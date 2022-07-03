@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-    # # Nginx service
+    # Nginx service
     nginx:
         build:
             context: .
@@ -21,7 +21,7 @@ services:
         depends_on:
             - 'app'
 
-    # # (Laravel) Admin application
+    # (Laravel) Admin application
     app:
         build:
             context: .
