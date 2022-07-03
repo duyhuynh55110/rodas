@@ -6,11 +6,14 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "base/assets": "dev-develop",
+        "base/repositories": "dev-develop",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "pragmarx/yaml": "^1.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -52,6 +55,16 @@
             "dont-discover": []
         }
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./packages/Base/Assets"
+        },
+        {
+            "type": "path",
+            "url": "./packages/Base/Repositories"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
