@@ -1,0 +1,92 @@
+version: '3'
+
+services:
+    # # Nginx service
+    nginx:
+        build:
+            context: .
+            dockerfile: './docker/nginx/Dockerfile'
+        container_name: 'rodas_nginx'
+        volumes:
+            - './public:/var/www/rodas-admin/public'
+            - ./docker/nginx/${APP_ENV:-local}.conf:/etc/nginx/nginx.conf
+        networks:
+            - rodas
+        ports:
+            - '8000:80'
+        expose:
+            - '80'
+        links:
+            - 'app'
+        depends_on:
+            - 'app'
+
+    # # (Laravel) Admin application
+    app:
+        build:
+            context: .
+            dockerfile: './docker/app/Dockerfile'
+        container_name: 'rodas_app'
+        environment:
+            - TZ="${APP_TIMEZONE:-UTC}"
+        volumes:
+            - '.:/var/www/rodas-admin'
+            - './docker/app/config/php/php.ini:/usr/local/etc/php/php.ini'
+            - './docker/app/entrypoint.sh:/entrypoint.sh'
+        working_dir: '/var/www/rodas-admin'
+        networks:
+            - rodas
+        expose:
+            - '9000'
+        command: ['/entrypoint.sh']
+        links:
+            - 'db'
+        depends_on:
+            - 'db'
+            - 'redis'
+
+    # MySQL database
+    db:
+        build:
+            context: .
+            dockerfile: './docker/db/Dockerfile'
+        container_name: 'rodas_db'
+        volumes:
+            - 'rodas-mysql:/var/lib/mysql'
+        networks:
+            - rodas
+        environment:
+            TZ: "${APP_TIMEZONE:-UTC}"
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        ports:
+            - "${FORWARD_DB_PORT:-13306}:3306"
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
+
+    # Redis server
+    redis:
+        image: 'redis:alpine'
+        container_name: 'rodas_redis'
+        ports:
+            - "${FORWARD_REDIS_PORT:-16379}:6379"
+        volumes:
+            - 'rodas-redis:/data'
+        networks:
+            - rodas
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            retries: 3
+            timeout: 5s
+networks:
+    rodas:
+        driver: bridge
+volumes:
+    rodas-mysql: # Use mysql local (must install mysql local to use)
+        driver: local
+    rodas-redis:
+        driver: local
+    dependencies:
