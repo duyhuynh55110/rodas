@@ -24,7 +24,7 @@ if (!function_exists('authAdmin')) {
      * Get auth guard for admin
      *
      * @param string $guard
-     * @return string|null
+     * @return Illuminate\Auth\SessionGuard|null
      */
     function authAdmin($guard = '') : Illuminate\Auth\SessionGuard
     {

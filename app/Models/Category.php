@@ -6,7 +6,7 @@ use App\Models\Traits\AdminTimestamp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Category extends Model
 {
     use HasFactory, AdminTimestamp;
 
@@ -15,7 +15,7 @@ class Brand extends Model
      *
      * @var string
      */
-    protected $table = 'brands';
+    protected $table = 'categories';
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,7 @@ class Brand extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'logo_file_name',
+        'name',
         'created_by', 'created_at', 'updated_by', 'updated_at'
     ];
 }

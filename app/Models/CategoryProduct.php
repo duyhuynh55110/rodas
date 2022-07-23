@@ -4,9 +4,9 @@ namespace App\Models;
 
 use App\Models\Traits\AdminTimestamp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Brand extends Model
+class CategoryProduct extends Pivot
 {
     use HasFactory, AdminTimestamp;
 
@@ -15,7 +15,7 @@ class Brand extends Model
      *
      * @var string
      */
-    protected $table = 'brands';
+    protected $table = 'category_products';
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,7 @@ class Brand extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'logo_file_name',
+        'category_id', 'product_id',
         'created_by', 'created_at', 'updated_by', 'updated_at'
     ];
 }
