@@ -5,6 +5,14 @@ RUN apt-get update \
     && apt-get install -y zlib1g-dev libzip-dev supervisor \
     && docker-php-ext-install zip
 
+# install GD library (php library)
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
+
 RUN docker-php-source extract \
     && curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/refs/tags/5.3.4.tar.gz \
     && tar xfz /tmp/redis.tar.gz \
