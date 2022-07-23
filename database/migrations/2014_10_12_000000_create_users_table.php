@@ -20,7 +20,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->integer('created_by')->command('user\'s id create');
             $table->timestamps();
+            $table->integer('updated_by')->command('user\'s id update');
+            $table->softDeletes()->comment('soft delete timestamp');
         });
     }
 

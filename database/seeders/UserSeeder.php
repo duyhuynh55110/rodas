@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
-class CountrySeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,21 +17,14 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('countries')->insert(
+        DB::table('users')->insert(
             [
-                'id' => 1,
-                'name' => 'United States',
+                'name' => 'Administrator',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('password'),
                 'created_by' => 1,
-                'updated_by' => 1,
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 2,
-                'name' => 'VietNam',
-                'created_by' => 1,
                 'updated_by' => 1,
-                'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]
         );
