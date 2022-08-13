@@ -10,10 +10,6 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
-                @php
-                    $groups = config('admin.sidebar');
-                @endphp
-
                 @foreach($groups as $group)
                     {{-- Group label --}}
                     <li class="nav-item menu-open  mb-2">

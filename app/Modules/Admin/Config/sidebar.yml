@@ -1,0 +1,13 @@
+# using fas font icon
+
+# master data (brand, products, categories)
+- group_label: 'Master'
+  icon: 'fas fa-columns'
+  items:
+  - label: 'Brand'
+    icon: 'far fa-circle'
+    items:
+    - label: 'List'
+      route: 'brands.index'
+    - label: 'New Brand'
+      route: 'brands.create'

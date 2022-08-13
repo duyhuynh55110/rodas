@@ -2,6 +2,7 @@
 
 use App\Exceptions\StorageUploadFileException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -133,5 +134,54 @@ if (!function_exists('getFilenameSuffixOriginal')) {
     function getFilenameSuffixOriginal($filename)
     {
         return preg_replace(STORAGE_IMAGE_ALLOW_EXTENSION, STORAGE_SUFFIX_ORIGINAL_RESIZE, $filename);
+    }
+}
+
+if (!function_exists('checkActiveSidebarItem')) {
+    /**
+    * Get Active of side
+    *
+    * @param array $side @app/Modules/Management/Config/sidebar.yml
+    * @return array
+    */
+    function checkActiveSidebarItem(array $side): array
+    {
+        $isActive = false;
+        $itemKeyActive = null;
+        $itemsFlg = (isset($side['items']) && !empty($side['items']));
+
+        if ($itemsFlg) {
+            foreach ($side['items'] as $k => $item) {
+                $url = isset($item['route']) ? routeAdmin($item['route']) : false;
+
+                if (url()->current() === $url) {
+                    $itemKeyActive = $k;
+                    $isActive = true;
+                    break;
+                }
+            }
+        }
+
+        if ($isActive === false) {
+            $url = isset($side['route']) ? routeAdmin($side['route']) : false;
+            if (url()->current() === $url) {
+                $isActive = true;
+            }
+        }
+
+        return [
+        'status' => $isActive,
+        'itemKey' => $itemKeyActive
+        ];
+    }
+}
+
+if(!function_exists('getCurrentBreadcrumbs')) {
+    function getCurrentBreadcrumbs(){
+        return collect(config('admin.breadcrumbs'))->filter(
+            function ($breadcrumb) {
+                return (ADMIN_MODULE_AS . $breadcrumb['for']) === Route::currentRouteName();
+            }
+        )->first();
     }
 }
