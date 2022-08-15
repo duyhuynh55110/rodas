@@ -16,5 +16,5 @@ defined('RESIZE_BRAND_HEIGHT') or define('RESIZE_BRAND_HEIGHT', 300);
 defined('RESIZE_PRODUCT_WIDTH') or define('RESIZE_PRODUCT_WIDTH', 300);
 defined('RESIZE_PRODUCT_HEIGHT') or define('RESIZE_PRODUCT_HEIGHT', 400);
 
-// option select all
-defined('SELECT_OPTIONS_ALL') or define('SELECT_OPTIONS_ALL', -1);
+// select option all
+defined('SELECT_OPTION_ALL') or define('SELECT_OPTION_ALL', -1);

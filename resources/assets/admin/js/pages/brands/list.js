@@ -2,6 +2,9 @@ const BRANDS_LIST = 'table#brands-list';
 const FORM_SEARCH = 'form#search-form';
 
 export default class ListData {
+    // dataTable object
+    brandsTable = null;
+
     // setting for datatables
     options = {};
 
@@ -15,12 +18,13 @@ export default class ListData {
     // init brands table
     initDataTable() {
         let _this = this;
-        $(BRANDS_LIST).DataTable({
+        this.brandsTable = $(BRANDS_LIST).DataTable({
             ajax: {
                 url: _this.options.dataTableAjax,
                 data: function (request) {
-                    request.name = '';
-                    request.country_id = '';
+                    let form = $(FORM_SEARCH);
+                    request.name = form.find('input[name=name]').val();
+                    request.country_id = form.find('select[name=country_id]').val();
                 }
             },
             columns: [
@@ -36,12 +40,54 @@ export default class ListData {
                     'title': 'Name',
                     render: $.fn.dataTable.render.text(),
                 },
+                {
+                    'data': 'country.name',
+                    'name': 'country_name',
+                    'title': 'Country',
+                    render: $.fn.dataTable.render.text(),
+                },
+                {
+                    'data': 'country.name',
+                    'name': 'country_name',
+                    'title': 'Country',
+                    render: $.fn.dataTable.render.text(),
+                },
+                {
+                    'data': 'full_path_logo',
+                    'name': 'full_path_logo',
+                    'title': 'Logo',
+                    render: function (data) {
+                        if(data == null) {
+                            return data;
+                        }
+
+                        return `<img width='30' src='${data}' class='rounded' alt='${data}'/>`;
+                    }
+                },
+                {
+                    'data': 'id',
+                    'name': 'control',
+                    'title': '',
+                    render: function (data) {
+                        let updateUrl = _this.options.updateUrl.replace('%s', data);
+                        return `<a class="btn btn-info btn-sm" href="${updateUrl}"><i class="fas fa-info-circle"></i> Detail </a>`;
+                    }
+                },
             ]
         });
     }
 
     // init events
     initEvents() {
+        this._onSubmitFormSearch();
+    }
 
+    // filter data in table
+    _onSubmitFormSearch() {
+        let _this = this;
+        $(FORM_SEARCH).on('submit', function (e) {
+            _this.brandsTable.draw();
+            return false;
+        });
     }
 }

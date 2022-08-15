@@ -34,8 +34,8 @@
                                 <label for="select-country" class="col-sm-2 col-form-label"> Country </label>
                                 <div class="col-sm-10">
                                     <div class="search-box">
-                                        <select name="country" class="form-control custom-select" id="select-country">
-                                            <option value="{{ SELECT_OPTIONS_ALL }}"> All </option>
+                                        <select name="country_id" class="form-control custom-select" id="select-country">
+                                            <option value="{{ SELECT_OPTION_ALL }}"> All </option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->id }}"> {{ $country->name }} </option>
                                             @endforeach
@@ -45,10 +45,10 @@
                             </div>
                             <!-- .country.row -->
 
-                            <div class="form-group row float-right">
-                                <button type="submit" name="btn-search" id="btn-search"
-                                    class="btn btn-info">Search</button>
+                            <div class="form-group row d-flex justify-content-end pr-2">
+                                <button type="submit" id="btn-search" class="btn btn-info">Search</button>
                             </div>
+                            <!-- .btn-submit.row -->
                         </div>
                     </form>
                 </div>

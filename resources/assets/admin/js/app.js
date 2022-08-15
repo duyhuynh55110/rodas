@@ -77,9 +77,6 @@ try {
             } else {
                 paginate.show();
             }
-
-            // Init preloaded-image
-            $('.preloaded-image').preloadedImage();
         }
     });
     $.fn.dataTable.ext.errMode = DATATABLE_ERROR_MODE;

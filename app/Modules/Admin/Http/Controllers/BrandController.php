@@ -35,11 +35,11 @@ class BrandController extends BaseController
         $this->countryService = $countryService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        // if(request()->expectsJson()) {
-        //     $this->brandService->
-        // }
+        if($request->expectsJson()) {
+            return $this->brandService->brandsDataTable($request);
+        }
 
         // data
         $countries = $this->countryService->getAllCountries();

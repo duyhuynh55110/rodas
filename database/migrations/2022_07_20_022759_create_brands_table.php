@@ -15,6 +15,7 @@ class CreateBrandsTable extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
+            $table->integer('country_id')->comment('country id');
             $table->string('name', 100)->comment('brand name');
             $table->string('logo_file_name', 100)->comment('brand logo');
             $table->integer('created_by')->command('user\'s id create');
