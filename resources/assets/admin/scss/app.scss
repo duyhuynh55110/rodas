@@ -10,3 +10,15 @@
 @import "~admin-lte/plugins/toastr/toastr.css";
 @import "~admin-lte/plugins/select2/css/select2.min.css";
 @import "~admin-lte/dist/css/adminlte.css";
+
+// jQuery Validation define master css
+input.error, select.error {
+    border-color: #dc3545;
+}
+
+label.error {
+    padding-top: 4px;
+    color: #dc3545;
+    font-weight: 500 !important;
+}
+

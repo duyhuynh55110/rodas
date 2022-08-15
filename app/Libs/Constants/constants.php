@@ -18,3 +18,9 @@ defined('RESIZE_PRODUCT_HEIGHT') or define('RESIZE_PRODUCT_HEIGHT', 400);
 
 // select option all
 defined('SELECT_OPTION_ALL') or define('SELECT_OPTION_ALL', -1);
+
+// maximum number value
+defined('MAX_INTEGER_VALUE') or define('MAX_INTEGER_VALUE', 2147483647);
+
+// Resize image
+defined('UPLOAD_MAX_SIZE') or define('UPLOAD_MAX_SIZE', 5242880); // BYTES (maximum is 5MB)

@@ -4,9 +4,11 @@ namespace App\Modules\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Modules\Admin\Http\Controllers\BaseController;
+use App\Modules\Admin\Http\Requests\BrandFormRequest;
 use App\Modules\Admin\Services\BrandService;
 use App\Modules\Admin\Services\CountryService;
 use Base\Assets\Assets;
+use Throwable;
 
 /**
  * BrandController
@@ -35,6 +37,12 @@ class BrandController extends BaseController
         $this->countryService = $countryService;
     }
 
+    /**
+     * View page brand list
+     *
+     * @param Request $request
+     * @return view
+     */
     public function index(Request $request)
     {
         if($request->expectsJson()) {
@@ -59,9 +67,20 @@ class BrandController extends BaseController
         ));
     }
 
+    /**
+     * View page create brand
+     *
+     * @return view
+     */
     public function create()
     {
-        return 'create page';
+        // country list
+        $countries = $this->countryService->getAllCountries();
+
+        // init js
+        $this->registerAssets();
+
+        return view('Admin::brands.form', compact('countries'));
     }
 
     public function edit($id)
@@ -69,9 +88,20 @@ class BrandController extends BaseController
         return 'edit page';
     }
 
-    public function save()
+    /**
+     * Save a brand data
+     *
+     * @param BrandFormRequest $request
+     * @return mixed
+     */
+    public function save(BrandFormRequest $request)
     {
-        return 'save';
+        try {
+            $this->brandService->updateOrCreate($request);
+            return redirect(routeAdmin('brands.index'))->with('status', DATA_SAVED);
+        } catch (Throwable $e) {
+            return back()->with('status', ERROR_OCCURRED_MSG)->with('status_type', 'danger')->withInput();
+        }
     }
 
     /**

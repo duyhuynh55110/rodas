@@ -59,7 +59,7 @@ if (!function_exists('uploadImageToStorage')) {
     /**
      * Resize and upload image to storage
      *
-     * @param Request $file
+     * @param Illuminate\Http\UploadedFile || Illuminate\Http\File $file
      * @param string $fileName
      * @param int $pWidth width you want to resize
      * @param int $pHeight height you want to resize
@@ -82,7 +82,14 @@ if (!function_exists('uploadImageToStorage')) {
         }
 
         // image extension
-        $fileExtension = $fileExtension ?? $file->getClientFileExtension();
+        if (!$fileExtension) {
+            if ($file instanceof Illuminate\Http\UploadedFile) {
+                $fileExtension = $file->extension();
+            } else {
+                $fileExtension = $file->getClientOriginalExtension();
+            }
+        }
+
 
         // init image
         $image = Image::make($file);

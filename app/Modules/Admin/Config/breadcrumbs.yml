@@ -2,12 +2,12 @@
 - for: 'brands.create'
   items:
     - title: 'Brand List'
-      route: 'brand.index'
+      route: 'brands.index'
     - title: 'New Brand'
       route: null
 - for: 'brands.create'
   items:
     - title: 'Brand List'
-      route: 'brand.index'
+      route: 'brands.index'
     - title: 'Brand Detail'
       route: null
