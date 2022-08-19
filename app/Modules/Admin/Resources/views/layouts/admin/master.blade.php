@@ -1,3 +1,11 @@
+@php
+    // sidebar data
+    $groups = config('admin.sidebar');
+
+    //breadcrumbs data
+    $breadcrumbs = getCurrentBreadcrumbs();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,12 +35,15 @@
             <!-- Navbar -->
             @include("Admin::layouts.admin.components.navbar")
             <!-- /.navbar -->
+
             <!-- Main Sidebar Container -->
             @include("Admin::layouts.admin.components.sidebar")
+
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 @include("Admin::layouts.admin.components.breadcrumbs")
+
                 <!-- Main content -->
                 <section class="content">
                     @yield('content')
@@ -40,7 +51,9 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
+
             @include("Admin::layouts.admin.components.footer")
+
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
                 <!-- Control sidebar content goes here -->

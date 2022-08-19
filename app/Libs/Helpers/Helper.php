@@ -2,6 +2,7 @@
 
 use App\Exceptions\StorageUploadFileException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -58,7 +59,7 @@ if (!function_exists('uploadImageToStorage')) {
     /**
      * Resize and upload image to storage
      *
-     * @param Request $file
+     * @param Illuminate\Http\UploadedFile || Illuminate\Http\File $file
      * @param string $fileName
      * @param int $pWidth width you want to resize
      * @param int $pHeight height you want to resize
@@ -81,7 +82,14 @@ if (!function_exists('uploadImageToStorage')) {
         }
 
         // image extension
-        $fileExtension = $fileExtension ?? $file->getClientFileExtension();
+        if (!$fileExtension) {
+            if ($file instanceof Illuminate\Http\UploadedFile) {
+                $fileExtension = $file->extension();
+            } else {
+                $fileExtension = $file->getClientOriginalExtension();
+            }
+        }
+
 
         // init image
         $image = Image::make($file);
@@ -123,6 +131,30 @@ if (!function_exists('uploadImageToStorage')) {
     }
 }
 
+if (!function_exists('deleteImageFromStorage')) {
+    /**
+     * Delete image from storage
+     *
+     * @param string $fileName
+     * @return void
+     */
+    function deleteImageFromStorage(string $fileName)
+    {
+        $storage = Storage::disk();
+
+        if ($storage->exists($fileName)) {
+            $storage->delete($fileName);
+        }
+
+        // try to delete original file
+        $fileOriginalName = getFilenameSuffixOriginal($fileName);
+        if ($storage->exists($fileOriginalName)) {
+            $storage->delete($fileOriginalName);
+        }
+    }
+}
+
+
 if (!function_exists('getFilenameSuffixOriginal')) {
     /**
      * Get file name with suffix original
@@ -133,5 +165,54 @@ if (!function_exists('getFilenameSuffixOriginal')) {
     function getFilenameSuffixOriginal($filename)
     {
         return preg_replace(STORAGE_IMAGE_ALLOW_EXTENSION, STORAGE_SUFFIX_ORIGINAL_RESIZE, $filename);
+    }
+}
+
+if (!function_exists('checkActiveSidebarItem')) {
+    /**
+    * Get Active of side
+    *
+    * @param array $side @app/Modules/Management/Config/sidebar.yml
+    * @return array
+    */
+    function checkActiveSidebarItem(array $side): array
+    {
+        $isActive = false;
+        $itemKeyActive = null;
+        $itemsFlg = (isset($side['items']) && !empty($side['items']));
+
+        if ($itemsFlg) {
+            foreach ($side['items'] as $k => $item) {
+                $url = isset($item['route']) ? routeAdmin($item['route']) : false;
+
+                if (url()->current() === $url) {
+                    $itemKeyActive = $k;
+                    $isActive = true;
+                    break;
+                }
+            }
+        }
+
+        if ($isActive === false) {
+            $url = isset($side['route']) ? routeAdmin($side['route']) : false;
+            if (url()->current() === $url) {
+                $isActive = true;
+            }
+        }
+
+        return [
+        'status' => $isActive,
+        'itemKey' => $itemKeyActive
+        ];
+    }
+}
+
+if(!function_exists('getCurrentBreadcrumbs')) {
+    function getCurrentBreadcrumbs(){
+        return collect(config('admin.breadcrumbs'))->filter(
+            function ($breadcrumb) {
+                return (ADMIN_MODULE_AS . $breadcrumb['for']) === Route::currentRouteName();
+            }
+        )->first();
     }
 }

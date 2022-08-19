@@ -9,6 +9,7 @@ services:
         container_name: 'rodas_nginx'
         volumes:
             - './public:/var/www/rodas-admin/public'
+            - ./storage/app:/var/www/rodas-admin/storage/app # need setting this to use laravel storage with nginx
             - ./docker/nginx/${APP_ENV:-local}.conf:/etc/nginx/nginx.conf
         networks:
             - rodas

@@ -27,4 +27,6 @@ const assetAdminPath = 'public/admin-lte/';
 mix.sass('resources/assets/admin/scss/app.scss', assetAdminPath + 'css')
 .js('resources/assets/admin/js/app.js', assetAdminPath + 'js')
 .copyDirectory('node_modules/admin-lte/dist/img', assetAdminPath + 'img').version();
+
 // Publish page script
+mix.js('resources/assets/admin/js/pages/brands.js', assetAdminPath + 'pages').version();

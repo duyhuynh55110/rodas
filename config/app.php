@@ -167,6 +167,7 @@ return [
          */
         App\Modules\ModuleServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
          * Application Service Providers...

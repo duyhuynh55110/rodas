@@ -8,10 +8,6 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    @php
-                        $breadcrumbs = getCurrentBreadcrumbs();
-                    @endphp
-
                     @if(!empty($breadcrumbs))
                         @foreach($breadcrumbs['items'] as $k => $breadcrumb)
                         @php
@@ -23,7 +19,7 @@
                         @else
                             <li class="breadcrumb-item active">{{ $breadcrumb['title'] }}</li>
                         @endif
-                        
+
                         @endforeach
                     @endif
 

@@ -15,7 +15,7 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('countries')->insert(
+        $data = [
             [
                 'id' => 1,
                 'name' => 'United States',
@@ -32,6 +32,9 @@ class CountrySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]
-        );
+        ];
+
+        // insert data
+        DB::table('countries')->insert($data);
     }
 }

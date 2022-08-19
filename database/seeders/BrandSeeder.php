@@ -18,6 +18,7 @@ class BrandSeeder extends Seeder
     {
         $data = [
             [
+                'country_id' => 1,
                 'name' => 'Avocados',
                 'logo_file_name' => 'YRieU7o7N4UlxLJ21Adh5Ur4amrYU6o94uxxHrRI.png',
                 'created_by' => 1,
@@ -26,6 +27,7 @@ class BrandSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
+                'country_id' => 1,
                 'name' => 'Bare Fruits',
                 'logo_file_name' => 'k6mzHTLZ1Ksr8I9T7xexKdmfYYM0qTdkwpIKepz6.jpg',
                 'created_by' => 1,
@@ -34,6 +36,7 @@ class BrandSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
+                'country_id' => 1,
                 'name' => 'Fresh Fruits',
                 'logo_file_name' => 'eDl7l81wYgulLWHbB1MKcaj3Wa7AMdXdOv5hW4xm.jpg',
                 'created_by' => 1,
@@ -42,6 +45,7 @@ class BrandSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
+                'country_id' => 2,
                 'name' => 'The Juice Alchemist',
                 'logo_file_name' => 'EyCIyKxiu4YmmcVedUeiDLoR0Au6sjOfzP4ZvWX9.png',
                 'created_by' => 1,
@@ -50,6 +54,7 @@ class BrandSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
+                'country_id' => 2,
                 'name' => 'La Bella Rocca',
                 'logo_file_name' => 'ksJCz2sLJsOmdBsrwH3eKKKhEqGFypSS8AjiSJIE.png',
                 'created_by' => 1,
