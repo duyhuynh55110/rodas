@@ -1,14 +1,20 @@
 @php
+    $isUpdateForm = isset($brand) ?? false;
+
     $inputId = old('id', $brand->id ?? null);
     $inputName = old('name', $brand->name ?? null);
     $selectCountryId = old('country_id', $brand->country_id ?? null);
     $srcLogo = $brand->full_path_logo ?? null;
+
+    // validate
+    $requiredInputLogo = !$isUpdateForm ? 'required' : ''; // required if create
+
 @endphp
 
 @extends('Admin::layouts.admin.master')
 
 @section('title')
-    @if (isset($brand))
+    @if ($isUpdateForm)
         Brand Detail
     @else
         New Brand
@@ -53,8 +59,10 @@
                                 <div class="col-sm-10">
                                     <div class="custom-file">
                                         <input id="uploadLogo" name="logo_file_upload" type="file"
-                                            class="custom-file-input" required filesize="{{ UPLOAD_MAX_SIZE }}"
-                                            accept="image/jpeg, image/png">
+                                            class="custom-file-input"
+                                            filesize="{{ UPLOAD_MAX_SIZE }}"
+                                            accept="image/jpeg, image/png"
+                                            {{ $requiredInputLogo }}>
                                         <label class="custom-file-label" for="uploadLogo">Choose file</label>
                                     </div>
                                     <small class="form-text text-muted">
@@ -64,7 +72,7 @@
                             </div>
                             <!--.upload-file  -->
 
-                            @if(isset($brand))
+                            @if($isUpdateForm)
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">&nbsp;</label>
                                     <div class="col-sm-10">
