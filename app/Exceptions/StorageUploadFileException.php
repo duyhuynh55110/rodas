@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Exception;
 
-class StorageUploadFileException extends HttpException {
+class StorageUploadFileException extends Exception {
 
 }

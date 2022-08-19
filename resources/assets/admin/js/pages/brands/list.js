@@ -61,7 +61,7 @@ export default class ListData {
                             return data;
                         }
 
-                        return `<img width='30' src='${data}' class='rounded' alt='${data}'/>`;
+                        return `<img width='80' src='${data}' class='rounded' alt='${data}'/>`;
                     }
                 },
                 {

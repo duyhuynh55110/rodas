@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Services;
 
+use App\Exceptions\DataNotFoundException;
 use App\Modules\Admin\Repositories\BrandRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,33 +56,52 @@ class BrandService
             // db - start transaction
             DB::beginTransaction();
 
+            // brand id
+            $id = $request->id;
+
             // brand values
             $values = [
                 'name' => $request->name,
                 'country_id' => $request->country_id,
             ];
 
-            // upload image
+            // if have upload file
             if($request->hasFile('logo_file_upload')) {
+                // prepare for remove image if was update form
+                if($id) {
+                    $brand = $this->getBrandById($id);
+                    $deleteLogoFileName = $brand->logo_file_name;
+                }
+
+                // prepare for upload image to storage
                 $file = $request->logo_file_upload;
                 $logoFileName = STORAGE_PATH_TO_BRANDS . $file->hashName();
 
-                // upload to storage
-                uploadImageToStorage($file, $logoFileName, RESIZE_BRAND_WIDTH, RESIZE_BRAND_HEIGHT);
-
+                // save logo name
                 $values['logo_file_name'] = $logoFileName;
             }
 
             // create/update brand
             $brand = $this->brandRepo->updateOrCreate(
                 [
-                    'id' => $request->id,
+                    'id' => $id,
                 ],
                 $values
             );
 
             // db - end transaction and save data
             DB::commit();
+
+            // upload file to storage
+            if ($request->hasFile('logo_file_upload')) {
+                // delete old image if was update form
+                if ($id) {
+                    deleteImageFromStorage($deleteLogoFileName);
+                }
+
+                // upload to storage
+                uploadImageToStorage($file, $logoFileName, RESIZE_BRAND_WIDTH, RESIZE_BRAND_HEIGHT);
+            }
 
             return $brand;
         } catch (Throwable $e) {
@@ -94,5 +114,23 @@ class BrandService
             // throw exception to handle exception in controller
             throw new $e;
         }
+    }
+
+    /**
+     * Get brand by id
+     *
+     * @param $id
+     * @return App\Models\Brand
+     */
+    public function getBrandById($id)
+    {
+        $brand = $this->brandRepo->find($id);
+
+        // throw exception if not found data
+        if(!$brand) {
+            throw new DataNotFoundException();
+        }
+
+        return $brand;
     }
 }

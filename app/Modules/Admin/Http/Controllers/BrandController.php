@@ -68,7 +68,7 @@ class BrandController extends BaseController
     }
 
     /**
-     * View page create brand
+     * View create brand form
      *
      * @return view
      */
@@ -83,9 +83,28 @@ class BrandController extends BaseController
         return view('Admin::brands.form', compact('countries'));
     }
 
+    /**
+     * View edit brand form
+     *
+     * @param $id
+     * @return view
+     */
     public function edit($id)
     {
-        return 'edit page';
+        try {
+            $brand = $this->brandService->getBrandById($id);
+
+            // country list
+            $countries = $this->countryService->getAllCountries();
+
+            // init js
+            $this->registerAssets();
+
+            return view('Admin::brands.form', compact('countries', 'brand'));
+        } catch (Throwable $e) {
+            return back()->with('status', $e->getMessage())->with('status_type', 'danger')->withInput();
+        }
+
     }
 
     /**

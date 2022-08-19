@@ -131,6 +131,30 @@ if (!function_exists('uploadImageToStorage')) {
     }
 }
 
+if (!function_exists('deleteImageFromStorage')) {
+    /**
+     * Delete image from storage
+     *
+     * @param string $fileName
+     * @return void
+     */
+    function deleteImageFromStorage(string $fileName)
+    {
+        $storage = Storage::disk();
+
+        if ($storage->exists($fileName)) {
+            $storage->delete($fileName);
+        }
+
+        // try to delete original file
+        $fileOriginalName = getFilenameSuffixOriginal($fileName);
+        if ($storage->exists($fileOriginalName)) {
+            $storage->delete($fileOriginalName);
+        }
+    }
+}
+
+
 if (!function_exists('getFilenameSuffixOriginal')) {
     /**
      * Get file name with suffix original
