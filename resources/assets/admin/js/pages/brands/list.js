@@ -47,12 +47,6 @@ export default class ListData {
                     render: $.fn.dataTable.render.text(),
                 },
                 {
-                    'data': 'country.name',
-                    'name': 'country_name',
-                    'title': 'Country',
-                    render: $.fn.dataTable.render.text(),
-                },
-                {
                     'data': 'full_path_logo',
                     'name': 'full_path_logo',
                     'title': 'Logo',
@@ -61,7 +55,7 @@ export default class ListData {
                             return data;
                         }
 
-                        return `<img width='80' src='${data}' class='rounded' alt='${data}'/>`;
+                        return `<img width='120' src='${data}' class='rounded' alt='${data}'/>`;
                     }
                 },
                 {
