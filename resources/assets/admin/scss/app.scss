@@ -11,7 +11,7 @@
 @import "~admin-lte/plugins/select2/css/select2.min.css";
 @import "~admin-lte/dist/css/adminlte.css";
 
-// jQuery Validation define master css
+// === jQuery Validation library
 input.error, select.error {
     border-color: #dc3545;
 }
@@ -22,7 +22,12 @@ label.error {
     font-weight: 500 !important;
 }
 
-// Custom css for 'Select2' library
+// jQuery validation + Select2 custom error field
+.select2-selection.error {
+    border: 1px solid #dc3545;
+}
+
+// === 'Select2' library
 .select2 {
     width: 100% !important;
 }

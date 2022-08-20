@@ -35,7 +35,6 @@ class ProductRepository extends Repository
                 'name',
                 'image_file_name',
                 'item_price',
-                'weight',
             ]
         )->with(
             [
@@ -78,5 +77,27 @@ class ProductRepository extends Repository
                 return floatval($product->item_price);
             })
             ->escapeColumns([])->make(true);
+    }
+
+    /**
+     * Create/Update product with relations
+     *
+     * Relations
+     * - categories
+     *
+     * @param array $attributes
+     * @param array $values
+     * @param array $categoriesData
+     * @return App\Models\Product
+     */
+    public function updateOrCreateWithRelations(array $attributes,  array $values, array $categoriesData)
+    {
+        // create/update a product
+        $product = $this->updateOrCreate($attributes, $values);
+
+        // Laravel pivot sync function - compare change to create/update/delete relation data
+        $product->categories()->sync($categoriesData);
+
+        return $product;
     }
 }

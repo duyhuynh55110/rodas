@@ -95,9 +95,19 @@ try {
         },
         highlight: function (element, errorClass, validClass) {
             $(element).addClass('is-invalid');
+
+            // custom select2 error
+            if($(element).hasClass('select2')) {
+                $(element).next().find('.select2-selection').addClass('error');
+            }
         },
         unhighlight: function (element, errorClass, validClass) {
             $(element).removeClass('is-invalid');
+
+            // custom select2 error
+            if($(element).hasClass('select2')) {
+                $(element).next().find('.select2-selection').removeClass('error');
+            }
         },
         submitHandler: function (form) {
             $(':submit').prop('disabled', true);
