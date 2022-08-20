@@ -36,7 +36,7 @@ class Brand extends Model
      */
     protected $appends = ['full_path_logo'];
 
-    // --- Relations
+    // ---- Relations
     /**
      * Brand belong to a country
      *
@@ -51,10 +51,9 @@ class Brand extends Model
     /**
      * Get full image logo path
      *
-     * @param string $value
      * @return string
      */
-    public function getFullPathLogoAttribute($value)
+    public function getFullPathLogoAttribute()
     {
         if(empty($this->logo_file_name)) {
             return null;
