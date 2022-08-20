@@ -5,12 +5,12 @@ namespace App\Modules\Admin\Services;
 use App\Modules\Admin\Repositories\CountryRepository;
 
 /**
- * Country Service
+ * CountryService
  */
 class CountryService
 {
     /**
-     * @var Country Repository
+     * @var CountryRepository
      */
     private $countryRepo;
 
