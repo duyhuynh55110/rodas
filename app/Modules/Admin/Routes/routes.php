@@ -3,6 +3,7 @@
 use App\Modules\Admin\Http\Controllers\Auth\LoginController;
 use App\Modules\Admin\Http\Controllers\Auth\LogoutController;
 use App\Modules\Admin\Http\Controllers\BrandController;
+use App\Modules\Admin\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -39,6 +40,20 @@ Route::group(
                         Route::name('create')->get('/create', [BrandController::class, 'create']);
                         Route::name('edit')->get('/{id}/edit', [BrandController::class, 'edit']);
                         Route::name('save')->post('/save', [BrandController::class, 'save']);
+                    }
+                );
+
+                // products
+                Route::group(
+                    [
+                        'prefix' => 'products',
+                        'as' => 'products.'
+                    ],
+                    function () {
+                        Route::name('index')->get('/', [ProductController::class, 'index']);
+                        Route::name('create')->get('/create', [ProductController::class, 'create']);
+                        Route::name('edit')->get('/{id}/edit', [ProductController::class, 'edit']);
+                        Route::name('save')->post('/save', [ProductController::class, 'save']);
                     }
                 );
 

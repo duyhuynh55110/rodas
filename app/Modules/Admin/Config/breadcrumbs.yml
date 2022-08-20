@@ -11,3 +11,16 @@
       route: 'brands.index'
     - title: 'Brand Detail'
       route: null
+# products
+- for: 'products.create'
+  items:
+    - title: 'Product List'
+      route: 'products.index'
+    - title: 'New Product'
+      route: null
+- for: 'products.create'
+  items:
+    - title: 'Product List'
+      route: 'products.index'
+    - title: 'Product Detail'
+      route: null

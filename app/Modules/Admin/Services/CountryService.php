@@ -24,7 +24,6 @@ class CountryService
         $this->countryRepo = $countryRepo;
     }
 
-
     /**
      * Get list all countries
      *

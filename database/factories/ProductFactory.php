@@ -31,7 +31,6 @@ class ProductFactory extends Factory
             'name' => $this->faker->text(50),
             'image_file_name' => $imageFiles[rand(0, count($imageFiles) - 1)],
             'item_price' => rand(1, 100), // random between 1 - 100
-            'weight' => rand(1, 100),
             'created_by' => 1,
             'created_at' => Carbon::now(),
             'updated_by' => 1,

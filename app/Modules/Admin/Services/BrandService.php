@@ -133,4 +133,14 @@ class BrandService
 
         return $brand;
     }
+
+    /**
+     * Get all brands data
+     *
+     * @return array
+     */
+    public function getAllBrands()
+    {
+        return $this->brandRepo->all();
+    }
 }
