@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Log;
 use Throwable;
 
 /**
- * Brand Service
+ * BrandService
  */
 class BrandService
 {
     /**
-     * @var Brand Repository
+     * @var BrandRepository
      */
     private $brandRepo;
 
