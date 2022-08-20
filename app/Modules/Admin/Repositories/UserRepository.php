@@ -6,7 +6,7 @@ use Base\Repositories\Eloquent\Repository;
 use App\Models\User;
 
 /**
- * User Repository
+ * UserRepository
  */
 class UserRepository extends Repository
 {

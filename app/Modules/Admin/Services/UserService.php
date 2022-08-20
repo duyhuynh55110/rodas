@@ -5,12 +5,12 @@ namespace App\Modules\Admin\Services;
 use App\Modules\Admin\Repositories\UserRepository;
 
 /**
- * User Service
+ * UserService
  */
 class UserService
 {
     /**
-     * @var User Repository
+     * @var UserRepository
      */
     private $userRepository;
 

@@ -5,7 +5,7 @@ namespace App\Modules\Admin\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Brand form request
+ * BrandFormRequest
  */
 class BrandFormRequest extends FormRequest
 {
