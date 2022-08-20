@@ -11,3 +11,10 @@
       route: 'brands.index'
     - label: 'New Brand'
       route: 'brands.create'
+  - label: 'Product'
+    icon: 'far fa-circle'
+    items:
+    - label: 'List'
+      route: 'products.index'
+    - label: 'New Product'
+      route: 'products.create'

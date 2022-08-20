@@ -26,7 +26,10 @@ const assetAdminPath = 'public/admin-lte/';
 // Build admin-lte resource (CSS, JS, Image)
 mix.sass('resources/assets/admin/scss/app.scss', assetAdminPath + 'css')
 .js('resources/assets/admin/js/app.js', assetAdminPath + 'js')
-.copyDirectory('node_modules/admin-lte/dist/img', assetAdminPath + 'img').version();
-
+.copyDirectory('node_modules/admin-lte/dist/img', assetAdminPath + 'img')
 // Publish page script
-mix.js('resources/assets/admin/js/pages/brands.js', assetAdminPath + 'pages').version();
+// brands
+mix.js('resources/assets/admin/js/pages/brands.js', assetAdminPath + 'pages')
+// products
+mix.js('resources/assets/admin/js/pages/products.js', assetAdminPath + 'pages')
+.version();

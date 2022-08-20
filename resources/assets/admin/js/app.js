@@ -119,6 +119,8 @@ try {
         'File size must not exceed {0} bytes'
     );
 
+    // init select2 library if have '.select2' class
+    $('select.select2').select2();
     /****************************************/
     /*     End Init global                  */
     /****************************************/
