@@ -3,12 +3,12 @@
 
     $inputId = old('id', $product->id ?? null);
     $inputName = old('name', $product->name ?? null);
-    $inputItemPrice = old('item_price', $product->item_price ?? null);
+    $inputItemPrice = old('item_price', $isUpdateForm ? floatval($product->item_price) : null);
     $selectBrandId = old('brand_id', $product->brand_id ?? null);
     $txtDescription = old('description', $product->description ?? null);
 
     $srcImage = $product->full_path_image ?? null;
-    $selectedCategories = old('category_ids', $product->categories->pluck('id')->all() ?? []);
+    $selectedCategories = old('category_ids', $isUpdateForm ? $product->categories->pluck('id')->all() : []);
 
     // validate
     $requiredInputImage = !$isUpdateForm ? 'required' : ''; // required if create
