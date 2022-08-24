@@ -1,5 +1,5 @@
-const BRANDS_LIST = 'table#brands-list';
-const FORM_SEARCH = 'form#search-form';
+const BRANDS_LIST = 'table#brandsList';
+const SEARCH_FORM = 'form#searchForm';
 
 export default class ListData {
     // dataTable object
@@ -22,34 +22,34 @@ export default class ListData {
             ajax: {
                 url: _this.options.dataTableAjax,
                 data: function (request) {
-                    let form = $(FORM_SEARCH);
+                    let form = $(SEARCH_FORM);
                     request.name = form.find('input[name=name]').val();
                     request.country_id = form.find('select[name=country_id]').val();
                 }
             },
             columns: [
                 {
-                    'data': 'id',
-                    'name': 'id',
-                    'title': 'ID',
+                    data: 'id',
+                    name: 'id',
+                    title: 'ID',
                     render: $.fn.dataTable.render.text(), // block XSS
                 },
                 {
-                    'data': 'name',
-                    'name': 'name',
-                    'title': 'Name',
+                    data: 'name',
+                    name: 'name',
+                    title: 'Name',
                     render: $.fn.dataTable.render.text(),
                 },
                 {
-                    'data': 'country.name',
-                    'name': 'country_name',
-                    'title': 'Country',
+                    data: 'country.name',
+                    name: 'country_name',
+                    title: 'Country',
                     render: $.fn.dataTable.render.text(),
                 },
                 {
-                    'data': 'full_path_logo',
-                    'name': 'full_path_logo',
-                    'title': 'Logo',
+                    data: 'full_path_logo',
+                    name: 'full_path_logo',
+                    title: 'Logo',
                     render: function (data) {
                         if(data == null) {
                             return data;
@@ -59,9 +59,9 @@ export default class ListData {
                     }
                 },
                 {
-                    'data': 'id',
-                    'name': 'control',
-                    'title': '',
+                    data: 'id',
+                    name: 'control',
+                    title: '',
                     render: function (data) {
                         let updateUrl = _this.options.updateUrl.replace('%s', data);
                         return `<a class="btn btn-info btn-sm" href="${updateUrl}"><i class="fas fa-info-circle"></i> Detail </a>`;
@@ -79,7 +79,7 @@ export default class ListData {
     // filter data in table
     _onSubmitFormSearch() {
         let _this = this;
-        $(FORM_SEARCH).on('submit', function (e) {
+        $(SEARCH_FORM).on('submit', function (e) {
             _this.brandsTable.draw();
             return false;
         });

@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card card-primary">
-                    <form id="brand-form" class="form-horizontal" method="POST" action="{{ routeAdmin('brands.save') }}" enctype="multipart/form-data">
+                    <form id="brandForm" class="form-horizontal" method="POST" action="{{ routeAdmin('brands.save') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="id" value="{{ $inputId }}">
 
