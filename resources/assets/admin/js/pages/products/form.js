@@ -1,6 +1,6 @@
 import bsCustomFileInput from 'bs-custom-file-input';
 
-const FORM_DATA = 'form#product-form';
+const FORM_DATA = 'form#productForm';
 
 export default class FormData {
     constructor() {

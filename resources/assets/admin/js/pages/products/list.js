@@ -1,5 +1,5 @@
-const PRODUCTS_LIST = 'table#products-list';
-const FORM_SEARCH = 'form#search-form';
+const PRODUCTS_LIST = 'table#productsList';
+const SEARCH_FORM = 'form#search-form';
 
 export default class ListData {
     // dataTable object
@@ -22,7 +22,7 @@ export default class ListData {
             ajax: {
                 url: _this.options.dataTableAjax,
                 data: function (request) {
-                    let form = $(FORM_SEARCH);
+                    let form = $(SEARCH_FORM);
 
                     request.name = form.find('input[name=name]').val();
                     request.brand_id = form.find('select[name=brand_id]').val();
@@ -31,40 +31,40 @@ export default class ListData {
             },
             columns: [
                 {
-                    'data': 'id',
-                    'name': 'id',
-                    'title': 'ID',
+                    data: 'id',
+                    name: 'id',
+                    title: 'ID',
                     render: $.fn.dataTable.render.text(), // block XSS
                 },
                 {
-                    'data': 'name',
-                    'name': 'name',
-                    'title': 'Name',
+                    data: 'name',
+                    name: 'name',
+                    title: 'Name',
                     'width': '30%',
                     render: $.fn.dataTable.render.text(),
                 },
                 {
-                    'data': 'brand.name',
-                    'name': 'brand_name',
-                    'title': 'Brand',
+                    data: 'brand.name',
+                    name: 'brand_name',
+                    title: 'Brand',
                     render: $.fn.dataTable.render.text(),
                 },
                 {
-                    'data': 'brand.country.name',
-                    'name': 'country_name',
-                    'title': 'Country',
+                    data: 'brand.country.name',
+                    name: 'country_name',
+                    title: 'Country',
                     render: $.fn.dataTable.render.text(),
                 },
                 {
-                    'data': 'item_price',
-                    'name': 'item_price',
-                    'title': 'Price',
+                    data: 'item_price',
+                    name: 'item_price',
+                    title: 'Price',
                     render: $.fn.dataTable.render.text(),
                 },
                 {
-                    'data': 'full_path_image',
-                    'name': 'full_path_image',
-                    'title': 'Image',
+                    data: 'full_path_image',
+                    name: 'full_path_image',
+                    title: 'Image',
                     render: function (data) {
                         if(data == null) {
                             return data;
@@ -74,9 +74,9 @@ export default class ListData {
                     }
                 },
                 {
-                    'data': 'id',
-                    'name': 'control',
-                    'title': '',
+                    data: 'id',
+                    name: 'control',
+                    title: '',
                     render: function (data) {
                         let updateUrl = _this.options.updateUrl.replace('%s', data);
                         return `<a class="btn btn-info btn-sm" href="${updateUrl}"><i class="fas fa-info-circle"></i> Detail </a>`;
@@ -94,7 +94,7 @@ export default class ListData {
     // event when submit search form, filter data in products table
     _onSubmitFormSearch() {
         let _this = this;
-        $(FORM_SEARCH).on('submit', function (e) {
+        $(SEARCH_FORM).on('submit', function (e) {
             _this.productsTable.draw();
             return false;
         });
