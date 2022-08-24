@@ -104,7 +104,6 @@ class BrandController extends BaseController
         } catch (Throwable $e) {
             return back()->with('status', $e->getMessage())->with('status_type', 'danger')->withInput();
         }
-
     }
 
     /**
