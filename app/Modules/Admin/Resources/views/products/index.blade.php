@@ -75,7 +75,7 @@
                 <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="products-list" data-options='@json($options)'
+                        <table id="productsList" data-options='@json($options)'
                             class="table table-bordered table-hover">
                         </table>
                     </div>
