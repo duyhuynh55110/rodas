@@ -19,7 +19,7 @@
                         <h3 class="card-title">Search</h3>
                     </div>
 
-                    <form id="search-form" onsubmit="return false;" class="form-horizontal">
+                    <form id="searchForm" onsubmit="return false;" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>

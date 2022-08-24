@@ -1,5 +1,5 @@
 const PRODUCTS_LIST = 'table#productsList';
-const SEARCH_FORM = 'form#search-form';
+const SEARCH_FORM = 'form#searchForm';
 
 export default class ListData {
     // dataTable object
