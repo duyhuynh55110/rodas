@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card card-primary">
-                    <form id="gift-box-form" class="form-horizontal" method="POST" action="{{ routeAdmin('gift-boxs.save') }}" enctype="multipart/form-data">
+                    <form id="giftBoxForm" class="form-horizontal" method="POST" action="{{ routeAdmin('gift-boxs.save') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="id" value="{{ $inputId }}">
 
