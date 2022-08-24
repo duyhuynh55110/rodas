@@ -4,6 +4,7 @@
 - group_label: 'Master'
   icon: 'fas fa-columns'
   items:
+  # brands
   - label: 'Brand'
     icon: 'far fa-circle'
     items:
@@ -11,6 +12,7 @@
       route: 'brands.index'
     - label: 'New Brand'
       route: 'brands.create'
+  # products
   - label: 'Product'
     icon: 'far fa-circle'
     items:
@@ -18,3 +20,11 @@
       route: 'products.index'
     - label: 'New Product'
       route: 'products.create'
+  # gift-boxs
+  - label: 'Gift Box'
+    icon: 'far fa-circle'
+    items:
+    - label: 'List'
+      route: 'gift-boxs.index'
+    - label: 'New Gift Box'
+      route: 'gift-boxs.create'

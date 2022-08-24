@@ -27,6 +27,13 @@ class GiftBox extends Model
         'created_by', 'created_at', 'updated_by', 'updated_at'
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['full_path_image'];
+
     // ---- Relations
     /**
      * Product belong to many giftBoxs
@@ -38,5 +45,20 @@ class GiftBox extends Model
                 ->withTimestamps()
                 ->withPivot(['deleted_at'])
                 ->using(GiftBoxProduct::class);
+    }
+
+    // ---- Mutators & Casting
+    /**
+     * Get full image path
+     *
+     * @return string
+     */
+    public function getFullPathImageAttribute()
+    {
+        if(empty($this->image_file_name)) {
+            return null;
+        }
+
+        return Storage::disk()->url($this->image_file_name) ;
     }
 }
