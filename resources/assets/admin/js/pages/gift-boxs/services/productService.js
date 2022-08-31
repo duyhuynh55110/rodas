@@ -329,7 +329,7 @@ export default class ProductService {
             // render new rows
             _this.giftBoxProductsDataTable.rows.add(newData).draw();
 
-            // remove not exist product from giftBoxProducts table
+            // remove not exist product rows from giftBoxProducts table
             let removeProductIds = giftBoxProductsData.map(giftBoxProduct => {
                 let existProduct = _this.selectedProductsData.find(selectedProduct => selectedProduct.id == giftBoxProduct.id);
 
@@ -339,7 +339,6 @@ export default class ProductService {
                 }
             }).filter(Boolean);
 
-            // remove not exist rows
             _this.giftBoxProductsDataTable.rows((idx, data) => {
                 return removeProductIds.includes(data.id);
             }).remove().draw();
