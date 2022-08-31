@@ -54,3 +54,14 @@ label.error {
 .modal-backdrop.in {
     opacity: 0.5;
 }
+
+// === Custom DataTables css
+.dataTables_scroll {
+    .dataTables_scrollBody {
+        overflow-x: hidden !important; // block scroll horizontal
+
+        table {
+            table-layout: fixed; // scroll header & scroll body not same width because scrollbar
+        }
+    }
+}

@@ -60,7 +60,7 @@
             </div>
             <div class="modal-footer">
                 <div class="mx-auto">
-                    <button type="button" class="btn btn-primary mr-2"> Confirm </button>
+                    <button id="btnSubmitSelectedProducts" type="button" class="btn btn-primary mr-2"> Confirm </button>
                 </div>
             </div>
         </div>

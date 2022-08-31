@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\AdminTimestamp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class GiftBox extends Model
 {
@@ -41,9 +42,9 @@ class GiftBox extends Model
      * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function products() {
-        return $this->belongsToMany(GiftBox::class, 'gift_box_products', 'product_id', 'gift_box_id')
+        return $this->belongsToMany(Product::class, 'gift_box_products', 'gift_box_id', 'product_id')
                 ->withTimestamps()
-                ->withPivot(['deleted_at'])
+                ->withPivot(['quantity','deleted_at'])
                 ->using(GiftBoxProduct::class);
     }
 

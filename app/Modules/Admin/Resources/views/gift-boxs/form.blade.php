@@ -4,7 +4,7 @@
     $inputId = old('id', $giftBox->id ?? null);
     $inputName = old('name', $giftBox->name ?? null);
     $srcImage = $giftBox->full_path_Image ?? null;
-    $inputPrice = old('price', $giftBox->price ?? null);
+    $inputPrice = old('price',  $isUpdateForm ? floatval($giftBox->price) : null);
 
     // validate
     $requiredInputImage = !$isUpdateForm ? 'required' : ''; // required if create
@@ -43,12 +43,12 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="inputPrice">Price</label>
                                 <div class="col-sm-10">
-                                    <input required min="0" max="{{MAX_INTEGER_VALUE}}" type="number" name="item_price" autocomplete="off" class="form-control"
+                                    <input required min="0" max="{{MAX_INTEGER_VALUE}}" type="number" name="price" autocomplete="off" class="form-control"
                                         id="inputPrice" placeholder="Enter price"
                                         value="{{ $inputPrice }}">
                                 </div>
                             </div>
-                            <!-- .item-price -->
+                            <!-- .price -->
 
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="uploadImage"> Image </label>
@@ -88,7 +88,7 @@
                                 <!-- /.search-button -->
 
                                 <div class="col-sm-12">
-                                    <table id="gift-box-products-list" class="table table-bordered table-hover"></table>
+                                    <table id="giftBoxProductsList" class="table table-bordered table-hover" data-options='@json($options['giftBoxProducts'])'></table>
                                 </div>
                             </div>
                         </div>

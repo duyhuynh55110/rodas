@@ -15,8 +15,8 @@ class CreateGiftBoxsTable extends Migration
     {
         Schema::create('gift_boxs', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 500)->comment('gift box name');
-            $table->string('image_file_name', 100)->nullable()->comment('gift box image');
+            $table->string('name', 100)->comment('gift box name');
+            $table->string('image_file_name', 100)->comment('gift box image');
             $table->decimal('price', 18, 8)->default(0)->comment('gift box price');
             $table->integer('created_by')->command('user\'s id create');
             $table->timestamps();

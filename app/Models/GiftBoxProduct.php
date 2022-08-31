@@ -24,6 +24,7 @@ class GiftBoxProduct extends Pivot
      */
     protected $fillable = [
         'gift_box_id', 'product_id',
+        'quantity',
         'created_by', 'created_at', 'updated_by', 'updated_at'
     ];
 }

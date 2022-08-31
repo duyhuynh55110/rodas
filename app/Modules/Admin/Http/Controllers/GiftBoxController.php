@@ -2,11 +2,13 @@
 
 namespace App\Modules\Admin\Http\Controllers;
 
+use App\Modules\Admin\Http\Requests\GiftBoxFormRequest;
 use App\Modules\Admin\Services\BrandService;
 use App\Modules\Admin\Services\CountryService;
 use App\Modules\Admin\Services\GiftBoxService;
 use Base\Assets\Assets;
 use Illuminate\Http\Request;
+use Throwable;
 
 /**
  * GiftBoxController
@@ -105,20 +107,45 @@ class GiftBoxController extends BaseController
      */
     public function edit($id)
     {
+        // data
+        $giftBox = $this->giftBoxService->getGiftBoxById($id);
+        $brands = $this->brandService->getAllBrands();
+        $countries = $this->countryService->getAllCountries();
+
+        $options = [
+            'giftBoxProducts' => [
+                'data' => $this->getGiftBoxProductsData($giftBox),
+            ],
+            'searchProducts' => [
+                'dataTableAjax' => routeAdmin('products.index'),
+            ],
+        ];
+
         // init js
         $this->registerAssets();
 
-        return view('Admin::gift-boxs.form');
+        return view('Admin::gift-boxs.form', compact(
+            'giftBox',
+            'brands',
+            'countries',
+            'options',
+        ));
     }
 
     /**
      * Save a gift box data
      *
-     * @param Request $request
+     * @param GiftBoxFormRequest $request
      * @return mixed
      */
-    public function save(Request $request)
+    public function save(GiftBoxFormRequest $request)
     {
+        try {
+            $this->giftBoxService->updateOrCreate($request);
+            return redirect(routeAdmin('gift-boxs.index'))->with('status', DATA_SAVED);
+        } catch (Throwable $e) {
+            return back()->with('status', ERROR_OCCURRED_MSG)->with('status_type', 'danger')->withInput();
+        }
     }
 
     /**
@@ -132,6 +159,37 @@ class GiftBoxController extends BaseController
             [
                 assetAdmin('pages/gift-boxs.js')
             ]
+        );
+    }
+
+    /**
+     * Return gift box products data for giftBoxProducts table
+     *
+     * @param $giftBox
+     * @return array
+     */
+    private function getGiftBoxProductsData($giftBox) {
+        return $giftBox->products->map(
+            function ($product) {
+                $brand = $product->brand;
+                $country = $brand->country;
+
+                return [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'item_price' => floatval($product->item_price),
+                    'full_path_image' => $product->full_path_image,
+                    'quantity' => $product->pivot->quantity,
+                    'brand' => [
+                        'id' => $brand->id,
+                        'name' => $brand->name,
+                        'country' => [
+                            'id' => $country->id,
+                            'name' => $country->name,
+                        ]
+                    ],
+                ];
+            }
         );
     }
 }
