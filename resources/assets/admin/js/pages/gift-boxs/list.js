@@ -1,30 +1,29 @@
-const BRANDS_LIST = 'table#brandsList';
+const GIFT_BOXS_LIST = 'table#giftBoxsList';
 const SEARCH_FORM = 'form#searchForm';
 
 export default class ListData {
     // dataTable object
-    brandsTable = null;
+    giftBoxsTable = null;
 
     // setting for dataTable
     options = {};
 
     constructor () {
-        this.options = $(BRANDS_LIST).data('options');
+        this.options = $(GIFT_BOXS_LIST).data('options');
 
         this.initDataTable();
         this.initEvents();
     }
 
-    // init brands table
+    // init dataTable
     initDataTable() {
         let _this = this;
-        this.brandsTable = $(BRANDS_LIST).DataTable({
+        this.giftBoxsTable = $(GIFT_BOXS_LIST).DataTable({
             ajax: {
                 url: _this.options.dataTableAjax,
                 data: function (request) {
                     let form = $(SEARCH_FORM);
                     request.name = form.find('input[name=name]').val();
-                    request.country_id = form.find('select[name=country_id]').val();
                 }
             },
             columns: [
@@ -41,22 +40,22 @@ export default class ListData {
                     render: $.fn.dataTable.render.text(),
                 },
                 {
-                    data: 'country.name',
-                    name: 'country_name',
-                    title: 'Country',
-                    render: $.fn.dataTable.render.text(),
-                },
-                {
-                    data: 'full_path_logo',
-                    name: 'full_path_logo',
-                    title: 'Logo',
+                    data: 'full_path_image',
+                    name: 'full_path_image',
+                    title: 'Image',
                     render: function (data) {
                         if(data == null) {
                             return data;
                         }
 
-                        return `<img width='120' src='${data}' class='rounded' alt='${data}'/>`;
+                        return `<img width='80' src='${data}' class='rounded' alt='${data}'/>`;
                     }
+                },
+                {
+                    data: 'price',
+                    name: 'price',
+                    title: 'Price',
+                    render: $.fn.dataTable.render.text(),
                 },
                 {
                     data: 'id',
@@ -76,11 +75,11 @@ export default class ListData {
         this._onSubmitFormSearch();
     }
 
-    // filter data in table
+    // event when submit search form, filter data in products table
     _onSubmitFormSearch() {
         let _this = this;
         $(SEARCH_FORM).on('submit', function (e) {
-            _this.brandsTable.draw();
+            _this.giftBoxsTable.draw();
             return false;
         });
     }

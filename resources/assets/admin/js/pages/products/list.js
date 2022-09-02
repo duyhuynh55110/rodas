@@ -40,7 +40,7 @@ export default class ListData {
                     data: 'name',
                     name: 'name',
                     title: 'Name',
-                    'width': '30%',
+                    width: '30%',
                     render: $.fn.dataTable.render.text(),
                 },
                 {

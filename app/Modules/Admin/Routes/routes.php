@@ -3,6 +3,7 @@
 use App\Modules\Admin\Http\Controllers\Auth\LoginController;
 use App\Modules\Admin\Http\Controllers\Auth\LogoutController;
 use App\Modules\Admin\Http\Controllers\BrandController;
+use App\Modules\Admin\Http\Controllers\GiftBoxController;
 use App\Modules\Admin\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +30,7 @@ Route::group(
                 'middleware' => 'auth.admin:' . ADMIN_GUARD,
             ],
             function () {
-                // Brands
+                // brands
                 Route::group(
                     [
                         'prefix' => 'brands',
@@ -54,6 +55,20 @@ Route::group(
                         Route::name('create')->get('/create', [ProductController::class, 'create']);
                         Route::name('edit')->get('/{id}/edit', [ProductController::class, 'edit']);
                         Route::name('save')->post('/save', [ProductController::class, 'save']);
+                    }
+                );
+
+                // gift-boxs
+                Route::group(
+                    [
+                        'prefix' => 'gift-boxs',
+                        'as' => 'gift-boxs.'
+                    ],
+                    function () {
+                        Route::name('index')->get('/', [GiftBoxController::class, 'index']);
+                        Route::name('create')->get('/create', [GiftBoxController::class, 'create']);
+                        Route::name('edit')->get('/{id}/edit', [GiftBoxController::class, 'edit']);
+                        Route::name('save')->post('/save', [GiftBoxController::class, 'save']);
                     }
                 );
 

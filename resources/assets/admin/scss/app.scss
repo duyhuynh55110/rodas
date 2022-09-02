@@ -9,7 +9,7 @@
 @import "~admin-lte/plugins/datatables-responsive/css/responsive.bootstrap4.css";
 @import "~admin-lte/plugins/toastr/toastr.css";
 @import "~admin-lte/plugins/select2/css/select2.min.css";
-@import "~admin-lte/dist/css/adminlte.css";
+@import "~admin-lte/dist/css/adminlte.min.css";
 
 // === jQuery Validation library
 input.error, select.error {
@@ -30,4 +30,38 @@ label.error {
 // === 'Select2' library
 .select2 {
     width: 100% !important;
+}
+
+// === Fix AdminLTE 3 + Bootstrap 4 error
+// Fix account dropdown
+.dropdown.open {
+    .dropdown-menu {
+        display: block;
+    }
+}
+
+// Fix modal fade not show
+.fade.in {
+    opacity: 1;
+}
+
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.modal-backdrop.in {
+    opacity: 0.5;
+}
+
+// === Custom DataTables css
+.dataTables_scroll {
+    .dataTables_scrollBody {
+        overflow-x: hidden !important; // block scroll horizontal
+
+        table {
+            table-layout: fixed; // scroll header & scroll body not same width because scrollbar
+        }
+    }
 }
