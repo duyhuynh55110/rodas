@@ -107,29 +107,33 @@ class GiftBoxController extends BaseController
      */
     public function edit($id)
     {
-        // data
-        $giftBox = $this->giftBoxService->getGiftBoxById($id);
-        $brands = $this->brandService->getAllBrands();
-        $countries = $this->countryService->getAllCountries();
+        try {
+            // data
+            $giftBox = $this->giftBoxService->getGiftBoxById($id);
+            $brands = $this->brandService->getAllBrands();
+            $countries = $this->countryService->getAllCountries();
 
-        $options = [
-            'giftBoxProducts' => [
-                'data' => $this->getGiftBoxProductsData($giftBox),
-            ],
-            'searchProducts' => [
-                'dataTableAjax' => routeAdmin('products.index'),
-            ],
-        ];
+            $options = [
+                'giftBoxProducts' => [
+                    'data' => $this->getGiftBoxProductsData($giftBox),
+                ],
+                'searchProducts' => [
+                    'dataTableAjax' => routeAdmin('products.index'),
+                ],
+            ];
 
-        // init js
-        $this->registerAssets();
+            // init js
+            $this->registerAssets();
 
-        return view('Admin::gift-boxs.form', compact(
-            'giftBox',
-            'brands',
-            'countries',
-            'options',
-        ));
+            return view('Admin::gift-boxs.form', compact(
+                'giftBox',
+                'brands',
+                'countries',
+                'options',
+            ));
+        } catch (Throwable $e) {
+            return back()->with('status', $e->getMessage())->with('status_type', 'danger')->withInput();
+        }
     }
 
     /**

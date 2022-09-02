@@ -67,7 +67,7 @@ class GiftBoxRepository extends Repository
      * @param array $giftBoxProducts
      * @return App\Models\GiftBox
      */
-    public function updateOrCreateWithRelations(array $attributes,  array $values, array $giftBoxProducts)
+    public function updateOrCreateWithRelations(array $attributes, array $values, array $giftBoxProducts)
     {
         // create/update a gift box
         $giftBox = $this->updateOrCreate($attributes, $values);

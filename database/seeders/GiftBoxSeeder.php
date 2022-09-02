@@ -91,7 +91,6 @@ class GiftBoxSeeder extends Seeder
                 }
             );
 
-            // --- create gift box products
             $giftBox->products()->sync($giftBoxProductsData);
         }
     }

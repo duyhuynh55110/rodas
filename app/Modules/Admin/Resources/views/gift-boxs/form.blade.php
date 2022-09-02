@@ -3,7 +3,7 @@
 
     $inputId = old('id', $giftBox->id ?? null);
     $inputName = old('name', $giftBox->name ?? null);
-    $srcImage = $giftBox->full_path_Image ?? null;
+    $srcImage = $giftBox->full_path_image ?? null;
     $inputPrice = old('price',  $isUpdateForm ? floatval($giftBox->price) : null);
 
     // validate
