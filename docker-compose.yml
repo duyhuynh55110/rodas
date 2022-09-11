@@ -30,17 +30,18 @@ services:
         container_name: 'rodas_web'
         environment:
             TZ: '${APP_TIMEZONE:-UTC}'
+            NODE_ENV: 'development'
         volumes:
             - './resources/assets/user:/var/www/rodas-user'
-            - 'dependencies:/var/www/rodas-user/node_modules' # this enables a much faster start/reload
+            - './resources/assets/user/node_modules:/var/www/rodas-user/node_modules' # this enables a much faster start/reload
         tty: true
         working_dir: '/var/www/rodas-user'
         networks:
             - rodas
         ports:
-            - '8080:8080' # when run 'npm run serve' default port was 8080 that why must set '8080:8080' here
+            - '9002:8080' # when run 'npm run serve' default port was 8080 that why must set '8080:8080' here
         expose:
-            - '8080'
+            - '9002'
 
     # (Laravel) Admin application
     app:
