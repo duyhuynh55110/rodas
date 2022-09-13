@@ -22,6 +22,27 @@ services:
         depends_on:
             - 'app'
 
+    # (VueJS) End User application
+    web:
+        build:
+            context: .
+            dockerfile: './docker/web/Dockerfile'
+        container_name: 'rodas_web'
+        environment:
+            TZ: '${APP_TIMEZONE:-UTC}'
+            NODE_ENV: 'development'
+        volumes:
+            - './resources/assets/user:/var/www/rodas-user'
+            - 'dependencies:/var/www/rodas-user/node_modules' # this enables a much faster start/reload
+        tty: true
+        working_dir: '/var/www/rodas-user'
+        networks:
+            - rodas
+        ports:
+            - '8080:8080' # when run 'npm run serve' default port was 8080 that why must set '8080:8080' here
+        expose:
+            - '8080'
+
     # (Laravel) Admin application
     app:
         build:
@@ -29,7 +50,7 @@ services:
             dockerfile: './docker/app/Dockerfile'
         container_name: 'rodas_app'
         environment:
-            - TZ="${APP_TIMEZONE:-UTC}"
+            TZ: '${APP_TIMEZONE:-UTC}'
         volumes:
             - '.:/var/www/rodas-admin'
             - './docker/app/config/php/php.ini:/usr/local/etc/php/php.ini'
@@ -57,7 +78,7 @@ services:
         networks:
             - rodas
         environment:
-            TZ: "${APP_TIMEZONE:-UTC}"
+            TZ: '${APP_TIMEZONE:-UTC}'
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_DATABASE: '${DB_DATABASE}'
             MYSQL_USER: '${DB_USERNAME}'
@@ -79,7 +100,7 @@ services:
         networks:
             - rodas
         healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
+            test: ['CMD', 'redis-cli', 'ping']
             retries: 3
             timeout: 5s
 networks:
