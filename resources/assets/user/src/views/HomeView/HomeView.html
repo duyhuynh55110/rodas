@@ -1,8 +1,15 @@
 <div class="page homepage">
-    <div class="container">
-        <div class="notification-bar">
-            <div class="info"> info </div>
-            <div class="media"> media </div>
+    <div class="page-content">
+        <div class="container">
+            <!-- Notification bar -->
+            <NotificationBar />
+
+            <!-- Swiper - Post cards -->
+            <swiper :modules="modules" :slides-per-view="1" :space-between="20" :pagination="true">
+                <swiper-slide><PostCard /></swiper-slide>
+                <swiper-slide><PostCard /></swiper-slide>
+                <swiper-slide><PostCard /></swiper-slide>
+            </swiper>
         </div>
     </div>
 </div>

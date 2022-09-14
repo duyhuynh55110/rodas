@@ -1,23 +1,20 @@
 body {
-    font-family: 'Poppins';
-    margin: 0;
-
     .page {
-        background-color: red; // TODO: remove this
+        .page-content {
+            padding-top: 30px;
 
-        .container {
-            background-color: bisque; // TODO: remove this
+            .container {
+                max-width: 1024px;
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: 30px;
+                padding-right: 30px;
+                box-sizing: border-box;
 
-            max-width: 1024px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 30px;
-            padding-right: 30px;
-            box-sizing: border-box;
-
-            &.px-15{
-                padding-left:15px;
-                padding-right:15px;
+                &.px-15{
+                    padding-left:15px;
+                    padding-right:15px;
+                }
             }
         }
     }

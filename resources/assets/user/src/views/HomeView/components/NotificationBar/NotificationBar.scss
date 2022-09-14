@@ -1,0 +1,41 @@
+.notification-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+
+    .info {
+        span {
+            color: #5F5F5F;
+            font-size: 14px;
+        }
+
+        h5 {
+            font-size: 20px;
+            margin: 5px 0 0;
+            font-weight: 600;
+        }
+    }
+
+    .media {
+        .notibell {
+            font-size: 25px;
+            color: var(--text-color-heading);
+            position: relative;
+
+            .badge {
+                position: absolute;
+                min-width: 8px;
+                height: 8px;
+                border-radius: 18px;
+                background: var(--theme-color);
+                border: 2px solid #fff;
+                width: 8px;
+                min-height: 6px;
+                display: block;
+                right: -2px;
+                top: 2px;
+            }
+        }
+    }
+}
