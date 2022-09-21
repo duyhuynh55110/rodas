@@ -1,3 +1,9 @@
+// ==== Sass variables
+// Max page width
+$maxPageWidth: 425px;
+$minScreenWidth: 426px;
+
+// === CSS variables
 :root {
     // theme color
     --theme-color: #4CB32B;
@@ -8,4 +14,7 @@
 
     // text color
     --text-color-heading: #384144;
+
+    // main font family
+    --theme-font-family: 'Poppins', sans-serif, sans-serif;
 }

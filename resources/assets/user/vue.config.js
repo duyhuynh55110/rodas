@@ -12,6 +12,7 @@ module.exports = defineConfig({
                 "@constants": path.resolve(__dirname, "src/constants"),
                 "@router": path.resolve(__dirname, "src/router"),
                 "@services": path.resolve(__dirname, "src/services"),
+                "@components": path.resolve(__dirname, "src/components"),
             },
         },
     },

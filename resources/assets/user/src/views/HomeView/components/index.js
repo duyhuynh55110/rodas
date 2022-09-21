@@ -1,7 +1,11 @@
 import NotificationBar from "./NotificationBar";
-import PostCard from "./PostCard";
+import PostsArea from "./PostsArea";
+import CategoriesArea from "./CategoriesArea";
+import TrendingItemsArea from "./TrendingItemsArea";
 
 export {
     NotificationBar,
-    PostCard
+    PostsArea,
+    CategoriesArea,
+    TrendingItemsArea
 }

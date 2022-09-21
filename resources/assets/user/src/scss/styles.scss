@@ -1,9 +1,15 @@
-@import "fonts";
-@import "colors";
-@import "reset";
+// Plugins
+@import "plugins/plugins.scss";
 
-// Custom Packages
-// Swiper
-@import "swiper";
+@import "abstracts/variables";
+@import "abstracts/mixins";
 
-@import "global";
+@import "base/reset";
+@import "base/typography";
+
+// Margin, Padding & Grid system
+@import "layout/grid";
+@import "layout/spacing";
+
+@import "custom/fonts";
+@import "custom/styles";

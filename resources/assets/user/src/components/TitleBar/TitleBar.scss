@@ -1,0 +1,20 @@
+.title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    line-height: 1;
+
+    .dz-title {
+        font-weight: 600;
+    }
+
+    a {
+        font-size: 28px;
+        color: var(--theme-color);
+    }
+
+    .icon-close {
+        color: var(--text-color-heading);
+    }
+}

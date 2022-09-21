@@ -4,12 +4,14 @@
             <!-- Notification bar -->
             <NotificationBar />
 
-            <!-- Swiper - Post cards -->
-            <swiper :modules="modules" :slides-per-view="1" :space-between="20" :pagination="true">
-                <swiper-slide><PostCard /></swiper-slide>
-                <swiper-slide><PostCard /></swiper-slide>
-                <swiper-slide><PostCard /></swiper-slide>
-            </swiper>
+            <!-- Swiper - Posts area -->
+            <PostsArea />
+
+            <!-- Swiper - Categories area -->
+            <CategoriesArea />
+
+            <!-- Trending items area -->
+            <TrendingItemsArea />
         </div>
     </div>
 </div>

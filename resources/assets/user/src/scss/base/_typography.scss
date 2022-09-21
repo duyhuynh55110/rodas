@@ -1,0 +1,71 @@
+/**
+    Typography Rules
+    -----------------------
+    basic style sheet with the website’s
+**/
+
+body {
+    overflow-x: hidden;
+    height: 100%;
+    position: relative;
+    max-width: 100%;
+    font-size: 1rem;
+    font-family: var(--theme-font-family);
+    background: var(--theme-color-light);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.page, .page-content {
+    background-color: var(--theme-color-light);
+}
+
+.page {
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    z-index: 1;
+
+    .page-content {
+        padding-top: 30px;
+
+        .container {
+            max-width: 1024px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 30px;
+            padding-right: 30px;
+            box-sizing: border-box;
+
+            &.px-15{
+                padding-left:15px;
+                padding-right:15px;
+            }
+        }
+    }
+}
+
+.button{
+	border-radius:16px;
+
+	&.button-large{
+		font-size: 16px;
+		padding: 20px 30px;
+		height: auto;
+		line-height: 1.2;
+	}
+}
+
+@media only screen and (min-width: $minScreenWidth) {
+    // Limit page size for mobile only
+    .page {
+        max-width: $maxPageWidth;
+        margin: 0 auto; // center
+    }
+}
+
+
