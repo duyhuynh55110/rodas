@@ -1,6 +1,6 @@
 // Import Swiper components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Pagination } from "swiper";
+import { Pagination, Autoplay } from "swiper";
 
 export default {
     name: 'PostsArea',
@@ -8,9 +8,16 @@ export default {
         Swiper,
         SwiperSlide,
     },
+    data() {
+        return {
+            autoplay: {
+                delay: 3000,
+            },
+        }
+    },
     setup() {
         return {
-          modules: [Pagination],
+          modules: [Pagination, Autoplay],
         };
     },
 }

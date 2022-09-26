@@ -16,22 +16,23 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    font-family: inherit; // inherit font-family from body
+}
+
 .page, .page-content {
     background-color: var(--theme-color-light);
 }
 
 .page {
-    box-sizing: border-box;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    transform: none;
-    z-index: 1;
+    margin: 0 auto; // center
 
     .page-content {
         padding-top: 30px;
+        padding-bottom: 30px;
 
         .container {
             max-width: 1024px;
@@ -60,11 +61,19 @@ body {
 	}
 }
 
+/* Content Bottom Space */
+.bottom-{
+    &sp80:after{
+        height:80px;
+        content:"";
+        display:block;
+    }
+}
+
 @media only screen and (min-width: $minScreenWidth) {
     // Limit page size for mobile only
     .page {
         max-width: $maxPageWidth;
-        margin: 0 auto; // center
     }
 }
 
