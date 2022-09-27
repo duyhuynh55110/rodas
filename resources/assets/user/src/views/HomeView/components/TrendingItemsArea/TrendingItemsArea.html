@@ -1,68 +1,13 @@
 <TitleBar title="Trending Deals" />
 
 <div class="row">
-    <div class="col-50">
-        <div class="item-box">
-            <div class="item-media">
-                <img src="https://kede.dexignzone.com/xhtml/img/categories/pic1.jpg" alt="">
-            </div>
-            <a href="javascript:void(0);" class="item-bookmark active">
-                <font-awesome-icon icon="fa fa-heart" />
-                <input type="checkbox">
-            </a>
-            <div class="item-content">
-                <h3 class="title"><a href="/item-details/">Avocado</a></h3>
-                <h4 class="price">$6.7</h4>
-            </div>
-        </div>
+    <!-- Item boxs -->
+    <div class="col-50" v-for="item in items">
+        <ItemBox :item="item" />
     </div>
-    <div class="col-50">
-        <div class="item-box">
-            <div class="item-media">
-                <img src="https://kede.dexignzone.com/xhtml/img/categories/pic1.jpg" alt="">
-            </div>
-            <a href="javascript:void(0);" class="item-bookmark">
-                <font-awesome-icon icon="fa fa-heart" />
-                <input type="checkbox">
-            </a>
-            <div class="item-content">
-                <h3 class="title"><a href="/item-details/">Brocoli</a></h3>
-                <h4 class="price">$8.7</h4>
-            </div>
-        </div>
-    </div>
-    <div class="col-50">
-        <div class="item-box">
-            <div class="item-media">
-                <img src="https://kede.dexignzone.com/xhtml/img/categories/pic1.jpg" alt="">
-            </div>
-            <a href="javascript:void(0);" class="item-bookmark">
-                <i class="fa fa-heart"></i>
-                <input type="checkbox">
-            </a>
-            <div class="item-content">
-                <h3 class="title"><a href="/item-details/">Tomatoes</a></h3>
-                <h4 class="price">$4.9</h4>
-            </div>
-        </div>
-    </div>
-    <div class="col-50">
-        <div class="item-box">
-            <div class="item-media">
-                <img src="https://kede.dexignzone.com/xhtml/img/categories/pic1.jpg" alt="">
-            </div>
-            <a href="javascript:void(0);" class="item-bookmark">
-                <i class="fa fa-heart"></i>
-                <input type="checkbox">
-            </a>
-            <div class="item-content">
-                <h3 class="title"><a href="/item-details/">Grapes</a></h3>
-                <h4 class="price">$7.2</h4>
-            </div>
-        </div>
-    </div>
+
+    <!-- Load more button -->
     <div class="col-100">
-        <!-- Load more button -->
         <ButtonPrimary content="LOAD MORE" />
     </div>
 </div>

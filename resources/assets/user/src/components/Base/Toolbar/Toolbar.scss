@@ -7,6 +7,10 @@
     border-top: 1px solid #F4F4F4;
     background-color: #fafefc;
 
+    // fix for responsive PC
+    max-width: var(--max-page-width);
+    margin: 0 auto;
+
     .toolbar-inner {
         padding: 0 30px;
         display: flex;
@@ -25,9 +29,11 @@
             font-size: 22px;
             color: #B1B1B1;
             transition-duration: .3s;
-            position: relative;
-            height: 100%;
             width: 100%;
+
+            &.active {
+                color: var(--theme-color);
+            }
 
             .cart-in {
                 position: relative;
