@@ -5,13 +5,13 @@
             <NotificationBar />
 
             <!-- Swiper - Posts area -->
-            <PostsArea />
+            <PostCardsArea :posts="this.posts" />
 
             <!-- Swiper - Categories area -->
             <CategoriesArea />
 
             <!-- Trending items area -->
-            <TrendingItemsArea :items="trendingItems" />
+            <TrendingItemsArea :items="this.trendingItems" />
         </div>
 
         <!-- Toolbar -->

@@ -1,4 +1,4 @@
-const HomeView = () => import('@views/HomeView')
+const HomeView = () => import('@/views/HomeView')
 
 const routes = [
     {

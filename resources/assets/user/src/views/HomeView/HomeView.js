@@ -1,18 +1,31 @@
 // components
-import { Toolbar } from "@components";
-import { NotificationBar, PostsArea, CategoriesArea, TrendingItemsArea } from './components';
+import { Toolbar, NotificationBar, PostCardsArea, TrendingItemsArea, CategoriesArea } from "@/components";
 
 export default {
     name: 'HomeView',
     components: {
         Toolbar,
         NotificationBar,
-        PostsArea,
+        PostCardsArea,
         CategoriesArea,
         TrendingItemsArea,
     },
     data() {
         return {
+            posts: [
+                {
+                    full_path_image: 'https://kede.dexignzone.com/xhtml/img/post/pic1.jpg',
+                    title: 'Recommended Recipe Today',
+                },
+                {
+                    full_path_image: 'https://kede.dexignzone.com/xhtml/img/post/pic2.jpg',
+                    title: 'Recommended Recipe Today',
+                },
+                {
+                    full_path_image: 'https://kede.dexignzone.com/xhtml/img/post/pic1.jpg',
+                    title: 'Recommended Recipe Today',
+                },
+            ],
             trendingItems: [
                 {
                     full_path_image: 'https://kede.dexignzone.com/xhtml/img/categories/pic1.jpg',

@@ -1,4 +1,6 @@
-import { TitleBar, ButtonPrimary, ItemBox } from "@components";
+import TitleBar from "@/components/ui/TitleBar";
+import ButtonPrimary from "@/components/ui/ButtonPrimary";
+import ItemBox from "../ItemBox";
 
 export default {
     name: "TrendingItemsArea",

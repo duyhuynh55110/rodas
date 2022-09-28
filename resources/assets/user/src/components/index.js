@@ -1,13 +1,22 @@
-import Navbar from "./base/Navbar";
-import Toolbar from "./base/Toolbar";
-import TitleBar from "./TitleBar";
-import ButtonPrimary from "./ButtonPrimary";
-import ItemBox from "./ItemBox";
+// layouts
+import Navbar from "./layouts/Navbar";
+import Toolbar from "./layouts/Toolbar";
+import NotificationBar from "./layouts/NotificationBar";
+
+// posts
+import PostCardsArea from "./posts/PostCardsArea";
+
+// items
+import TrendingItemsArea from "./items/TrendingItemsArea";
+
+// categories
+import CategoriesArea from "./categories/CategoriesArea";
 
 export {
     Navbar,
     Toolbar,
-    TitleBar,
-    ButtonPrimary,
-    ItemBox
+    NotificationBar,
+    PostCardsArea,
+    TrendingItemsArea,
+    CategoriesArea
 }

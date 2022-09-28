@@ -1,0 +1,7 @@
+<div class="posts-area mb-30">
+    <swiper :autoplay="autoplay" :modules="modules" :slides-per-view="auto" :space-between="20" :pagination="true">
+        <swiper-slide v-for="post in posts">
+            <PostCard :post="post" />
+        </swiper-slide>
+    </swiper>
+</div>
