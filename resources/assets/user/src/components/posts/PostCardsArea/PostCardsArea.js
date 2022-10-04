@@ -4,7 +4,7 @@ import { Pagination, Autoplay } from "swiper";
 import PostCard from "../PostCard";
 
 export default {
-    name: "PostCards",
+    name: "PostCardsArea",
     components: {
         Swiper,
         SwiperSlide,

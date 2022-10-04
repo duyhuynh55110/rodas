@@ -1,10 +1,9 @@
 // components
-import { Toolbar, NotificationBar, PostCardsArea, TrendingItemsArea, CategoriesArea } from "@/components";
+import { NotificationBar, PostCardsArea, TrendingItemsArea, CategoriesArea } from "@/components";
 
 export default {
     name: 'HomeView',
     components: {
-        Toolbar,
         NotificationBar,
         PostCardsArea,
         CategoriesArea,

@@ -2,7 +2,7 @@ export default {
     name: "TitleBar",
     props: {
         title: {
-            type: Text,
+            type: String,
             required: true,
         }
     }

@@ -1,7 +1,5 @@
-// layouts
-import Navbar from "./layouts/Navbar";
-import Toolbar from "./layouts/Toolbar";
-import NotificationBar from "./layouts/NotificationBar";
+// layout
+import Toolbar from "./layout/Toolbar";
 
 // posts
 import PostCardsArea from "./posts/PostCardsArea";
@@ -12,10 +10,12 @@ import TrendingItemsArea from "./items/TrendingItemsArea";
 // categories
 import CategoriesArea from "./categories/CategoriesArea";
 
+// ui
+import NotificationBar from "./ui/NotificationBar";
+
 export {
-    Navbar,
-    Toolbar,
     NotificationBar,
+    Toolbar,
     PostCardsArea,
     TrendingItemsArea,
     CategoriesArea

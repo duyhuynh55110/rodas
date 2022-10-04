@@ -2,7 +2,7 @@ export default {
     name: 'ButtonPrimary',
     props: {
         content: {
-            type: Text,
+            type: String,
             required: true,
         },
     }
