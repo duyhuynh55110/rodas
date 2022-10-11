@@ -3,6 +3,12 @@
     -----------------------
     basic style sheet with the website’s
 **/
+@media only screen and (min-width: $minScreenWidth) {
+    // Limit page size for mobile only
+    .page {
+        max-width: $maxPageWidth;
+    }
+}
 
 body {
     overflow-x: hidden;
@@ -48,6 +54,16 @@ button {
             }
         }
     }
+
+    /* route transitions */
+    .route-enter-active,
+    .route-leave-active {
+        transition: opacity 0.2s ease;
+    }
+    .route-enter-from,
+    .route-leave-to {
+        opacity: 0;
+    }
 }
 
 .button{
@@ -70,11 +86,33 @@ button {
     }
 }
 
-@media only screen and (min-width: $minScreenWidth) {
-    // Limit page size for mobile only
-    .page {
-        max-width: $maxPageWidth;
+.d-flex {
+    display: flex;
+
+    // justify content
+    &.justify-content-between {
+        justify-content: space-between;
+    }
+
+    &.justify-content-center {
+        justify-content: center;
+    }
+
+    // align item
+    &.align-item-center {
+        align-items: center;
+    }
+
+    //  flex direction
+    &.flex-column {
+        flex-direction: column;
     }
 }
 
+.text-primary {
+    color: var(--theme-color);
+}
 
+.bg-primary {
+    background-color: var(--theme-color);
+}

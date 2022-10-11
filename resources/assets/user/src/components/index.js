@@ -1,6 +1,11 @@
 // layout
 import Toolbar from "./layout/Toolbar";
 
+// ui
+import NotificationBar from "./ui/NotificationBar";
+import TitleBar from "./ui/TitleBar";
+import ButtonPrimary from "./ui/ButtonPrimary";
+
 // posts
 import PostCardsArea from "./posts/PostCardsArea";
 
@@ -8,15 +13,18 @@ import PostCardsArea from "./posts/PostCardsArea";
 import TrendingItemsArea from "./items/TrendingItemsArea";
 
 // categories
-import CategoriesArea from "./categories/CategoriesArea";
+import CategorySlidesArea from "./categories/CategorySlidesArea";
 
-// ui
-import NotificationBar from "./ui/NotificationBar";
+// shopping cart
+import CartItemsArea from "./cart/CartItemsArea";
 
 export {
-    NotificationBar,
     Toolbar,
+    NotificationBar,
+    ButtonPrimary,
+    TitleBar,
     PostCardsArea,
     TrendingItemsArea,
-    CategoriesArea
+    CategorySlidesArea,
+    CartItemsArea
 }
