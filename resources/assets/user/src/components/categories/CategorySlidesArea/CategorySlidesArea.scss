@@ -10,7 +10,7 @@
         display: block;
 
         .category {
-            @include position(relative);
+            @include flexbox($alignItems: center);
             @include circleBox(70px, 16px);
             padding: 0px 30px;
             font-size: 24px;

@@ -1,6 +1,6 @@
 <template>
     <div class="navbar">
-        <div class="navbar-inner d-flex justify-content-between">
+        <div class="navbar-inner">
             <div class="title">Shopping Cart</div>
             <div class="right">
                 <a href="/shipping-address/"> Checkout </a>

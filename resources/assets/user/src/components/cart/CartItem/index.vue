@@ -1,6 +1,6 @@
 <template>
     <div class="cart-item">
-        <div class="item-inner d-flex">
+        <div class="item-inner">
             <div class="item-media">
                 <img
                     src="https://kede.dexignzone.com/xhtml/img/categories/pic1.jpg"
@@ -8,16 +8,16 @@
                 />
                 <h3 class="item-price bg-primary">$7.2</h3>
             </div>
-            <div class="item-info d-flex justify-content-between flex-column">
+            <div class="item-info">
                 <div class="item-head">
                     <h6 class="category">FRUITS</h6>
                     <h2 class="item-title">
                         <a href="/item-details/">Banana</a>
                     </h2>
                 </div>
-                <div class="item-foot d-flex justify-content-between">
+                <div class="item-foot">
                     <h3 class="text-primary item-total">$28.8</h3>
-                    <div class="stepper d-flex">
+                    <div class="stepper">
                         <div class="stepper-button-minus">-</div>
                         <div class="stepper-input-wrap">
                             <input

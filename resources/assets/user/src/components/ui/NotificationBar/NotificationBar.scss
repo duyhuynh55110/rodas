@@ -1,7 +1,5 @@
 .notification-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    @include flexbox($justifyContent: space-between, $alignItems: flex-end);
     margin-bottom: 20px;
 
     .info {
@@ -24,17 +22,13 @@
             position: relative;
 
             .badge {
-                position: absolute;
+                @include position(absolute, $top: 2px, $right: -2px);
+                @include circleBox(8px, 18px);
+                width: 8px;
                 min-width: 8px;
-                height: 8px;
-                border-radius: 18px;
                 background: $themeColor;
                 border: 2px solid #fff;
-                width: 8px;
                 min-height: 6px;
-                display: block;
-                right: -2px;
-                top: 2px;
             }
         }
     }

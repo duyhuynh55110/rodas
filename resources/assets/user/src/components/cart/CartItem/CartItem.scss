@@ -4,15 +4,15 @@
     margin: 6px 0;
 
     .item-inner {
+        @include flexbox();
         padding: 12px 30px;
 
         .item-media {
+            @include circleBox(115px, 16px);
             min-width: 95px !important;
             width: 30%;
-            border-radius: 16px;
-            overflow: hidden;
             margin-right: 20px;
-            height: 115px;
+            overflow: hidden;
             position: relative;
 
             img {
@@ -20,22 +20,22 @@
             }
 
             .item-price {
-                position: absolute;
-                left: 0;
-                bottom: 0;
+                @include position(absolute, $left: 0, $right: 0, $bottom: 0);
                 margin: 0;
-                width: 100%;
                 text-align: center;
                 font-weight: 500;
                 font-size: 18px;
                 padding: 5px;
                 border-radius: 16px;
-                box-sizing: border-box;
                 color: #fff;
             }
         }
 
         .item-info {
+            @include flexbox(
+                $flexDirection: column,
+                $justifyContent: space-between
+            );
             width: 100%;
 
             .item-head {
@@ -57,7 +57,10 @@
             }
 
             .item-foot {
-                align-items: center;
+                @include flexbox(
+                    $justifyContent: space-between,
+                    $alignItems: center
+                );
 
                 .item-total {
                     margin: 0;
@@ -66,10 +69,10 @@
                 }
 
                 .stepper {
+                    @include flexbox();
+                    @include circleBox(35px, 28px);
                     background-color: #efefef;
-                    height: 35px;
                     width: 115px;
-                    border-radius: 28px;
 
                     .stepper-button-minus,
                     .stepper-button-plus,

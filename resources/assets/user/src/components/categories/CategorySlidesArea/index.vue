@@ -2,7 +2,7 @@
     <div class="categories-area mb-30">
         <swiper :space-between="10">
             <swiper-slide>
-                <a href="/categories" class="category d-flex align-item-center">
+                <a href="/categories" class="category">
                     <svg
                         width="37"
                         height="33"
