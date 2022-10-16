@@ -1,5 +1,6 @@
 // layout
 import Toolbar from "./layout/Toolbar";
+import Navbar from "./layout/Navbar";
 
 // ui
 import NotificationBar from "./ui/NotificationBar";
@@ -20,6 +21,7 @@ import CartItemsArea from "./cart/CartItemsArea";
 
 export {
     Toolbar,
+    Navbar,
     NotificationBar,
     ButtonPrimary,
     TitleBar,

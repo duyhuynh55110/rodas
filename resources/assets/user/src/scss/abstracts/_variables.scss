@@ -3,21 +3,13 @@
 $maxPageWidth: 425px;
 $minScreenWidth: 426px;
 
-// === CSS variables
-:root {
-    // theme color
-    --theme-color: #4CB32B;
-    --theme-color-rgb: 146, 55, 227;
-    --theme-color-shade: #4CB32B;
-    --theme-color-tint: #a44ef1;
-    --theme-color-light: #fafefc;
+// Theme color
+$themeColor: #4CB32B;
+$themeColorLight: #fafefc;
 
-    // text color
-    --text-color-heading: #384144;
+// Text color
+$themeTextColor: #4CB32B;
+$textColorHeading:#384144;
 
-    // main font family
-    --theme-font-family: 'Poppins', sans-serif, sans-serif;
-
-    // responsive
-    --max-page-width: 425px;
-}
+// Font family
+$themeFontFamily: 'Poppins', sans-serif, sans-serif;

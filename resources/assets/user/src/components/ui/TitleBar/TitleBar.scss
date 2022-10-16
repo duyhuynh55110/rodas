@@ -11,10 +11,10 @@
 
     a {
         font-size: 28px;
-        color: var(--theme-color);
+        color: $themeColor;
     }
 
     .icon-close {
-        color: var(--text-color-heading);
+        color: $textColorHeading;
     }
 }

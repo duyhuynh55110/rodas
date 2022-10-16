@@ -16,8 +16,8 @@ body {
     position: relative;
     max-width: 100%;
     font-size: 1rem;
-    font-family: var(--theme-font-family);
-    background: var(--theme-color-light);
+    font-family: $themeFontFamily;
+    background: $themeColorLight;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -30,7 +30,7 @@ button {
 }
 
 .page, .page-content {
-    background-color: var(--theme-color-light);
+    background-color: $themeColorLight;
 }
 
 .page {
@@ -110,9 +110,9 @@ button {
 }
 
 .text-primary {
-    color: var(--theme-color);
+    color: $themeColor;
 }
 
 .bg-primary {
-    background-color: var(--theme-color);
+    background-color: $themeColor;
 }

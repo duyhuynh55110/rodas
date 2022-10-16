@@ -8,7 +8,7 @@
     background-color: #fafefc;
 
     // fix for responsive PC
-    max-width: var(--max-page-width);
+    max-width: $maxPageWidth;
     margin: 0 auto;
 
     .toolbar-inner {
@@ -32,7 +32,7 @@
             width: 100%;
 
             &.active {
-                color: var(--theme-color);
+                color: $themeColor;
             }
 
             .cart-in {
@@ -47,7 +47,7 @@
                     right: -6px;
                     top: -2px;
                     border-radius: 10px;
-                    background-color: var(--theme-color);
+                    background-color: $themeColor;
                 }
             }
 

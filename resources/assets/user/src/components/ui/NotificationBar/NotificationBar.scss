@@ -20,7 +20,7 @@
     .media {
         .notibell {
             font-size: 25px;
-            color: var(--text-color-heading);
+            color: $textColorHeading;
             position: relative;
 
             .badge {
@@ -28,7 +28,7 @@
                 min-width: 8px;
                 height: 8px;
                 border-radius: 18px;
-                background: var(--theme-color);
+                background: $themeColor;
                 border: 2px solid #fff;
                 width: 8px;
                 min-height: 6px;

@@ -7,7 +7,7 @@
 // Custom - the text is being highlighted by the user.
 ::selection {
     color: #fff;
-    background: var(--theme-color);
+    background: $themeColor;
 }
 
 body {
@@ -24,11 +24,11 @@ h3,
 h4,
 h5,
 h6 {
-    color: var(--text-color-heading);
+    color: $textColorHeading;
 }
 
 a {
     cursor: pointer;
     text-decoration: none;
-    color: var(--theme-color);
+    color: $themeColor;
 }
