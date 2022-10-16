@@ -2,7 +2,7 @@
     margin-right: -30px;
     height: auto;
 
-    .swiper-slide{
+    .swiper-slide {
         width: auto !important;
         border: 0;
         background: transparent;
@@ -10,17 +10,10 @@
         display: block;
 
         .category {
-            border-radius: 16px;
+            @include position(relative);
+            @include circleBox(70px, 16px);
             padding: 0px 30px;
-            text-transform: capitalize;
-            font-weight: 500;
-            line-height: 1.4;
-            height: 70px;
-            display: flex;
-            align-items: center;
             font-size: 24px;
-            border-width: 1px;
-            position: relative;
             border: 1px solid $themeColor;
         }
     }

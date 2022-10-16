@@ -1,70 +1,51 @@
 .item-box {
-    position: relative;
-    width: 100%;
-    margin-bottom: 20px;
-    border-radius: 18px;
+    @include circleBox(220px, 18px);
+    @include position(relative);
+    margin-bottom: 15px;
     overflow: hidden;
-    height: 220px;
 
-    &:after{
-        content: "";
-        background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        left: 0;
-        bottom: 0;
+    &:after {
+        @include bgGradient();
+        @include position(absolute, $left: 0, $bottom: 0);
         width: 100%;
         height: 50%;
-        position: absolute;
     }
 
-    .item-media{
-        padding: 0;
-        margin: 0;
+    .item-media {
         height: 100%;
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+
+        img {
+            @include imgObjectFitCover();
         }
     }
 
-    .item-content{
-        position: absolute;
-        left: 0;
-        bottom: 0;
+    .item-content {
+        @include position(absolute, $left: 0, $bottom: 0, $zIndex: 1);
         width: 100%;
         padding: 15px;
         box-sizing: border-box;
-        color: #fff;
-        z-index: 1;
-        display: block;
-    }
 
-    .title{
-        margin: 0 0 5px;
-        font-weight: 400;
-        color: #fff;
-        font-size: 18px;
-        a{
+        .title {
+            margin: 0 0 5px;
+            font-weight: 400;
+            font-size: 18px;
+            a {
+                color: #fff;
+            }
+        }
+
+        .price {
+            margin: 0;
+            font-weight: 600;
+            font-size: 14px;
             color: #fff;
         }
     }
 
-    .price{
-        margin: 0;
-        font-weight: 600;
-        color: #fff;
-        font-size: 14px;
-    }
-
     .item-bookmark {
-        z-index: 1;
-        position: absolute;
-        top: 15px;
-        left: 15px;
+        @include position(absolute, $top: 15px, $left: 15px);
         font-size: 22px;
-        color: #fff;
+
         &.active {
             color: #ff2e6c;
         }

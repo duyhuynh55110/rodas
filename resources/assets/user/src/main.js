@@ -3,6 +3,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+// Global styles
+import "@/scss/main.scss";
+
 // Vuex
 import store from './store'
 

@@ -1,10 +1,6 @@
 .toolbar {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 999;
-    border-top: 1px solid #F4F4F4;
+    @include position(fixed, $left: 0, $right: 0, $bottom: 0, $zIndex: 999);
+    border-top: 1px solid #f4f4f4;
     background-color: #fafefc;
 
     // fix for responsive PC
@@ -12,23 +8,24 @@
     margin: 0 auto;
 
     .toolbar-inner {
+        @include flexbox(
+            $justifyContent: space-between,
+            $alignItems: center,
+            $alignContent: center
+        );
         padding: 0 30px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        align-content: center;
         height: 56px;
 
         .tab-link {
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            overflow: unset;
+            @include flexbox(
+                $flexDirection: column,
+                $justifyContent: space-between,
+                $alignItems: center,
+                $alignContent: center
+            );
             font-size: 22px;
-            color: #B1B1B1;
-            transition-duration: .3s;
+            color: #b1b1b1;
+            transition-duration: 0.3s;
             width: 100%;
 
             &.active {
