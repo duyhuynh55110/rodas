@@ -15,5 +15,4 @@
         <TrendingItemsArea :items="this.trendingItems" />
     </div>
 </template>
-<style src="./HomeView.scss" scoped lang="scss"></style>
 <script src="./HomeView.js"></script>

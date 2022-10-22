@@ -83,24 +83,5 @@ button {
     }
 }
 
-/* Content Bottom Space */
-.bottom- {
-    &sp60:after {
-        height: 60px;
-        content: "";
-        display: block;
-    }
-    &sp80:after {
-        height: 80px;
-        content: "";
-        display: block;
-    }
-}
 
-/* Padding space */
-.pt- {
-    &60 {
-        padding-top: 60px;
-    }
-}
 
