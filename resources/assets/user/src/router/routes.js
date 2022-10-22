@@ -9,7 +9,7 @@ const routes = [
         component: HomeView,
         exact: true,
         meta: {
-            customPageClass: 'bottom-sp80',
+            customPageContentClass: 'pt-30 bottom-sp80',
         }
     },
     {
@@ -22,6 +22,9 @@ const routes = [
         path: '/shopping-cart',
         name: 'shoppingCart',
         component: ShoppingCartView,
+        meta: {
+            customPageContentClass: 'pt-60 bottom-sp60',
+        }
     },
     {
         path: '/wishlist',

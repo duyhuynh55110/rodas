@@ -1,7 +1,7 @@
 <template>
     <div class="navbar">
         <div class="navbar-inner">
-            <div class="title">Shopping Cart</div>
+            <div class="title"> {{ title }} </div>
             <div class="right">
                 <a href="/shipping-address/"> Checkout </a>
             </div>

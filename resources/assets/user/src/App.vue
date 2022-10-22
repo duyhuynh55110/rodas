@@ -1,9 +1,6 @@
 <template>
-    <div :class="this.pageClass">
-        <!-- Navbar -->
-        <!-- <Navbar /> -->
-
-        <div class="page-content">
+    <div class="page">
+        <div :class="this.pageContentClass">
             <router-view v-slot="{ Component }">
                 <transition name="route" mode="out-in">
                     <component :is="Component" />
@@ -23,11 +20,13 @@ export default {
     name: "App",
     components: {
         Toolbar,
-        // Navbar,
     },
     computed: {
-        pageClass() {
-            return "page " + (this.$route.meta.customPageClass || "");
+        pageContentClass() {
+            return (
+                "page-content " +
+                (this.$route.meta.customPageContentClass || "")
+            );
         },
     },
 };

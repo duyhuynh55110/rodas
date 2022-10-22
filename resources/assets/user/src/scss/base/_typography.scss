@@ -29,7 +29,8 @@ button {
     font-family: inherit; // inherit font-family from body
 }
 
-.page, .page-content {
+.page,
+.page-content {
     background-color: $themeColorLight;
 }
 
@@ -37,9 +38,6 @@ button {
     margin: 0 auto; // center
 
     .page-content {
-        padding-top: 30px;
-        padding-bottom: 30px;
-
         .container {
             max-width: 1024px;
             margin-left: auto;
@@ -48,9 +46,9 @@ button {
             padding-right: 30px;
             box-sizing: border-box;
 
-            &.px-15{
-                padding-left:15px;
-                padding-right:15px;
+            &.px-15 {
+                padding-left: 15px;
+                padding-right: 15px;
             }
         }
     }
@@ -66,26 +64,6 @@ button {
     }
 }
 
-.button{
-	border-radius:16px;
-
-	&.button-large{
-		font-size: 16px;
-		padding: 20px 30px;
-		height: auto;
-		line-height: 1.2;
-	}
-}
-
-/* Content Bottom Space */
-.bottom-{
-    &sp80:after{
-        height:80px;
-        content:"";
-        display:block;
-    }
-}
-
 .text-primary {
     color: $themeColor;
 }
@@ -93,3 +71,36 @@ button {
 .bg-primary {
     background-color: $themeColor;
 }
+
+.button {
+    border-radius: 16px;
+
+    &.button-large {
+        font-size: 16px;
+        padding: 20px 30px;
+        height: auto;
+        line-height: 1.2;
+    }
+}
+
+/* Content Bottom Space */
+.bottom- {
+    &sp60:after {
+        height: 60px;
+        content: "";
+        display: block;
+    }
+    &sp80:after {
+        height: 80px;
+        content: "";
+        display: block;
+    }
+}
+
+/* Padding space */
+.pt- {
+    &60 {
+        padding-top: 60px;
+    }
+}
+

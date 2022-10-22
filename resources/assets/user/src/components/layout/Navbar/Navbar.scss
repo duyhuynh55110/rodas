@@ -1,4 +1,24 @@
 .navbar {
+    @include position(fixed, $top: 0, $left: 0, $right: 0, $zIndex: $zIndexMax);
+    background: $themeColorLight;
+    border-bottom: 1px solid #f4f4f4;
+    height: $navbarHeight;
+
     .navbar-inner {
+        @include flexbox($justifyContent: space-between, $alignItems: center);
+        padding: 0 20px;
+        height: inherit;
+
+        .title {
+            margin: 0 16px;
+            color: $textColorHeading;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .right {
+            margin-right: 20px;
+            font-size: 16px;
+        }
     }
 }
