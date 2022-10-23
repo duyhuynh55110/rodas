@@ -1,13 +1,23 @@
 .navbar {
+    @include maxPageWidth();
     @include position(fixed, $top: 0, $left: 0, $right: 0, $zIndex: $zIndexMax);
     background: $themeColorLight;
     border-bottom: 1px solid #f4f4f4;
     height: $navbarHeight;
+    margin: 0 auto;
 
     .navbar-inner {
         @include flexbox($justifyContent: space-between, $alignItems: center);
-        padding: 0 20px;
+        padding: 0 30px;
         height: inherit;
+
+        // ::v-deep effect this style to slot element
+        .left::v-deep {
+            a.back {
+                font-size: 1.3rem;
+                color: $textColorHeading;
+            }
+        }
 
         .title {
             margin: 0 16px;

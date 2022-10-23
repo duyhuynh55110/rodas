@@ -11,13 +11,13 @@ import ButtonPrimary from "./ui/ButtonPrimary";
 import PostCardsArea from "./posts/PostCardsArea";
 
 // items
-import TrendingItemsArea from "./items/TrendingItemsArea";
+import ItemBoxList from "./items/ItemBoxList";
 
 // categories
 import CategorySlidesArea from "./categories/CategorySlidesArea";
 
 // shopping cart
-import CartItemsArea from "./cart/CartItemsArea";
+import CartItemsArea from "./items/CartItemsArea";
 
 export {
     Toolbar,
@@ -26,7 +26,7 @@ export {
     ButtonPrimary,
     TitleBar,
     PostCardsArea,
-    TrendingItemsArea,
+    ItemBoxList,
     CategorySlidesArea,
     CartItemsArea
 }

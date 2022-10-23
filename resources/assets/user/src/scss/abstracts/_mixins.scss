@@ -79,3 +79,8 @@
     align-content: $alignContent;
     flex-wrap: $wrap;
 }
+
+/// responsive, set max page width
+@mixin maxPageWidth() {
+    max-width: 425px;
+}

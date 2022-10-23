@@ -6,7 +6,7 @@
 @media only screen and (min-width: $minScreenWidth) {
     // Limit page size for mobile only
     .page {
-        max-width: $maxPageWidth;
+       @include maxPageWidth();
     }
 }
 

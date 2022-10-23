@@ -6,4 +6,9 @@ export default {
             required: true,
         },
     },
+    computed: {
+        hasLeftSlot: function () {
+            return !!this.$slots.left;
+        },
+    }
 }

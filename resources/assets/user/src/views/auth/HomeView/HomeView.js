@@ -1,5 +1,5 @@
 // components
-import { TitleBar, NotificationBar, PostCardsArea, TrendingItemsArea, CategorySlidesArea } from "@/components";
+import { TitleBar, NotificationBar, PostCardsArea, ItemBoxList, CategorySlidesArea } from "@/components";
 
 export default {
     name: 'HomeView',
@@ -8,7 +8,7 @@ export default {
         NotificationBar,
         PostCardsArea,
         CategorySlidesArea,
-        TrendingItemsArea,
+        ItemBoxList,
     },
     data() {
         return {

@@ -11,5 +11,5 @@
         </div>
     </div>
 </template>
-<style src="./TrendingItemsArea.scss" scoped lang="scss"></style>
-<script src="./TrendingItemsArea.js"></script>
+<style src="./ItemBoxList.scss" scoped lang="scss"></style>
+<script src="./ItemBoxList.js"></script>

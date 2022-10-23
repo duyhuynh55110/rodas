@@ -1,6 +1,7 @@
 const HomeView = () => import('@/views/auth/HomeView')
 const CategoriesView = () => import('@/views/auth/CategoriesView')
 const ShoppingCartView = () => import('@/views/auth/ShoppingCartView')
+const WishListView = () => import('@/views/auth/WishListView')
 
 const routes = [
     {
@@ -29,7 +30,10 @@ const routes = [
     {
         path: '/wishlist',
         name: 'wishlist',
-        component: HomeView,
+        component: WishListView,
+        meta: {
+            customPageContentClass: 'pt-90 bottom-sp70',
+        }
     },
 ];
 
