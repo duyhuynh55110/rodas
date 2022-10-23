@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar title="Wishlist">
+        <Navbar title="Wishlist" navbarStyle="2">
             <template v-slot:left>
                 <a href="#" class="link back">
                     <font-awesome-icon icon="fa-solid fa-arrow-left" />

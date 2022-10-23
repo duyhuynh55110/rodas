@@ -6,9 +6,20 @@
     height: $navbarHeight;
     margin: 0 auto;
 
+    &.navbar-style-1 {
+        .navbar-inner {
+            padding: 0 20px;
+        }
+    }
+
+    &.navbar-style-2 {
+        .navbar-inner {
+            padding: 0 30px;
+        }
+    }
+
     .navbar-inner {
         @include flexbox($justifyContent: space-between, $alignItems: center);
-        padding: 0 30px;
         height: inherit;
 
         // ::v-deep effect this style to slot element

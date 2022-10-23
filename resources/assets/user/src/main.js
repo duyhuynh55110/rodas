@@ -19,7 +19,7 @@ import {
     faCartShopping,
     faArrowRightArrowLeft,
     faHouse,
-    faArrowLeft
+    faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add([

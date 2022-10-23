@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar">
+    <div :class="this.navbarClass">
         <div class="navbar-inner">
             <div class="left" v-if="this.hasLeftSlot">
                 <slot name="left"></slot>
