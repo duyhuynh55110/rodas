@@ -1,7 +1,7 @@
 import CartItem from "../CartItem"
 
 export default {
-    name: "CartItemsArea",
+    name: "CartItemList",
     components: {
         CartItem,
     }

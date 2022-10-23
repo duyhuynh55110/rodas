@@ -12,5 +12,5 @@
         <CartItem />
     </div>
 </template>
-<style src="./CartItemsArea.scss" scoped lang="scss"></style>
-<script src="./CartItemsArea.js"></script>
+<style src="./CartItemList.scss" scoped lang="scss"></style>
+<script src="./CartItemList.js"></script>

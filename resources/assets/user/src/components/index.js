@@ -17,7 +17,7 @@ import ItemBoxList from "./items/ItemBoxList";
 import CategorySlidesArea from "./categories/CategorySlidesArea";
 
 // shopping cart
-import CartItemsArea from "./items/CartItemsArea";
+import CartItemList from "./items/CartItemList";
 
 export {
     Toolbar,
@@ -28,5 +28,5 @@ export {
     PostCardsArea,
     ItemBoxList,
     CategorySlidesArea,
-    CartItemsArea
+    CartItemList
 }

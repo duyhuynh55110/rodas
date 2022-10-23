@@ -1,9 +1,9 @@
-import { CartItemsArea, Navbar } from "@/components"
+import { CartItemList, Navbar } from "@/components"
 
 export default {
     name: 'CartView',
     components: {
-        CartItemsArea,
+        CartItemList,
         Navbar,
     }
 }

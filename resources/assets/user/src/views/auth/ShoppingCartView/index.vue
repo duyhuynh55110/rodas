@@ -7,7 +7,7 @@
         </Navbar>
 
         <div class="container">
-            <CartItemsArea />
+            <CartItemList />
         </div>
     </div>
 </template>
