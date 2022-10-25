@@ -20,7 +20,11 @@ import {
     faArrowRightArrowLeft,
     faHouse,
     faArrowLeft,
+    faCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import {
+    faClock,
+} from "@fortawesome/free-regular-svg-icons";
 
 library.add([
     faBell,
@@ -30,6 +34,8 @@ library.add([
     faArrowRightArrowLeft,
     faHouse,
     faArrowLeft,
+    faCircle,
+    faClock,
 ]);
 
 createApp(App)

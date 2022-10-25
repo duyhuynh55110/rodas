@@ -38,6 +38,16 @@ button {
     margin: 0 auto; // center
 
     .page-content {
+        // &.content-full-screen {
+        //     position: relative;
+        //     top: 0;
+        //     z-index: $zIndexMax;
+
+        //     .container {
+        //         min-height: 100vh;
+        //     }
+        // }
+
         .container {
             max-width: 1024px;
             margin-left: auto;

@@ -24,6 +24,9 @@ import CartItemList from "./items/CartItemList";
 import ProfileInfo from "./profile/ProfileInfo";
 import ProfileList from "./profile/ProfileList";
 
+// notifications
+import NotificationCard from "./notifications/NotificationCard";
+
 export {
     Toolbar,
     Navbar,
@@ -36,5 +39,6 @@ export {
     CartItemList,
     MenuList,
     ProfileInfo,
-    ProfileList
+    ProfileList,
+    NotificationCard,
 }

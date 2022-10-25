@@ -26,6 +26,21 @@
 
 /* Content Bottom Space */
 .bottom- {
+    &sp30:after {
+        height: 30px;
+        content: "";
+        display: block;
+    }
+    &sp40:after {
+        height: 40px;
+        content: "";
+        display: block;
+    }
+    &sp50:after {
+        height: 50px;
+        content: "";
+        display: block;
+    }
     &sp60:after {
         height: 60px;
         content: "";

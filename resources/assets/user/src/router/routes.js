@@ -4,6 +4,7 @@ const ShoppingCartView = () => import('@/views/auth/ShoppingCartView')
 const WishListView = () => import('@/views/auth/WishListView')
 const UserMenuView = () => import('@/views/auth/UserMenuView')
 const ProfileView = () => import('@/views/auth/ProfileView')
+const NotificationsView = () => import('@/views/auth/NotificationsView')
 
 const routes = [
     {
@@ -51,6 +52,15 @@ const routes = [
         component: ProfileView,
         meta: {
             customPageContentClass: 'pt-80 bottom-sp80',
+        }
+    },
+    {
+        path: '/notifications',
+        name: 'notifications',
+        component: NotificationsView,
+        meta: {
+            customPageContentClass: 'pt-80',
+            viewFullScreen: true,
         }
     },
 ];

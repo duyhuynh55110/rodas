@@ -1,6 +1,6 @@
 .navbar {
     @include maxPageWidth();
-    @include position(fixed, $top: 0, $left: 0, $right: 0, $zIndex: $zIndexMax);
+    @include position(fixed, $top: 0, $left: 0, $right: 0, $zIndex: $zIndexNavbar);
     background: $themeColorLight;
     border-bottom: 1px solid #f4f4f4;
     height: $navbarHeight;

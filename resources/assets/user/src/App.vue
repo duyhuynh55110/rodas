@@ -9,7 +9,7 @@
         </div>
 
         <!-- Toolbar -->
-        <Toolbar />
+        <Toolbar v-show="!this.viewFullScreen" />
     </div>
 </template>
 
@@ -28,6 +28,9 @@ export default {
                 (this.$route.meta.customPageContentClass || "")
             );
         },
+        viewFullScreen() {
+            return this.$route.meta.viewFullScreen || false;
+        }
     },
 };
 </script>
