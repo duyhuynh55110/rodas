@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <Navbar title="Wishlist" :navbarStyle="navbarStyle">
+    <div class="container">
+        <Navbar title="Profile" :navbarStyle="navbarStyle">
             <template v-slot:left>
                 <a href="#" class="link back">
                     <font-awesome-icon icon="fa-solid fa-arrow-left" />
@@ -8,10 +8,8 @@
             </template>
         </Navbar>
 
-        <div class="container">
-            <ItemBoxList :items="items" />
-        </div>
+        <ProfileInfo />
+        <ProfileList />
     </div>
 </template>
-
-<script src="./WishListView.js"></script>
+<script src="./ProfileView.js"></script>

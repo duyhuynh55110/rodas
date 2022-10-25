@@ -1,0 +1,19 @@
+.menu-list {
+    ul {
+        li {
+            display: block;
+            margin-bottom: 15px;
+
+            a.button {
+                @include flexbox($alignItems: center);
+                box-sizing: border-box;
+                text-transform: uppercase;
+
+                .icon {
+                    width: 24px;
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+}

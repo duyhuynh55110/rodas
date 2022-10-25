@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar title="Wishlist" :navbarStyle="navbarStyle">
+        <Navbar title="User" :navbarStyle="navbarStyle">
             <template v-slot:left>
                 <a href="#" class="link back">
                     <font-awesome-icon icon="fa-solid fa-arrow-left" />
@@ -9,9 +9,9 @@
         </Navbar>
 
         <div class="container">
-            <ItemBoxList :items="items" />
+            <MenuList />
         </div>
     </div>
 </template>
 
-<script src="./WishListView.js"></script>
+<script src="./UserMenuView.js"></script>

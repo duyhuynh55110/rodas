@@ -2,6 +2,8 @@ const HomeView = () => import('@/views/auth/HomeView')
 const CategoriesView = () => import('@/views/auth/CategoriesView')
 const ShoppingCartView = () => import('@/views/auth/ShoppingCartView')
 const WishListView = () => import('@/views/auth/WishListView')
+const UserMenuView = () => import('@/views/auth/UserMenuView')
+const ProfileView = () => import('@/views/auth/ProfileView')
 
 const routes = [
     {
@@ -33,6 +35,22 @@ const routes = [
         component: WishListView,
         meta: {
             customPageContentClass: 'pt-90 bottom-sp70',
+        }
+    },
+    {
+        path: '/user-menu',
+        name: 'userMenu',
+        component: UserMenuView,
+        meta: {
+            customPageContentClass: 'pt-80 bottom-sp90',
+        }
+    },
+    {
+        path: '/profile',
+        name: 'profile',
+        component: ProfileView,
+        meta: {
+            customPageContentClass: 'pt-80 bottom-sp80',
         }
     },
 ];

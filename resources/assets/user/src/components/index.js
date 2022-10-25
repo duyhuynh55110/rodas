@@ -6,6 +6,7 @@ import Navbar from "./layout/Navbar";
 import NotificationBar from "./ui/NotificationBar";
 import TitleBar from "./ui/TitleBar";
 import ButtonPrimary from "./ui/ButtonPrimary";
+import MenuList from "./ui/MenuList";
 
 // posts
 import PostCardsArea from "./posts/PostCardsArea";
@@ -19,6 +20,10 @@ import CategorySlidesArea from "./categories/CategorySlidesArea";
 // shopping cart
 import CartItemList from "./items/CartItemList";
 
+// profile
+import ProfileInfo from "./profile/ProfileInfo";
+import ProfileList from "./profile/ProfileList";
+
 export {
     Toolbar,
     Navbar,
@@ -28,5 +33,8 @@ export {
     PostCardsArea,
     ItemBoxList,
     CategorySlidesArea,
-    CartItemList
+    CartItemList,
+    MenuList,
+    ProfileInfo,
+    ProfileList
 }

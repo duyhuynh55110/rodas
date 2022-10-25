@@ -23,7 +23,7 @@
             <router-link class="tab-link" active-class="active" to="/wishlist">
                 <font-awesome-icon icon="fa fa-heart" />
             </router-link>
-            <router-link class="tab-link" active-class="active" to="/wishlist">
+            <router-link class="tab-link" active-class="active" to="/user-menu">
                 <img
                     src="https://kede.dexignzone.com/xhtml/img/avatar/1.jpg"
                     class="user-media"
