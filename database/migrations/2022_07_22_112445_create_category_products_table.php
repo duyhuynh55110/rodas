@@ -20,7 +20,7 @@ class CreateCategoryProductsTable extends Migration
             $table->integer('created_by')->command('user\'s id create');
             $table->timestamps();
             $table->integer('updated_by')->command('user\'s id update');
-            $table->softDeletes()->comment('soft delete timestamp');
+            $table->softDeletes();
 
             // add unique index
             $table->unique([

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBrandsTable extends Migration
+class CreateUserNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateBrandsTable extends Migration
      */
     public function up()
     {
-        Schema::create('brands', function (Blueprint $table) {
+        Schema::create('user_notifications', function (Blueprint $table) {
             $table->id();
-            $table->integer('country_id')->comment('country id');
-            $table->string('name', 100)->comment('brand name');
-            $table->string('logo_file_name', 100)->comment('brand logo');
+            $table->integer('user_id')->comment('user id');
+            $table->string('title', 199)->comment('notify title');
+            $table->text('content')->comment('notify content');
             $table->integer('created_by')->command('user\'s id create');
             $table->timestamps();
             $table->integer('updated_by')->command('user\'s id update');
@@ -32,6 +32,6 @@ class CreateBrandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brands');
+        Schema::dropIfExists('user_notifications');
     }
 }
