@@ -22,7 +22,7 @@ class ProductService
     /**
      * __construct
      *
-     * @param ProductRepository $productRepo
+     * @param  ProductRepository  $productRepo
      */
     public function __construct(ProductRepository $productRepo)
     {
@@ -32,7 +32,7 @@ class ProductService
     /**
      * Data for products table
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function productsDataTable(Request $request)
@@ -57,7 +57,7 @@ class ProductService
         $product = $this->productRepo->find($id);
 
         // throw exception if not found data
-        if(!$product) {
+        if (! $product) {
             throw new DataNotFoundException();
         }
 
@@ -70,7 +70,8 @@ class ProductService
      * @param $request
      * @return App\Models\Product
      */
-    public function updateOrCreate($request) {
+    public function updateOrCreate($request)
+    {
         try {
             // db - start transaction
             DB::beginTransaction();
@@ -87,16 +88,16 @@ class ProductService
             ];
 
             // if have upload file
-            if($request->hasFile('image_file_upload')) {
+            if ($request->hasFile('image_file_upload')) {
                 // prepare for remove image if was update form
-                if($id) {
+                if ($id) {
                     $product = $this->getProductById($id);
                     $deleteLogoFileName = $product->image_file_upload;
                 }
 
                 // prepare for upload image to storage
                 $file = $request->image_file_upload;
-                $logoFileName = STORAGE_PATH_TO_PRODUCTS . $file->hashName();
+                $logoFileName = STORAGE_PATH_TO_PRODUCTS.$file->hashName();
 
                 // save logo name
                 $values['image_file_name'] = $logoFileName;

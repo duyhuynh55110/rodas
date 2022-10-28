@@ -26,7 +26,7 @@ class Brand extends Model
     protected $fillable = [
         'country_id',
         'name', 'logo_file_name',
-        'created_by', 'created_at', 'updated_by', 'updated_at'
+        'created_by', 'created_at', 'updated_by', 'updated_at',
     ];
 
     /**
@@ -55,10 +55,10 @@ class Brand extends Model
      */
     public function getFullPathLogoAttribute()
     {
-        if(empty($this->logo_file_name)) {
+        if (empty($this->logo_file_name)) {
             return null;
         }
 
-        return Storage::disk()->url($this->logo_file_name) ;
+        return Storage::disk()->url($this->logo_file_name);
     }
 }

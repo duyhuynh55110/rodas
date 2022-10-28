@@ -22,7 +22,7 @@ class BrandService
     /**
      * __construct
      *
-     * @param BrandRepository $brandRepo
+     * @param  BrandRepository  $brandRepo
      */
     public function __construct(BrandRepository $brandRepo)
     {
@@ -32,7 +32,7 @@ class BrandService
     /**
      * Data for brands table
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function brandsDataTable(Request $request)
@@ -51,7 +51,8 @@ class BrandService
      * @param $request
      * @return App\Models\Brand
      */
-    public function updateOrCreate($request) {
+    public function updateOrCreate($request)
+    {
         try {
             // db - start transaction
             DB::beginTransaction();
@@ -66,16 +67,16 @@ class BrandService
             ];
 
             // if have upload file
-            if($request->hasFile('logo_file_upload')) {
+            if ($request->hasFile('logo_file_upload')) {
                 // prepare for remove image if was update form
-                if($id) {
+                if ($id) {
                     $brand = $this->getBrandById($id);
                     $deleteLogoFileName = $brand->logo_file_name;
                 }
 
                 // prepare for upload image to storage
                 $file = $request->logo_file_upload;
-                $logoFileName = STORAGE_PATH_TO_BRANDS . $file->hashName();
+                $logoFileName = STORAGE_PATH_TO_BRANDS.$file->hashName();
 
                 // save logo name
                 $values['logo_file_name'] = $logoFileName;
@@ -127,7 +128,7 @@ class BrandService
         $brand = $this->brandRepo->find($id);
 
         // throw exception if not found data
-        if(!$brand) {
+        if (! $brand) {
             throw new DataNotFoundException();
         }
 

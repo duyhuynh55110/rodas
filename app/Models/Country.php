@@ -23,6 +23,6 @@ class Country extends Model
      */
     protected $fillable = [
         'name',
-        'created_by', 'created_at', 'updated_by', 'updated_at'
+        'created_by', 'created_at', 'updated_by', 'updated_at',
     ];
 }

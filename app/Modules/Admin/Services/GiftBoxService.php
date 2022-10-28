@@ -12,7 +12,8 @@ use Throwable;
 /**
  * GiftBoxService
  */
-class GiftBoxService {
+class GiftBoxService
+{
     /**
      * @var GiftBoxRepository
      */
@@ -21,7 +22,7 @@ class GiftBoxService {
     /**
      * __construct
      *
-     * @param GiftBoxRepository $giftBoxRepo
+     * @param  GiftBoxRepository  $giftBoxRepo
      */
     public function __construct(GiftBoxRepository $giftBoxRepo)
     {
@@ -31,7 +32,7 @@ class GiftBoxService {
     /**
      * Data for gift boxs table
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function giftBoxsDataTable(Request $request)
@@ -54,7 +55,7 @@ class GiftBoxService {
         $giftBox = $this->giftBoxRepo->find($id);
 
         // throw exception if not found data
-        if(!$giftBox) {
+        if (! $giftBox) {
             throw new DataNotFoundException();
         }
 
@@ -67,7 +68,8 @@ class GiftBoxService {
      * @param $request
      * @return App\Models\GiftBox
      */
-    public function updateOrCreate($request) {
+    public function updateOrCreate($request)
+    {
         try {
             // db - start transaction
             DB::beginTransaction();
@@ -82,16 +84,16 @@ class GiftBoxService {
             ];
 
             // if have upload file
-            if($request->hasFile('image_file_upload')) {
+            if ($request->hasFile('image_file_upload')) {
                 // prepare for remove image if was update form
-                if($id) {
+                if ($id) {
                     $giftBox = $this->getGiftBoxById($id);
                     $deleteLogoFileName = $giftBox->image_file_name;
                 }
 
                 // prepare for upload image to storage
                 $file = $request->image_file_upload;
-                $logoFileName = STORAGE_PATH_TO_GIFT_BOXS . $file->hashName();
+                $logoFileName = STORAGE_PATH_TO_GIFT_BOXS.$file->hashName();
 
                 // save logo name
                 $values['image_file_name'] = $logoFileName;

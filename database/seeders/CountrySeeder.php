@@ -31,7 +31,7 @@ class CountrySeeder extends Seeder
                 'updated_by' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ]
+            ],
         ];
 
         // insert data

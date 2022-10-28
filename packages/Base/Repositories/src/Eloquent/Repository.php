@@ -2,11 +2,10 @@
 
 namespace Base\Repositories\Eloquent;
 
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Container\Container as App;
 use Base\Repositories\Contracts\RepositoryInterface;
 use Base\Repositories\Exceptions\RepositoryException;
+use Illuminate\Container\Container as App;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Repository
@@ -24,7 +23,8 @@ abstract class Repository implements RepositoryInterface
     protected $model;
 
     /**
-     * @param App $app
+     * @param  App  $app
+     *
      * @throws RepositoryException
      */
     public function __construct(App $app)
@@ -43,10 +43,10 @@ abstract class Repository implements RepositoryInterface
     /**
      * Get all
      *
-     * @param array $columns
+     * @param  array  $columns
      * @return mixed
      */
-    public function all($columns = array('*'))
+    public function all($columns = ['*'])
     {
         $results = $this->model->get($columns);
 
@@ -60,19 +60,20 @@ abstract class Repository implements RepositoryInterface
      * Eager loaded
      * Refer: https://laravel.com/docs/8.x/eloquent-relationships#eager-loading-multiple-relationships
      *
-     * @param array $relations
+     * @param  array  $relations
      * @return mixed
      */
     public function with(array $relations)
     {
         $this->model = $this->model->with($relations);
+
         return $this;
     }
 
     /**
      * Bulk Insertion data
      *
-     * @param array $data
+     * @param  array  $data
      * @return bool
      */
     public function insert(array $data)
@@ -83,7 +84,7 @@ abstract class Repository implements RepositoryInterface
     /**
      * Create data
      *
-     * @param array $data
+     * @param  array  $data
      * @return mixed
      */
     public function create(array $data)
@@ -94,11 +95,11 @@ abstract class Repository implements RepositoryInterface
     /**
      * Update data
      *
-     * @param array $data
+     * @param  array  $data
      * @param $id
      * @return mixed
      */
-    public function update(array $data, $id, $attribute = "id")
+    public function update(array $data, $id, $attribute = 'id')
     {
         $results = $this->model->where($attribute, '=', $id)->update($data);
 
@@ -173,10 +174,10 @@ abstract class Repository implements RepositoryInterface
      * Find by id
      *
      * @param $id
-     * @param array $columns
+     * @param  array  $columns
      * @return mixed
      */
-    public function find($id, $columns = array('*'))
+    public function find($id, $columns = ['*'])
     {
         $results = $this->model->find($id, $columns);
 
@@ -190,10 +191,10 @@ abstract class Repository implements RepositoryInterface
      * Find by id
      *
      * @param $id
-     * @param array $columns
+     * @param  array  $columns
      * @return mixed
      */
-    public function findOrFail($id, $columns = array('*'))
+    public function findOrFail($id, $columns = ['*'])
     {
         $results = $this->model->findOrFail($id, $columns);
 
@@ -208,10 +209,10 @@ abstract class Repository implements RepositoryInterface
      *
      * @param $field
      * @param $value
-     * @param array $columns
+     * @param  array  $columns
      * @return mixed
      */
-    public function findAllBy($field, $value, $columns = array('*'))
+    public function findAllBy($field, $value, $columns = ['*'])
     {
         $results = $this->model->where($field, '=', $value)->get($columns);
 
@@ -225,13 +226,14 @@ abstract class Repository implements RepositoryInterface
      * Make Eloquent Model to instantiate
      *
      * @return Model
+     *
      * @throws RepositoryException
      */
     private function makeModel()
     {
         $model = $this->app->make($this->model());
 
-        if (!$model instanceof Model) {
+        if (! $model instanceof Model) {
             throw new RepositoryException(
                 "Class {$model} must be an instance of Illuminate\\Database\\Eloquent\\Model"
             );
@@ -243,8 +245,9 @@ abstract class Repository implements RepositoryInterface
     /**
      * Reset model
      *
-     * @throws RepositoryException
      * @return void
+     *
+     * @throws RepositoryException
      */
     public function resetModel()
     {

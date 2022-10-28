@@ -33,9 +33,9 @@ class GiftBoxController extends BaseController
     /**
      * __construct
      *
-     * @param GiftBoxService $giftBoxService
-     * @param BrandService $brandService
-     * @param CountryService $countryService
+     * @param  GiftBoxService  $giftBoxService
+     * @param  BrandService  $brandService
+     * @param  CountryService  $countryService
      */
     public function __construct(GiftBoxService $giftBoxService, BrandService $brandService, CountryService $countryService)
     {
@@ -47,7 +47,7 @@ class GiftBoxController extends BaseController
     /**
      * View page giftBox list
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return view
      */
     public function index(Request $request)
@@ -139,13 +139,14 @@ class GiftBoxController extends BaseController
     /**
      * Save a gift box data
      *
-     * @param GiftBoxFormRequest $request
+     * @param  GiftBoxFormRequest  $request
      * @return mixed
      */
     public function save(GiftBoxFormRequest $request)
     {
         try {
             $this->giftBoxService->updateOrCreate($request);
+
             return redirect(routeAdmin('gift-boxs.index'))->with('status', DATA_SAVED);
         } catch (Throwable $e) {
             return back()->with('status', ERROR_OCCURRED_MSG)->with('status_type', 'danger')->withInput();
@@ -157,11 +158,11 @@ class GiftBoxController extends BaseController
      *
      * @return void
      */
-    private function registerAssets() : void
+    private function registerAssets(): void
     {
         Assets::js(
             [
-                assetAdmin('pages/gift-boxs.js')
+                assetAdmin('pages/gift-boxs.js'),
             ]
         );
     }
@@ -172,7 +173,8 @@ class GiftBoxController extends BaseController
      * @param $giftBox
      * @return array
      */
-    private function getGiftBoxProductsData($giftBox) {
+    private function getGiftBoxProductsData($giftBox)
+    {
         return $giftBox->products->map(
             function ($product) {
                 $brand = $product->brand;
@@ -190,7 +192,7 @@ class GiftBoxController extends BaseController
                         'country' => [
                             'id' => $country->id,
                             'name' => $country->name,
-                        ]
+                        ],
                     ],
                 ];
             }

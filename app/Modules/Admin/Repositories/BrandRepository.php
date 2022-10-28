@@ -2,8 +2,8 @@
 
 namespace App\Modules\Admin\Repositories;
 
-use Base\Repositories\Eloquent\Repository;
 use App\Models\Brand;
+use Base\Repositories\Eloquent\Repository;
 
 /**
  * BrandRepository
@@ -23,7 +23,7 @@ class BrandRepository extends Repository
     /**
      * Get brands and format dataTable response
      *
-     * @param array $filters
+     * @param  array  $filters
      * @return Illuminate\Http\JsonResponse
      */
     public function brandsDataTable(array $filters)
@@ -33,11 +33,11 @@ class BrandRepository extends Repository
                 'id',
                 'name',
                 'country_id',
-                'logo_file_name'
+                'logo_file_name',
             ]
         )->with(
             [
-                'country:id,name'
+                'country:id,name',
             ]
         );
 
@@ -45,7 +45,8 @@ class BrandRepository extends Repository
         $query->when(
             isset($filters['name']),
             function ($q) use ($filters) {
-                $name = '%' . $filters['name'] . '%';
+                $name = '%'.$filters['name'].'%';
+
                 return $q->where('name', 'LIKE', $name);
             }
         );

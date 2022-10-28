@@ -2,8 +2,8 @@
 
 namespace App\Modules\Admin\Repositories;
 
-use Base\Repositories\Eloquent\Repository;
 use App\Models\GiftBox;
+use Base\Repositories\Eloquent\Repository;
 
 /**
  * GiftBoxRepository
@@ -23,7 +23,7 @@ class GiftBoxRepository extends Repository
     /**
      * Get gift boxs and format dataTable response
      *
-     * @param array $filters
+     * @param  array  $filters
      * @return Illuminate\Http\JsonResponse
      */
     public function giftBoxsDataTable(array $filters)
@@ -41,7 +41,8 @@ class GiftBoxRepository extends Repository
         $query->when(
             isset($filters['name']),
             function ($q) use ($filters) {
-                $name = '%' . $filters['name'] . '%';
+                $name = '%'.$filters['name'].'%';
+
                 return $q->where('name', 'LIKE', $name);
             }
         );
@@ -62,9 +63,9 @@ class GiftBoxRepository extends Repository
      * Relations
      * - products (gift_box_products)
      *
-     * @param array $attributes
-     * @param array $values
-     * @param array $giftBoxProducts
+     * @param  array  $attributes
+     * @param  array  $values
+     * @param  array  $giftBoxProducts
      * @return App\Models\GiftBox
      */
     public function updateOrCreateWithRelations(array $attributes, array $values, array $giftBoxProducts)
