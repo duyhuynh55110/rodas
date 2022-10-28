@@ -8,7 +8,6 @@ trait AdminTimestamp
 {
     use HasEvents;
 
-
     /**
      * The "booting" method of the model.
      *

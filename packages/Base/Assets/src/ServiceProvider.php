@@ -18,7 +18,7 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
     public function provides(): array
     {
         return [
-            AssetsManager::class
+            AssetsManager::class,
         ];
     }
 
@@ -30,7 +30,7 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
     public function register(): void
     {
         // Load the default config values
-        $this->mergeConfigFrom(__DIR__ . '/../config/assets.php', 'assets');
+        $this->mergeConfigFrom(__DIR__.'/../config/assets.php', 'assets');
 
         // Register Manager class singleton with the app container
         $this->app->singleton(AssetsManager::class, config('assets.assets_manager'));
@@ -44,13 +44,13 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
     public function boot(): void
     {
         // Register 'Assets::' view namespace
-        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'Assets');
+        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'Assets');
 
         // Publish the config/assets.php file
         // - php artisan vendor:publish --tag=assets-config
         $this->publishes(
             [
-                __DIR__ . '/../config/assets.php' => config_path('assets.php'),
+                __DIR__.'/../config/assets.php' => config_path('assets.php'),
             ],
             'assets-config'
         );

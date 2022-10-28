@@ -2,8 +2,8 @@
 
 namespace App\Modules\Admin\Repositories;
 
-use Base\Repositories\Eloquent\Repository;
 use App\Models\Product;
+use Base\Repositories\Eloquent\Repository;
 
 /**
  * ProductRepository
@@ -23,7 +23,7 @@ class ProductRepository extends Repository
     /**
      * Get products and format dataTable response
      *
-     * @param array $filters
+     * @param  array  $filters
      * @return Illuminate\Http\JsonResponse
      */
     public function productsDataTable(array $filters)
@@ -41,7 +41,7 @@ class ProductRepository extends Repository
                 'brand' => function ($q) {
                     $q->select('id', 'name', 'country_id')
                     ->with(['country:id,name']);
-                }
+                },
             ]
         );
 
@@ -49,7 +49,8 @@ class ProductRepository extends Repository
         $query->when(
             isset($filters['name']),
             function ($q) use ($filters) {
-                $name = '%' . $filters['name'] . '%';
+                $name = '%'.$filters['name'].'%';
+
                 return $q->where('name', 'LIKE', $name);
             }
         );
@@ -73,7 +74,7 @@ class ProductRepository extends Repository
         );
 
         return datatables($query)
-            ->addColumn('item_price', function($product) {
+            ->addColumn('item_price', function ($product) {
                 return floatval($product->item_price);
             })
             ->escapeColumns([])->make(true);
@@ -85,12 +86,12 @@ class ProductRepository extends Repository
      * Relations
      * - categories
      *
-     * @param array $attributes
-     * @param array $values
-     * @param array $categoriesData
+     * @param  array  $attributes
+     * @param  array  $values
+     * @param  array  $categoriesData
      * @return App\Models\Product
      */
-    public function updateOrCreateWithRelations(array $attributes,  array $values, array $categoriesData)
+    public function updateOrCreateWithRelations(array $attributes, array $values, array $categoriesData)
     {
         // create/update a product
         $product = $this->updateOrCreate($attributes, $values);

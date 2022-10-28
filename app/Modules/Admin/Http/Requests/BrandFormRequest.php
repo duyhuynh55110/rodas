@@ -19,8 +19,8 @@ class BrandFormRequest extends FormRequest
         return [
             'id' => ['nullable', 'integer'],
             'name' => ['required', 'max:100'],
-            'country_id' => ['required', 'exists:countries,id', 'integer', 'max:' . MAX_INTEGER_VALUE],
-            'logo_file_upload' => ['nullable', 'file', 'mimes:jpeg,jpg,png', 'max:' . UPLOAD_MAX_SIZE],
+            'country_id' => ['required', 'exists:countries,id', 'integer', 'max:'.MAX_INTEGER_VALUE],
+            'logo_file_upload' => ['nullable', 'file', 'mimes:jpeg,jpg,png', 'max:'.UPLOAD_MAX_SIZE],
         ];
     }
 

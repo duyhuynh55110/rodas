@@ -66,11 +66,11 @@ class BrandSeeder extends Seeder
 
         // upload image to storage
         foreach ($data as &$dt) {
-            if (!empty('logo_file_name')) {
+            if (! empty('logo_file_name')) {
                 // 1. open & read file
-                $filePath = storage_path('seeder/' . STORAGE_PATH_TO_BRANDS . $dt['logo_file_name']);
+                $filePath = storage_path('seeder/'.STORAGE_PATH_TO_BRANDS.$dt['logo_file_name']);
                 $file = new File($filePath);
-                $fileName = STORAGE_PATH_TO_BRANDS . $file->hashName();
+                $fileName = STORAGE_PATH_TO_BRANDS.$file->hashName();
 
                 // 2. upload resize to storage
                 uploadImageToStorage($file, $fileName, RESIZE_BRAND_WIDTH, RESIZE_BRAND_HEIGHT, $file->extension());

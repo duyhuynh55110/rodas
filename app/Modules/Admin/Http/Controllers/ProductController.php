@@ -2,14 +2,13 @@
 
 namespace App\Modules\Admin\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Modules\Admin\Http\Controllers\BaseController;
 use App\Modules\Admin\Http\Requests\ProductFormRequest;
 use App\Modules\Admin\Services\BrandService;
 use App\Modules\Admin\Services\CategoryService;
 use App\Modules\Admin\Services\CountryService;
 use App\Modules\Admin\Services\ProductService;
 use Base\Assets\Assets;
+use Illuminate\Http\Request;
 use Throwable;
 
 /**
@@ -40,10 +39,10 @@ class ProductController extends BaseController
     /**
      * __construct
      *
-     * @param ProductService $productService
-     * @param CountryService $countryService
-     * @param BrandService $brandService
-     * @param CategoryService $categoryService
+     * @param  ProductService  $productService
+     * @param  CountryService  $countryService
+     * @param  BrandService  $brandService
+     * @param  CategoryService  $categoryService
      */
     public function __construct(ProductService $productService, CountryService $countryService, BrandService $brandService, CategoryService $categoryService)
     {
@@ -56,12 +55,12 @@ class ProductController extends BaseController
     /**
      * View page product list
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return view
      */
     public function index(Request $request)
     {
-        if($request->expectsJson()) {
+        if ($request->expectsJson()) {
             return $this->productService->productsDataTable($request);
         }
 
@@ -125,13 +124,14 @@ class ProductController extends BaseController
     /**
      * Save a product data
      *
-     * @param ProductFormRequest $request
+     * @param  ProductFormRequest  $request
      * @return mixed
      */
     public function save(ProductFormRequest $request)
     {
         try {
             $this->productService->updateOrCreate($request);
+
             return redirect(routeAdmin('products.index'))->with('status', DATA_SAVED);
         } catch (Throwable $e) {
             return back()->with('status', ERROR_OCCURRED_MSG)->with('status_type', 'danger')->withInput();
@@ -143,11 +143,11 @@ class ProductController extends BaseController
      *
      * @return void
      */
-    private function registerAssets() : void
+    private function registerAssets(): void
     {
         Assets::js(
             [
-                assetAdmin('pages/products.js')
+                assetAdmin('pages/products.js'),
             ]
         );
     }

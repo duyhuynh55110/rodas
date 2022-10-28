@@ -19,9 +19,9 @@ class ProductFormRequest extends FormRequest
         return [
             'id' => ['nullable', 'integer'],
             'name' => ['required', 'max:100'],
-            'item_price' => ['required', 'min:0', 'max:' . MAX_INTEGER_VALUE],
-            'brand_id' => ['required', 'exists:brands,id', 'integer', 'max:' . MAX_INTEGER_VALUE],
-            'image_file_upload' => ['nullable', 'file', 'mimes:jpeg,jpg,png', 'max:' . UPLOAD_MAX_SIZE],
+            'item_price' => ['required', 'min:0', 'max:'.MAX_INTEGER_VALUE],
+            'brand_id' => ['required', 'exists:brands,id', 'integer', 'max:'.MAX_INTEGER_VALUE],
+            'image_file_upload' => ['nullable', 'file', 'mimes:jpeg,jpg,png', 'max:'.UPLOAD_MAX_SIZE],
             'description' => ['nullable', 'max:5000'],
         ];
     }

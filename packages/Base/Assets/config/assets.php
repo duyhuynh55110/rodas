@@ -8,5 +8,5 @@ return [
     'version' => env('ASSETS_VERSION', microtime(true)),
 
     // asset manager class
-    'assets_manager' => Base\Assets\AssetsManager::class
+    'assets_manager' => Base\Assets\AssetsManager::class,
 ];

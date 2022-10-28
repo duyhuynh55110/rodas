@@ -10,16 +10,16 @@ interface RepositoryInterface
     /**
      * Get all
      *
-     * @param array $columns
+     * @param  array  $columns
      * @return mixed
      */
-    public function all($columns = array('*'));
+    public function all($columns = ['*']);
 
     /**
      * Eager loaded
      * Refer: https://laravel.com/docs/8.x/eloquent-relationships#eager-loading-multiple-relationships
      *
-     * @param array $relations
+     * @param  array  $relations
      * @return void
      */
     public function with(array $relations);
@@ -27,7 +27,7 @@ interface RepositoryInterface
     /**
      * Bulk Insertion data
      *
-     * @param array $data
+     * @param  array  $data
      * @return bool
      */
     public function insert(array $data);
@@ -35,7 +35,7 @@ interface RepositoryInterface
     /**
      * Create data
      *
-     * @param array $data
+     * @param  array  $data
      * @return mixed
      */
     public function create(array $data);
@@ -43,7 +43,7 @@ interface RepositoryInterface
     /**
      * Update data
      *
-     * @param array $data
+     * @param  array  $data
      * @param $id
      * @return mixed
      */
@@ -77,18 +77,18 @@ interface RepositoryInterface
      * Find by id
      *
      * @param $id
-     * @param array $columns
+     * @param  array  $columns
      * @return mixed
      */
-    public function find($id, $columns = array('*'));
+    public function find($id, $columns = ['*']);
 
     /**
      * Find all by field
      *
      * @param $field
      * @param $value
-     * @param array $columns
+     * @param  array  $columns
      * @return mixed
      */
-    public function findAllBy($field, $value, $columns = array('*'));
+    public function findAllBy($field, $value, $columns = ['*']);
 }

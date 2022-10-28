@@ -54,17 +54,16 @@ class GiftBoxSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_by' => 1,
                 'updated_at' => Carbon::now(),
-            ]
+            ],
         ];
-
 
         foreach ($giftBoxsData as $data) {
             // --- update image to storage
             // 1. open & read file
-            $filePath = storage_path('seeder/' . STORAGE_PATH_TO_GIFT_BOXS . $data['image_file_name']);
+            $filePath = storage_path('seeder/'.STORAGE_PATH_TO_GIFT_BOXS.$data['image_file_name']);
             $file = new File($filePath);
 
-            $fileName = STORAGE_PATH_TO_GIFT_BOXS . $file->hashName();
+            $fileName = STORAGE_PATH_TO_GIFT_BOXS.$file->hashName();
 
             // 2. upload resize to storage
             uploadImageToStorage($file, $fileName, RESIZE_GIFT_BOX_WIDTH, RESIZE_GIFT_BOX_HEIGHT, $file->extension());

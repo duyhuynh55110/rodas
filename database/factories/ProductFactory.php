@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Brand;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\File;
+use Illuminate\Support\Arr;
 
 class ProductFactory extends Factory
 {
@@ -38,12 +38,12 @@ class ProductFactory extends Factory
         ];
 
         // Upload image to storage
-        if (!empty($productData['image_file_name'])) {
+        if (! empty($productData['image_file_name'])) {
             // 1. open & read file
-            $filePath = storage_path('seeder/' . STORAGE_PATH_TO_PRODUCTS . $productData['image_file_name']);
+            $filePath = storage_path('seeder/'.STORAGE_PATH_TO_PRODUCTS.$productData['image_file_name']);
             $file = new File($filePath);
 
-            $fileName = STORAGE_PATH_TO_PRODUCTS . $file->hashName();
+            $fileName = STORAGE_PATH_TO_PRODUCTS.$file->hashName();
 
             // 2. upload resize to storage
             uploadImageToStorage($file, $fileName, RESIZE_PRODUCT_WIDTH, RESIZE_PRODUCT_HEIGHT, $file->extension());

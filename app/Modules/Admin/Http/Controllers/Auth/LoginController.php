@@ -2,9 +2,9 @@
 
 namespace App\Modules\Admin\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Modules\Admin\Http\Controllers\BaseController;
 use App\Modules\Admin\Services\UserService;
+use Illuminate\Http\Request;
 
 /**
  * Login controller
@@ -19,7 +19,7 @@ class LoginController extends BaseController
     /**
      * __construct
      *
-     * @param UserService $userService
+     * @param  UserService  $userService
      */
     public function __construct(UserService $userService)
     {

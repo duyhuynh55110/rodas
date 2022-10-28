@@ -32,7 +32,7 @@ class Product extends Model
      */
     protected $fillable = [
         'brand_id', 'name', 'image_file_name', 'item_price', 'description',
-        'created_by', 'created_at', 'updated_by', 'updated_at'
+        'created_by', 'created_at', 'updated_by', 'updated_at',
     ];
 
     // ---- Relations
@@ -41,7 +41,8 @@ class Product extends Model
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function categories() {
+    public function categories()
+    {
         return $this->belongsToMany(Category::class, 'category_products', 'product_id', 'category_id')
                 ->withTimestamps()
                 ->withPivot(['deleted_at'])
@@ -66,10 +67,10 @@ class Product extends Model
      */
     public function getFullPathImageAttribute()
     {
-        if(empty($this->image_file_name)) {
+        if (empty($this->image_file_name)) {
             return null;
         }
 
-        return Storage::disk()->url($this->image_file_name) ;
+        return Storage::disk()->url($this->image_file_name);
     }
 }

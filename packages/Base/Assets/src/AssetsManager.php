@@ -2,11 +2,6 @@
 
 namespace Base\Assets;
 
-use Illuminate\Contracts\View\Factory as ViewFactory;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Collection;
-use Illuminate\Support\HtmlString;
-
 /**
  * The main Assets singleton class, responsible for registering and rendering assets.
  */
@@ -50,13 +45,12 @@ class AssetsManager
     /**
      * Add css or get all css.
      *
-     * @param null $css
-     *
+     * @param  null  $css
      * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public static function css($css = null)
     {
-        if (!is_null($css)) {
+        if (! is_null($css)) {
             return self::$css = array_merge(self::$css, (array) $css);
         }
 
@@ -67,13 +61,12 @@ class AssetsManager
     }
 
     /**
-     * @param null $css
-     *
+     * @param  null  $css
      * @return array|null
      */
     public static function baseCss($css = null)
     {
-        if (!is_null($css)) {
+        if (! is_null($css)) {
             return static::$baseCss = $css;
         }
 
@@ -83,13 +76,12 @@ class AssetsManager
     /**
      * Add js or get all js.
      *
-     * @param null $js
-     *
+     * @param  null  $js
      * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public static function js($js = null)
     {
-        if (!is_null($js)) {
+        if (! is_null($js)) {
             return self::$js = array_merge(self::$js, (array) $js);
         }
 
@@ -102,13 +94,12 @@ class AssetsManager
     /**
      * Add js or get all js.
      *
-     * @param null $js
-     *
+     * @param  null  $js
      * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public static function headerJs($js = null)
     {
-        if (!is_null($js)) {
+        if (! is_null($js)) {
             return self::$headerJs = array_merge(self::$headerJs, (array) $js);
         }
 
@@ -116,13 +107,12 @@ class AssetsManager
     }
 
     /**
-     * @param null $js
-     *
+     * @param  null  $js
      * @return array|null
      */
     public static function baseJs($js = null)
     {
-        if (!is_null($js)) {
+        if (! is_null($js)) {
             return static::$baseJs = $js;
         }
 
@@ -130,13 +120,12 @@ class AssetsManager
     }
 
     /**
-     * @param string $script
-     *
+     * @param  string  $script
      * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public static function script($script = '')
     {
-        if (!empty($script)) {
+        if (! empty($script)) {
             return self::$script = array_merge(self::$script, (array) $script);
         }
 
@@ -144,13 +133,12 @@ class AssetsManager
     }
 
     /**
-     * @param string $headerScript
-     *
+     * @param  string  $headerScript
      * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public static function headerScript($headerScript = '')
     {
-        if (!empty($headerScript)) {
+        if (! empty($headerScript)) {
             return self::$headerScript = array_merge(self::$headerScript, (array) $headerScript);
         }
 

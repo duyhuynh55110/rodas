@@ -25,7 +25,7 @@ class GiftBox extends Model
      */
     protected $fillable = [
         'name', 'image_file_name', 'price',
-        'created_by', 'created_at', 'updated_by', 'updated_at'
+        'created_by', 'created_at', 'updated_by', 'updated_at',
     ];
 
     /**
@@ -41,10 +41,11 @@ class GiftBox extends Model
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function products() {
+    public function products()
+    {
         return $this->belongsToMany(Product::class, 'gift_box_products', 'gift_box_id', 'product_id')
                 ->withTimestamps()
-                ->withPivot(['quantity','deleted_at'])
+                ->withPivot(['quantity', 'deleted_at'])
                 ->using(GiftBoxProduct::class);
     }
 
@@ -56,10 +57,10 @@ class GiftBox extends Model
      */
     public function getFullPathImageAttribute()
     {
-        if(empty($this->image_file_name)) {
+        if (empty($this->image_file_name)) {
             return null;
         }
 
-        return Storage::disk()->url($this->image_file_name) ;
+        return Storage::disk()->url($this->image_file_name);
     }
 }

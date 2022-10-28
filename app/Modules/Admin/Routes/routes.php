@@ -27,14 +27,14 @@ Route::group(
         // Admin group
         Route::group(
             [
-                'middleware' => 'auth.admin:' . ADMIN_GUARD,
+                'middleware' => 'auth.admin:'.ADMIN_GUARD,
             ],
             function () {
                 // brands
                 Route::group(
                     [
                         'prefix' => 'brands',
-                        'as' => 'brands.'
+                        'as' => 'brands.',
                     ],
                     function () {
                         Route::name('index')->get('/', [BrandController::class, 'index']);
@@ -48,7 +48,7 @@ Route::group(
                 Route::group(
                     [
                         'prefix' => 'products',
-                        'as' => 'products.'
+                        'as' => 'products.',
                     ],
                     function () {
                         Route::name('index')->get('/', [ProductController::class, 'index']);
@@ -62,7 +62,7 @@ Route::group(
                 Route::group(
                     [
                         'prefix' => 'gift-boxs',
-                        'as' => 'gift-boxs.'
+                        'as' => 'gift-boxs.',
                     ],
                     function () {
                         Route::name('index')->get('/', [GiftBoxController::class, 'index']);

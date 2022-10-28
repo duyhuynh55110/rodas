@@ -24,6 +24,6 @@ class CategoryProduct extends Pivot
      */
     protected $fillable = [
         'category_id', 'product_id',
-        'created_by', 'created_at', 'updated_by', 'updated_at'
+        'created_by', 'created_at', 'updated_by', 'updated_at',
     ];
 }

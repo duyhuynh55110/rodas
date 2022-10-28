@@ -2,12 +2,11 @@
 
 namespace App\Modules\Admin\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Modules\Admin\Http\Controllers\BaseController;
 use App\Modules\Admin\Http\Requests\BrandFormRequest;
 use App\Modules\Admin\Services\BrandService;
 use App\Modules\Admin\Services\CountryService;
 use Base\Assets\Assets;
+use Illuminate\Http\Request;
 use Throwable;
 
 /**
@@ -28,8 +27,8 @@ class BrandController extends BaseController
     /**
      * __construct
      *
-     * @param BrandService $brandService
-     * @param CountryService $countryService
+     * @param  BrandService  $brandService
+     * @param  CountryService  $countryService
      */
     public function __construct(BrandService $brandService, CountryService $countryService)
     {
@@ -40,12 +39,12 @@ class BrandController extends BaseController
     /**
      * View page brand list
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return view
      */
     public function index(Request $request)
     {
-        if($request->expectsJson()) {
+        if ($request->expectsJson()) {
             return $this->brandService->brandsDataTable($request);
         }
 
@@ -109,13 +108,14 @@ class BrandController extends BaseController
     /**
      * Save a brand data
      *
-     * @param BrandFormRequest $request
+     * @param  BrandFormRequest  $request
      * @return mixed
      */
     public function save(BrandFormRequest $request)
     {
         try {
             $this->brandService->updateOrCreate($request);
+
             return redirect(routeAdmin('brands.index'))->with('status', DATA_SAVED);
         } catch (Throwable $e) {
             return back()->with('status', ERROR_OCCURRED_MSG)->with('status_type', 'danger')->withInput();
@@ -127,11 +127,11 @@ class BrandController extends BaseController
      *
      * @return void
      */
-    private function registerAssets() : void
+    private function registerAssets(): void
     {
         Assets::js(
             [
-                assetAdmin('pages/brands.js')
+                assetAdmin('pages/brands.js'),
             ]
         );
     }

@@ -3,8 +3,8 @@
 namespace App\Modules;
 
 use Illuminate\Foundation\Application;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\ServiceProvider;
 use PragmaRX\Yaml\Package\Yaml;
 
 /**
@@ -21,10 +21,10 @@ class ModuleServiceProvider extends ServiceProvider
     {
         $modules = array_map('basename', File::directories(__DIR__));
         foreach ($modules as $module) {
-            $modulePath = __DIR__ . '/' . $module;
+            $modulePath = __DIR__.'/'.$module;
 
             // Load the config
-            $configPath = $modulePath . '/Config';
+            $configPath = $modulePath.'/Config';
 
             if (is_dir($configPath)) {
                 // load config yml file
@@ -41,26 +41,26 @@ class ModuleServiceProvider extends ServiceProvider
                 );
                 foreach ($configFiles as $configFile) {
                     $key = str_replace('.php', '', $configFile->getBaseName());
-                    $this->mergeConfigFrom($configFile, strtolower($module) . '.' . $key);
+                    $this->mergeConfigFrom($configFile, strtolower($module).'.'.$key);
                 }
             }
 
             // Load the given routes
-            $routePath = $modulePath . '/Routes/routes.php';
+            $routePath = $modulePath.'/Routes/routes.php';
             if (file_exists($routePath)) {
                 include $routePath;
             }
 
             // Register views
             // - using view: __('module::view-name')
-            $viewPath = $modulePath . '/Resources/views';
+            $viewPath = $modulePath.'/Resources/views';
             if (is_dir($viewPath)) {
                 $this->loadViewsFrom($viewPath, $module);
             }
 
             // Register translations
             // - using translation: __('module::file-name.key')
-            $langPath = $modulePath . '/Resources/lang';
+            $langPath = $modulePath.'/Resources/lang';
             if (is_dir($langPath)) {
                 $this->loadTranslationsFrom($langPath, strtolower($module));
             }

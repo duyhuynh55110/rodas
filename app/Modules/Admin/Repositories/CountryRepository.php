@@ -2,8 +2,8 @@
 
 namespace App\Modules\Admin\Repositories;
 
-use Base\Repositories\Eloquent\Repository;
 use App\Models\Country;
+use Base\Repositories\Eloquent\Repository;
 
 /**
  * CountryRepository

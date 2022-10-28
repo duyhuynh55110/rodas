@@ -35,7 +35,7 @@ class ProductSeeder extends Seeder
                             'created_at' => Carbon::now(),
                             'updated_by' => 1,
                             'updated_at' => Carbon::now(),
-                        ]
+                        ],
                     ]
                 );
             }
