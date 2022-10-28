@@ -1,0 +1,57 @@
+.item-box {
+    @include circleBox(220px, 18px);
+    @include position(relative);
+    margin-bottom: 15px;
+    overflow: hidden;
+
+    &:after {
+        @include bgGradient();
+        @include position(absolute, $left: 0, $bottom: 0);
+        width: 100%;
+        height: 50%;
+    }
+
+    .item-media {
+        height: 100%;
+
+        img {
+            @include imgObjectFitCover();
+        }
+    }
+
+    .item-content {
+        @include position(absolute, $left: 0, $bottom: 0, $zIndex: 1);
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+
+        .title {
+            margin: 0 0 5px;
+            font-weight: 400;
+            font-size: 18px;
+            a {
+                color: #fff;
+            }
+        }
+
+        .price {
+            margin: 0;
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+        }
+    }
+
+    .item-bookmark {
+        @include position(absolute, $top: 15px, $left: 15px);
+        font-size: 22px;
+
+        &.active {
+            color: #ff2e6c;
+        }
+
+        input {
+            display: none;
+        }
+    }
+}

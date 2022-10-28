@@ -1,0 +1,20 @@
+.categories-area {
+    margin-right: -30px;
+    height: auto;
+
+    .swiper-slide {
+        width: auto !important;
+        border: 0;
+        background: transparent;
+        height: auto;
+        display: block;
+
+        .category {
+            @include flexbox($alignItems: center);
+            @include circleBox(70px, 16px);
+            padding: 0px 30px;
+            font-size: 24px;
+            border: 1px solid $themeColor;
+        }
+    }
+}

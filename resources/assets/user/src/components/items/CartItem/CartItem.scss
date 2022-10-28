@@ -1,0 +1,112 @@
+.cart-item {
+    box-sizing: border-box;
+    overflow: unset;
+    margin: 6px 0;
+
+    .item-inner {
+        @include flexbox();
+        padding: 12px 0;
+
+        .item-media {
+            @include circleBox(115px, 16px);
+            min-width: 95px !important;
+            width: 30%;
+            margin-right: 20px;
+            overflow: hidden;
+            position: relative;
+
+            img {
+                width: 100%;
+            }
+
+            .item-price {
+                @include position(absolute, $left: 0, $right: 0, $bottom: 0);
+                margin: 0;
+                text-align: center;
+                font-weight: 500;
+                font-size: 18px;
+                padding: 5px;
+                border-radius: 16px;
+                color: #fff;
+            }
+        }
+
+        .item-info {
+            @include flexbox(
+                $flexDirection: column,
+                $justifyContent: space-between
+            );
+            width: 100%;
+
+            .item-head {
+                .category {
+                    margin: 0;
+                    font-size: 12px;
+                    color: rgba(0, 0, 0, 0.6);
+                }
+            }
+
+            .item-title {
+                margin: 0 0 10px;
+                font-weight: 500;
+                font-size: 16px;
+
+                a {
+                    color: #000;
+                }
+            }
+
+            .item-foot {
+                @include flexbox(
+                    $justifyContent: space-between,
+                    $alignItems: center
+                );
+
+                .item-total {
+                    margin: 0;
+                    font-weight: 500;
+                    font-size: 18px;
+                }
+
+                .stepper {
+                    @include flexbox();
+                    @include circleBox(35px, 28px);
+                    background-color: #efefef;
+                    width: 115px;
+
+                    .stepper-button-minus,
+                    .stepper-button-plus,
+                    .stepper-input-wrap {
+                        box-sizing: border-box;
+                        flex: 1;
+                        text-align: center;
+                        margin: auto;
+                        width: 50%;
+                        color: #0a3c48;
+                    }
+
+                    .stepper-input-wrap {
+                        border: 0;
+                        height: 100%;
+
+                        input {
+                            box-sizing: border-box;
+                            font-size: 18px;
+                            font-weight: 500;
+                            height: 100%;
+                            width: 45px;
+                            border: none;
+                            background: inherit;
+                            text-align: center;
+                            color: #0a3c48;
+
+                            &:focus-visible {
+                                outline: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

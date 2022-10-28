@@ -1,0 +1,18 @@
+.title-bar {
+    @include flexbox($alignItems: center, $justifyContent: space-between);
+    font-size: 14px;
+    line-height: 1;
+
+    .dz-title {
+        font-weight: 600;
+    }
+
+    a {
+        font-size: 28px;
+        color: $themeColor;
+    }
+
+    .icon-close {
+        color: $textColorHeading;
+    }
+}

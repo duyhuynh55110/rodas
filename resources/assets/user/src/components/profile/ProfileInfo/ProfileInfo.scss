@@ -1,0 +1,39 @@
+.profile-info {
+    .media {
+        width: 150px;
+        height: 150px;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        margin: 0 auto;
+        margin-bottom: 20px;
+
+        img {
+            @include imgObjectFitCover();
+        }
+    }
+
+    .info {
+        text-align: center;
+
+        .item-title {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        span {
+            display: block;
+            font-size: 16px;
+            opacity: 0.7;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #000;
+            margin-bottom: 0;
+        }
+    }
+}

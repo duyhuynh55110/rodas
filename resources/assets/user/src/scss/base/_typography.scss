@@ -1,0 +1,110 @@
+/**
+    Typography Rules
+    -----------------------
+    basic style sheet with the website’s
+**/
+@media only screen and (min-width: $minScreenWidth) {
+    // Limit page size for mobile only
+    .page {
+       @include maxPageWidth();
+    }
+}
+
+body {
+    overflow-x: hidden;
+    height: 100%;
+    position: relative;
+    max-width: 100%;
+    font-size: 1rem;
+    font-family: $themeFontFamily;
+    background: $themeColorLight;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    font-family: inherit; // inherit font-family from body
+}
+
+.page,
+.page-content {
+    background-color: $themeColorLight;
+}
+
+.page {
+    margin: 0 auto; // center
+
+    .page-content {
+        // &.content-full-screen {
+        //     position: relative;
+        //     top: 0;
+        //     z-index: $zIndexMax;
+
+        //     .container {
+        //         min-height: 100vh;
+        //     }
+        // }
+
+        .container {
+            max-width: 1024px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 30px;
+            padding-right: 30px;
+            box-sizing: border-box;
+
+            &.px-15 {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    }
+
+    /* route transitions */
+    .route-enter-active,
+    .route-leave-active {
+        transition: opacity 0.2s ease;
+    }
+    .route-enter-from,
+    .route-leave-to {
+        opacity: 0;
+    }
+}
+
+.text-primary {
+    color: $themeColor;
+}
+
+.bg-primary {
+    background-color: $themeColor;
+}
+
+.button {
+    border-radius: 16px;
+
+    &.button-large {
+        font-size: 16px;
+        padding: 20px 30px;
+        height: auto;
+        line-height: 1.2;
+    }
+}
+
+.button{
+    width: 100%;
+	border-radius:16px;
+    background: $themeColor;
+    color: #fff;
+    border: none;
+
+	&.button-large{
+		font-size: 16px;
+        font-weight: 500;
+		padding: 20px 30px;
+		height: auto;
+		line-height: 1.2;
+	}
+}

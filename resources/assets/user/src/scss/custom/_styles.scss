@@ -1,0 +1,21 @@
+/*
+    Custom library css
+    ----------------
+    this File is imported last, and will override other styles in the cascade
+    Add styles here to make changes without digging in too much
+*/
+
+// Swiper
+.swiper {
+    .swiper-pagination {
+        .swiper-pagination-bullet {
+            width: 7%;
+            height: 4px;
+            border-radius: 12px;
+
+            &.swiper-pagination-bullet-active {
+                background-color: #fff !important;
+            }
+        }
+    }
+}

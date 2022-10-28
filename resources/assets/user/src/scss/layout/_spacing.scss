@@ -1,0 +1,64 @@
+/* Margin Bottom Space */
+.mb- {
+    &30 {
+        margin-bottom: 30px;
+    }
+}
+
+/* Padding Top Space */
+.pt- {
+    &30 {
+        padding-top: 30px;
+    }
+
+    &60 {
+        padding-top: 60px;
+    }
+
+    &80 {
+        padding-top: 80px;
+    }
+
+    &90 {
+        padding-top: 90px;
+    }
+}
+
+/* Content Bottom Space */
+.bottom- {
+    &sp30:after {
+        height: 30px;
+        content: "";
+        display: block;
+    }
+    &sp40:after {
+        height: 40px;
+        content: "";
+        display: block;
+    }
+    &sp50:after {
+        height: 50px;
+        content: "";
+        display: block;
+    }
+    &sp60:after {
+        height: 60px;
+        content: "";
+        display: block;
+    }
+    &sp70:after {
+        height: 70px;
+        content: "";
+        display: block;
+    }
+    &sp80:after {
+        height: 80px;
+        content: "";
+        display: block;
+    }
+    &sp90:after {
+        height: 90px;
+        content: "";
+        display: block;
+    }
+}

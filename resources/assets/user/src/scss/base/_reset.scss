@@ -1,0 +1,39 @@
+/**
+    Reset CSS
+    -------------------------
+    resets all of the styles that come with the browser’s user agent.
+**/
+
+// Custom - the text is being highlighted by the user.
+::selection {
+    color: #fff;
+    background: $themeColor;
+}
+
+body {
+    margin: 0;
+}
+
+p {
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $textColorHeading;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: $themeColor;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}

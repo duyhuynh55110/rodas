@@ -1,0 +1,57 @@
+.toolbar {
+    @include maxPageWidth();
+    @include position(fixed, $left: 0, $right: 0, $bottom: 0, $zIndex: 999);
+    border-top: 1px solid #f4f4f4;
+    background-color: #fafefc;
+    margin: 0 auto;
+
+    .toolbar-inner {
+        @include flexbox(
+            $justifyContent: space-between,
+            $alignItems: center,
+            $alignContent: center
+        );
+        padding: 0 30px;
+        height: 56px;
+
+        .tab-link {
+            @include flexbox(
+                $flexDirection: column,
+                $justifyContent: space-between,
+                $alignItems: center,
+                $alignContent: center
+            );
+            font-size: 22px;
+            color: #b1b1b1;
+            transition-duration: 0.3s;
+            width: 100%;
+
+            &.active {
+                color: $themeColor;
+            }
+
+            .cart-in {
+                position: relative;
+
+                &::after {
+                    content: "";
+                    height: 8px;
+                    width: 8px;
+                    border: 2px solid #fff;
+                    position: absolute;
+                    right: -6px;
+                    top: -2px;
+                    border-radius: 10px;
+                    background-color: $themeColor;
+                }
+            }
+
+            .user-media {
+                height: 24px;
+                width: 24px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+    }
+}

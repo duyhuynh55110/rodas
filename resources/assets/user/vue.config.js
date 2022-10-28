@@ -7,11 +7,16 @@ module.exports = defineConfig({
         resolve: {
             alias: {
                 "@": path.resolve(__dirname, "src/"),
-                "@views": path.resolve(__dirname, "src/views"),
-                "@assets": path.resolve(__dirname, "src/assets"),
-                "@constants": path.resolve(__dirname, "src/constants"),
-                "@router": path.resolve(__dirname, "src/router"),
-                "@services": path.resolve(__dirname, "src/services"),
+            },
+        },
+    },
+    css: {
+        loaderOptions: {
+            scss: {
+                additionalData: `
+                @import "@/scss/abstracts/variables";
+                @import "@/scss/abstracts/mixins";
+                `,
             },
         },
     },
