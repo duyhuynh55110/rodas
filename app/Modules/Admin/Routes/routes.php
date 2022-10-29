@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        // 'domain' => env('APP_ADMIN_DOMAIN'),
+        'domain' => env('APP_ADMIN_DOMAIN'),
         'as' => ADMIN_MODULE_AS,
         'middleware' => ['web'],
     ],
