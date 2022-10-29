@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Api\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -9,6 +10,8 @@ Route::group(
         'middleware' => ['api', 'response.json'],
     ],
     function () {
+        Route::post('/register', [RegisterController::class, 'register']);
+
         // Homepage
         Route::name('home')->get(
             '/',
