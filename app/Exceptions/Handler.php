@@ -63,7 +63,7 @@ class Handler extends ExceptionHandler
      * Return JSON format if request have content type is 'application/json'
      *
      * @param $request
-     * @param Throwable $e
+     * @param  Throwable  $e
      * @return \Illuminate\Http\JsonResponse
      */
     private function customApiResponse($request, Throwable $e)
@@ -100,7 +100,7 @@ class Handler extends ExceptionHandler
      * Custom handle api exception
      *
      * @param $request
-     * @param Throwable $e
+     * @param  Throwable  $e
      * @return Throwable $e
      */
     private function prepareApiException($request, Throwable $e)

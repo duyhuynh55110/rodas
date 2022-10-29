@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Api\Http\Middleware;
 
 use Closure;
@@ -12,8 +13,8 @@ class ResponseWithJsonMiddleware
     /**
      * Handle an incoming request
      *
-     * @param Request $request
-     * @param Closure $next
+     * @param  Request  $request
+     * @param  Closure  $next
      */
     public function handle(Request $request, Closure $next)
     {
