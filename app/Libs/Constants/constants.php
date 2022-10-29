@@ -1,4 +1,5 @@
 <?php
+defined('API_MODULE_AS') or define('API_MODULE_AS', 'api.');
 
 defined('ADMIN_MODULE_AS') or define('ADMIN_MODULE_AS', 'admin.');
 defined('ADMIN_GUARD') or define('ADMIN_GUARD', 'admin');
