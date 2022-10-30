@@ -4,9 +4,19 @@ namespace App\Modules\Api\Http\Controllers\Auth;
 
 use App\Modules\Api\Http\Controllers\BaseController;
 use App\Modules\Api\Http\Requests\RegisterUserFormRequest;
+use App\Modules\Api\Services\UserService;
 
 class RegisterController extends BaseController
 {
+    /**
+     * Constructor
+     *
+     * @param  UserRepository  $userRepo
+     */
+    public function __construct(private UserService $userService)
+    {
+    }
+
     /**
      * Register a user
      *
@@ -14,6 +24,8 @@ class RegisterController extends BaseController
      */
     public function register(RegisterUserFormRequest $request)
     {
-        dd($request->all());
+        $token = $this->userService->register($request);
+
+        return $token;
     }
 }

@@ -30,6 +30,9 @@ trait AdminTimestamp
 
                     $model->created_by = $userId;
                     $model->updated_by = $userId;
+                } else {
+                    $model->created_by = CREATED_BY_SYSTEM;
+                    $model->updated_by = CREATED_BY_SYSTEM;
                 }
             }
         );
@@ -46,6 +49,8 @@ trait AdminTimestamp
                     $userId = $admin->user()->id;
 
                     $model->updated_by = $userId;
+                } else {
+                    $model->updated_by = CREATED_BY_SYSTEM;
                 }
             }
         );

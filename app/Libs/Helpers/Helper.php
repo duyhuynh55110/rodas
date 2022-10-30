@@ -1,7 +1,9 @@
 <?php
 
 use App\Exceptions\StorageUploadFileException;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -205,6 +207,11 @@ if (! function_exists('checkActiveSidebarItem')) {
 }
 
 if (! function_exists('getCurrentBreadcrumbs')) {
+    /**
+     * [Admin] Get current breadcrumbs
+     *
+     * @return mixed
+     */
     function getCurrentBreadcrumbs()
     {
         return collect(config('admin.breadcrumbs'))->filter(
@@ -212,5 +219,28 @@ if (! function_exists('getCurrentBreadcrumbs')) {
                 return (ADMIN_MODULE_AS.$breadcrumb['for']) === Route::currentRouteName();
             }
         )->first();
+    }
+}
+
+if (! function_exists('writeLogHandleException')) {
+    /**
+     * Write log when exception appear
+     *
+     * @return mixed
+     */
+    function writeLogHandleException(Throwable $e)
+    {
+        Log::error('====== '.get_class($e).' ======');
+        Log::error('Appear at: '.Carbon::now());
+        Log::error('Header: '.json_encode(request()->header()));
+        Log::error('Requests: '.json_encode(request()->all()));
+
+        // write bearer token if use
+        if (request()->bearerToken()) {
+            Log::error('Bearer Token: '.request()->bearerToken());
+        }
+
+        // Write exception message
+        Log::error($e);
     }
 }

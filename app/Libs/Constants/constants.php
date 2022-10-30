@@ -38,3 +38,9 @@ defined('HTTP_CODE_INTERNAL_SERVER_ERROR') or define('HTTP_CODE_INTERNAL_SERVER_
 
 // Status code (status is custom define, handle exception from RESTFUL API)
 defined('STATUS_CODE_INVALID_REQUEST') or define('STATUS_CODE_INVALID_REQUEST', 100);
+
+// Token name
+defined('TOKEN_NAME_API') or define('TOKEN_NAME_API', 'Api');
+
+// Created by system (set when creating/updating on a model without admin role)
+defined('CREATED_BY_SYSTEM') or define('CREATED_BY_SYSTEM', 0);
