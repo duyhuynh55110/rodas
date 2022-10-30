@@ -15,6 +15,7 @@ class RegisterController extends BaseController
      */
     public function __construct(private UserService $userService)
     {
+        parent::__construct();
     }
 
     /**
@@ -26,6 +27,6 @@ class RegisterController extends BaseController
     {
         $token = $this->userService->register($request);
 
-        return $token;
+        return $this->outputJson($token);
     }
 }

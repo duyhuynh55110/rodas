@@ -44,3 +44,6 @@ defined('TOKEN_NAME_API') or define('TOKEN_NAME_API', 'Api');
 
 // Created by system (set when creating/updating on a model without admin role)
 defined('CREATED_BY_SYSTEM') or define('CREATED_BY_SYSTEM', 0);
+
+// Token type
+defined('TOKEN_TYPE_BEARER') or define('TOKEN_TYPE_BEARER', 'Bearer');

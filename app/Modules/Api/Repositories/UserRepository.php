@@ -30,10 +30,15 @@ class UserRepository extends Repository
     {
         $user = $this->model->create($values);
 
-        $token = $user->createToken(TOKEN_NAME_API);
+        // create user token (use to login)
+        $plainTextToken = $user->createToken(TOKEN_NAME_API)->plainTextToken;
+
+        // explode plainTextToken
+        [$tokenId, $accessToken] = explode('|', $plainTextToken);
 
         return [
-            'access_token' => $token->plainTextToken,
+            'access_token' => $accessToken,
+            'user' => $user,
         ];
     }
 }

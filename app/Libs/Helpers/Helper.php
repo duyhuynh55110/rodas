@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use League\Fractal\Resource\Item as FractalItem;
 
 if (! function_exists('routeAdmin')) {
     /**
@@ -242,5 +243,14 @@ if (! function_exists('writeLogHandleException')) {
 
         // Write exception message
         Log::error($e);
+    }
+}
+
+if (! function_exists('createFractalItem')) {
+    function createFractalItem($data, $transformer)
+    {
+        $item = new FractalItem($data, $transformer, 'abc');
+
+        return $item;
     }
 }
