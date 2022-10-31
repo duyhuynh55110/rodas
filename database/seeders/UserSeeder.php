@@ -16,16 +16,27 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
+        DB::table('users')->insert([
             [
                 'name' => 'Administrator',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('password'),
-                'created_by' => 1,
+                'role' => ACCOUNT_ROLE_ADMIN,
+                'created_by' => CREATED_BY_SYSTEM,
                 'created_at' => Carbon::now(),
-                'updated_by' => 1,
+                'updated_by' => CREATED_BY_SYSTEM,
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'User',
+                'email' => 'user@gmail.com',
+                'password' => Hash::make('password'),
+                'role' => ACCOUNT_ROLE_USER,
+                'created_by' => CREATED_BY_SYSTEM,
+                'created_at' => Carbon::now(),
+                'updated_by' => CREATED_BY_SYSTEM,
                 'updated_at' => Carbon::now(),
             ]
-        );
+        ]);
     }
 }

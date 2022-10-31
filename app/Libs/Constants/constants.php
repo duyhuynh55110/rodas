@@ -47,3 +47,7 @@ defined('CREATED_BY_SYSTEM') or define('CREATED_BY_SYSTEM', 0);
 
 // Token type
 defined('TOKEN_TYPE_BEARER') or define('TOKEN_TYPE_BEARER', 'Bearer');
+
+// account role
+defined('ACCOUNT_ROLE_ADMIN') or define('ACCOUNT_ROLE_ADMIN', 1);
+defined('ACCOUNT_ROLE_USER') or define('ACCOUNT_ROLE_USER', 2);
