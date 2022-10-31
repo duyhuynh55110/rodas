@@ -1,4 +1,5 @@
 <?php
+
 defined('API_MODULE_AS') or define('API_MODULE_AS', 'api.');
 
 defined('ADMIN_MODULE_AS') or define('ADMIN_MODULE_AS', 'admin.');
@@ -29,3 +30,20 @@ defined('MAX_INTEGER_VALUE') or define('MAX_INTEGER_VALUE', 2147483647);
 
 // Resize image
 defined('UPLOAD_MAX_SIZE') or define('UPLOAD_MAX_SIZE', 5242880); // BYTES (maximum is 5MB)
+
+// Http Code
+defined('HTTP_CODE_OK') or define('HTTP_CODE_OK', 200);
+defined('HTTP_CODE_UNPROCESSABLE_ENTITY') or define('HTTP_CODE_UNPROCESSABLE_ENTITY', 422);
+defined('HTTP_CODE_INTERNAL_SERVER_ERROR') or define('HTTP_CODE_INTERNAL_SERVER_ERROR', 500);
+
+// Status code (status is custom define, handle exception from RESTFUL API)
+defined('STATUS_CODE_INVALID_REQUEST') or define('STATUS_CODE_INVALID_REQUEST', 100);
+
+// Token name
+defined('TOKEN_NAME_API') or define('TOKEN_NAME_API', 'Api');
+
+// Created by system (set when creating/updating on a model without admin role)
+defined('CREATED_BY_SYSTEM') or define('CREATED_BY_SYSTEM', 0);
+
+// Token type
+defined('TOKEN_TYPE_BEARER') or define('TOKEN_TYPE_BEARER', 'Bearer');
