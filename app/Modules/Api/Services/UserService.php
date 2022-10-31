@@ -22,7 +22,7 @@ class UserService
     /**
      * Create a user with token
      *
-     * @param
+     * @param $request
      */
     public function register($request)
     {
