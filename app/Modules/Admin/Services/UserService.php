@@ -32,6 +32,6 @@ class UserService
      */
     public function authenticate(array $credentials): bool
     {
-        return authAdmin()->attempt($credentials);
+        return auth()->attempt($credentials);
     }
 }

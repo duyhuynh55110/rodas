@@ -79,6 +79,9 @@ class Handler extends ExceptionHandler
         $response = [];
 
         switch ($httpCode) {
+            case HTTP_CODE_UNAUTHORIZED:
+                $response['message'] = 'Unauthorized';
+                break;
             case HTTP_CODE_UNPROCESSABLE_ENTITY:
                 // Only return first error message
                 $errors = $e->original['errors'];
@@ -109,6 +112,8 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof \Illuminate\Validation\ValidationException) {
             $e = $this->convertValidationExceptionToResponse($e, $request);
+        } elseif ($e instanceof \Illuminate\Auth\AuthenticationException) {
+            $e = $this->unauthenticated($request, $e);
         }
 
         return $e;

@@ -17,7 +17,7 @@ class LogoutController extends BaseController
     public function logout()
     {
         // logout user
-        authAdmin()->logout();
+        auth()->logout();
 
         // redirect to login form
         return redirect()->action([LoginController::class, 'login']);

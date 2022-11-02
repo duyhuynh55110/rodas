@@ -3,7 +3,7 @@
 defined('API_MODULE_AS') or define('API_MODULE_AS', 'api.');
 
 defined('ADMIN_MODULE_AS') or define('ADMIN_MODULE_AS', 'admin.');
-defined('ADMIN_GUARD') or define('ADMIN_GUARD', 'admin');
+defined('USER_GUARD') or define('USER_GUARD', 'user');
 defined('ADMIN_ASSET_PATH') or define('ADMIN_ASSET_PATH', 'admin-lte/');
 
 // Storage
@@ -35,6 +35,7 @@ defined('UPLOAD_MAX_SIZE') or define('UPLOAD_MAX_SIZE', 5242880); // BYTES (maxi
 defined('HTTP_CODE_OK') or define('HTTP_CODE_OK', 200);
 defined('HTTP_CODE_UNPROCESSABLE_ENTITY') or define('HTTP_CODE_UNPROCESSABLE_ENTITY', 422);
 defined('HTTP_CODE_INTERNAL_SERVER_ERROR') or define('HTTP_CODE_INTERNAL_SERVER_ERROR', 500);
+defined('HTTP_CODE_UNAUTHORIZED') or define('HTTP_CODE_UNAUTHORIZED', 401);
 
 // Status code (status is custom define, handle exception from RESTFUL API)
 defined('STATUS_CODE_INVALID_REQUEST') or define('STATUS_CODE_INVALID_REQUEST', 100);
@@ -47,3 +48,7 @@ defined('CREATED_BY_SYSTEM') or define('CREATED_BY_SYSTEM', 0);
 
 // Token type
 defined('TOKEN_TYPE_BEARER') or define('TOKEN_TYPE_BEARER', 'Bearer');
+
+// account role
+defined('ACCOUNT_ROLE_ADMIN') or define('ACCOUNT_ROLE_ADMIN', 1);
+defined('ACCOUNT_ROLE_USER') or define('ACCOUNT_ROLE_USER', 2);
