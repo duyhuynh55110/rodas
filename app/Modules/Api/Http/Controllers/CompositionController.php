@@ -17,7 +17,7 @@ class CompositionController extends BaseController
     }
 
     /**
-     * Response master data for homepage
+     * Response master data for home page
      *
      * @return Illuminate\Http\JsonResponse
      */
