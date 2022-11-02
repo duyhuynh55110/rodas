@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use League\Fractal\Resource\Collection as FractalCollection;
 use League\Fractal\Resource\Item as FractalItem;
 
 if (! function_exists('routeAdmin')) {
@@ -249,8 +251,23 @@ if (! function_exists('writeLogHandleException')) {
 if (! function_exists('createFractalItem')) {
     function createFractalItem($data, $transformer)
     {
-        $item = new FractalItem($data, $transformer, 'abc');
+        $item = new FractalItem($data, $transformer);
 
         return $item;
+    }
+}
+
+if (! function_exists('createFractalCollection')) {
+    function createFractalCollection($data, $transformer)
+    {
+        if ($data instanceof \Illuminate\Pagination\LengthAwarePaginator) {
+            $collection = $data->getCollection();
+            $collection = new FractalCollection($collection, $transformer);
+            $collection->setPaginator(new IlluminatePaginatorAdapter($data));
+        } else {
+            $collection = new FractalCollection($data, $transformer);
+        }
+
+        return $collection;
     }
 }

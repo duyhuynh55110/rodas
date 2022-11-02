@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Api\Http\Controllers\AuthController;
+use App\Modules\Api\Http\Controllers\CompositionController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -23,6 +24,21 @@ Route::group(
             }
         );
 
+        // === Without Authentication
+        Route::group(
+            [],
+            function () {
+                // Composition
+                Route::group(
+                    [
+                        'prefix' => 'composition',
+                    ],
+                    function () {
+                        Route::get('/home-page', [CompositionController::class, 'homePage']);
+                    }
+                );
+            }
+        );
         // Homepage
         Route::name('home')->get(
             '/',

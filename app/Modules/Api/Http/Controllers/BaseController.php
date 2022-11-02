@@ -26,7 +26,7 @@ class BaseController extends Controller
      * @param  \League\Fractal\Resource\ResourceInterface|array  $data
      * @return array
      */
-    protected function outputJson($data)
+    protected function outputJson($data, $groupInData = true)
     {
         if ($data instanceof \League\Fractal\Resource\ResourceInterface) {
             $dataResponse = $this->fractal->createData($data)->toArray();
@@ -41,10 +41,16 @@ class BaseController extends Controller
             });
         }
 
-        return response()->json([
+        $baseData = [
             'status' => HTTP_CODE_OK,
             'message' => 'Ok',
-            ...$dataResponse,
-        ]);
+        ];
+
+        $response = [
+            ...$baseData,
+            ...(! $groupInData) ? $dataResponse : ['data' => $dataResponse], // true: data: {...}, false: without data object
+        ];
+
+        return response()->json($response);
     }
 }

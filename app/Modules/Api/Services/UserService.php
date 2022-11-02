@@ -117,6 +117,10 @@ class UserService
         // get user -> must get type was 'sanctum' because this was out middleware 'auth:sanctum'
         $user = auth('sanctum')->user();
 
+        if (! $user) {
+            throw new AuthenticationException();
+        }
+
         // Revoke the user's current token...
         $user->currentAccessToken()->delete();
     }
