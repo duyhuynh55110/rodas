@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_by' => CREATED_BY_SYSTEM,
                 'updated_at' => Carbon::now(),
-            ]
+            ],
         ]);
     }
 }

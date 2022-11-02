@@ -27,7 +27,7 @@ Route::group(
         // Admin group
         Route::group(
             [
-                'middleware' => 'auth.admin:'.ADMIN_GUARD,
+                'middleware' => 'auth.admin',
             ],
             function () {
                 // brands

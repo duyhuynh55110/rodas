@@ -22,7 +22,7 @@ trait AdminTimestamp
          */
         self::creating(
             function ($model) {
-                $admin = authAdmin();
+                $admin = auth();
 
                 // if have admin authorization
                 if ($admin && $admin->user()) {
@@ -42,7 +42,7 @@ trait AdminTimestamp
          */
         self::updating(
             function ($model) {
-                $admin = authAdmin();
+                $admin = auth();
 
                 // if have admin authorization
                 if ($admin && $admin->user()) {

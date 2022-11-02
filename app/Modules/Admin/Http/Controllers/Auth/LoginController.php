@@ -35,7 +35,7 @@ class LoginController extends BaseController
     public function login(Request $request)
     {
         // user is logging then redirect
-        if (authAdmin()->check()) {
+        if (auth()->check()) {
             $request->session()->regenerate();
 
             return redirect()->intended(routeAdmin(config('admin.auth.redirect_to')));
@@ -53,7 +53,11 @@ class LoginController extends BaseController
      */
     public function authenticate(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'role' => ACCOUNT_ROLE_ADMIN,
+        ];
 
         // authentication attempt
         if ($this->userService->authenticate($credentials)) {

@@ -23,16 +23,16 @@ if (! function_exists('routeAdmin')) {
     }
 }
 
-if (! function_exists('authAdmin')) {
+if (! function_exists('auth')) {
     /**
      * Get auth guard for admin
      *
      * @param  string  $guard
      * @return Illuminate\Auth\SessionGuard|null
      */
-    function authAdmin($guard = ''): Illuminate\Auth\SessionGuard
+    function auth($guard = ''): Illuminate\Auth\SessionGuard
     {
-        $guard = empty($guard) ? ADMIN_GUARD : $guard;
+        $guard = empty($guard) ? USER_GUARD : $guard;
 
         return Auth::guard($guard);
     }

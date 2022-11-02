@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\Api\Http\Controllers\Auth\RegisterController;
+use App\Modules\Api\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -10,7 +10,18 @@ Route::group(
         'middleware' => ['api', 'response.json'],
     ],
     function () {
-        Route::post('/register', [RegisterController::class, 'register']);
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+
+        // === Authentication
+        Route::group(
+            [
+                'middleware' => ['auth:sanctum'],
+            ],
+            function () {
+            }
+        );
 
         // Homepage
         Route::name('home')->get(
@@ -21,6 +32,6 @@ Route::group(
                     'status' => 200,
                 ]);
             }
-        );
+        )->middleware(['auth:sanctum']);
     }
 );
