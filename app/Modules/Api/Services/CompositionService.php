@@ -20,7 +20,9 @@ class CompositionService
     }
 
     /**
-     * Master data for homepage
+     * Master data for home page
+     *
+     * @return array
      */
     public function homePage()
     {

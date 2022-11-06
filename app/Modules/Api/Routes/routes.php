@@ -1,7 +1,9 @@
 <?php
 
 use App\Modules\Api\Http\Controllers\AuthController;
+use App\Modules\Api\Http\Controllers\CategoryController;
 use App\Modules\Api\Http\Controllers\CompositionController;
+use App\Modules\Api\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -21,6 +23,25 @@ Route::group(
                 'middleware' => ['auth:sanctum'],
             ],
             function () {
+                // categories
+                Route::group(
+                    [
+                        'prefix' => 'categories',
+                    ],
+                    function () {
+                        Route::get('/', [CategoryController::class, 'index']);
+                    }
+                );
+
+                // products
+                Route::group(
+                    [
+                        'prefix' => 'products',
+                    ],
+                    function () {
+                        Route::get('/', [ProductController::class, 'index']);
+                    }
+                );
             }
         );
 
@@ -28,7 +49,7 @@ Route::group(
         Route::group(
             [],
             function () {
-                // Composition
+                // composition
                 Route::group(
                     [
                         'prefix' => 'composition',
@@ -39,15 +60,16 @@ Route::group(
                 );
             }
         );
-        // Homepage
-        Route::name('home')->get(
+
+        // test
+        Route::get(
             '/',
             function () {
                 return response()->json([
-                    'message' => 'OK',
+                    'message' => 'api ready',
                     'status' => 200,
                 ]);
             }
-        )->middleware(['auth:sanctum']);
+        );
     }
 );
