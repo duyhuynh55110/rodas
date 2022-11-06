@@ -37,12 +37,12 @@ class BrandService
      */
     public function brandsDataTable(Request $request)
     {
-        $filters = [
+        $filter = [
             'name' => $request->name ?? null,
             'country_id' => $request->country_id ?? null,
         ];
 
-        return $this->brandRepo->brandsDataTable($filters);
+        return $this->brandRepo->brandsDataTable($filter);
     }
 
     /**

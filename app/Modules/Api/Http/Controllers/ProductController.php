@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\Http\Controllers;
 
+use App\Modules\Api\Http\Requests\ProductsListFormRequest;
 use App\Modules\Api\Services\ProductService;
 
 class ProductController extends BaseController
@@ -17,13 +18,14 @@ class ProductController extends BaseController
     }
 
     /**
-     * Response all categories
+     * Response products with paginate
      *
+     * @param $request
      * @return Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(ProductsListFormRequest $request)
     {
-        $responseData = $this->productService->getProducts();
+        $responseData = $this->productService->getProducts($request);
 
         return $this->outputJson($responseData);
     }

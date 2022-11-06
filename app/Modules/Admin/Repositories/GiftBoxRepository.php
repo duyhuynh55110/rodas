@@ -23,10 +23,10 @@ class GiftBoxRepository extends Repository
     /**
      * Get gift boxs and format dataTable response
      *
-     * @param  array  $filters
+     * @param  array  $filter
      * @return Illuminate\Http\JsonResponse
      */
-    public function giftBoxsDataTable(array $filters)
+    public function giftBoxsDataTable(array $filter)
     {
         $query = $this->model->select(
             [
@@ -39,9 +39,9 @@ class GiftBoxRepository extends Repository
 
         // filter by name
         $query->when(
-            isset($filters['name']),
-            function ($q) use ($filters) {
-                $name = '%'.$filters['name'].'%';
+            isset($filter['name']),
+            function ($q) use ($filter) {
+                $name = '%'.$filter['name'].'%';
 
                 return $q->where('name', 'LIKE', $name);
             }

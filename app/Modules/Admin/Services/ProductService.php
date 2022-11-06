@@ -37,13 +37,13 @@ class ProductService
      */
     public function productsDataTable(Request $request)
     {
-        $filters = [
+        $filter = [
             'name' => $request->name ?? null,
             'brand_id' => $request->brand_id ?? null,
             'country_id' => $request->country_id ?? null,
         ];
 
-        return $this->productRepo->productsDataTable($filters);
+        return $this->productRepo->productsDataTable($filter);
     }
 
     /**

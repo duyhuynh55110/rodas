@@ -271,3 +271,57 @@ if (! function_exists('createFractalCollection')) {
         return $collection;
     }
 }
+
+if (! function_exists('getRequestListByName')) {
+    /**
+     * [API] Get list ids from request param
+     *
+     * @param $requestName
+     * @return array
+     */
+    function getListByRequestName($requestName)
+    {
+        try {
+            $listIds = request()->$requestName ? explode(',', request()->$requestName) : [];
+
+            // remove invalid data
+            $listIds = array_filter(
+                $listIds,
+                function ($id) {
+                    return !empty($id);
+                }
+            );
+
+            return $listIds;
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+}
+
+if (! function_exists('validatePaginationRequestParams')) {
+    /**
+     * [API] Validation paginate params valid
+     *
+     * @return array
+     */
+    function validatePaginationRequestParams()
+    {
+        return [
+            'page' => ['integer', 'min:1', 'max:' . MAX_INTEGER_VALUE],
+            'per_page'  => ['integer', 'min:1', 'max:' . MAX_INTEGER_VALUE],
+        ];
+    }
+}
+
+if (! function_exists('getPerPage')) {
+    /**
+     * [API] Limit record in  per page
+     *
+     * @return integer
+     */
+    function getPerPage()
+    {
+        return request()->per_page ?? 12;
+    }
+}
