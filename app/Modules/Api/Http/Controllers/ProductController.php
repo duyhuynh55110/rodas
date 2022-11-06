@@ -21,7 +21,8 @@ class ProductController extends BaseController
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function index() {
+    public function index()
+    {
         $responseData = $this->productService->getProducts();
 
         return $this->outputJson($responseData);

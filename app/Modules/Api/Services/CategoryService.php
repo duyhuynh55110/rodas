@@ -21,7 +21,8 @@ class CategoryService
      *
      * @return League\Fractal\Resource\Collection
      */
-    public function getAllCategories() {
+    public function getAllCategories()
+    {
         $data = $this->categoryRepo->getAllCategories();
         $collection = createFractalCollection($data, new CategoryTransformer);
 

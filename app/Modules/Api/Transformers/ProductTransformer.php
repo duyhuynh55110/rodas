@@ -12,7 +12,7 @@ class ProductTransformer extends TransformerAbstract
      * @var array
      */
     protected array $defaultIncludes = [
-        'brand'
+        'brand',
     ];
 
     /**

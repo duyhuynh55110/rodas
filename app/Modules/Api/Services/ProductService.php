@@ -21,7 +21,8 @@ class ProductService
      *
      * @return League\Fractal\Resource\Collection
      */
-    public function getProducts() {
+    public function getProducts()
+    {
         $data = $this->productRepo->getProducts();
         $collection = createFractalCollection($data, new ProductTransformer);
 

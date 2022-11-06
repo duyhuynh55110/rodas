@@ -21,7 +21,8 @@ class CategoryController extends BaseController
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function index() {
+    public function index()
+    {
         $responseData = $this->categoryService->getAllCategories();
 
         return $this->outputJson($responseData);
