@@ -4,7 +4,7 @@ namespace App\Modules\Api\Transformers;
 
 use League\Fractal\TransformerAbstract;
 
-class CartProductTransformer extends TransformerAbstract
+class ProductCartTransformer extends TransformerAbstract
 {
     /**
      * List of resources to automatically include

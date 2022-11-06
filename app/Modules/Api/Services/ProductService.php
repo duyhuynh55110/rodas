@@ -3,7 +3,7 @@
 namespace App\Modules\Api\Services;
 
 use App\Modules\Api\Repositories\ProductRepository;
-use App\Modules\Api\Transformers\CartProductTransformer;
+use App\Modules\Api\Transformers\ProductCartTransformer;
 use App\Modules\Api\Transformers\ProductTransformer;
 
 class ProductService
@@ -46,7 +46,7 @@ class ProductService
     {
         $userId = auth()->user()->id;
         $data = $this->productRepo->getProductsCart($userId);
-        $collection = createFractalCollection($data, new CartProductTransformer);
+        $collection = createFractalCollection($data, new ProductCartTransformer);
 
         return $collection;
     }
