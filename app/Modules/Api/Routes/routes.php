@@ -40,7 +40,16 @@ Route::group(
                     ],
                     function () {
                         Route::get('/', [ProductController::class, 'index']);
-                        Route::get('/wishlist', [ProductController::class, 'wishlist']);
+
+                        // cart
+                        Route::group(
+                            [
+                                'prefix' => 'cart',
+                            ],
+                            function () {
+                                Route::get('/', [ProductController::class, 'cart']);
+                            }
+                        );
                     }
                 );
             }
