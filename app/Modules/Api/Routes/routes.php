@@ -40,6 +40,7 @@ Route::group(
                     ],
                     function () {
                         Route::get('/', [ProductController::class, 'index']);
+                        Route::get('/wishlist', [ProductController::class, 'wishlist']);
                     }
                 );
             }

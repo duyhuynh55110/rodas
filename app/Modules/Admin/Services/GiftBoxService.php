@@ -37,11 +37,11 @@ class GiftBoxService
      */
     public function giftBoxsDataTable(Request $request)
     {
-        $filters = [
+        $filter = [
             'name' => $request->name ?? null,
         ];
 
-        return $this->giftBoxRepo->giftBoxsDataTable($filters);
+        return $this->giftBoxRepo->giftBoxsDataTable($filter);
     }
 
     /**

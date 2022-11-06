@@ -23,10 +23,10 @@ class ProductRepository extends Repository
     /**
      * Get products and format dataTable response
      *
-     * @param  array  $filters
+     * @param  array  $filter
      * @return Illuminate\Http\JsonResponse
      */
-    public function productsDataTable(array $filters)
+    public function productsDataTable(array $filter)
     {
         $query = $this->model->select(
             [
@@ -47,9 +47,9 @@ class ProductRepository extends Repository
 
         // filter by name
         $query->when(
-            isset($filters['name']),
-            function ($q) use ($filters) {
-                $name = '%'.$filters['name'].'%';
+            isset($filter['name']),
+            function ($q) use ($filter) {
+                $name = '%'.$filter['name'].'%';
 
                 return $q->where('name', 'LIKE', $name);
             }
@@ -57,18 +57,18 @@ class ProductRepository extends Repository
 
         // filter by brand_id
         $query->when(
-            isset($filters['brand_id']) && $filters['brand_id'] != SELECT_OPTION_ALL,
-            function ($q) use ($filters) {
-                return $q->where('brand_id', $filters['brand_id']);
+            isset($filter['brand_id']) && $filter['brand_id'] != SELECT_OPTION_ALL,
+            function ($q) use ($filter) {
+                return $q->where('brand_id', $filter['brand_id']);
             }
         );
 
         // filter by country_id
         $query->when(
-            isset($filters['country_id']) && $filters['country_id'] != SELECT_OPTION_ALL,
-            function ($q) use ($filters) {
-                return $q->whereHas('brand', function ($q2) use ($filters) {
-                    $q2->where('country_id', $filters['country_id']);
+            isset($filter['country_id']) && $filter['country_id'] != SELECT_OPTION_ALL,
+            function ($q) use ($filter) {
+                return $q->whereHas('brand', function ($q2) use ($filter) {
+                    $q2->where('country_id', $filter['country_id']);
                 });
             }
         );
