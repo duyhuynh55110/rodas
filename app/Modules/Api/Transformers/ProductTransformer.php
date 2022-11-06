@@ -29,7 +29,7 @@ class ProductTransformer extends TransformerAbstract
             'image_url' => $data->full_path_image,
             'description' => $data->description,
             'item_price' => floatval($data->item_price),
-            'is_favorite' => (bool)$data->is_favorite,
+            'is_favorite' => (bool) $data->is_favorite,
         ];
     }
 

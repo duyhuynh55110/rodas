@@ -288,7 +288,7 @@ if (! function_exists('getRequestListByName')) {
             $listIds = array_filter(
                 $listIds,
                 function ($id) {
-                    return !empty($id);
+                    return ! empty($id);
                 }
             );
 
@@ -308,8 +308,8 @@ if (! function_exists('validatePaginationRequestParams')) {
     function validatePaginationRequestParams()
     {
         return [
-            'page' => ['integer', 'min:1', 'max:' . MAX_INTEGER_VALUE],
-            'per_page'  => ['integer', 'min:1', 'max:' . MAX_INTEGER_VALUE],
+            'page' => ['integer', 'min:1', 'max:'.MAX_INTEGER_VALUE],
+            'per_page' => ['integer', 'min:1', 'max:'.MAX_INTEGER_VALUE],
         ];
     }
 }
@@ -318,7 +318,7 @@ if (! function_exists('getPerPage')) {
     /**
      * [API] Limit record in  per page
      *
-     * @return integer
+     * @return int
      */
     function getPerPage()
     {

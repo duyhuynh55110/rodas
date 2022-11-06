@@ -24,7 +24,7 @@ class ProductRepository extends Repository
     /**
      * Get products with paginate
      *
-     * @param array $filter
+     * @param  array  $filter
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function getProducts($userId, array $filter)
@@ -58,19 +58,20 @@ class ProductRepository extends Repository
      * @param $filter
      * @return void
      */
-    private function filterProducts($query, $filter) {
+    private function filterProducts($query, $filter)
+    {
         // filter by search text
         $query->when(
-            isset($filter['search']) && !empty($filter['search']),
+            isset($filter['search']) && ! empty($filter['search']),
             function ($q) use ($filter) {
-                $search = '%' . $filter['search'] . '%';
+                $search = '%'.$filter['search'].'%';
                 $q->where('products.name', 'like', $search);
             }
         );
 
         // filter by categories
         $query->when(
-            isset($filter['category_ids']) && !empty($filter['category_ids']),
+            isset($filter['category_ids']) && ! empty($filter['category_ids']),
             function ($q) use ($filter) {
                 $q->whereHas('categories', function ($q) use ($filter) {
                     $q->whereIn('category_id', $filter['category_ids']);
