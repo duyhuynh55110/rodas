@@ -4,6 +4,7 @@ namespace App\Modules\Api\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use League\Fractal\Manager as FractalManager;
+use League\Fractal\Serializer\ArraySerializer;
 
 class BaseController extends Controller
 {
@@ -18,6 +19,7 @@ class BaseController extends Controller
     public function __construct()
     {
         $this->fractal = new FractalManager();
+        $this->fractal->setSerializer(new ArraySerializer);
     }
 
     /**

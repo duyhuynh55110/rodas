@@ -29,8 +29,13 @@ class ProductRepository extends Repository
     {
         return $this->model->select([
             'id',
+            'brand_id',
             'name',
             'image_file_name',
-        ])->paginate();
+            'description',
+            'item_price',
+        ])
+        ->with(['brand:id,name,logo_file_name'])
+        ->paginate();
     }
 }
