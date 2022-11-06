@@ -29,4 +29,16 @@ class ProductController extends BaseController
 
         return $this->outputJson($responseData);
     }
+
+    /**
+     * Response user's products cart with paginate
+     *
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function cart()
+    {
+        $responseData = $this->productService->getProductsCart();
+
+        return $this->outputJson($responseData);
+    }
 }

@@ -87,4 +87,34 @@ class ProductRepository extends Repository
             }
         );
     }
+
+    /**
+     * Get user's products cart
+     *
+     * @param $userId
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getProductsCart($userId) {
+        $query = $this->model->select([
+            'products.id',
+            'products.brand_id',
+            'products.name',
+            'products.image_file_name',
+            'products.item_price',
+            DB::raw('fp.id as is_favorite'),
+            'cp.quantity',
+        ])
+        ->with(['brand:id,name,logo_file_name'])
+        ->join('cart_products as cp', function ($q) use ($userId) {
+            $q->on('cp.product_id', '=', 'products.id')
+            ->where('cp.user_id', '=', DB::raw($userId));
+        })
+        ->leftJoin('favorite_products as fp', function ($q) use ($userId) {
+            $q->on('fp.product_id', '=', 'products.id')
+            ->where('fp.user_id', '=', DB::raw($userId));
+        });
+
+        // paginate
+        return $query->paginate(getPerPage());
+    }
 }
