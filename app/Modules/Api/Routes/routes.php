@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Api\Http\Controllers\AuthController;
+use App\Modules\Api\Http\Controllers\CartController;
 use App\Modules\Api\Http\Controllers\CategoryController;
 use App\Modules\Api\Http\Controllers\CompositionController;
 use App\Modules\Api\Http\Controllers\ProductController;
@@ -47,7 +48,7 @@ Route::group(
                                 'prefix' => 'cart',
                             ],
                             function () {
-                                Route::get('/', [ProductController::class, 'cart']);
+                                Route::get('/', [CartController::class, 'cart']);
                             }
                         );
                     }
