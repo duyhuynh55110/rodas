@@ -2,8 +2,8 @@
 
 namespace App\Modules\Api\Services;
 
-use App\Modules\Api\Repositories\UserRepository;
 use App\Modules\Api\Repositories\ProductRepository;
+use App\Modules\Api\Repositories\UserRepository;
 use App\Modules\Api\Transformers\CartProductTransformer;
 use App\Modules\Api\Transformers\ProductTransformer;
 use Illuminate\Support\Facades\DB;
@@ -15,13 +15,12 @@ class ProductService
      * Constructor
      *
      * @param  ProductRepository  $productRepo
-     * @param UserRepository $userRepo
+     * @param  UserRepository  $userRepo
      */
     public function __construct(
         private ProductRepository $productRepo,
         private UserRepository $userRepo
-    )
-    {
+    ) {
     }
 
     /**
@@ -64,7 +63,8 @@ class ProductService
      * @param $request
      * @return void
      */
-    public function updateOrCreateProductToCart($request) {
+    public function updateOrCreateProductToCart($request)
+    {
         try {
             $user = auth()->user();
             $productId = $request->product_id;
@@ -98,7 +98,8 @@ class ProductService
      * @param $request
      * @return void
      */
-    public function removeProductFromCart($request) {
+    public function removeProductFromCart($request)
+    {
         try {
             $user = auth()->user();
             $productId = $request->product_id;

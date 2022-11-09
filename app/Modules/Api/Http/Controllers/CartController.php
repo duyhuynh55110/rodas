@@ -36,7 +36,8 @@ class CartController extends BaseController
      * @param $request
      * @return Illuminate\Http\JsonResponse
      */
-    public function updateOrCreate(CreateProductToCartFormRequest $request) {
+    public function updateOrCreate(CreateProductToCartFormRequest $request)
+    {
         $this->productService->updateOrCreateProductToCart($request);
 
         return $this->outputJson([]);
@@ -48,7 +49,8 @@ class CartController extends BaseController
      * @param $request
      * @return Illuminate\Http\JsonResponse
      */
-    public function delete(RemoveProductFromCartFormRequest $request) {
+    public function delete(RemoveProductFromCartFormRequest $request)
+    {
         $this->productService->removeProductFromCart($request);
 
         return $this->outputJson([]);
