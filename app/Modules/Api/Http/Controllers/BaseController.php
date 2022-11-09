@@ -32,7 +32,10 @@ class BaseController extends Controller
     {
         if ($data instanceof \League\Fractal\Resource\ResourceInterface) {
             $dataResponse = $this->fractal->createData($data)->toArray();
-            $groupInData = false;
+
+            if ($data instanceof \League\Fractal\Resource\Collection) {
+                $groupInData = false;
+            }
         } else {
             $dataResponse = collect($data)->transform(function ($item) {
                 // Convert fractal instance -> array
