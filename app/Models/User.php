@@ -50,7 +50,7 @@ class User extends Authenticatable
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function cart()
+    public function cartProducts()
     {
         return $this->belongsToMany(Product::class, 'cart_products', 'user_id', 'product_id')
                 ->withTimestamps()

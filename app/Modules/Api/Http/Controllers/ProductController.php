@@ -35,7 +35,7 @@ class ProductController extends BaseController
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function cart()
+    public function cartProducts()
     {
         $responseData = $this->productService->getProductsCart();
 

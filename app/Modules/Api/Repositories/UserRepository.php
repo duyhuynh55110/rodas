@@ -66,13 +66,14 @@ class UserRepository extends Repository
      */
     public function updateOrCreateCartProduct(User $user, $productId, $cartProductValues)
     {
-        $updateExisting = $user->cart()->where('product_id', $productId)->exists();
+        $cartProducts = $user->cartProducts();
+        $productExists = $cartProducts->where('product_id', $productId)->exists();
 
-        if ($updateExisting) {
-            $user->cart()->updateExistingPivot($productId, $cartProductValues);
+        if ($productExists) {
+            $cartProducts->updateExistingPivot($productId, $cartProductValues);
         } else {
             // create/update products in cart
-            $user->cart()->attach([
+            $cartProducts->attach([
                 $productId => $cartProductValues,
             ]);
         }
@@ -87,12 +88,11 @@ class UserRepository extends Repository
      */
     public function removeCartProduct(User $user, $productId)
     {
-        $updateExisting = $user->cart()->where('product_id', $productId)->exists();
+        $cartProducts = $user->cartProducts();
+        $productExists = $cartProducts->where('product_id', $productId)->exists();
 
-        if ($updateExisting) {
-            $user->cart()->detach([
-                $productId,
-            ]);
+        if ($productExists) {
+            $cartProducts->detach([$productId]);
         }
     }
 
