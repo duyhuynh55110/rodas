@@ -121,4 +121,82 @@ class ProductService
             throw $e;
         }
     }
+
+    /**
+     * Get user's favorite products
+     *
+     * @return League\Fractal\Resource\Collection
+     */
+    public function getFavoriteProducts()
+    {
+        $userId = auth()->user()->id;
+        $filter = [
+            'is_favorite' => true,
+        ];
+
+        $data = $this->productRepo->getProducts($userId, $filter);
+        $collection = createFractalCollection($data, new ProductTransformer);
+
+        return $collection;
+    }
+
+    /**
+     * Create a favorite product
+     *
+     * @param $request
+     * @return void
+     */
+    public function createFavoriteProduct($request)
+    {
+        try {
+            $user = auth()->user();
+            $productId = $request->product_id;
+
+            // start transaction
+            DB::beginTransaction();
+
+            // create/update cart_product
+            $this->userRepo->createFavoriteProduct($user, $productId);
+
+            // commit transaction
+            DB::commit();
+        } catch (Throwable $e) {
+            // rollback transaction
+            DB::rollback();
+
+            writeLogHandleException($e);
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Remove a favorite product
+     *
+     * @param $request
+     * @return void
+     */
+    public function removeFavoriteProduct($request)
+    {
+        try {
+            $user = auth()->user();
+            $productId = $request->product_id;
+
+            // start transaction
+            DB::beginTransaction();
+
+            // create/update cart_product
+            $this->userRepo->removeFavoriteProduct($user, $productId);
+
+            // commit transaction
+            DB::commit();
+        } catch (Throwable $e) {
+            // rollback transaction
+            DB::rollback();
+
+            writeLogHandleException($e);
+
+            throw $e;
+        }
+    }
 }
