@@ -2,9 +2,12 @@
 
 namespace App\Modules\Api\Services;
 
+use App\Modules\Api\Repositories\UserRepository;
 use App\Modules\Api\Repositories\ProductRepository;
-use App\Modules\Api\Transformers\ProductCartTransformer;
+use App\Modules\Api\Transformers\CartProductTransformer;
 use App\Modules\Api\Transformers\ProductTransformer;
+use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class ProductService
 {
@@ -12,8 +15,12 @@ class ProductService
      * Constructor
      *
      * @param  ProductRepository  $productRepo
+     * @param UserRepository $userRepo
      */
-    public function __construct(private ProductRepository $productRepo)
+    public function __construct(
+        private ProductRepository $productRepo,
+        private UserRepository $userRepo
+    )
     {
     }
 
@@ -46,8 +53,71 @@ class ProductService
     {
         $userId = auth()->user()->id;
         $data = $this->productRepo->getProductsCart($userId);
-        $collection = createFractalCollection($data, new ProductCartTransformer);
+        $collection = createFractalCollection($data, new CartProductTransformer);
 
         return $collection;
+    }
+
+    /**
+     * Add/Update a product to user's cart
+     *
+     * @param $request
+     * @return void
+     */
+    public function updateOrCreateProductToCart($request) {
+        try {
+            $user = auth()->user();
+            $productId = $request->product_id;
+
+            // cart_products value
+            $cartProductValues = [
+                'quantity' => $request->quantity,
+            ];
+
+            // start transaction
+            DB::beginTransaction();
+
+            // create/update cart_product
+            $this->userRepo->updateOrCreateCartProduct($user, $productId, $cartProductValues);
+
+            // commit transaction
+            DB::commit();
+        } catch (Throwable $e) {
+            // rollback transaction
+            DB::rollback();
+
+            writeLogHandleException($e);
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Remove a product from user's cart
+     *
+     * @param $request
+     * @return void
+     */
+    public function removeProductFromCart($request) {
+        try {
+            $user = auth()->user();
+            $productId = $request->product_id;
+
+            // start transaction
+            DB::beginTransaction();
+
+            // create/update cart_product
+            $this->userRepo->removeCartProduct($user, $productId);
+
+            // commit transaction
+            DB::commit();
+        } catch (Throwable $e) {
+            // rollback transaction
+            DB::rollback();
+
+            writeLogHandleException($e);
+
+            throw $e;
+        }
     }
 }

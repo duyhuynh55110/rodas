@@ -48,7 +48,9 @@ Route::group(
                                 'prefix' => 'cart',
                             ],
                             function () {
-                                Route::get('/', [CartController::class, 'cart']);
+                                Route::get('/', [CartController::class, 'index']);
+                                Route::post('/', [CartController::class, 'updateOrCreate']);
+                                Route::delete('/', [CartController::class, 'delete']);
                             }
                         );
                     }

@@ -42,4 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // --- Relations
+    /**
+     * - User's cart has many products
+     * - Products can belongs to many user's cart
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function cart()
+    {
+        return $this->belongsToMany(Product::class, 'cart_products', 'user_id', 'product_id')
+                ->withTimestamps()
+                ->withPivot(['quantity'])
+                ->using(CartProduct::class);
+    }
 }
