@@ -124,4 +124,19 @@ class UserService
         // Revoke the user's current token...
         $user->currentAccessToken()->delete();
     }
+
+    /**
+     * Get user's profile
+     *
+     * @return @return League\Fractal\Resource\Item
+     */
+    public function profile()
+    {
+        $user = auth()->user();
+
+        // fractal item
+        $item = createFractalItem($user, new UserTransformer);
+
+        return $item;
+    }
 }
