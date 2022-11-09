@@ -4,6 +4,7 @@ use App\Modules\Api\Http\Controllers\AuthController;
 use App\Modules\Api\Http\Controllers\CartController;
 use App\Modules\Api\Http\Controllers\CategoryController;
 use App\Modules\Api\Http\Controllers\CompositionController;
+use App\Modules\Api\Http\Controllers\FavoriteController;
 use App\Modules\Api\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,18 @@ Route::group(
                                 Route::get('/', [CartController::class, 'index']);
                                 Route::post('/', [CartController::class, 'updateOrCreate']);
                                 Route::delete('/', [CartController::class, 'delete']);
+                            }
+                        );
+
+                        // favorite
+                        Route::group(
+                            [
+                                'prefix' => 'favorite',
+                            ],
+                            function () {
+                                Route::get('/', [FavoriteController::class, 'index']);
+                                Route::post('/', [FavoriteController::class, 'create']);
+                                Route::delete('/', [FavoriteController::class, 'delete']);
                             }
                         );
                     }

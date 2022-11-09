@@ -95,4 +95,38 @@ class UserRepository extends Repository
             ]);
         }
     }
+
+    /**
+     * Create a favorite product
+     *
+     * @param User $user
+     * @param $productId
+     * @return void
+     */
+    public function createFavoriteProduct(User $user, $productId) {
+        $favoriteProducts = $user->favoriteProducts();
+        $productExists = $favoriteProducts->where('product_id', $productId)->exists();
+
+        // create if not exists
+        if (!$productExists) {
+            $favoriteProducts->attach([$productId]);
+        }
+    }
+
+    /**
+     * Remove a favorite product
+     *
+     * @param  User  $user
+     * @param $productId
+     * @return void
+     */
+    public function removeFavoriteProduct(User $user, $productId)
+    {
+        $favoriteProducts = $user->favoriteProducts();
+        $productExists = $favoriteProducts->where('product_id', $productId)->exists();
+
+        if ($productExists) {
+            $favoriteProducts->detach([$productId]);
+        }
+    }
 }
