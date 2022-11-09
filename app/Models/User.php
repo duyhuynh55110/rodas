@@ -50,11 +50,24 @@ class User extends Authenticatable
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function cart()
+    public function cartProducts()
     {
         return $this->belongsToMany(Product::class, 'cart_products', 'user_id', 'product_id')
                 ->withTimestamps()
                 ->withPivot(['quantity'])
                 ->using(CartProduct::class);
+    }
+
+    /**
+     * - User has many favorite products
+     * - Products can be favorite by many users
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favoriteProducts()
+    {
+        return $this->belongsToMany(Product::class, 'favorite_products', 'user_id', 'product_id')
+                ->withTimestamps()
+                ->using(FavoriteProduct::class);
     }
 }
