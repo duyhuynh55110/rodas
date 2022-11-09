@@ -55,4 +55,44 @@ class UserRepository extends Repository
             'user' => $user,
         ];
     }
+
+    /**
+     * Create/Update product to user's cart
+     *
+     * @param  User  $user
+     * @param $productId
+     * @param $cartProductValues
+     * @return void
+     */
+    public function updateOrCreateCartProduct(User $user, $productId, $cartProductValues)
+    {
+        $updateExisting = $user->cart()->where('product_id', $productId)->exists();
+
+        if ($updateExisting) {
+            $user->cart()->updateExistingPivot($productId, $cartProductValues);
+        } else {
+            // create/update products in cart
+            $user->cart()->attach([
+                $productId => $cartProductValues,
+            ]);
+        }
+    }
+
+    /**
+     * Remove product from user's cart
+     *
+     * @param  User  $user
+     * @param $productId
+     * @return void
+     */
+    public function removeCartProduct(User $user, $productId)
+    {
+        $updateExisting = $user->cart()->where('product_id', $productId)->exists();
+
+        if ($updateExisting) {
+            $user->cart()->detach([
+                $productId,
+            ]);
+        }
+    }
 }

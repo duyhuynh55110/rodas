@@ -94,7 +94,8 @@ class ProductRepository extends Repository
      * @param $userId
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getProductsCart($userId) {
+    public function getProductsCart($userId)
+    {
         $query = $this->model->select([
             'products.id',
             'products.brand_id',

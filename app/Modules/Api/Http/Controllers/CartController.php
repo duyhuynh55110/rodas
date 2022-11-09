@@ -2,6 +2,8 @@
 
 namespace App\Modules\Api\Http\Controllers;
 
+use App\Modules\Api\Http\Requests\CreateProductToCartFormRequest;
+use App\Modules\Api\Http\Requests\RemoveProductFromCartFormRequest;
 use App\Modules\Api\Services\ProductService;
 
 class CartController extends BaseController
@@ -26,5 +28,31 @@ class CartController extends BaseController
         $responseData = $this->productService->getProductsCart();
 
         return $this->outputJson($responseData);
+    }
+
+    /**
+     * Add/Update a product to cart
+     *
+     * @param $request
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function updateOrCreate(CreateProductToCartFormRequest $request)
+    {
+        $this->productService->updateOrCreateProductToCart($request);
+
+        return $this->outputJson([]);
+    }
+
+    /**
+     * Remove a product from cart
+     *
+     * @param $request
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function delete(RemoveProductFromCartFormRequest $request)
+    {
+        $this->productService->removeProductFromCart($request);
+
+        return $this->outputJson([]);
     }
 }
