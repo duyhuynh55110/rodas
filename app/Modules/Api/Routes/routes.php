@@ -4,6 +4,7 @@ use App\Modules\Api\Http\Controllers\AuthController;
 use App\Modules\Api\Http\Controllers\CartController;
 use App\Modules\Api\Http\Controllers\CategoryController;
 use App\Modules\Api\Http\Controllers\CompositionController;
+use App\Modules\Api\Http\Controllers\NotificationController;
 use App\Modules\Api\Http\Controllers\ProductController;
 use App\Modules\Api\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,8 @@ Route::group(
                 'middleware' => ['auth:sanctum'],
             ],
             function () {
+                Route::get('/profile', [UserController::class, 'profile']);
+
                 // categories
                 Route::group(
                     [
@@ -57,7 +60,15 @@ Route::group(
                     }
                 );
 
-                Route::get('/profile', [UserController::class, 'profile']);
+                // notifications
+                Route::group(
+                    [
+                        'prefix' => 'notifications',
+                    ],
+                    function () {
+                        Route::get('/', [NotificationController::class, 'index']);
+                    }
+                );
             }
         );
 

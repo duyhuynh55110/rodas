@@ -52,3 +52,7 @@ defined('TOKEN_TYPE_BEARER') or define('TOKEN_TYPE_BEARER', 'Bearer');
 // account role
 defined('ACCOUNT_ROLE_ADMIN') or define('ACCOUNT_ROLE_ADMIN', 1);
 defined('ACCOUNT_ROLE_USER') or define('ACCOUNT_ROLE_USER', 2);
+
+// notification type
+defined('NOTIFICATION_TYPE_NORMAL') or define('NOTIFICATION_TYPE_NORMAL', 1);
+defined('NOTIFICATION_TYPE_SUCCESS') or define('NOTIFICATION_TYPE_SUCCESS', 2);
