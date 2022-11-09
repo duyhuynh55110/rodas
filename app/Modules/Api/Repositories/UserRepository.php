@@ -99,16 +99,17 @@ class UserRepository extends Repository
     /**
      * Create a favorite product
      *
-     * @param User $user
+     * @param  User  $user
      * @param $productId
      * @return void
      */
-    public function createFavoriteProduct(User $user, $productId) {
+    public function createFavoriteProduct(User $user, $productId)
+    {
         $favoriteProducts = $user->favoriteProducts();
         $productExists = $favoriteProducts->where('product_id', $productId)->exists();
 
         // create if not exists
-        if (!$productExists) {
+        if (! $productExists) {
             $favoriteProducts->attach([$productId]);
         }
     }

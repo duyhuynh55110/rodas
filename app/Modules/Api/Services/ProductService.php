@@ -127,7 +127,8 @@ class ProductService
      *
      * @return League\Fractal\Resource\Collection
      */
-    public function getFavoriteProducts() {
+    public function getFavoriteProducts()
+    {
         $userId = auth()->user()->id;
         $filter = [
             'is_favorite' => true,
@@ -145,7 +146,8 @@ class ProductService
      * @param $request
      * @return void
      */
-    public function createFavoriteProduct($request) {
+    public function createFavoriteProduct($request)
+    {
         try {
             $user = auth()->user();
             $productId = $request->product_id;
@@ -174,7 +176,8 @@ class ProductService
      * @param $request
      * @return void
      */
-    public function removeFavoriteProduct($request) {
+    public function removeFavoriteProduct($request)
+    {
         try {
             $user = auth()->user();
             $productId = $request->product_id;
