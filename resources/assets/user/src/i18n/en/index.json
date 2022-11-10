@@ -1,3 +1,18 @@
 {
-    "good morning": "good morning"
+    "good morning": "good morning",
+    "categories": "categories",
+    "trending deals":  "trending deals",
+    "load more": "load more",
+    "shopping cart": "shopping cart",
+    "checkout": "checkout",
+    "wishlist": "wishlist",
+    "user": "user",
+    "my profile": "my profile",
+    "profile": "profile",
+    "notifications": "notifications",
+    "logout": "logout",
+    "name": "name",
+    "phone": "phone",
+    "apply success": "apply success",
+    "mark as read": "mark as read"
 }
