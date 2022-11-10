@@ -1,7 +1,7 @@
 <template>
     <div class="notification-bar">
         <div class="info">
-            <span class="text">Good Morning</span>
+            <span class="text">{{ $t('good morning') }}</span>
             <h5 class="title">Samuel Witwicky</h5>
         </div>
         <div class="media">

@@ -38,8 +38,12 @@ library.add([
     faClock,
 ]);
 
+// vue-i18n (translate package)
+import i18n from './i18n'
+
 createApp(App)
     .component("font-awesome-icon", FontAwesomeIcon)
     .use(store)
     .use(router)
+    .use(i18n)
     .mount("#app");
