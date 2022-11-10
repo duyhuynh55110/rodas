@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\Http\Controllers;
 
+use App\Modules\Api\Http\Requests\ProductDetailFormRequest;
 use App\Modules\Api\Http\Requests\ProductsListFormRequest;
 use App\Modules\Api\Services\ProductService;
 
@@ -31,14 +32,15 @@ class ProductController extends BaseController
     }
 
     /**
-     * Response user's products cart with paginate
+     * Response a product detail by id
      *
+     * @param $id
+     * @param $request
      * @return Illuminate\Http\JsonResponse
      */
-    public function cartProducts()
-    {
-        $responseData = $this->productService->getProductsCart();
+    public function show($id, ProductDetailFormRequest $request) {
+        $product = $this->productService->getProductById($id);
 
-        return $this->outputJson($responseData);
+        return $this->outputJson($product);
     }
 }

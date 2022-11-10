@@ -199,4 +199,19 @@ class ProductService
             throw $e;
         }
     }
+
+    /**
+     * Get a product detail by id
+     *
+     * @param $productId
+     * @return League\Fractal\Resource\Item
+     */
+    public function getProductById($productId) {
+        $product = $this->productRepo->getProductById($productId);
+
+        // fractal item
+        $item = createFractalItem($product, new ProductTransformer);
+
+        return $item;
+    }
 }

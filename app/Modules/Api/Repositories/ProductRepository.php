@@ -118,4 +118,23 @@ class ProductRepository extends Repository
         // paginate
         return $query->paginate(getPerPage());
     }
+
+    /**
+     * Get a product by id
+     *
+     * @param $productId
+     * @return \App\Models\Product
+     */
+    public function getProductById($productId) {
+        return $this->model->select([
+            'products.id',
+            'products.brand_id',
+            'products.name',
+            'products.image_file_name',
+            'products.description',
+            'products.item_price',
+        ])
+        ->with(['brand:id,name,logo_file_name'])
+        ->find($productId);
+    }
 }
