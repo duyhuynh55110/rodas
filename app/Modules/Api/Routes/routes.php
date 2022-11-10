@@ -45,6 +45,7 @@ Route::group(
                         'prefix' => 'products',
                     ],
                     function () {
+                        Route::get('/{id}', [ProductController::class, 'show']);
                         Route::get('/', [ProductController::class, 'index']);
 
                         // cart
