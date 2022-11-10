@@ -1,3 +1,18 @@
 {
-    "good morning": "chào buổi sáng"
+    "good morning": "chào buổi sáng",
+    "categories": "loại",
+    "trending deals":  "thịnh hành",
+    "load more": "tải thêm",
+    "shopping cart": "giỏ hàng",
+    "checkout": "thanh toán",
+    "wishlist": "yêu thích",
+    "user": "tài khoản",
+    "my profile": "thông tin của tôi",
+    "profile": "thông tin",
+    "notifications": "thông báo",
+    "logout": "đăng xuất",
+    "name": "tên",
+    "phone": "số điện thoại",
+    "apply success": "áp dụng thành công",
+    "mark as read": "đánh dấu là đã đọc"
 }
