@@ -10,25 +10,6 @@
     }
 }
 
-body {
-    overflow-x: hidden;
-    height: 100%;
-    position: relative;
-    max-width: 100%;
-    font-size: 1rem;
-    font-family: $themeFontFamily;
-    background: $themeColorLight;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-button {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    font-family: inherit; // inherit font-family from body
-}
-
 .page,
 .page-content {
     background-color: $themeColorLight;
@@ -107,4 +88,8 @@ button {
 		height: auto;
 		line-height: 1.2;
 	}
+}
+
+.text-capitalize {
+    text-transform: capitalize;
 }

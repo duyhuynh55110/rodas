@@ -1,8 +1,8 @@
 <template>
     <div>
-        <Navbar title="Shopping Cart">
+        <Navbar :title="$t('shopping cart')">
             <template v-slot:right>
-                <a href="/shipping-address/"> Checkout </a>
+                <a href="/shipping-address/"> {{ $t('checkout') }} </a>
             </template>
         </Navbar>
 

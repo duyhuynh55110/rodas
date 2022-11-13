@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar title="Wishlist" :navbarStyle="navbarStyle">
+        <Navbar :title="$t('wishlist')" :navbarStyle="navbarStyle">
             <template v-slot:left>
                 <a href="#" class="link back">
                     <font-awesome-icon icon="fa-solid fa-arrow-left" />

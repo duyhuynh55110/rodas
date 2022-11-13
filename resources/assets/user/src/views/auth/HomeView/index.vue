@@ -7,11 +7,11 @@
         <PostCardsArea :posts="this.posts" />
 
         <!-- Swiper - Categories area -->
-        <TitleBar title="Categories" />
+        <TitleBar :title="$t('categories')" />
         <CategorySlidesArea />
 
         <!-- Trending items area -->
-        <TitleBar title="Trending Deals" />
+        <TitleBar :title="$t('trending deals')" />
         <ItemBoxList :items="this.trendingItems" />
     </div>
 </template>

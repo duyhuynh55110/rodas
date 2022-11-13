@@ -7,7 +7,7 @@
 
         <!-- Load more button -->
         <div class="col-100">
-            <ButtonPrimary content="LOAD MORE" />
+            <ButtonPrimary :content="$t('load more')" customClass="text-capitalize" />
         </div>
     </div>
 </template>

@@ -19,6 +19,7 @@ export default {
         navbarClass: function () {
             return {
                 'navbar': true,
+                'text-capitalize': true,
                 'navbar-style-1': this.navbarStyle == NAVBAR_STYLE_1,
                 'navbar-style-2': this.navbarStyle == NAVBAR_STYLE_2,
             };

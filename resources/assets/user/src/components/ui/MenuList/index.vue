@@ -11,7 +11,7 @@
                         :src="require('@/assets/img/svg/user.svg')"
                         alt=""
                     />
-                    My Profile
+                    {{ $t('my profile') }}
                 </router-link>
             </li>
             <li>
@@ -24,7 +24,7 @@
                         :src="require('@/assets/img/svg/star.svg')"
                         alt=""
                     />
-                    Notifications
+                    {{ $t('notifications') }}
                 </router-link>
             </li>
             <li>
@@ -37,7 +37,7 @@
                         :src="require('@/assets/img/svg/clipboard.svg')"
                         alt=""
                     />
-                    Logout
+                    {{ $t('logout') }}
                 </router-link>
             </li>
         </ul>
