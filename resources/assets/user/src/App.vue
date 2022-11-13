@@ -21,6 +21,15 @@ export default {
     components: {
         Toolbar,
     },
+    watch: {
+        $route: {
+            immediate: true,
+            handler(to) {
+                // handle page title show on browser
+                document.title = to.meta.title || 'Rodas';
+            }
+        },
+    },
     computed: {
         pageContentClass() {
             return (
