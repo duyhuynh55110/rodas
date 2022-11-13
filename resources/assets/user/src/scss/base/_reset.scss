@@ -12,6 +12,15 @@
 
 body {
     margin: 0;
+    overflow-x: hidden;
+    height: 100%;
+    position: relative;
+    max-width: 100%;
+    font-size: 1rem;
+    font-family: $themeFontFamily;
+    background: $themeColorLight;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 p {
@@ -36,4 +45,11 @@ a {
 ul {
     padding: 0;
     list-style: none;
+}
+
+button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    font-family: inherit; // inherit font-family from body
 }
