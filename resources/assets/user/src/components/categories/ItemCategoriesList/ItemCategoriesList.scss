@@ -1,0 +1,32 @@
+.item-categories {
+    .item-category {
+        @include flexbox($justifyContent: space-between, $alignItems: center);
+        position: relative;
+        overflow: hidden;
+        border-radius: 18px;
+        padding: 18px 25px 18px 20px;
+        background-color: $themeColor;
+        color: #fff;
+        margin-bottom: 20px;
+
+        .item-info {
+            .title {
+                margin: 0 0 8px;
+                font-size: 20px;
+                font-weight: 600;
+                color: #fff;
+            }
+
+            p {
+                margin: 0;
+                font-weight: 300;
+            }
+        }
+
+        .layer-icon {
+            @include position(absolute, $left: 15px, $bottom: 10px);
+            opacity: 0.2;
+            transform: scale(3) rotate(25deg);
+        }
+    }
+}

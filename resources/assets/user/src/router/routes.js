@@ -24,7 +24,7 @@ const routes = [
         component: CategoriesView,
         meta: {
             title: 'Categories',
-            customPageContentClass: 'pt-30 bottom-sp80',
+            customPageContentClass: 'pt-80 bottom-sp90',
         }
     },
     {

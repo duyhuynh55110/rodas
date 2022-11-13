@@ -14,5 +14,6 @@
     "name": "name",
     "phone": "phone",
     "apply success": "apply success",
-    "mark as read": "mark as read"
+    "mark as read": "mark as read",
+    "items": "items"
 }
