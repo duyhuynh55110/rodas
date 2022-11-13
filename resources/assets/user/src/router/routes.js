@@ -13,6 +13,7 @@ const routes = [
         component: HomeView,
         exact: true,
         meta: {
+            title: 'Homepage',
             customPageContentClass: 'pt-30 bottom-sp80',
         }
     },
@@ -21,12 +22,17 @@ const routes = [
         name: 'categories',
         exact: true,
         component: CategoriesView,
+        meta: {
+            title: 'Categories',
+            customPageContentClass: 'pt-30 bottom-sp80',
+        }
     },
     {
         path: '/shopping-cart',
         name: 'shoppingCart',
         component: ShoppingCartView,
         meta: {
+            title: 'Shopping Cart',
             customPageContentClass: 'pt-60 bottom-sp60',
         }
     },
@@ -35,6 +41,7 @@ const routes = [
         name: 'wishlist',
         component: WishListView,
         meta: {
+            title: 'Wishlist',
             customPageContentClass: 'pt-90 bottom-sp70',
         }
     },
@@ -43,6 +50,7 @@ const routes = [
         name: 'userMenu',
         component: UserMenuView,
         meta: {
+            title: 'User',
             customPageContentClass: 'pt-80 bottom-sp90',
         }
     },
@@ -51,6 +59,7 @@ const routes = [
         name: 'profile',
         component: ProfileView,
         meta: {
+            title: 'Profile',
             customPageContentClass: 'pt-80 bottom-sp80',
         }
     },
@@ -59,6 +68,7 @@ const routes = [
         name: 'notifications',
         component: NotificationsView,
         meta: {
+            title: 'Notifications',
             customPageContentClass: 'pt-80',
             viewFullScreen: true,
         }
