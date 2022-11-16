@@ -33,8 +33,8 @@ export default {
     computed: {
         pageContentClass() {
             return (
-                "page-content " +
-                (this.$route.meta.customPageContentClass || "")
+                'page-content ' +
+                (this.$route.meta.customPageContentClass || '')
             );
         },
         viewFullScreen() {

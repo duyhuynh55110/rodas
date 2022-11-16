@@ -1,22 +1,16 @@
 .navbar {
     @include maxPageWidth();
-    @include position(fixed, $top: 0, $left: 0, $right: 0, $zIndex: $zIndexNavbar);
+    @include position(
+        fixed,
+        $top: 0,
+        $left: 0,
+        $right: 0,
+        $zIndex: $zIndexNavbar
+    );
     background: $themeColorLight;
     border-bottom: 1px solid #f4f4f4;
     height: $navbarHeight;
     margin: 0 auto;
-
-    &.navbar-style-1 {
-        .navbar-inner {
-            padding: 0 20px;
-        }
-    }
-
-    &.navbar-style-2 {
-        .navbar-inner {
-            padding: 0 30px;
-        }
-    }
 
     .navbar-inner {
         @include flexbox($justifyContent: space-between, $alignItems: center);
@@ -40,6 +34,39 @@
         .right {
             margin-right: 20px;
             font-size: 16px;
+        }
+    }
+
+    &.navbar-style-1 {
+        .navbar-inner {
+            padding: 0 20px;
+        }
+    }
+
+    &.navbar-style-2 {
+        .navbar-inner {
+            padding: 0 30px;
+        }
+    }
+
+    &.navbar-transparent {
+        border-bottom: unset;
+        background-color: transparent;
+
+        .navbar-inner {
+            .left::v-deep {
+                a {
+                    color: $textColorWhite !important;
+                }
+            }
+
+            .right::v-deep {
+                margin-right: 0;
+
+                a {
+                    color: $textColorWhite !important;
+                }
+            }
         }
     }
 }

@@ -21,6 +21,8 @@ import {
     faHouse,
     faArrowLeft,
     faCircle,
+    faBars,
+    faMagnifyingGlass
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faClock,
@@ -36,13 +38,19 @@ library.add([
     faArrowLeft,
     faCircle,
     faClock,
+    faBars,
+    faMagnifyingGlass,
 ]);
 
 // vue-i18n (translate package)
 import i18n from './i18n'
 
+// global components
+import { Navbar } from '@/components';
+
 createApp(App)
     .component("font-awesome-icon", FontAwesomeIcon)
+    .component("navbar", Navbar)
     .use(store)
     .use(router)
     .use(i18n)

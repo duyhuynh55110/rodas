@@ -13,4 +13,4 @@
         </div>
     </div>
 </template>
-<script src="./CategoriesView.js"></script>
+<script src="./CategoriesIndexView.js"></script>

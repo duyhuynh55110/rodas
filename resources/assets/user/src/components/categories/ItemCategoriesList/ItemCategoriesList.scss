@@ -6,7 +6,7 @@
         border-radius: 18px;
         padding: 18px 25px 18px 20px;
         background-color: $themeColor;
-        color: #fff;
+        color: $textColorWhite;
         margin-bottom: 20px;
 
         .item-info {
@@ -14,7 +14,7 @@
                 margin: 0 0 8px;
                 font-size: 20px;
                 font-weight: 600;
-                color: #fff;
+                color: $textColorWhite;
             }
 
             p {
