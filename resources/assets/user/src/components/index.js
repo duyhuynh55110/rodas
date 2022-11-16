@@ -16,6 +16,7 @@ import ItemBoxList from "./items/ItemBoxList";
 
 // categories
 import CategorySlidesArea from "./categories/CategorySlidesArea";
+import ItemCategoriesList from "./categories/ItemCategoriesList";
 
 // shopping cart
 import CartItemList from "./items/CartItemList";
@@ -41,4 +42,5 @@ export {
     ProfileInfo,
     ProfileList,
     NotificationCard,
+    ItemCategoriesList
 }
