@@ -1,6 +1,7 @@
 // layout
 import Toolbar from "./layout/Toolbar";
 import Navbar from "./layout/Navbar";
+import LinkIcon from "./layout/LinkIcon";
 
 // ui
 import NotificationBar from "./ui/NotificationBar";
@@ -42,5 +43,6 @@ export {
     ProfileInfo,
     ProfileList,
     NotificationCard,
-    ItemCategoriesList
+    ItemCategoriesList,
+    LinkIcon
 }

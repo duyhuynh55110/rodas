@@ -2,14 +2,10 @@
     <div>
         <navbar :navbarStyle="navbarStyle" :navbarTransparent="true">
             <template v-slot:left>
-                <a href="#" class="link back">
-                    <font-awesome-icon icon="fa-solid fa-arrow-left" />
-                </a>
+                <link-icon linkIcon="link-back" />
             </template>
             <template v-slot:right>
-                <a href="#">
-                    <font-awesome-icon icon="fa-solid fa-bars" />
-                </a>
+                <link-icon linkIcon="link-menu" />
             </template>
         </navbar>
 

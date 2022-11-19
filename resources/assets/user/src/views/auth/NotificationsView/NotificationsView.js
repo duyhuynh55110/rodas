@@ -1,11 +1,10 @@
-import { Navbar, NotificationCard } from "@/components"
+import { NotificationCard } from "@/components"
 import { NAVBAR_STYLE_2 } from "@/utils/constants"
 
 
 export default {
     name: "NotificationsView",
     components: {
-        Navbar,
         NotificationCard,
     },
     data() {

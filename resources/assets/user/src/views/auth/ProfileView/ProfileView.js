@@ -1,10 +1,9 @@
-import { Navbar, ProfileInfo, ProfileList } from "@/components";
+import { ProfileInfo, ProfileList } from "@/components";
 import { NAVBAR_STYLE_2 } from "@/utils/constants";
 
 export default {
     name: "ProfileView",
     components: {
-        Navbar,
         ProfileInfo,
         ProfileList,
     },

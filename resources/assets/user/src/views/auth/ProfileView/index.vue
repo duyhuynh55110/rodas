@@ -1,12 +1,10 @@
 <template>
     <div class="container">
-        <Navbar title="Profile" :navbarStyle="navbarStyle">
+        <navbar title="Profile" :navbarStyle="navbarStyle">
             <template v-slot:left>
-                <a href="#" class="link back">
-                    <font-awesome-icon icon="fa-solid fa-arrow-left" />
-                </a>
+                <link-icon linkIcon="link-back" />
             </template>
-        </Navbar>
+        </navbar>
 
         <ProfileInfo />
         <ProfileList />
