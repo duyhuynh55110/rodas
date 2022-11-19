@@ -1,10 +1,10 @@
 <template>
     <div>
-        <Navbar :title="$t('shopping cart')">
+        <navbar :title="$t('shopping cart')">
             <template v-slot:right>
                 <a href="/shipping-address/"> {{ $t('checkout') }} </a>
             </template>
-        </Navbar>
+        </navbar>
 
         <div class="container">
             <CartItemList />

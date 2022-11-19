@@ -1,10 +1,9 @@
-import { Navbar, ItemCategoriesList } from "@/components";
+import { ItemCategoriesList } from "@/components";
 import { NAVBAR_STYLE_2 } from "@/utils/constants";
 
 export default {
     name: 'CategoriesIndexView',
     components: {
-        Navbar,
         ItemCategoriesList
     },
     data() {

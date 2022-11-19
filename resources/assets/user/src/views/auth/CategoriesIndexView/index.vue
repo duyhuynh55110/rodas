@@ -1,12 +1,10 @@
 <template>
     <div>
-        <Navbar :title="$t('categories')" :navbarStyle="navbarStyle">
+        <navbar :title="$t('categories')" :navbarStyle="navbarStyle">
             <template v-slot:left>
-                <a href="#" class="link back">
-                    <font-awesome-icon icon="fa-solid fa-arrow-left" />
-                </a>
+               <link-icon linkIcon="link-back" />
             </template>
-        </Navbar>
+        </navbar>
 
         <div class="container">
             <ItemCategoriesList :categories="categories" />

@@ -46,11 +46,12 @@ library.add([
 import i18n from './i18n'
 
 // global components
-import { Navbar } from '@/components';
+import { Navbar, LinkIcon } from '@/components';
 
 createApp(App)
     .component("font-awesome-icon", FontAwesomeIcon)
     .component("navbar", Navbar)
+    .component("link-icon", LinkIcon)
     .use(store)
     .use(router)
     .use(i18n)
