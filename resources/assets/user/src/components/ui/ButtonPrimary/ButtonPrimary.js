@@ -1,5 +1,5 @@
 export default {
-    name: 'ButtonPrimary',
+    name: "ButtonPrimary",
     props: {
         content: {
             type: String,

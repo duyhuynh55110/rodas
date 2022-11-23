@@ -1,5 +1,5 @@
 export default {
-    name: 'ItemBox',
+    name: "ItemBox",
     props: {
         item: {
             type: Object,

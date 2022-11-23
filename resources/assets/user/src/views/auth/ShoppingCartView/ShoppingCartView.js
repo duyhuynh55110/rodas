@@ -1,7 +1,7 @@
 import { CartItemList } from "@/components"
 
 export default {
-    name: 'CartView',
+    name: "CartView",
     components: {
         CartItemList,
     }
