@@ -4,7 +4,7 @@ import { ItemBoxList } from "@/components";
 import { NAVBAR_STYLE_2 } from "@/utils/constants";
 
 export default {
-    name: 'CategoryDetailView',
+    name: "CategoryDetailView",
     components: {
         ItemBoxList,
     },
