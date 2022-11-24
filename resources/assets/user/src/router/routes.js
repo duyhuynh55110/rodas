@@ -18,6 +18,7 @@ const routes = [
         meta: {
             title: 'Category Detail',
             customPageContentClass: 'pt-60 bg-primary',
+            viewFullScreen: true,
         },
     },
     {
@@ -28,6 +29,7 @@ const routes = [
         meta: {
             title: 'Categories',
             customPageContentClass: 'pt-80 bottom-sp90',
+            viewFullScreen: true,
         },
     },
     {

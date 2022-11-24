@@ -1,4 +1,4 @@
-import ProductService from "@/services/products.service";
+import { productService } from "@/services";
 
 export default {
     namespaced: true,
@@ -12,8 +12,7 @@ export default {
     },
     actions: {
         loadProducts: async function ({ commit }) {
-            const service = new ProductService();
-            const { data } = await service.getProducts();
+            const { data } = await productService.getProducts();
 
             commit('setProducts', data);
         }

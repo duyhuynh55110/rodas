@@ -9,11 +9,12 @@
         </div>
 
         <!-- Toolbar -->
-        <Toolbar v-show="!this.viewFullScreen" />
+        <Toolbar v-show="this.showToolbar" />
     </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { Toolbar } from "@/components";
 
 export default {
@@ -31,14 +32,23 @@ export default {
         },
     },
     computed: {
+        ...mapState('global', [
+            'isPageLoading',
+        ]),
         pageContentClass() {
             return (
                 'page-content ' +
                 (this.$route.meta.customPageContentClass || '')
             );
         },
-        viewFullScreen() {
-            return this.$route.meta.viewFullScreen || false;
+        showToolbar() {
+            //  not show toolbar when page loading
+            if(this.isPageLoading) {
+                return false;
+            }
+
+            // not show toolbar if was page view full screen
+            return !this.$route.meta.viewFullScreen;
         }
     },
 };

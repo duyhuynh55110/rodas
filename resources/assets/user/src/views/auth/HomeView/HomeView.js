@@ -32,9 +32,15 @@ export default {
     computed: {
         ...mapState('products', [
             'products',
+        ]),
+        ...mapState('global', [
+            'isPageLoading',
         ])
     },
-    created() {
-        this.$store.dispatch('products/loadProducts');
+    async created() {
+        await this.$store.dispatch('global/loadCompositionHomeView');
+        await this.$store.dispatch('products/loadProducts');
+
+        this.$store.commit('global/setIsPageLoading', false);
     }
 }

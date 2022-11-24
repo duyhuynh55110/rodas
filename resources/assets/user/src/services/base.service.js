@@ -11,35 +11,33 @@ axios.defaults.baseURL = process.env.VUE_APP_API_DOMAIN;
 axios.defaults.headers.common["Authorization"] = "Bearer 0FPD7baVmlpQdUhch81GPkgRIRLH7FpsybqJqApu";
 
 export default class BaseService {
-    uri = "";
-
-    async get(params = {}) {
+    async get(uri, params = {}) {
         try {
-            return await axios.get(this.uri, { params: params });
+            return await axios.get(uri, { params: params });
         } catch (e) {
             return this.handleError(e);
         }
     }
 
-    async post(params = {}) {
+    async post(uri, params = {}) {
         try {
-            return await axios.post(this.uri, params);
+            return await axios.post(uri, params);
         } catch (e) {
             return this.handleError(e);
         }
     }
 
-    async put(params = {}) {
+    async put(uri, params = {}) {
         try {
-            return await axios.put(this.uri, params);
+            return await axios.put(uri, params);
         } catch (e) {
             return this.handleError(e);
         }
     }
 
-    async patch(params = {}) {
+    async patch(uri, params = {}) {
         try {
-            return await axios.patch(this.uri, params);
+            return await axios.patch(uri, params);
         } catch (e) {
             return this.handleError(e);
         }
