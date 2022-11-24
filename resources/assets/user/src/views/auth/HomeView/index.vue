@@ -12,7 +12,7 @@
 
         <!-- Trending items area -->
         <TitleBar :title="$t('trending deals')" />
-        <ItemBoxList :items="this.trendingItems" />
+        <ItemBoxList :items="this.products" />
     </div>
 </template>
 <script src="./HomeView.js"></script>

@@ -36,6 +36,7 @@ defined('HTTP_CODE_OK') or define('HTTP_CODE_OK', 200);
 defined('HTTP_CODE_UNPROCESSABLE_ENTITY') or define('HTTP_CODE_UNPROCESSABLE_ENTITY', 422);
 defined('HTTP_CODE_INTERNAL_SERVER_ERROR') or define('HTTP_CODE_INTERNAL_SERVER_ERROR', 500);
 defined('HTTP_CODE_UNAUTHORIZED') or define('HTTP_CODE_UNAUTHORIZED', 401);
+defined('HTTP_CODE_NOT_FOUND') or define('HTTP_CODE_NOT_FOUND', 404);
 
 // Status code (status is custom define, handle exception from RESTFUL API)
 defined('STATUS_CODE_INVALID_REQUEST') or define('STATUS_CODE_INVALID_REQUEST', 100);
