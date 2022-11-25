@@ -1,5 +1,6 @@
 <template>
-    <div class="container">
+    <screen-loading v-if="this.isPageLoading"/>
+    <div class="container" v-else>
         <!-- Notification bar -->
         <NotificationBar />
 

@@ -1,0 +1,28 @@
+.screen-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    .container {
+        @include flexbox(
+            $flexDirection: column,
+            $alignItems: center,
+            $justifyContent: center
+        );
+
+        .logo {
+            margin-bottom: 10px;
+
+            .logo-icon {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        .three-dots-icon {
+            width: 45px;
+        }
+    }
+}

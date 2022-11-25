@@ -29,6 +29,9 @@ import ProfileList from "./profile/ProfileList";
 // notifications
 import NotificationCard from "./notifications/NotificationCard";
 
+// loader
+import ScreenLoading from "./loader/ScreenLoading";
+
 export {
     Toolbar,
     Navbar,
@@ -44,5 +47,6 @@ export {
     ProfileList,
     NotificationCard,
     ItemCategoriesList,
-    LinkIcon
+    LinkIcon,
+    ScreenLoading
 }

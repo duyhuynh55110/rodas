@@ -1,11 +1,12 @@
 import BaseService from "./base.service";
 
-export default class ProductService extends BaseService {
-    uri = '/products';
-
+const baseUri = '/products';
+class ProductService extends BaseService {
     async getProducts() {
-        const response = await this.get('');
+        const response = await this.get(baseUri);
 
         return response;
-    }p
+    }
 }
+
+export default new ProductService()
