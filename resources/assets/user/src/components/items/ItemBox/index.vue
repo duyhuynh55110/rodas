@@ -1,7 +1,7 @@
 <template>
     <div class="item-box">
         <div class="item-media">
-            <img :src="this.item.full_path_image" alt="" />
+            <img :src="this.item.image_url" alt="" />
         </div>
         <a href="javascript:void(0);" class="item-bookmark active">
             <font-awesome-icon icon="fa fa-heart" />

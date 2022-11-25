@@ -14,7 +14,7 @@ export default {
         loadProducts: async function ({ commit }) {
             const { data } = await productService.getProducts();
 
-            commit('setProducts', data);
+            commit('setProducts', data.data);
         }
     },
     getters: {},
