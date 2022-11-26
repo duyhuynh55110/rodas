@@ -10,9 +10,9 @@ export default class FormData {
     productService;
 
     constructor () {
-        this.initServices();
-
         this.initFormValidate();
+
+        this.initServices();
     }
 
     // init services
