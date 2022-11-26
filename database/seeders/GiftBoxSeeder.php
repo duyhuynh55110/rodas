@@ -17,8 +17,8 @@ class GiftBoxSeeder extends Seeder
      */
     public function run()
     {
-        // gift_boxs data
-        $giftBoxsData = [
+        // gift_boxes data
+        $giftBoxesData = [
             [
                 'name' => 'Gift Box demo 1',
                 'image_file_name' => '1.jpg',
@@ -57,16 +57,16 @@ class GiftBoxSeeder extends Seeder
             ],
         ];
 
-        foreach ($giftBoxsData as $data) {
+        foreach ($giftBoxesData as $data) {
             // --- update image to storage
             // 1. open & read file
-            $filePath = storage_path('seeder/'.STORAGE_PATH_TO_GIFT_BOXS.$data['image_file_name']);
+            $filePath = storage_path('seeder/'.STORAGE_PATH_TO_GIFT_BOXES.$data['image_file_name']);
             $file = new File($filePath);
 
-            $fileName = STORAGE_PATH_TO_GIFT_BOXS.$file->hashName();
+            $fileName = STORAGE_PATH_TO_GIFT_BOXES.$file->hashName();
 
             // 2. upload resize to storage
-            uploadImageToStorage($file, $fileName, RESIZE_GIFT_BOX_WIDTH, RESIZE_GIFT_BOX_HEIGHT, $file->extension());
+            uploadImageToStorage($file, $fileName, RESIZE_GIFT_BOXES_WIDTH, RESIZE_GIFT_BOXES_HEIGHT, $file->extension());
 
             // 3. update logo_file_name field
             $data['image_file_name'] = $fileName;

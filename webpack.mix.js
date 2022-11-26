@@ -32,6 +32,6 @@ mix.sass('resources/assets/admin/scss/app.scss', assetAdminPath + 'css')
 mix.js('resources/assets/admin/js/pages/brands.js', assetAdminPath + 'pages')
 // products
 mix.js('resources/assets/admin/js/pages/products.js', assetAdminPath + 'pages')
-// giftBoxs
-mix.js('resources/assets/admin/js/pages/gift-boxs.js', assetAdminPath + 'pages')
+// giftBoxes
+mix.js('resources/assets/admin/js/pages/gift-boxes.js', assetAdminPath + 'pages')
 .version();

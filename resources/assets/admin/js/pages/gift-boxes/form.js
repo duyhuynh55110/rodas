@@ -2,7 +2,7 @@ import ProductService from './services/productService';
 import bsCustomFileInput from 'bs-custom-file-input';
 
 const FORM_DATA = 'form#giftBoxForm';
-const GIFT_BOX_PRODUCTS_TABLE = 'table#giftBoxProductsList';
+const GIFT_BOXES_PRODUCTS_TABLE = 'table#giftBoxProductsList';
 const INPUT_QUANTITY = 'input.input-quantity';
 
 export default class FormData {
@@ -26,9 +26,9 @@ export default class FormData {
     initFormValidate() {
         $(FORM_DATA).validate({
             submitHandler: function (form) {
-                let giftBoxProductsData = $(GIFT_BOX_PRODUCTS_TABLE).find('tbody tr').map((i, e) => {
+                let giftBoxProductsData = $(GIFT_BOXES_PRODUCTS_TABLE).find('tbody tr').map((i, e) => {
                     let tr = $(e);
-                    let data = $(GIFT_BOX_PRODUCTS_TABLE).DataTable().row(tr).data();
+                    let data = $(GIFT_BOXES_PRODUCTS_TABLE).DataTable().row(tr).data();
 
                     return {
                         product_id: data.id,

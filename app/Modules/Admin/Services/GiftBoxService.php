@@ -30,18 +30,18 @@ class GiftBoxService
     }
 
     /**
-     * Data for gift boxs table
+     * Data for gift boxes table
      *
      * @param  Request  $request
      * @return Illuminate\Http\JsonResponse
      */
-    public function giftBoxsDataTable(Request $request)
+    public function giftBoxesDataTable(Request $request)
     {
         $filter = [
             'name' => $request->name ?? null,
         ];
 
-        return $this->giftBoxRepo->giftBoxsDataTable($filter);
+        return $this->giftBoxRepo->giftBoxesDataTable($filter);
     }
 
     /**
@@ -93,7 +93,7 @@ class GiftBoxService
 
                 // prepare for upload image to storage
                 $file = $request->image_file_upload;
-                $logoFileName = STORAGE_PATH_TO_GIFT_BOXS.$file->hashName();
+                $logoFileName = STORAGE_PATH_TO_GIFT_BOXES.$file->hashName();
 
                 // save logo name
                 $values['image_file_name'] = $logoFileName;
@@ -119,7 +119,7 @@ class GiftBoxService
                 }
 
                 // upload to storage
-                uploadImageToStorage($file, $logoFileName, RESIZE_GIFT_BOX_WIDTH, RESIZE_GIFT_BOX_HEIGHT);
+                uploadImageToStorage($file, $logoFileName, RESIZE_GIFT_BOXES_WIDTH, RESIZE_GIFT_BOXES_HEIGHT);
             }
 
             return $giftBox;

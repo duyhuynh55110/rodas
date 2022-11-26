@@ -1,15 +1,15 @@
-const GIFT_BOXS_LIST = 'table#giftBoxsList';
+const GIFT_BOXES_LIST = 'table#giftBoxesList';
 const SEARCH_FORM = 'form#searchForm';
 
 export default class ListData {
     // dataTable object
-    giftBoxsTable = null;
+    giftBoxesTable = null;
 
     // setting for dataTable
     options = {};
 
     constructor () {
-        this.options = $(GIFT_BOXS_LIST).data('options');
+        this.options = $(GIFT_BOXES_LIST).data('options');
 
         this.initDataTable();
         this.initEvents();
@@ -18,7 +18,7 @@ export default class ListData {
     // init dataTable
     initDataTable() {
         let _this = this;
-        this.giftBoxsTable = $(GIFT_BOXS_LIST).DataTable({
+        this.giftBoxesTable = $(GIFT_BOXES_LIST).DataTable({
             ajax: {
                 url: _this.options.dataTableAjax,
                 data: function (request) {
@@ -79,7 +79,7 @@ export default class ListData {
     _onSubmitFormSearch() {
         let _this = this;
         $(SEARCH_FORM).on('submit', function (e) {
-            _this.giftBoxsTable.draw();
+            _this.giftBoxesTable.draw();
             return false;
         });
     }

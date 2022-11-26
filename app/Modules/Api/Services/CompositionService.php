@@ -27,11 +27,11 @@ class CompositionService
     public function homePage()
     {
         $categoriesCollection = createFractalCollection($this->categoryRepo->getAllCategories(), new CategoryTransformer);
-        $giftBoxs = createFractalCollection($this->giftBoxRepo->getAllGiftBoxs(), new GiftBoxTransformer);
+        $giftBoxes = createFractalCollection($this->giftBoxRepo->getAllGiftBoxes(), new GiftBoxTransformer);
 
         return [
             'categories' => $categoriesCollection,
-            'gift_boxs' => $giftBoxs,
+            'gift_boxes' => $giftBoxes,
         ];
     }
 }

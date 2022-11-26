@@ -1,7 +1,7 @@
 export default {
-    name: "PostCard",
+    name: "GiftBoxCard",
     props: {
-        post: {
+        giftBox: {
             type: Object,
             required: true,
         }

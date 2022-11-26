@@ -8,7 +8,7 @@ import router from "@/router";
 // import router from '@/router'
 
 axios.defaults.baseURL = process.env.VUE_APP_API_DOMAIN;
-axios.defaults.headers.common["Authorization"] = "Bearer 0FPD7baVmlpQdUhch81GPkgRIRLH7FpsybqJqApu";
+axios.defaults.headers.common["Authorization"] = "Bearer 8HOv93SGjYqMyK731ToVx05YUQDbllaG7Cx1Z5jm";
 
 export default class BaseService {
     async get(uri, params = {}) {

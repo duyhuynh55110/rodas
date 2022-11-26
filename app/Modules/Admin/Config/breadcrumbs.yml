@@ -24,16 +24,16 @@
       route: 'products.index'
     - title: 'Product Detail'
       route: null
-# gift-boxs
-- for: 'gift-boxs.create'
+# gift-boxes
+- for: 'gift-boxes.create'
   items:
     - title: 'Gift Box List'
-      route: 'gift-boxs.index'
+      route: 'gift-boxes.index'
     - title: 'New Gift Box'
       route: null
-- for: 'gift-boxs.create'
+- for: 'gift-boxes.create'
   items:
     - title: 'Gift Box List'
-      route: 'gift-boxs.index'
+      route: 'gift-boxes.index'
     - title: 'Gift Box Detail'
       route: null

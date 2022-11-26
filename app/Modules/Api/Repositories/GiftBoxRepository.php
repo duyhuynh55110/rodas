@@ -21,11 +21,11 @@ class GiftBoxRepository extends Repository
     }
 
     /**
-     * Get all giftBoxs
+     * Get all giftBoxes
      *
      * @return array
      */
-    public function getAllGiftBoxs()
+    public function getAllGiftBoxes()
     {
         return $this->model->select([
             'id',

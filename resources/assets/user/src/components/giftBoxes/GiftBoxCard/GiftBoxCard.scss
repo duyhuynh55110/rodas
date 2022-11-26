@@ -1,9 +1,9 @@
-.post-card {
+.gift-box-card {
     overflow: hidden;
     border-radius: 18px;
     position: relative;
 
-    .post-media {
+    .gift-box-media {
         position: relative;
         z-index: 1;
         display: flex;
@@ -13,7 +13,7 @@
         }
     }
 
-    .post-info {
+    .gift-box-info {
         @include position(absolute, $left: 0, $right: 0, $bottom: 0, $zIndex: 2);
         padding: 20px;
         padding-bottom: 30px;

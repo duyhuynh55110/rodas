@@ -5,7 +5,7 @@
         <NotificationBar />
 
         <!-- Swiper - Posts area -->
-        <PostCardsArea :posts="this.posts" />
+        <GiftBoxCardsArea :giftBoxes="this.giftBoxes" />
 
         <!-- Swiper - Categories area -->
         <TitleBar :title="$t('categories')" />
