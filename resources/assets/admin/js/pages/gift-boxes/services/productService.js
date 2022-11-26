@@ -3,7 +3,7 @@ import {
 } from '@admin_js/constants';
 
 // gift box products table
-const GIFT_BOXES_PRODUCTS_TABLE = 'table#giftBoxProductsList';
+const GIFT_BOX_PRODUCTS_TABLE = 'table#giftBoxProductsList';
 const BTN_REMOVE_PRODUCT = 'button.btn-delete';
 
 // search table
@@ -33,7 +33,7 @@ export default class ProductService {
     constructor() {
         this.searchProductsOptions = $(SEARCH_PRODUCTS_TABLE).data('options');
 
-        this.giftBoxProductsOptions = $(GIFT_BOXES_PRODUCTS_TABLE).data('options');
+        this.giftBoxProductsOptions = $(GIFT_BOX_PRODUCTS_TABLE).data('options');
     }
 
     // init
@@ -107,7 +107,7 @@ export default class ProductService {
         // when load page: current selected products default from giftBoxProducts table
         this.selectedProductsData = data;
 
-        this.giftBoxProductsDataTable = $(GIFT_BOXES_PRODUCTS_TABLE).DataTable({
+        this.giftBoxProductsDataTable = $(GIFT_BOX_PRODUCTS_TABLE).DataTable({
             data: data,
             scrollY: '800px',
             scrollCollapse: true,
@@ -123,10 +123,16 @@ export default class ProductService {
                     name: 'quantity',
                     title: 'Quantity',
                     orderable: false,
-                    render: function (data) {
+                    render: function (data, type, row) {
+                        // get product id to set 'jQuery Validate' rules
+                        let productId = row.id;
+
+                        // must set name have index because
+                        // jQuery Validate will validate only first element if have multiple input have same name
+                        // Ex: have 10 input name=quantity -> only validate first element
                         return `
                             <div class="form-group">
-                                <input required min="1" value="${data}" type="number" class="input-quantity form-control w-75" placeholder="Enter quantity" />
+                                <input name="product[${productId}][quantity]" required min="1" value="${data}" type="number" class="input-quantity form-control w-75" placeholder="Enter quantity" />
                             </div>
                         `;
                     }
@@ -352,7 +358,7 @@ export default class ProductService {
     _onClickRemoveButtonOnGiftBoxProductsTable() {
         let _this = this;
 
-        $(GIFT_BOXES_PRODUCTS_TABLE).on('click', BTN_REMOVE_PRODUCT, function () {
+        $(GIFT_BOX_PRODUCTS_TABLE).on('click', BTN_REMOVE_PRODUCT, function () {
             let tr = $(this).closest('tr');
             let row = _this.giftBoxProductsDataTable.row(tr);
             let productId = row.data().id;
