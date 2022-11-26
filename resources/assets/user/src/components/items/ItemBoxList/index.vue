@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <!-- Item boxs -->
+        <!-- Item boxes -->
         <div class="col-50" v-for="item in items" :key="item.id">
             <ItemBox :item="item" />
         </div>
@@ -11,5 +11,5 @@
         </div>
     </div>
 </template>
-<style src="./ItemBoxList.scss" scoped lang="scss"></style>
+
 <script src="./ItemBoxList.js"></script>

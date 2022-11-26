@@ -16,6 +16,7 @@ export default {
 
             // { root: true }, change another module state from one module
             commit('categories/setCategories', data.data.categories, { root: true });
+            commit('giftBoxes/setGiftBoxes', data.data.gift_boxes, { root: true });
         }
     },
     getters: {},

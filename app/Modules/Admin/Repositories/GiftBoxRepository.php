@@ -21,12 +21,12 @@ class GiftBoxRepository extends Repository
     }
 
     /**
-     * Get gift boxs and format dataTable response
+     * Get gift boxes and format dataTable response
      *
      * @param  array  $filter
      * @return Illuminate\Http\JsonResponse
      */
-    public function giftBoxsDataTable(array $filter)
+    public function giftBoxesDataTable(array $filter)
     {
         $query = $this->model->select(
             [

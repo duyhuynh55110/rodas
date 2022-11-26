@@ -16,6 +16,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $adminEmail = 'admin@gmail.com';
+        $userEmail = 'user@gmail.com';
+
+        $existsEmail = DB::table('users')->whereIn('email', [
+            $adminEmail,
+            $userEmail,
+        ])->exists();
+
+        // not add records if emails was exists
+        if ($existsEmail) {
+            return;
+        }
+
         DB::table('users')->insert([
             [
                 'name' => 'Administrator',

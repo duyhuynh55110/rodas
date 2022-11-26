@@ -15,6 +15,11 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
+        // not add records if already insert before
+        if(DB::table('countries')->count() > 1) {
+            return;
+        }
+
         $data = [
             [
                 'id' => 1,

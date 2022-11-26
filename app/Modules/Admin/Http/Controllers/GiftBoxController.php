@@ -53,20 +53,20 @@ class GiftBoxController extends BaseController
     public function index(Request $request)
     {
         if ($request->expectsJson()) {
-            return $this->giftBoxService->giftBoxsDataTable($request);
+            return $this->giftBoxService->giftBoxesDataTable($request);
         }
 
         $options = [
-            'updateUrl' => routeAdmin('gift-boxs.edit', [
+            'updateUrl' => routeAdmin('gift-boxes.edit', [
                 'id' => '%s',
             ]),
-            'dataTableAjax' => routeAdmin('gift-boxs.index'),
+            'dataTableAjax' => routeAdmin('gift-boxes.index'),
         ];
 
         // init js
         $this->registerAssets();
 
-        return view('Admin::gift-boxs.index', compact('options'));
+        return view('Admin::gift-boxes.index', compact('options'));
     }
 
     /**
@@ -92,7 +92,7 @@ class GiftBoxController extends BaseController
         // init js
         $this->registerAssets();
 
-        return view('Admin::gift-boxs.form', compact(
+        return view('Admin::gift-boxes.form', compact(
             'brands',
             'countries',
             'options',
@@ -125,7 +125,7 @@ class GiftBoxController extends BaseController
             // init js
             $this->registerAssets();
 
-            return view('Admin::gift-boxs.form', compact(
+            return view('Admin::gift-boxes.form', compact(
                 'giftBox',
                 'brands',
                 'countries',
@@ -147,7 +147,7 @@ class GiftBoxController extends BaseController
         try {
             $this->giftBoxService->updateOrCreate($request);
 
-            return redirect(routeAdmin('gift-boxs.index'))->with('status', DATA_SAVED);
+            return redirect(routeAdmin('gift-boxes.index'))->with('status', DATA_SAVED);
         } catch (Throwable $e) {
             return back()->with('status', ERROR_OCCURRED_MSG)->with('status_type', 'danger')->withInput();
         }
@@ -162,7 +162,7 @@ class GiftBoxController extends BaseController
     {
         Assets::js(
             [
-                assetAdmin('pages/gift-boxs.js'),
+                assetAdmin('pages/gift-boxes.js'),
             ]
         );
     }

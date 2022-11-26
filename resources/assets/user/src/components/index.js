@@ -9,8 +9,8 @@ import TitleBar from "./ui/TitleBar";
 import ButtonPrimary from "./ui/ButtonPrimary";
 import MenuList from "./ui/MenuList";
 
-// posts
-import PostCardsArea from "./posts/PostCardsArea";
+// giftBoxes
+import GiftBoxCardsArea from "./giftBoxes/GiftBoxCardsArea";
 
 // items
 import ItemBoxList from "./items/ItemBoxList";
@@ -38,7 +38,7 @@ export {
     NotificationBar,
     ButtonPrimary,
     TitleBar,
-    PostCardsArea,
+    GiftBoxCardsArea,
     ItemBoxList,
     CategorySlidesArea,
     CartItemList,

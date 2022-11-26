@@ -1,17 +1,17 @@
 // Import Swiper components
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Autoplay } from "swiper";
-import PostCard from "../PostCard";
+import GiftBoxCard from "../GiftBoxCard";
 
 export default {
-    name: "PostCardsArea",
+    name: "GiftBoxCardsArea",
     components: {
         Swiper,
         SwiperSlide,
-        PostCard,
+        GiftBoxCard,
     },
     props: {
-        posts: {
+        giftBoxes: {
             type: Array,
             default: [],
         }

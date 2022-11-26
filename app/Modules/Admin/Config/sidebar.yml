@@ -20,11 +20,11 @@
       route: 'products.index'
     - label: 'New Product'
       route: 'products.create'
-  # gift-boxs
+  # gift-boxes
   - label: 'Gift Box'
     icon: 'far fa-circle'
     items:
     - label: 'List'
-      route: 'gift-boxs.index'
+      route: 'gift-boxes.index'
     - label: 'New Gift Box'
-      route: 'gift-boxs.create'
+      route: 'gift-boxes.create'

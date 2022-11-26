@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card card-primary">
-                    <form id="giftBoxForm" class="form-horizontal" method="POST" action="{{ routeAdmin('gift-boxs.save') }}" enctype="multipart/form-data">
+                    <form id="giftBoxForm" class="form-horizontal" method="POST" action="{{ routeAdmin('gift-boxes.save') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="id" value="{{ $inputId }}">
 
@@ -103,7 +103,7 @@
     </div>
 
     {{-- modal search products --}}
-    @include('Admin::gift-boxs.components.modal_search_products', [
+    @include('Admin::gift-boxes.components.modal_search_products', [
         'brands' => $brands,
         'countries' => $countries,
         'options' => $options['searchProducts'],

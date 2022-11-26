@@ -58,11 +58,11 @@ Route::group(
                     }
                 );
 
-                // gift-boxs
+                // gift-boxes
                 Route::group(
                     [
-                        'prefix' => 'gift-boxs',
-                        'as' => 'gift-boxs.',
+                        'prefix' => 'gift-boxes',
+                        'as' => 'gift-boxes.',
                     ],
                     function () {
                         Route::name('index')->get('/', [GiftBoxController::class, 'index']);

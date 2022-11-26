@@ -1,8 +1,8 @@
-import ListData from './gift-boxs/list';
-import FormData from './gift-boxs/form';
+import ListData from './gift-boxes/list';
+import FormData from './gift-boxes/form';
 
 // init list
-if($('#giftBoxsList').length > 0) {
+if($('#giftBoxesList').length > 0) {
     new ListData();
 }
 

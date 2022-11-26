@@ -16,7 +16,7 @@ class GiftBox extends Model
      *
      * @var string
      */
-    protected $table = 'gift_boxs';
+    protected $table = 'gift_boxes';
 
     /**
      * The attributes that are mass assignable.
@@ -37,7 +37,7 @@ class GiftBox extends Model
 
     // ---- Relations
     /**
-     * Product belong to many giftBoxs
+     * Product belong to many giftBoxes
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 mb-3">
-                <a class="btn btn-primary" href="{{ routeAdmin('gift-boxs.create') }}" role="button"> New </a>
+                <a class="btn btn-primary" href="{{ routeAdmin('gift-boxes.create') }}" role="button"> New </a>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
                 <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="giftBoxsList" data-options='@json($options)'
+                        <table id="giftBoxesList" data-options='@json($options)'
                             class="table table-bordered table-hover">
                         </table>
                     </div>

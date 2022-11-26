@@ -3,13 +3,13 @@ import {
 } from '@admin_js/constants';
 
 // gift box products table
-const GIFT_BOX_PRODUCTS_TABLE = 'table#giftBoxProductsList';
+const GIFT_BOXES_PRODUCTS_TABLE = 'table#giftBoxProductsList';
 const BTN_REMOVE_PRODUCT = 'button.btn-delete';
 
 // search table
 const SEARCH_PRODUCTS_TABLE = 'table#searchProductsList';
-const CHECKBOX_SELECT_PRODUCT = 'input.select-product';
-const CHECKBOX_SELECT_ALL_PRODUCTS = 'input.select-all-products';
+const CHECKBOXES_SELECT_PRODUCT = 'input.select-product';
+const CHECKBOXES_SELECT_ALL_PRODUCTS = 'input.select-all-products';
 const SEARCH_PRODUCTS_FORM = 'form#searchProductsForm';
 const BTN_SUBMIT_SELECTED_PRODUCTS = 'button#btnSubmitSelectedProducts';
 const MODAL_SEARCH_PRODUCTS = '#modalSearchProducts';
@@ -33,7 +33,7 @@ export default class ProductService {
     constructor() {
         this.searchProductsOptions = $(SEARCH_PRODUCTS_TABLE).data('options');
 
-        this.giftBoxProductsOptions = $(GIFT_BOX_PRODUCTS_TABLE).data('options');
+        this.giftBoxProductsOptions = $(GIFT_BOXES_PRODUCTS_TABLE).data('options');
     }
 
     // init
@@ -107,7 +107,7 @@ export default class ProductService {
         // when load page: current selected products default from giftBoxProducts table
         this.selectedProductsData = data;
 
-        this.giftBoxProductsDataTable = $(GIFT_BOX_PRODUCTS_TABLE).DataTable({
+        this.giftBoxProductsDataTable = $(GIFT_BOXES_PRODUCTS_TABLE).DataTable({
             data: data,
             scrollY: '800px',
             scrollCollapse: true,
@@ -174,7 +174,7 @@ export default class ProductService {
             lengthMenu: SEARCH_TABLE_PAGE_LENGTH_MENU,
             select: {
                 style: 'multi',
-                selector: 'td:first-child' + CHECKBOX_SELECT_PRODUCT,
+                selector: 'td:first-child' + CHECKBOXES_SELECT_PRODUCT,
             },
             drawCallback: function (settings) {
                 let api = this.api();
@@ -188,7 +188,7 @@ export default class ProductService {
 
                     // selected this row if product id exist in selectedProductsData
                     if(_this.selectedProductsData.find(selectedProduct => selectedProduct.id == productId)) {
-                        $(e).find(CHECKBOX_SELECT_PRODUCT).prop('checked', true);
+                        $(e).find(CHECKBOXES_SELECT_PRODUCT).prop('checked', true);
                         row.select();
                     }
                 });
@@ -225,7 +225,7 @@ export default class ProductService {
     _onChangeCheckboxSelectProductOnSearchTable() {
         let _this = this;
 
-        $(SEARCH_PRODUCTS_TABLE).on('change', CHECKBOX_SELECT_PRODUCT, function () {
+        $(SEARCH_PRODUCTS_TABLE).on('change', CHECKBOXES_SELECT_PRODUCT, function () {
             let tr = $(this).closest('tr');
             let row = _this.searchProductsDataTable.row(tr);
             let data = row.data();
@@ -252,7 +252,7 @@ export default class ProductService {
     _onChangeCheckboxSelectAllProductsOnSearchTable() {
         let _this = this;
 
-        $(SEARCH_PRODUCTS_TABLE).on('change', CHECKBOX_SELECT_ALL_PRODUCTS, function () {
+        $(SEARCH_PRODUCTS_TABLE).on('change', CHECKBOXES_SELECT_ALL_PRODUCTS, function () {
             let isChecked = $(this).prop('checked');
             let currRows = _this.searchProductsDataTable.rows({page: 'current'}).nodes();
 
@@ -260,7 +260,7 @@ export default class ProductService {
             currRows.map(
                 function (e, i) {
                     // change select product value and trigger their change event after that
-                    $(e).find(CHECKBOX_SELECT_PRODUCT).prop('checked', isChecked).trigger('change');
+                    $(e).find(CHECKBOXES_SELECT_PRODUCT).prop('checked', isChecked).trigger('change');
                 }
             );
         });
@@ -302,9 +302,9 @@ export default class ProductService {
 
         // checked checkbox select all products if all rows on page are selected
         if(pageRows == selectedRows) {
-            $(CHECKBOX_SELECT_ALL_PRODUCTS).prop('checked', true);
+            $(CHECKBOXES_SELECT_ALL_PRODUCTS).prop('checked', true);
         } else {
-            $(CHECKBOX_SELECT_ALL_PRODUCTS).prop('checked', false);
+            $(CHECKBOXES_SELECT_ALL_PRODUCTS).prop('checked', false);
         }
     }
 
@@ -352,7 +352,7 @@ export default class ProductService {
     _onClickRemoveButtonOnGiftBoxProductsTable() {
         let _this = this;
 
-        $(GIFT_BOX_PRODUCTS_TABLE).on('click', BTN_REMOVE_PRODUCT, function () {
+        $(GIFT_BOXES_PRODUCTS_TABLE).on('click', BTN_REMOVE_PRODUCT, function () {
             let tr = $(this).closest('tr');
             let row = _this.giftBoxProductsDataTable.row(tr);
             let productId = row.data().id;
@@ -361,7 +361,7 @@ export default class ProductService {
             row.remove().draw();
 
             // unselected row from search table
-            $(SEARCH_PRODUCTS_TABLE).find(CHECKBOX_SELECT_PRODUCT + `[value=${productId}]`).prop('checked', false).trigger('change');
+            $(SEARCH_PRODUCTS_TABLE).find(CHECKBOXES_SELECT_PRODUCT + `[value=${productId}]`).prop('checked', false).trigger('change');
         });
     }
 }

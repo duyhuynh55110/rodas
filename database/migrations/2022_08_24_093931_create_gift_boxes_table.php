@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGiftBoxsTable extends Migration
+class CreateGiftBoxesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateGiftBoxsTable extends Migration
      */
     public function up()
     {
-        Schema::create('gift_boxs', function (Blueprint $table) {
+        Schema::create('gift_boxes', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100)->comment('gift box name');
             $table->string('image_file_name', 100)->comment('gift box image');
@@ -32,6 +32,6 @@ class CreateGiftBoxsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gift_boxs');
+        Schema::dropIfExists('gift_boxes');
     }
 }
