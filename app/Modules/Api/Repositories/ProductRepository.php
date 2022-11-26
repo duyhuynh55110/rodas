@@ -125,7 +125,8 @@ class ProductRepository extends Repository
      * @param $productId
      * @return \App\Models\Product
      */
-    public function getProductById($productId) {
+    public function getProductById($productId)
+    {
         return $this->model->select([
             'products.id',
             'products.brand_id',

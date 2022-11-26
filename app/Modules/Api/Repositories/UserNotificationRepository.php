@@ -34,7 +34,7 @@ class UserNotificationRepository extends Repository
             'content',
             'type',
         ])
-        ->where('user_id',  $userId)
+        ->where('user_id', $userId)
         ->paginate(getPerPage());
     }
 }

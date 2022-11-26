@@ -206,7 +206,8 @@ class ProductService
      * @param $productId
      * @return League\Fractal\Resource\Item
      */
-    public function getProductById($productId) {
+    public function getProductById($productId)
+    {
         $product = $this->productRepo->getProductById($productId);
 
         // fractal item

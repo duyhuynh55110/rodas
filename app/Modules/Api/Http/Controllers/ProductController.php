@@ -38,7 +38,8 @@ class ProductController extends BaseController
      * @param $request
      * @return Illuminate\Http\JsonResponse
      */
-    public function show($id, ProductDetailFormRequest $request) {
+    public function show($id, ProductDetailFormRequest $request)
+    {
         $product = $this->productService->getProductById($id);
 
         return $this->outputJson($product);

@@ -10,7 +10,7 @@ class NotificationController extends BaseController
     /**
      * Constructor
      *
-     * @param  UserNotificationService $userNotificationService
+     * @param  UserNotificationService  $userNotificationService
      */
     public function __construct(private UserNotificationService $userNotificationService)
     {
