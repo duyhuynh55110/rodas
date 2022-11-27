@@ -20,6 +20,7 @@
         "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.7",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.2",
