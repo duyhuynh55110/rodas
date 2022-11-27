@@ -3,15 +3,18 @@
         <div class="item-media">
             <img :src="this.item.image_url" alt="" />
         </div>
-        <a href="javascript:void(0);" class="item-bookmark active">
+        <router-link to="" :class="this.itemBookmarkClass" @click="onClickFavoriteIcon">
             <font-awesome-icon icon="fa fa-heart" />
             <input type="checkbox" />
-        </a>
+        </router-link>
         <div class="item-content">
             <h3 class="title">
-                <a href="/item-details/"> {{ this.item.name }} </a>
+                <router-link :to="{
+                    name: 'items.detail',
+                    params: { id: this.item.id }
+                }"> {{ this.item.name }} </router-link>
             </h3>
-            <h4 class="price">${{ this.item.price }}</h4>
+            <h4 class="price">${{ this.item.item_price }}</h4>
         </div>
     </div>
 </template>

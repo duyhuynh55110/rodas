@@ -8,11 +8,11 @@
         <GiftBoxCardsArea :giftBoxes="this.giftBoxes" />
 
         <!-- Swiper - Categories area -->
-        <TitleBar :title="$t('categories')" />
-        <CategorySlidesArea />
+        <TitleBar :title="$t('categories')" linkTo="/categories" />
+        <CategorySlidesArea :categories="this.categories" />
 
         <!-- Trending items area -->
-        <TitleBar :title="$t('trending deals')" />
+        <TitleBar :title="$t('trending deals')" linkTo="/products" />
         <ItemBoxList :items="this.products" />
     </div>
 </template>

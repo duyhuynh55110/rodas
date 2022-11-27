@@ -52,6 +52,7 @@
     .item-bookmark {
         @include position(absolute, $top: 15px, $left: 15px);
         font-size: 22px;
+        color: #fff;
 
         &.active {
             color: #ff2e6c;

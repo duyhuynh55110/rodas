@@ -38,9 +38,9 @@ class FavoriteController extends BaseController
      */
     public function create(CreateFavoriteProductFormRequest $request)
     {
-        $this->productService->createFavoriteProduct($request);
+        $item = $this->productService->createFavoriteProduct($request);
 
-        return $this->outputJson([]);
+        return $this->outputJson($item);
     }
 
     /**

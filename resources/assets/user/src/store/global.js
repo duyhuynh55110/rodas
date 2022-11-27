@@ -1,4 +1,3 @@
-import { compositionService } from "@/services";
 
 export default {
     namespaced: true,
@@ -10,14 +9,6 @@ export default {
             state.isPageLoading = isPageLoading;
         }
     },
-    actions: {
-        loadCompositionHomeView: async function ({ commit }) {
-            const { data } = await compositionService.getHomeViewData();
-
-            // { root: true }, change another module state from one module
-            commit('categories/setCategories', data.data.categories, { root: true });
-            commit('giftBoxes/setGiftBoxes', data.data.gift_boxes, { root: true });
-        }
-    },
+    actions: {},
     getters: {},
 };

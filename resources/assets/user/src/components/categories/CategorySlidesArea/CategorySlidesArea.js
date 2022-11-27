@@ -7,4 +7,10 @@ export default {
         Swiper,
         SwiperSlide,
     },
+    props: {
+        categories: {
+            type: Array,
+            required: true,
+        }
+    }
 }

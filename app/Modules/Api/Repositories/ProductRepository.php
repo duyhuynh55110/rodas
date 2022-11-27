@@ -123,19 +123,33 @@ class ProductRepository extends Repository
      * Get a product by id
      *
      * @param $productId
+     * @param $userId
      * @return \App\Models\Product
      */
-    public function getProductById($productId)
+    public function getProductById($productId, $userId = null)
     {
-        return $this->model->select([
+        $select = [
             'products.id',
             'products.brand_id',
             'products.name',
             'products.image_file_name',
             'products.description',
             'products.item_price',
-        ])
-        ->with(['brand:id,name,logo_file_name'])
-        ->find($productId);
+            ...($userId) ? [DB::raw('fp.id as is_favorite')] : [],
+        ];
+
+        $query = $this->model->select($select)->with(['brand:id,name,logo_file_name']);
+
+        $query->when(
+            $userId,
+            function ($q) use ($userId) {
+                $q->leftJoin('favorite_products as fp', function ($q) use ($userId) {
+                    $q->on('fp.product_id', '=', 'products.id')
+                    ->where('fp.user_id', '=', DB::raw($userId));
+                });
+            }
+        );
+
+        return $query->find($productId);
     }
 }

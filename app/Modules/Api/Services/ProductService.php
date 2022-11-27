@@ -160,6 +160,11 @@ class ProductService
 
             // commit transaction
             DB::commit();
+
+            // fractal format
+            $item = $this->getProductById($productId, $user->id);
+
+            return $item;
         } catch (Throwable $e) {
             // rollback transaction
             DB::rollback();
@@ -204,11 +209,12 @@ class ProductService
      * Get a product detail by id
      *
      * @param $productId
+     * @param $userId
      * @return League\Fractal\Resource\Item
      */
-    public function getProductById($productId)
+    public function getProductById($productId, $userId = null)
     {
-        $product = $this->productRepo->getProductById($productId);
+        $product = $this->productRepo->getProductById($productId, $userId);
 
         // fractal item
         $item = createFractalItem($product, new ProductTransformer);
