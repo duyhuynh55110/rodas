@@ -146,11 +146,10 @@ class ProductService
      * @param $request
      * @return void
      */
-    public function createFavoriteProduct($request)
+    public function createFavoriteProduct($productId)
     {
         try {
             $user = auth()->user();
-            $productId = $request->product_id;
 
             // start transaction
             DB::beginTransaction();
@@ -178,14 +177,13 @@ class ProductService
     /**
      * Remove a favorite product
      *
-     * @param $request
+     * @param $productId
      * @return void
      */
-    public function removeFavoriteProduct($request)
+    public function removeFavoriteProduct($productId)
     {
         try {
             $user = auth()->user();
-            $productId = $request->product_id;
 
             // start transaction
             DB::beginTransaction();
@@ -195,6 +193,11 @@ class ProductService
 
             // commit transaction
             DB::commit();
+
+            // fractal format
+            $item = $this->getProductById($productId, $user->id);
+
+            return $item;
         } catch (Throwable $e) {
             // rollback transaction
             DB::rollback();

@@ -47,6 +47,9 @@ class ProductRepository extends Repository
         // filters
         $this->filterProducts($query, $filter);
 
+        // sort by
+        $query->orderBy('products.id', 'DESC');
+
         // paginate
         return $query->paginate(getPerPage());
     }

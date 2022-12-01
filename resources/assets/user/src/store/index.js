@@ -1,13 +1,13 @@
 import { createStore } from 'vuex'
 
 // modules
-import global from './global'
-import products from './products'
+import app from './modules/app'
+import homeView from './modules/homeView'
 
 // initial store
 export default createStore({
   modules: {
-    global,
-    products,
+    app,
+    homeView,
   }
 })

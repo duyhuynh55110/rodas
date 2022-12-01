@@ -3,12 +3,16 @@ import { favoriteService, productService } from "@/services";
 export default {
     namespaced: true,
     state: () => ({
+        isLoadingProducts: false, // is fetching products list
         products: [], // products list
         productsPagination: {}, // pagination for 'products' list
     }),
     mutations: {
         setProducts: function (state, products) {
-            state.products = products;
+            state.products = [
+                ...state.products,
+                ...products,
+            ];
         },
         setProductsPagination: function (state, productsPagination) {
             state.productsPagination = productsPagination;
@@ -23,20 +27,36 @@ export default {
             });
 
             state.products = products;
+        },
+        setIsLoadingProducts: function (state, isLoadingProducts) {
+            state.isLoadingProducts = isLoadingProducts;
         }
     },
     actions: {
-        loadProducts: async function ({ commit }) {
-            const { data, pagination } = await productService.getProducts();
+        loadProducts: async function ({ commit }, params = {}) {
+            // start fetching
+            commit('setIsLoadingProducts', true);
 
+            // call api
+            const { data, pagination } = await productService.getProducts(params);
+
+            // set data
             commit('setProducts', data);
             commit('setProductsPagination', pagination);
+
+            // end fetching
+            commit('setIsLoadingProducts', false);
         },
         createFavorite: async function ({ commit }, productId) {
             const { data } = await favoriteService.createFavorite(productId);
 
             commit('setProductInList', data);
-        }
+        },
+        removeFavorite: async function ({ commit }, productId) {
+            const { data } = await favoriteService.removeFavorite(productId);
+
+            commit('setProductInList', data);
+        },
     },
     getters: {},
 };

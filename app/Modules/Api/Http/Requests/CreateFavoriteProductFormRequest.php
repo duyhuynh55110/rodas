@@ -17,7 +17,19 @@ class CreateFavoriteProductFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id' => ['required', 'integer', 'exists:products,id'],
+            'id' => ['required', 'integer', 'exists:products,id'],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->mergeIfMissing([
+            'id' => $this->id,
+        ]);
     }
 }

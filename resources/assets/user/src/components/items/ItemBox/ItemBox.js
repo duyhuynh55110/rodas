@@ -15,8 +15,8 @@ export default {
         },
     },
     methods: {
-        onClickFavoriteIcon: async function () {
-            await this.$store.dispatch('products/createFavorite', this.item.id);
+        onClickFavoriteIcon: async function (e) {
+            this.$emit('clickFavoriteIcon', e);
         }
     }
 }

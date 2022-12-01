@@ -2,8 +2,9 @@ import BaseService from "./base.service";
 
 const baseUri = '/products';
 class ProductService extends BaseService {
-    async getProducts() {
-        const { data } = await this.get(baseUri);
+    // get products list with pagination
+    async getProducts(params) {
+        const { data } = await this.get(baseUri, params);
 
         return {
             data: data.data,
