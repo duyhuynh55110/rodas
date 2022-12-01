@@ -1,5 +1,5 @@
 <template>
-    <div class="categories-area mb-30">
+    <div class="category-swiper mb-30">
         <swiper :space-between="10">
             <swiper-slide v-for="category in categories" :key="category.id">
                 <router-link :to="{
@@ -23,5 +23,5 @@
         </swiper>
     </div>
 </template>
-<style src="./CategorySlidesArea.scss" scoped lang="scss"></style>
-<script src="./CategorySlidesArea.js"></script>
+<style src="./CategorySwiper.scss" scoped lang="scss"></style>
+<script src="./CategorySwiper.js"></script>

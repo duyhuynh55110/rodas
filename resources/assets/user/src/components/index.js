@@ -9,14 +9,10 @@ import TitleBar from "./ui/TitleBar";
 import ButtonPrimary from "./ui/ButtonPrimary";
 import MenuList from "./ui/MenuList";
 
-// giftBoxes
-import GiftBoxCardsArea from "./giftBoxes/GiftBoxCardsArea";
-
-// items
-import ItemBox from "./items/ItemBox";
+// products
+import ProductBox from "./products/ProductBox";
 
 // categories
-import CategorySlidesArea from "./categories/CategorySlidesArea";
 import ItemCategoriesList from "./categories/ItemCategoriesList";
 
 // shopping cart
@@ -39,8 +35,6 @@ export {
     NotificationBar,
     ButtonPrimary,
     TitleBar,
-    GiftBoxCardsArea,
-    CategorySlidesArea,
     CartItemList,
     MenuList,
     ProfileInfo,
@@ -49,6 +43,6 @@ export {
     ItemCategoriesList,
     LinkIcon,
     ScreenLoading,
-    ItemBox,
+    ProductBox,
     LoadingData
 }

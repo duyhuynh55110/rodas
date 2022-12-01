@@ -1,4 +1,4 @@
-.item-box {
+.product-box {
     @include circleBox(220px, 18px);
     @include position(relative);
     margin-bottom: 15px;
@@ -11,7 +11,7 @@
         height: 50%;
     }
 
-    .item-media {
+    .product-media {
         height: 100%;
 
         img {
@@ -19,7 +19,7 @@
         }
     }
 
-    .item-content {
+    .product-content {
         @include position(absolute, $left: 0, $bottom: 0, $zIndex: 1);
         width: 100%;
         padding: 15px;
@@ -49,7 +49,7 @@
         }
     }
 
-    .item-bookmark {
+    .product-bookmark {
         @include position(absolute, $top: 15px, $left: 15px);
         font-size: 22px;
         color: #fff;

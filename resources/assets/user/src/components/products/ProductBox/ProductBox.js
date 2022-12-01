@@ -1,16 +1,16 @@
 export default {
-    name: "ItemBox",
+    name: "ProductBox",
     props: {
-        item: {
+        product: {
             type: Object,
             required: true,
         }
     },
     computed: {
-        itemBookmarkClass: function () {
+        productBookmarkClass: function () {
             return {
-                'item-bookmark': true,
-                'active': this.item.is_favorite, // this item is favorite by current user
+                'product-bookmark': true,
+                'active': this.product.is_favorite, // this product is favorite by current user
             }
         },
     },

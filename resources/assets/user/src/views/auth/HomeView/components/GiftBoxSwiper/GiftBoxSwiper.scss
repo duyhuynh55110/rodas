@@ -1,0 +1,43 @@
+.gift-box-swiper {
+    .gift-box-slide {
+        overflow: hidden;
+        border-radius: 18px;
+        position: relative;
+
+        .gift-box-media {
+            position: relative;
+            z-index: 1;
+            display: flex;
+
+            img {
+                @include imgObjectFitCover();
+            }
+        }
+
+        .gift-box-info {
+            @include position(
+                absolute,
+                $left: 0,
+                $right: 0,
+                $bottom: 0,
+                $zIndex: 2
+            );
+            padding: 20px;
+            padding-bottom: 30px;
+
+            .title {
+                color: $textColorWhite;
+                font-weight: 500;
+                margin: 0;
+            }
+        }
+
+        &::after {
+            @include bgGradient();
+            @include position(absolute, $left: 0, $top: 0, $zIndex: 1);
+            width: 100%;
+            height: 105%;
+            opacity: 0.9;
+        }
+    }
+}

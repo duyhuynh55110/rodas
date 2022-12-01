@@ -79,11 +79,11 @@ const routes = [
         },
     },
     {
-        path: '/items/:id',
-        name: 'items.detail',
+        path: '/products/:id',
+        name: 'products.detail',
         component: NotificationsView,
         meta: {
-            title: 'Notifications',
+            title: 'Products',
             customPageContentClass: 'pt-80',
             viewFullScreen: true,
         },
