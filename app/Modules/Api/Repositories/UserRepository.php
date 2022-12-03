@@ -126,6 +126,7 @@ class UserRepository extends Repository
         $favoriteProducts = $user->favoriteProducts();
         $productExists = $favoriteProducts->where('product_id', $productId)->exists();
 
+        // remove if exists
         if ($productExists) {
             $favoriteProducts->detach([$productId]);
         }

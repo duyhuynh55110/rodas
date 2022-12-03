@@ -15,5 +15,10 @@ export default {
         getClass: function () {
             return "button button-fill button-large " + this.customClass;
         }
+    },
+    methods: {
+        onClick: function (e) {
+            this.$emit('clickButton', e);
+        }
     }
 }

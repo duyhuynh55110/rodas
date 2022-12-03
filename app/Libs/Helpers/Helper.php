@@ -322,6 +322,6 @@ if (! function_exists('getPerPage')) {
      */
     function getPerPage()
     {
-        return request()->per_page ?? 12;
+        return request()->per_page ?? 6;
     }
 }

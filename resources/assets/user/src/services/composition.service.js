@@ -2,10 +2,11 @@ import BaseService from "./base.service";
 
 const baseUri = '/composition';
 class CompositionService extends BaseService {
+    // master data for homepage
     async getHomeViewData() {
-        const response = await this.get(baseUri + '/home-page');
+        const { data } = await this.get(baseUri + '/home-page');
 
-        return response;
+        return data;
     }
 }
 

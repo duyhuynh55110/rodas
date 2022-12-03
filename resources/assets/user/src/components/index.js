@@ -9,14 +9,10 @@ import TitleBar from "./ui/TitleBar";
 import ButtonPrimary from "./ui/ButtonPrimary";
 import MenuList from "./ui/MenuList";
 
-// giftBoxes
-import GiftBoxCardsArea from "./giftBoxes/GiftBoxCardsArea";
-
-// items
-import ItemBoxList from "./items/ItemBoxList";
+// products
+import ProductBox from "./products/ProductBox";
 
 // categories
-import CategorySlidesArea from "./categories/CategorySlidesArea";
 import ItemCategoriesList from "./categories/ItemCategoriesList";
 
 // shopping cart
@@ -31,6 +27,7 @@ import NotificationCard from "./notifications/NotificationCard";
 
 // loader
 import ScreenLoading from "./loader/ScreenLoading";
+import LoadingData from "./loader/LoadingData";
 
 export {
     Toolbar,
@@ -38,9 +35,6 @@ export {
     NotificationBar,
     ButtonPrimary,
     TitleBar,
-    GiftBoxCardsArea,
-    ItemBoxList,
-    CategorySlidesArea,
     CartItemList,
     MenuList,
     ProfileInfo,
@@ -48,5 +42,7 @@ export {
     NotificationCard,
     ItemCategoriesList,
     LinkIcon,
-    ScreenLoading
+    ScreenLoading,
+    ProductBox,
+    LoadingData
 }

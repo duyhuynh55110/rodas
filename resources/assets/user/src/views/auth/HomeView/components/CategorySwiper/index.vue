@@ -1,8 +1,11 @@
 <template>
-    <div class="categories-area mb-30">
+    <div class="category-swiper mb-30">
         <swiper :space-between="10">
-            <swiper-slide>
-                <a href="/categories" class="category">
+            <swiper-slide v-for="category in categories" :key="category.id">
+                <router-link :to="{
+                    name: 'categories.detail',
+                    params: { id: category.id }
+                }" class="category">
                     <svg
                         width="37"
                         height="33"
@@ -15,10 +18,10 @@
                             fill="#4cb32b"
                         ></path>
                     </svg>
-                </a>
+                </router-link>
             </swiper-slide>
         </swiper>
     </div>
 </template>
-<style src="./CategorySlidesArea.scss" scoped lang="scss"></style>
-<script src="./CategorySlidesArea.js"></script>
+<style src="./CategorySwiper.scss" scoped lang="scss"></style>
+<script src="./CategorySwiper.js"></script>

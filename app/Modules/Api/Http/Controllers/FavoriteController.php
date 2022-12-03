@@ -33,26 +33,28 @@ class FavoriteController extends BaseController
     /**
      * Add a user's favorite product
      *
+     * @param $id products.id
      * @param $request
      * @return Illuminate\Http\JsonResponse
      */
-    public function create(CreateFavoriteProductFormRequest $request)
+    public function create($id, CreateFavoriteProductFormRequest $request)
     {
-        $this->productService->createFavoriteProduct($request);
+        $product = $this->productService->createFavoriteProduct($id);
 
-        return $this->outputJson([]);
+        return $this->outputJson($product);
     }
 
     /**
      * Remove a user's favorite product
      *
+     * @param $id products.id
      * @param $request
      * @return Illuminate\Http\JsonResponse
      */
-    public function delete(RemoveFavoriteProductFormRequest $request)
+    public function delete($id, RemoveFavoriteProductFormRequest $request)
     {
-        $this->productService->removeFavoriteProduct($request);
+        $product = $this->productService->removeFavoriteProduct($id);
 
-        return $this->outputJson([]);
+        return $this->outputJson($product);
     }
 }

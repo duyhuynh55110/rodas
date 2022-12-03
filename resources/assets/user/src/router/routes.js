@@ -12,7 +12,7 @@ const NotificationsView = () => import('@/views/auth/NotificationsView');
 
 const routes = [
     {
-        path: '/categories/:slug',
+        path: '/categories/:id',
         name: 'categories.detail',
         component: CategoryDetailView,
         meta: {
@@ -74,6 +74,16 @@ const routes = [
         component: NotificationsView,
         meta: {
             title: 'Notifications',
+            customPageContentClass: 'pt-80',
+            viewFullScreen: true,
+        },
+    },
+    {
+        path: '/products/:id',
+        name: 'products.detail',
+        component: NotificationsView,
+        meta: {
+            title: 'Products',
             customPageContentClass: 'pt-80',
             viewFullScreen: true,
         },

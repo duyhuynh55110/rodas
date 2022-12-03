@@ -67,8 +67,8 @@ Route::group(
                             ],
                             function () {
                                 Route::get('/', [FavoriteController::class, 'index']);
-                                Route::post('/', [FavoriteController::class, 'create']);
-                                Route::delete('/', [FavoriteController::class, 'delete']);
+                                Route::post('/{id}', [FavoriteController::class, 'create']);
+                                Route::delete('/{id}', [FavoriteController::class, 'delete']);
                             }
                         );
                     }

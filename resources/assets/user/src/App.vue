@@ -32,7 +32,7 @@ export default {
         },
     },
     computed: {
-        ...mapState('global', [
+        ...mapState('app', [
             'isPageLoading',
         ]),
         pageContentClass() {
