@@ -1,5 +1,6 @@
 <template>
-    <div class="container">
+    <screen-loading v-if="isPageLoading" />
+    <div class="container" v-else>
         <navbar title="Profile" :navbarStyle="navbarStyle">
             <template v-slot:left>
                 <link-icon linkIcon="link-back" />

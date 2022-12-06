@@ -7,17 +7,12 @@ import LinkIcon from "./layout/LinkIcon";
 import NotificationBar from "./ui/NotificationBar";
 import TitleBar from "./ui/TitleBar";
 import ButtonPrimary from "./ui/ButtonPrimary";
-import MenuList from "./ui/MenuList";
 
 // products
 import ProductBoxesList from "./products/ProductBoxesList";
 
 // shopping cart
 import CartItemList from "./items/CartItemList";
-
-// profile
-import ProfileInfo from "./profile/ProfileInfo";
-import ProfileList from "./profile/ProfileList";
 
 // notifications
 import NotificationCard from "./notifications/NotificationCard";
@@ -33,9 +28,6 @@ export {
     ButtonPrimary,
     TitleBar,
     CartItemList,
-    MenuList,
-    ProfileInfo,
-    ProfileList,
     NotificationCard,
     LinkIcon,
     ScreenLoading,
