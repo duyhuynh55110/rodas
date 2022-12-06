@@ -1,8 +1,8 @@
 const HomeView = () => import('@/views/auth/HomeView');
 
 // categories
-const CategoriesIndexView = () => import('@/views/auth/CategoriesIndexView');
-const CategoryDetailView = () => import('@/views/auth/CategoryDetailView');
+const CategoryIndexView = () => import('@/views/auth/categories/CategoryIndexView');
+const CategoryDetailView = () => import('@/views/auth/categories/CategoryDetailView');
 
 const ShoppingCartView = () => import('@/views/auth/ShoppingCartView');
 const WishListView = () => import('@/views/auth/WishListView');
@@ -24,7 +24,7 @@ const routes = [
     {
         path: '/categories',
         name: 'categories.index',
-        component: CategoriesIndexView,
+        component: CategoryIndexView,
         exact: true,
         meta: {
             title: 'Categories',

@@ -31,7 +31,7 @@ export default {
             await this.$store.dispatch("homeView/loadProducts");
         },
     },
-    async created() {
+    created: async function () {
         // start fetching
         this.$store.commit("app/setIsPageLoading", true);
 

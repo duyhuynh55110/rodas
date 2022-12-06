@@ -10,10 +10,7 @@ import ButtonPrimary from "./ui/ButtonPrimary";
 import MenuList from "./ui/MenuList";
 
 // products
-import ProductBox from "./products/ProductBox";
-
-// categories
-import ItemCategoriesList from "./categories/ItemCategoriesList";
+import ProductBoxesList from "./products/ProductBoxesList";
 
 // shopping cart
 import CartItemList from "./items/CartItemList";
@@ -40,9 +37,8 @@ export {
     ProfileInfo,
     ProfileList,
     NotificationCard,
-    ItemCategoriesList,
     LinkIcon,
     ScreenLoading,
-    ProductBox,
-    LoadingData
+    LoadingData,
+    ProductBoxesList
 }

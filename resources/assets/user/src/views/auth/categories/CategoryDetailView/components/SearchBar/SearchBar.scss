@@ -1,0 +1,62 @@
+.deals-search {
+    padding: 20px 0;
+
+    .searchbar {
+        position: relative;
+        flex-shrink: 1;
+
+        .searchbar-inner {
+            input {
+                @include circleBox(60px, 20px 20px 0 0 !important);
+                background-color: #f0f0f0;
+                border: none;
+                font-size: 16px;
+                padding: 12px 20px;
+                width: 100%;
+
+                &:focus {
+                    outline-width: 0 !important;
+                }
+            }
+
+            svg {
+                @include position(
+                    absolute,
+                    $top: 50%,
+                    $right: 20px,
+                    $left: auto
+                );
+                width: 24px;
+                height: 24px;
+                margin-left: 12px;
+                margin-top: -12px;
+                color: #898989;
+            }
+        }
+
+        .suggest-list {
+            @include position(absolute, $left: 0, $right: 0, $zIndex: 99);
+            background-color: #ffffff;
+            border: 1px solid #f0f0f0;
+            border-radius: 0 0 20px 20px;
+            margin: 0;
+            overflow: hidden;
+
+            .search-suggestion {
+                @include flexbox($alignItems: center);
+                color: $textColorHeading;
+                font-size: 15px;
+                line-height: 35px;
+                padding: 0 14px;
+
+                &:hover {
+                    background-color: #e2e2e2;
+                }
+
+                span {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}

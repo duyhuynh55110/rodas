@@ -1,0 +1,25 @@
+.dz-banner-heading {
+    padding: 25px 0;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+
+    .head-title {
+        font-size: 20px;
+        margin: 0;
+        font-weight: 600;
+        color: $textColorWhite;
+    }
+
+    .item-qty {
+        font-size: 14px;
+        margin: 5px 0 0;
+        color: $textColorWhite;
+    }
+
+    .category-icon {
+        @include position(absolute, $right: 60px, $bottom: 0);
+        opacity: 0.1;
+        transform: scale(4.5);
+    }
+}

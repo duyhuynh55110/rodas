@@ -26,4 +26,17 @@ class Category extends Model
         'name',
         'created_by', 'created_at', 'updated_by', 'updated_at',
     ];
+
+    /**
+     * Category has many products
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'category_products', 'category_id', 'product_id')
+                ->withTimestamps()
+                ->withPivot(['deleted_at'])
+                ->using(CategoryProduct::class);
+    }
 }

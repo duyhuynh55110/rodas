@@ -1,23 +1,28 @@
 <template>
     <div class="row item-categories">
         <div v-for="category in categories" :key="category.id" class="col-100">
-            <a href="/deals/" class="item-category">
+            <router-link :to="{
+                name: 'categories.detail',
+                params: {
+                    id: category.id
+                }
+            }" class="item-category">
                 <div class="item-info">
                     <h3 class="title"> {{ category.name }} </h3>
-                    <p>0 {{ $t('items') }}</p>
+                    <p>{{ category.products_count + ' ' + $t('items') }}</p>
                 </div>
                 <img
-                    :src="category.full_path_image"
+                    src="https://kede.dexignzone.com/xhtml/img/svg/grapes.svg"
                     :alt="category.name"
                     class="layer-icon"
                 />
                 <div class="item-icon">
                     <img
-                        :src="category.full_path_image"
+                        src="https://kede.dexignzone.com/xhtml/img/svg/grapes.svg"
                         :alt="category.name"
                     />
                 </div>
-            </a>
+            </router-link>
         </div>
     </div>
 </template>

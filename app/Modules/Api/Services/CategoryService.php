@@ -28,4 +28,19 @@ class CategoryService
 
         return $collection;
     }
+
+    /**
+     * Get a category by id, fractal item format
+     *
+     * @param $categoryId
+     * @return League\Fractal\Resource\Item
+     */
+    public function getCategoryById($categoryId)
+    {
+        $category = $this->categoryRepo->getCategoryById($categoryId);
+
+        $item = createFractalItem($category, new CategoryTransformer);
+
+        return $item;
+    }
 }
