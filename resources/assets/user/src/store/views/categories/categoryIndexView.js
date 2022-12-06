@@ -9,6 +9,9 @@ export default {
         setCategories: function (state, categories) {
             state.categories = categories;
         },
+        resetState: function (state) {
+            state.categories = [];
+        }
     },
     actions: {
         // load categories list

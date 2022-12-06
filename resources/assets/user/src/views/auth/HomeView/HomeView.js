@@ -6,6 +6,7 @@ import TrendingProductsList from "./components/TrendingProductsList";
 
 // store
 import { mapState } from "vuex";
+import { resetState } from "@/utils/helper";
 
 export default {
     name: "HomeView",
@@ -42,4 +43,7 @@ export default {
         // end fetching
         this.$store.commit("app/setIsPageLoading", false);
     },
+    unmounted: async function () {
+        resetState('homeView');
+    }
 };

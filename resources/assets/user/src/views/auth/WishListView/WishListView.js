@@ -1,5 +1,6 @@
 import { ProductBoxesList } from "@/components";
 import { NAVBAR_STYLE_2 } from "@/utils/constants";
+import { resetState } from "@/utils/helper";
 import { mapState } from "vuex";
 
 export default {
@@ -45,7 +46,7 @@ export default {
             done();
         },
     },
-    async created() {
+    created: async function () {
         // start fetching
         this.$store.commit("app/setIsPageLoading", true);
 
@@ -55,4 +56,7 @@ export default {
         // end fetching
         this.$store.commit("app/setIsPageLoading", false);
     },
+    unmounted: async function () {
+        resetState('wishlistView');
+    }
 };

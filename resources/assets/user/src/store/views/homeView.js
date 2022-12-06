@@ -41,6 +41,12 @@ export default {
         setIsLoadingProducts: function (state, isLoadingProducts) {
             state.isLoadingProducts = isLoadingProducts;
         },
+        resetState: function (state) {
+            state.giftBoxes = [];
+            state.categories = [];
+            state.products = [];
+            state.productsPagination = {};
+        }
     },
     actions: {
         loadCompositionData: async function ({ commit }) {

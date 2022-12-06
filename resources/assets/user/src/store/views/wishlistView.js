@@ -31,6 +31,10 @@ export default {
         setIsLoadingProducts: function (state, isLoadingProducts) {
             state.isLoadingProducts = isLoadingProducts;
         },
+        resetState: function (state) {
+            state.products = [];
+            state.productsPagination = {};
+        }
     },
     actions: {
         loadProducts: async function ({ state, commit }) {
