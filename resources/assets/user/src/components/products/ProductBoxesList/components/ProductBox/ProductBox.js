@@ -7,6 +7,7 @@ export default {
         }
     },
     computed: {
+        // active favorite icon if 'is_favorite' is true
         productBookmarkClass: function () {
             return {
                 'product-bookmark': true,
@@ -15,8 +16,9 @@ export default {
         },
     },
     methods: {
-        onClickFavoriteIcon: async function (e) {
-            this.$emit('clickFavoriteIcon', e);
+        // event on click favorite icon
+        onClickFavoriteIcon: async function () {
+            await this.$emit('clickFavoriteIcon', this.product);
         }
     }
 }

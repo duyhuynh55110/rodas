@@ -30,6 +30,23 @@ class CategoryRepository extends Repository
         return $this->model->select([
             'id',
             'name',
-        ])->get();
+        ])
+        ->withCount(['products'])
+        ->get();
+    }
+
+    /**
+     * Get category by id
+     *
+     * @param $categoryId
+     * @return \App\Models\Category
+     */
+    public function getCategoryById($categoryId) {
+        return $this->model->select([
+            'id',
+            'name',
+        ])
+        ->withCount(['products'])
+        ->find($categoryId);
     }
 }

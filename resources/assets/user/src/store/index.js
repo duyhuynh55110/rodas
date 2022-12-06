@@ -1,13 +1,19 @@
 import { createStore } from 'vuex'
 
 // modules
-import app from './modules/app'
-import homeView from './modules/views/homeView'
+import app from './app'
+import homeView from './views/homeView'
+
+// categories
+import categoryIndexView from './views/categories/categoryIndexView'
+import categoryDetailView from './views/categories/categoryDetailView'
 
 // initial store
 export default createStore({
   modules: {
     app,
     homeView,
+    categoryIndexView,
+    categoryDetailView,
   }
 })

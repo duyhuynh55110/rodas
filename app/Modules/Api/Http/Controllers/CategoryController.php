@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\Http\Controllers;
 
+use App\Modules\Api\Http\Requests\CategoryDetailFormRequest;
 use App\Modules\Api\Services\CategoryService;
 
 class CategoryController extends BaseController
@@ -24,6 +25,20 @@ class CategoryController extends BaseController
     public function index()
     {
         $responseData = $this->categoryService->getAllCategories();
+
+        return $this->outputJson($responseData);
+    }
+
+    /**
+     * Response a catego
+     *
+     * @param $id
+     * @param CategoryDetailFormRequest $request
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function show($id, CategoryDetailFormRequest $request)
+    {
+        $responseData = $this->categoryService->getCategoryById($id);
 
         return $this->outputJson($responseData);
     }

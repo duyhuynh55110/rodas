@@ -14,9 +14,12 @@ class CategoryTransformer extends TransformerAbstract
      */
     public function transform($data)
     {
-        return [
+        $response = [
             'id' => $data->id,
             'name' => $data->name,
+            'products_count' => $data->products_count,
         ];
+
+        return $response;
     }
 }

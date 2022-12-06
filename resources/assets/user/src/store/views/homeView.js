@@ -3,7 +3,7 @@ import {
     favoriteService,
     productService,
 } from "@/services";
-import { PAGE_DEFAULT } from "@/utils/constants";
+import { nextPage } from "@/utils/helper";
 
 export default {
     namespaced: true,
@@ -50,19 +50,13 @@ export default {
             commit("setCategories", data.categories);
         },
         loadProducts: async function ({ state, commit }) {
-            const params = {
-                page: state.productsPagination?.current_page
-                    ? state.productsPagination.current_page + 1
-                    : PAGE_DEFAULT,
-            };
-
             // start fetching
             commit("setIsLoadingProducts", true);
 
             // call api
-            const { data, pagination } = await productService.getProducts(
-                params
-            );
+            const { data, pagination } = await productService.getProducts({
+                page: nextPage(state.productsPagination),
+            });
 
             // set data
             commit("setProducts", data);
