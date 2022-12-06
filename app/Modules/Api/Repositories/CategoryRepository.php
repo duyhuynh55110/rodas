@@ -41,7 +41,8 @@ class CategoryRepository extends Repository
      * @param $categoryId
      * @return \App\Models\Category
      */
-    public function getCategoryById($categoryId) {
+    public function getCategoryById($categoryId)
+    {
         return $this->model->select([
             'id',
             'name',

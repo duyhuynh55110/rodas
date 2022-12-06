@@ -33,7 +33,7 @@ class CategoryController extends BaseController
      * Response a catego
      *
      * @param $id
-     * @param CategoryDetailFormRequest $request
+     * @param  CategoryDetailFormRequest  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function show($id, CategoryDetailFormRequest $request)
