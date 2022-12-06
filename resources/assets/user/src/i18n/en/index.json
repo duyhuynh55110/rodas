@@ -15,5 +15,8 @@
     "phone": "phone",
     "apply success": "apply success",
     "mark as read": "mark as read",
-    "items": "items"
+    "items": "items",
+    "email address": "email address",
+    "shipping address": "shipping address",
+    "total order": "total order"
 }

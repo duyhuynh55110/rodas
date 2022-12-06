@@ -7,8 +7,8 @@
             />
         </div>
         <div class="info">
-            <h5 class="item-title">Richard Brownlee</h5>
-            <span>Engineer</span>
+            <h5 class="item-title"> {{ auth.name }} </h5>
+            <span> Updating... </span>
             <p>
                 Duis aute irure dolor in reprehenderit in voluptate velit esse
                 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
