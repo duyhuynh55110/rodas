@@ -17,7 +17,7 @@
         height: inherit;
 
         // ::v-deep effect this style to slot element
-        .left::v-deep {
+        .left::v-deep() {
             a.back {
                 font-size: 1.3rem;
                 color: $textColorHeading;
@@ -54,13 +54,13 @@
         background-color: transparent;
 
         .navbar-inner {
-            .left::v-deep {
+            .left::v-deep() {
                 a {
                     color: $textColorWhite !important;
                 }
             }
 
-            .right::v-deep {
+            .right::v-deep() {
                 margin-right: 0;
 
                 a {
