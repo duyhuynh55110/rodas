@@ -37,6 +37,13 @@ export default {
         },
         setProductsPagination: function(state, productsPagination) {
             state.productsPagination = productsPagination;
+        },
+        resetState: function (state) {
+            state.id = null;
+            state.search = null;
+            state.category = null;
+            state.products = [];
+            state.productsPagination = {};
         }
     },
     actions: {

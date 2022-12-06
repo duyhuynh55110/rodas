@@ -1,6 +1,7 @@
 import ItemCategoriesList from "./components/ItemCategoriesList";
 import { NAVBAR_STYLE_2 } from "@/utils/constants";
 import { mapState } from "vuex";
+import { resetState } from "@/utils/helper";
 
 export default {
     name: "CategoriesIndexView",
@@ -15,7 +16,7 @@ export default {
     computed: {
         ...mapState("app", ["isPageLoading"]),
     },
-    async created() {
+    created: async function() {
          // start fetching
          this.$store.commit("app/setIsPageLoading", true);
 
@@ -24,4 +25,7 @@ export default {
          // end fetching
          this.$store.commit("app/setIsPageLoading", false);
     },
+    unmounted: async function () {
+        resetState('categoryIndexView');
+    }
 }
