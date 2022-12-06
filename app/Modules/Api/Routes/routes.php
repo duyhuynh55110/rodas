@@ -46,9 +46,6 @@ Route::group(
                         'prefix' => 'products',
                     ],
                     function () {
-                        Route::get('/{id}', [ProductController::class, 'show']);
-                        Route::get('/', [ProductController::class, 'index']);
-
                         // cart
                         Route::group(
                             [
@@ -72,6 +69,9 @@ Route::group(
                                 Route::delete('/{id}', [FavoriteController::class, 'delete']);
                             }
                         );
+
+                        Route::get('/{id}', [ProductController::class, 'show']);
+                        Route::get('/', [ProductController::class, 'index']);
                     }
                 );
 
