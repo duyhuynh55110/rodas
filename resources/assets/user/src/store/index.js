@@ -9,8 +9,6 @@ import wishlistView from './views/wishlistView'
 import categoryIndexView from './views/categories/categoryIndexView'
 import categoryDetailView from './views/categories/categoryDetailView'
 
-
-
 // initial store
 export default createStore({
   modules: {

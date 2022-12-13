@@ -10,3 +10,7 @@ export const HTTP_CODE_NOT_FOUND = 404;
 // default
 export const LOAD_MORE_LIMITED_DEFAULT = 2;
 export const PAGE_DEFAULT = 1;
+
+//  user notification read status
+export const NOTIFICATION_IS_READ_OFF = 0;
+export const NOTIFICATION_IS_READ_ON = 1;

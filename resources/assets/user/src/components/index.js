@@ -14,9 +14,6 @@ import ProductBoxesList from "./products/ProductBoxesList";
 // shopping cart
 import CartItemList from "./items/CartItemList";
 
-// notifications
-import NotificationCard from "./notifications/NotificationCard";
-
 // loader
 import ScreenLoading from "./loader/ScreenLoading";
 import LoadingData from "./loader/LoadingData";
@@ -28,7 +25,6 @@ export {
     ButtonPrimary,
     TitleBar,
     CartItemList,
-    NotificationCard,
     LinkIcon,
     ScreenLoading,
     LoadingData,

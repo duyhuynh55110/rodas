@@ -54,6 +54,11 @@ defined('TOKEN_TYPE_BEARER') or define('TOKEN_TYPE_BEARER', 'Bearer');
 defined('ACCOUNT_ROLE_ADMIN') or define('ACCOUNT_ROLE_ADMIN', 1);
 defined('ACCOUNT_ROLE_USER') or define('ACCOUNT_ROLE_USER', 2);
 
-// notification type
+// user notification type
 defined('NOTIFICATION_TYPE_NORMAL') or define('NOTIFICATION_TYPE_NORMAL', 1);
 defined('NOTIFICATION_TYPE_SUCCESS') or define('NOTIFICATION_TYPE_SUCCESS', 2);
+
+//  user notification read status
+defined('NOTIFICATION_IS_READ_OFF') or define('NOTIFICATION_IS_READ_OFF', 0);
+defined('NOTIFICATION_IS_READ_ON') or define('NOTIFICATION_IS_READ_ON', 1);
+
