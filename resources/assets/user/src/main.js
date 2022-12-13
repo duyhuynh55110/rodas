@@ -44,8 +44,9 @@ library.add([
 import i18n from "./i18n";
 
 // global components
-import { Navbar, LinkIcon, ScreenLoading } from "@/components";
+import { Navbar, LinkIcon } from "@/components";
 
+// initial app
 const app = createApp(App);
 
 // https://vuejs.org/guide/components/provide-inject.html#working-with-reactivity
@@ -55,7 +56,6 @@ app.config.unwrapInjectedRef = true;
 app.component("font-awesome-icon", FontAwesomeIcon)
     .component("navbar", Navbar)
     .component("link-icon", LinkIcon)
-    .component("screen-loading", ScreenLoading)
     .use(store)
     .use(router)
     .use(i18n)

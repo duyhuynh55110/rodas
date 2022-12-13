@@ -1,6 +1,5 @@
 <template>
-    <screen-loading v-if="isPageLoading" />
-    <div class="container" v-else>
+    <div class="container">
         <navbar title="Notifications" :navbarStyle="navbarStyle">
             <template v-slot:left>
                 <link-icon linkIcon="link-back" />

@@ -5,12 +5,18 @@ import { NAVBAR_STYLE_2 } from "@/utils/constants"
 import NotificationCardsList from "./components/NotificationCardsList";
 import FilterCondition from "./components/FilterCondition";
 
-// store
-import { mapState } from "vuex";
-
 // services
 import { notificationService } from "@/services";
-import { nextPage } from "@/utils/helper";
+import { setPaginate, nextPage } from "@/utils/paginator";
+
+const loadNotifications = async function (page, filter) {
+    const response = await notificationService.getNotifications({
+        ...filter,
+        page,
+    });
+
+    return response;
+}
 
 export default {
     name: "NotificationsView",
@@ -20,11 +26,9 @@ export default {
     },
     data: function () {
         return {
-            navbarStyle: NAVBAR_STYLE_2,
-            notifications: [],
-            notificationsPagination: {},
-            filterNotifications: {},
             isLoadingData: false,
+            notifications: setPaginate(),
+            filterNotifications: {},
         }
     },
     provide: function () {
@@ -34,9 +38,6 @@ export default {
             evtOnClickFilterButton: this.evtOnClickFilterButton,
         };
     },
-    computed: {
-        ...mapState("app", ["isPageLoading"]),
-    },
     methods: {
         // load notifications list
         loadNotifications: async function () {
@@ -44,14 +45,10 @@ export default {
             this.isLoadingData = true;
 
             // call api
-            const { data, pagination } = await notificationService.getNotifications({
-                ...this.filterNotifications,
-                page: nextPage(this.notificationsPagination),
-            });
+            const { data, pagination } = await loadNotifications(nextPage(this.notificationsPagination), this.filterNotifications);
 
             // set state
-            this.notifications = data;
-            this.notificationsPagination = pagination;
+            this.notifications = setPaginate(data, pagination);
 
             // end fetching
             this.isLoadingData = false;
@@ -65,14 +62,19 @@ export default {
             await this.loadNotifications();
         }
     },
-    created: async function() {
-        // start fetching
-        this.$store.commit("app/setIsPageLoading", true);
+    setup: async function () {
+        const page = nextPage({});
 
-        // fetch data
-        await this.loadNotifications();
+        // fetch composition API
+        const { data, pagination } = await loadNotifications(page, {});
 
-        // end fetching
-        this.$store.commit("app/setIsPageLoading", false);
+        // master data
+        return {
+            navbarStyle: NAVBAR_STYLE_2,
+            dfNotifications: setPaginate(data, pagination), // default 'notifications' state value
+        };
     },
+    created: function () {
+        this.notifications = setPaginate(this.dfNotifications.data, this.dfNotifications.pagination);
+    }
 }

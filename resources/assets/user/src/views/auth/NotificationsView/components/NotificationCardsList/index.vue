@@ -4,7 +4,7 @@
     </div>
     <div class="notifications-list" v-else>
         <NotificationCard
-            v-for="notification in notifications"
+            v-for="notification in notifications.data"
             :key="notification.id"
             :notification="notification" />
     </div>
