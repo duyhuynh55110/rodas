@@ -25,9 +25,10 @@ class UserNotificationFactory extends Factory
 
         return [
             'user_id' => $user->id,
-            'title' => $this->faker->title(150),
+            'title' => $this->faker->text(rand(5, 100)),
             'content' => $this->faker->text(500),
             'type' => $notificationTypes[array_rand($notificationTypes, 1)],
+            'is_read' => rand(NOTIFICATION_IS_READ_OFF, NOTIFICATION_IS_READ_ON),
             'created_by' => CREATED_BY_SYSTEM,
             'created_at' => Carbon::now()->subHours(3),
             'updated_by' => CREATED_BY_SYSTEM,
