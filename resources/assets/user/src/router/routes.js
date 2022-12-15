@@ -8,7 +8,7 @@ const ShoppingCartView = () => import('@/views/auth/ShoppingCartView');
 const WishListView = () => import('@/views/auth/WishListView');
 const UserMenuView = () => import('@/views/auth/UserMenuView');
 const ProfileView = () => import('@/views/auth/ProfileView');
-const NotificationsView = () => import('@/views/auth/NotificationsView');
+const NotificationsView = () => import('@/views/auth/NotificationsView/NotificationsView.vue');
 
 const routes = [
     {

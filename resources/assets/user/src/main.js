@@ -22,11 +22,9 @@ import {
     faArrowLeft,
     faCircle,
     faBars,
-    faMagnifyingGlass
+    faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-    faClock,
-} from "@fortawesome/free-regular-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
 
 library.add([
     faBell,
@@ -43,16 +41,25 @@ library.add([
 ]);
 
 // vue-i18n (translate package)
-import i18n from './i18n'
+import i18n from "./i18n";
+
+// vue-skeletor
+import { Skeletor } from 'vue-skeletor';
 
 // global components
-import { Navbar, LinkIcon, ScreenLoading } from '@/components';
+import { Navbar, LinkIcon } from "@/components";
 
-createApp(App)
-    .component("font-awesome-icon", FontAwesomeIcon)
+// initial app
+const app = createApp(App);
+
+// https://vuejs.org/guide/components/provide-inject.html#working-with-reactivity
+app.config.unwrapInjectedRef = true;
+
+// add global components & global object to App
+app.component("font-awesome-icon", FontAwesomeIcon)
     .component("navbar", Navbar)
     .component("link-icon", LinkIcon)
-    .component("screen-loading", ScreenLoading)
+    .component("skeletor", Skeletor)
     .use(store)
     .use(router)
     .use(i18n)

@@ -19,6 +19,8 @@ class UserNotificationTransformer extends TransformerAbstract
             'title' => $data->title,
             'content' => $data->content,
             'type' => $data->type,
+            'is_read' => $data->is_read,
+            'created_human_date' => $data->created_at->diffForHumans(),
         ];
     }
 }

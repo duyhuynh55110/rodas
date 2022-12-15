@@ -19,13 +19,21 @@ class UserNotificationService
     /**
      * Get all user's notifications, fractal collection format
      *
+     * @param $request
      * @return League\Fractal\Resource\Collection
      */
-    public function getUserNotifications()
+    public function getUserNotifications($request)
     {
+        // current user's id
         $userId = auth()->user()->id;
 
-        $data = $this->userNotificationRepo->getUserNotifications($userId);
+        // filter data
+        $filter = [
+            'is_read' => $request->is_read,
+            'type' => $request->type,
+        ];
+
+        $data = $this->userNotificationRepo->getUserNotifications($userId, $filter);
         $collection = createFractalCollection($data, new UserNotificationTransformer);
 
         return $collection;

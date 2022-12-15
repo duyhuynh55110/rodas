@@ -1,55 +1,57 @@
 <template>
-    <div class="page">
-        <div :class="this.pageContentClass">
-            <router-view v-slot="{ Component }">
-                <transition name="route" mode="out-in">
-                    <component :is="Component" />
-                </transition>
-            </router-view>
-        </div>
+    <router-view v-slot="{ Component }">
+        <template v-if="Component">
+            <transition name="route" mode="out-in">
+<Suspense>
+                        <div class="page">
+                            <div :class="this.pageContentClass">
+                                <!-- main page -->
+                                <component :is="Component" />
 
-        <!-- Toolbar -->
-        <Toolbar v-show="this.showToolbar" />
-    </div>
+                                <!-- toolbar -->
+                                <Toolbar v-show="this.showToolbar" />
+                            </div>
+                        </div>
+
+                        <!-- screen loading -->
+                        <template #fallback>
+                            <ScreenLoading />
+                        </template>
+                    </Suspense>
+            </transition>
+        </template>
+    </router-view>
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { Toolbar } from "@/components";
+import { Toolbar, ScreenLoading } from "@/components";
 
 export default {
     name: "App",
     components: {
         Toolbar,
+        ScreenLoading,
     },
     watch: {
         $route: {
             immediate: true,
             handler(to) {
                 // handle page title show on browser
-                document.title = to.meta.title || 'Rodas';
-            }
+                document.title = to.meta.title || "Rodas";
+            },
         },
     },
     computed: {
-        ...mapState('app', [
-            'isPageLoading',
-        ]),
         pageContentClass() {
             return (
-                'page-content ' +
-                (this.$route.meta.customPageContentClass || '')
+                "page-content " +
+                (this.$route.meta.customPageContentClass || "")
             );
         },
         showToolbar() {
-            //  not show toolbar when page loading
-            if(this.isPageLoading) {
-                return false;
-            }
-
             // not show toolbar if was page view full screen
             return !this.$route.meta.viewFullScreen;
-        }
+        },
     },
 };
 </script>

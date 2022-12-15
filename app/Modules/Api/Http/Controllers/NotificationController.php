@@ -25,7 +25,7 @@ class NotificationController extends BaseController
      */
     public function index(NotificationsListFormRequest $request)
     {
-        $userNotifications = $this->userNotificationService->getUserNotifications();
+        $userNotifications = $this->userNotificationService->getUserNotifications($request);
 
         return $this->outputJson($userNotifications);
     }
