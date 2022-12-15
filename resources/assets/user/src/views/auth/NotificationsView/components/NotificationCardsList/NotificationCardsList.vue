@@ -1,6 +1,6 @@
 <template>
-    <div class="notifications-list-loading" v-if="isLoadingData">
-        isLoading...
+    <div class="notifications-list is-loading" v-if="isLoadingData">
+        <NotificationCard v-for="index in PER_PAGE_DEFAULT" :key="index" />
     </div>
     <div class="notifications-list" v-else>
         <NotificationCard

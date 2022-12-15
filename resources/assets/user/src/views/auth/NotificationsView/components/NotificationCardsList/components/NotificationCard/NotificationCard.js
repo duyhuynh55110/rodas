@@ -3,15 +3,21 @@ export default {
     props: {
         notification: {
             type: Object,
-            required: true,
+            default: {},
         }
     },
     computed: {
         notificationCardClass: function () {
             return {
                 'notification-card': true,
-                'is-read': this.notification.is_read,
+                'is-read': this.notification?.is_read,
             }
+        },
+        // check this notification is valid data
+        // true: show info
+        // false: show skeleton
+        isLoadingData: function () {
+            return this.notification?.id;
         }
     },
 }

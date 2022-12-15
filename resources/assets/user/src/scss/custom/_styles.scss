@@ -19,3 +19,14 @@
         }
     }
 }
+
+// vue-skeletor
+/*
+Text skeleton
+By default skeletor uses fully rounded style for text
+type skeletons, you can change that as you like
+*/
+.vue-skeletor--text {
+    /* Completely square style skeletons */
+    border-radius: .5rem;
+}

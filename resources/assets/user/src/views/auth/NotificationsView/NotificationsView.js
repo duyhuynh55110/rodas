@@ -1,9 +1,9 @@
 import { computed } from "vue";
-import { NAVBAR_STYLE_2 } from "@/utils/constants"
+import { NAVBAR_STYLE_2, PER_PAGE_DEFAULT } from "@/utils/constants"
 
 // components
-import NotificationCardsList from "./components/NotificationCardsList";
-import FilterCondition from "./components/FilterCondition";
+import NotificationCardsList from "./components/NotificationCardsList/NotificationCardsList.vue";
+import FilterCondition from "./components/FilterCondition/FilterCondition.vue";
 
 // services
 import { notificationService } from "@/services";
@@ -13,6 +13,7 @@ const loadNotifications = async function (page, filter) {
     const response = await notificationService.getNotifications({
         ...filter,
         page,
+        per_page: PER_PAGE_DEFAULT,
     });
 
     return response;

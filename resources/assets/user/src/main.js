@@ -43,6 +43,9 @@ library.add([
 // vue-i18n (translate package)
 import i18n from "./i18n";
 
+// vue-skeletor
+import { Skeletor } from 'vue-skeletor';
+
 // global components
 import { Navbar, LinkIcon } from "@/components";
 
@@ -56,6 +59,7 @@ app.config.unwrapInjectedRef = true;
 app.component("font-awesome-icon", FontAwesomeIcon)
     .component("navbar", Navbar)
     .component("link-icon", LinkIcon)
+    .component("skeletor", Skeletor)
     .use(store)
     .use(router)
     .use(i18n)
