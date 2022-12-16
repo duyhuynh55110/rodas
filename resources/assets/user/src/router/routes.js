@@ -1,7 +1,7 @@
 const HomeView = () => import('@/views/auth/HomeView/HomeView.vue');
 
 // categories
-const CategoryIndexView = () => import('@/views/auth/categories/CategoryIndexView');
+const CategoryIndexView = () => import('@/views/auth/categories/CategoryIndexView/CategoryIndexView.vue');
 const CategoryDetailView = () => import('@/views/auth/categories/CategoryDetailView');
 
 const ShoppingCartView = () => import('@/views/auth/ShoppingCartView');
