@@ -20,4 +20,5 @@
     </div>
 </template>
 
+<style src="./GiftBoxSwiper.scss" scoped lang="scss"></style>
 <script src="./GiftBoxSwiper.js"></script>

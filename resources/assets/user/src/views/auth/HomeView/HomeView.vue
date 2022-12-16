@@ -1,19 +1,18 @@
 <template>
-    <screen-loading v-if="this.isPageLoading" />
-    <div class="container" v-else>
+    <div class="container">
         <!-- Notification bar -->
         <NotificationBar />
 
         <!-- Swiper - Posts area -->
-        <GiftBoxSwiper />
+        <GiftBoxSwiper :giftBoxes="giftBoxes" />
 
         <!-- Swiper - Categories area -->
         <TitleBar :title="$t('categories')" linkTo="/categories" />
-        <CategorySwiper />
+        <CategorySwiper :categories="categories" />
 
         <!-- Trending items area -->
         <TitleBar :title="$t('trending deals')" linkTo="/products" />
-        <TrendingProductsList />
+        <TrendingProductsList :products="products" />
     </div>
 </template>
 

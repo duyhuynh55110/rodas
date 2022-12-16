@@ -1,4 +1,4 @@
-const HomeView = () => import('@/views/auth/HomeView');
+const HomeView = () => import('@/views/auth/HomeView/HomeView.vue');
 
 // categories
 const CategoryIndexView = () => import('@/views/auth/categories/CategoryIndexView');
