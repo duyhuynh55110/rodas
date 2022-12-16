@@ -4,7 +4,6 @@ import Navbar from "./layout/Navbar";
 import LinkIcon from "./layout/LinkIcon";
 
 // ui
-import NotificationBar from "./ui/NotificationBar";
 import TitleBar from "./ui/TitleBar";
 import ButtonPrimary from "./ui/ButtonPrimary";
 
@@ -21,7 +20,6 @@ import LoadingData from "./loader/LoadingData";
 export {
     Toolbar,
     Navbar,
-    NotificationBar,
     ButtonPrimary,
     TitleBar,
     CartItemList,

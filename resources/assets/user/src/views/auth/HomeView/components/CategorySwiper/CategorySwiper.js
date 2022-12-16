@@ -1,6 +1,5 @@
 // Import Swiper components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { mapState } from 'vuex';
 
 export default {
     name: "CategorySwiper",
@@ -8,7 +7,10 @@ export default {
         Swiper,
         SwiperSlide,
     },
-    computed: {
-        ...mapState('homeView', ['categories'])
-    }
+    props: {
+        categories: {
+            type: Array,
+            required: true,
+        }
+    },
 }

@@ -10,7 +10,7 @@
         <FilterCondition />
 
         <!-- notifications list -->
-        <NotificationCardsList />
+        <NotificationCardsList :notifications="notifications" />
     </div>
 </template>
 <script src="./NotificationsView.js"></script>

@@ -1,7 +1,6 @@
 // Import Swiper components
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Autoplay } from "swiper";
-import { mapState } from "vuex";
 
 export default {
     name: "GiftBoxSwiper",
@@ -16,8 +15,11 @@ export default {
             },
         };
     },
-    computed: {
-        ...mapState('homeView', ['giftBoxes'])
+    props: {
+        giftBoxes: {
+            type: Array,
+            required: true,
+        }
     },
     setup() {
         return {

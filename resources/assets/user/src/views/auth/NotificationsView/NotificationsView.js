@@ -9,7 +9,8 @@ import FilterCondition from "./components/FilterCondition/FilterCondition.vue";
 import { notificationService } from "@/services";
 import { setPaginate, nextPage } from "@/utils/paginator";
 
-const loadNotifications = async function (page, filter) {
+// fetch notifications list
+const fetchNotifications = async function (page, filter) {
     const response = await notificationService.getNotifications({
         ...filter,
         page,
@@ -28,25 +29,24 @@ export default {
     data: function () {
         return {
             isLoadingData: false,
-            notifications: setPaginate(),
+            notifications: {},
             filterNotifications: {},
         }
     },
     provide: function () {
         return {
             isLoadingData: computed(() => this.isLoadingData),
-            notifications: computed(() => this.notifications),
             evtOnClickFilterButton: this.evtOnClickFilterButton,
         };
     },
     methods: {
         // load notifications list
-        loadNotifications: async function () {
+        loadNotifications: async function (page) {
             // start fetching
             this.isLoadingData = true;
 
             // call api
-            const { data, pagination } = await loadNotifications(nextPage(this.notificationsPagination), this.filterNotifications);
+            const { data, pagination } = await fetchNotifications(page, this.filterNotifications);
 
             // set state
             this.notifications = setPaginate(data, pagination);
@@ -56,18 +56,19 @@ export default {
         },
         // event on click filter button -> filter list by condition
         evtOnClickFilterButton: async function (filterNotifications) {
+            const page = nextPage(); // page 1
+
             // reset state
-            this.notificationsPagination = {};
             this.filterNotifications = filterNotifications;
 
-            await this.loadNotifications();
+            await this.loadNotifications(page);
         }
     },
     setup: async function () {
         const page = nextPage({});
 
         // fetch composition API
-        const { data, pagination } = await loadNotifications(page, {});
+        const { data, pagination } = await fetchNotifications(page, {});
 
         // master data
         return {
