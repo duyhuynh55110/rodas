@@ -1,6 +1,5 @@
 <template>
-    <screen-loading v-if="this.isPageLoading" />
-    <div v-else>
+    <div>
         <navbar :title="$t('categories')" :navbarStyle="navbarStyle">
             <template v-slot:left>
                <link-icon linkIcon="link-back" />
@@ -8,7 +7,7 @@
         </navbar>
 
         <div class="container">
-            <ItemCategoriesList />
+            <ItemCategoriesList :categories="categories" />
         </div>
     </div>
 </template>
