@@ -2,7 +2,7 @@
     <router-view v-slot="{ Component }">
         <template v-if="Component">
             <transition name="route" mode="out-in">
-<Suspense>
+                    <Suspense>
                         <div class="page">
                             <div :class="this.pageContentClass">
                                 <!-- main page -->

@@ -5,9 +5,10 @@ import {
     HTTP_CODE_NOT_FOUND,
 } from "@/utils/constants";
 import router from "@/router";
+// import router from '@/router'
 
 axios.defaults.baseURL = process.env.VUE_APP_API_DOMAIN;
-axios.defaults.headers.common["Authorization"] = "Bearer myERNAg6l57hPxQ9rduvQA97DmVB3i1cXQyzOb9J";
+axios.defaults.headers.common["Authorization"] = "Bearer 8HOv93SGjYqMyK731ToVx05YUQDbllaG7Cx1Z5jm";
 
 export default class BaseService {
     async get(uri, params = {}) {

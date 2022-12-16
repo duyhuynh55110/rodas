@@ -2,7 +2,7 @@ const HomeView = () => import('@/views/auth/HomeView/HomeView.vue');
 
 // categories
 const CategoryIndexView = () => import('@/views/auth/categories/CategoryIndexView/CategoryIndexView.vue');
-const CategoryDetailView = () => import('@/views/auth/categories/CategoryDetailView');
+const CategoryDetailView = () => import('@/views/auth/categories/CategoryDetailView/CategoryDetailView.vue');
 
 const ShoppingCartView = () => import('@/views/auth/ShoppingCartView');
 const WishListView = () => import('@/views/auth/WishListView');
@@ -78,16 +78,16 @@ const routes = [
             viewFullScreen: true,
         },
     },
-    {
-        path: '/products/:id',
-        name: 'products.detail',
-        component: NotificationsView,
-        meta: {
-            title: 'Products',
-            customPageContentClass: 'pt-80',
-            viewFullScreen: true,
-        },
-    },
+    // {
+    //     path: '/products/:id',
+    //     name: 'products.detail',
+    //     component: NotificationsView,
+    //     meta: {
+    //         title: 'Products',
+    //         customPageContentClass: 'pt-80',
+    //         viewFullScreen: true,
+    //     },
+    // },
     {
         path: '/',
         name: 'home',

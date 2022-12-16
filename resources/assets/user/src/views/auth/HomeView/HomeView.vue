@@ -11,7 +11,7 @@
         <CategorySwiper :categories="categories" />
 
         <!-- Trending items area -->
-        <TitleBar :title="$t('trending deals')" linkTo="/products" />
+        <TitleBar :title="$t('trending deals')" linkTo="/categories" />
         <TrendingProductsList :products="products" />
     </div>
 </template>

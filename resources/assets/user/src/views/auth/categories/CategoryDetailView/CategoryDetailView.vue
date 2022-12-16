@@ -1,6 +1,5 @@
 <template>
-    <screen-loading v-if="this.isPageLoading" />
-    <div  v-else>
+    <div>
         <navbar :navbarStyle="navbarStyle" :navbarTransparent="true">
             <template v-slot:left>
                 <link-icon linkIcon="link-back" />
@@ -11,14 +10,14 @@
         </navbar>
 
         <!-- Category Banner -->
-        <BannerHeading />
+        <BannerHeading :category="category" />
 
         <!--  Category's Products -->
-        <div class="dz-content">
+        <!-- <div class="dz-content">
             <SearchBar />
 
             <SearchProductsList />
-        </div>
+        </div> -->
     </div>
 </template>
 
