@@ -63,7 +63,6 @@ export default {
 
             this.products.data = productsData;
         },
-        // load products list with pagination
         // event on click 'load more' button
         onClickLoadMoreBtn: async function (done) {
             const page = nextPage(this.products.pagination);

@@ -47,7 +47,7 @@ import i18n from "./i18n";
 import { Skeletor } from 'vue-skeletor';
 
 // global components
-import { Navbar, LinkIcon } from "@/components";
+import { Navbar, LinkIcon, Toolbar } from "@/components";
 
 // initial app
 const app = createApp(App);
@@ -58,6 +58,7 @@ app.config.unwrapInjectedRef = true;
 // add global components & global object to App
 app.component("font-awesome-icon", FontAwesomeIcon)
     .component("navbar", Navbar)
+    .component("Toolbar", Toolbar)
     .component("link-icon", LinkIcon)
     .component("skeletor", Skeletor)
     .use(store)

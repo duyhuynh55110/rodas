@@ -1,26 +1,23 @@
 <template>
-    <router-view v-slot="{ Component }">
-        <template v-if="Component">
-            <transition name="route" mode="out-in">
-<Suspense>
-                        <div class="page">
-                            <div :class="this.pageContentClass">
-                                <!-- main page -->
-                                <component :is="Component" />
+    <div class="page">
+        <div :class="this.pageContentClass">
+            <router-view v-slot="{ Component }">
+                <template v-if="Component">
+                    <transition name="route" mode="out-in">
+                        <Suspense timeout="0">
+                            <!-- main page -->
+                            <component :is="Component" />
 
-                                <!-- toolbar -->
-                                <Toolbar v-show="this.showToolbar" />
-                            </div>
-                        </div>
-
-                        <!-- screen loading -->
-                        <template #fallback>
-                            <ScreenLoading />
-                        </template>
-                    </Suspense>
-            </transition>
-        </template>
-    </router-view>
+                            <!-- screen loading -->
+                            <template #fallback>
+                                <ScreenLoading />
+                            </template>
+                        </Suspense>
+                    </transition>
+                </template>
+            </router-view>
+        </div>
+    </div>
 </template>
 
 <script>
