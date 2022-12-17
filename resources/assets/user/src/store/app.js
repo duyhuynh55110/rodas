@@ -3,13 +3,9 @@ import { authService } from "@/services";
 export default {
     namespaced: true,
     state: () => ({
-        isPageLoading: true, // app was fetching data for page
         auth: null, // user's profile
     }),
     mutations: {
-        setIsPageLoading: function (state, isPageLoading) {
-            state.isPageLoading = isPageLoading;
-        },
         setAuth: function (state, auth) {
             state.auth = auth;
         }

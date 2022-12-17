@@ -1,6 +1,5 @@
 <template>
-    <screen-loading v-if="isPageLoading" />
-    <div v-else>
+    <div>
         <navbar :title="$t('wishlist')" :navbarStyle="navbarStyle">
             <template v-slot:left>
                 <link-icon linkIcon="link-back" />
@@ -10,8 +9,8 @@
         <div class="container">
             <!-- Product boxes -->
             <ProductBoxesList
-                :products="products"
-                :productsPagination="productsPagination"
+                :products="products.data"
+                :productsPagination="products.pagination"
                 @clickFavoriteIcon="onClickFavoriteIcon"
                 @clickLoadMoreBtn="onClickLoadMoreBtn"
             />

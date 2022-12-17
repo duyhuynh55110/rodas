@@ -1,7 +1,19 @@
-import { ProductBoxesList } from "@/components";
+import { favoriteService } from "@/services";
 import { NAVBAR_STYLE_2 } from "@/utils/constants";
-import { resetState } from "@/utils/helper";
-import { mapState } from "vuex";
+import { nextPage } from "@/utils/helper";
+
+// components
+import { ProductBoxesList } from "@/components";
+import { setPaginate } from "@/utils/paginator";
+
+// load user's favorite products
+const fetchFavoriteProducts = async (page) => {
+    const response = await favoriteService.getProducts({
+        page,
+    });
+
+    return response;
+}
 
 export default {
     name: "WishListView",
@@ -11,52 +23,63 @@ export default {
     data() {
         return {
             navbarStyle: NAVBAR_STYLE_2,
+            products: {},
         };
     },
-    computed: {
-        ...mapState("app", ["isPageLoading"]),
-        ...mapState("wishlistView", ["products", "productsPagination"]),
-    },
     methods: {
-        // load products list, pagination
-        loadProducts: async function () {
-            await this.$store.dispatch("wishlistView/loadProducts");
-        },
-        // emit - event click icon on ProductBox
-        onClickFavoriteIcon: async function (product) {
-            let productId = product.id;
+        // update a product data in list
+        setItemInProductsList: function (updateProduct) {
+            const productsData = this.products.data.map((product) => {
+                if (product.id == updateProduct.id) {
+                    product = updateProduct;
+                }
 
-            if (!product.is_favorite) {
-                await this.$store.dispatch(
-                    "wishlistView/createFavorite",
-                    productId
-                );
+                return product;
+            });
+
+            this.products.data = productsData;
+        },
+        // event click icon on ProductBox
+        onClickFavoriteIcon: async function (product) {
+            if(!product.is_favorite) {
+                const { data } = await favoriteService.createFavorite(product.id);
+
+                // update product in list
+                this.setItemInProductsList(data);
             } else {
-                await this.$store.dispatch(
-                    "wishlistView/removeFavorite",
-                    productId
-                );
+                const { data } = await favoriteService.removeFavorite(product.id);
+
+                // update product in list
+                this.setItemInProductsList(data);
             }
         },
-        // emit - event on lick load more data
+        // event on click load more data
         onClickLoadMoreBtn: async function (done) {
-            await this.$store.dispatch("wishlistView/loadProducts");
+            const page = nextPage(this.products.pagination);
 
-            // callback, product list load completed
+            // call api
+            const { data, pagination } = await fetchFavoriteProducts(page);
+
+            this.products = setPaginate([
+                ...this.products.data,
+                ...data
+            ], pagination);
+
+            // ProductBoxesList callback, product list load completed
             done();
         },
     },
-    created: async function () {
-        // start fetching
-        this.$store.commit("app/setIsPageLoading", true);
+    setup: async function () {
+        const page = nextPage(); // page 1
 
-        // fetching data
-        await this.loadProducts();
+        // call api
+        const {data, pagination } = await fetchFavoriteProducts(page);
 
-        // end fetching
-        this.$store.commit("app/setIsPageLoading", false);
+        return {
+            dfProducts: setPaginate(data, pagination),
+        }
     },
-    unmounted: async function () {
-        resetState('wishlistView');
-    }
+    created: async function () {
+        this.products = this.dfProducts;
+    },
 };
