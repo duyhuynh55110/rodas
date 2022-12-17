@@ -10,7 +10,7 @@
         <div class="product-content">
             <h3 class="title">
                 <router-link :to="{
-                    name: 'categories.detail',
+                    name: 'products.detail',
                     params: { id: product.id }
                 }"> {{ product.name }} </router-link>
             </h3>
