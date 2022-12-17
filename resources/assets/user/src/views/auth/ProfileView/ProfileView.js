@@ -1,9 +1,9 @@
 import { NAVBAR_STYLE_2 } from "@/utils/constants";
-import { mapState } from "vuex";
+import { mapState, useStore } from "vuex";
 
 // components
-import ProfileInfo from "./components/ProfileInfo";
-import ProfileList from "./components/ProfileList";
+import ProfileInfo from "./components/ProfileInfo/ProfileInfo.vue";
+import ProfileList from "./components/ProfileList/ProfileList.vue";
 
 export default {
     name: "ProfileView",
@@ -17,16 +17,14 @@ export default {
         };
     },
     computed: {
-        ...mapState('app', ['isPageLoading', 'auth']),
+        ...mapState('app', ['auth']),
     },
-    created: async function () {
-        // start fetching
-        this.$store.commit("app/setIsPageLoading", true);
+    setup: async function () {
+        const store = useStore();
 
-        // fetching data
-        await this.$store.dispatch('app/loadAuth');
+        // call api
+        await store.dispatch('app/loadAuth');
 
-        // end fetching
-        this.$store.commit("app/setIsPageLoading", false);
-    },
+        return {};
+    }
 }
