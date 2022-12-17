@@ -1,20 +1,8 @@
-const HomeView = () => import('@/views/auth/HomeView/HomeView.vue');
-
-// categories
-const CategoryIndexView = () => import('@/views/auth/categories/CategoryIndexView/CategoryIndexView.vue');
-const CategoryDetailView = () => import('@/views/auth/categories/CategoryDetailView/CategoryDetailView.vue');
-
-const ShoppingCartView = () => import('@/views/auth/ShoppingCartView');
-const WishListView = () => import('@/views/auth/WishListView');
-const UserMenuView = () => import('@/views/auth/UserMenuView');
-const ProfileView = () => import('@/views/auth/ProfileView');
-const NotificationsView = () => import('@/views/auth/NotificationsView/NotificationsView.vue');
-
 const routes = [
     {
         path: '/categories/:id',
         name: 'categories.detail',
-        component: CategoryDetailView,
+        component: import('@/views/auth/categories/CategoryDetailView/CategoryDetailView.vue'),
         meta: {
             title: 'Category Detail',
             customPageContentClass: 'pt-60 bg-primary',
@@ -24,7 +12,7 @@ const routes = [
     {
         path: '/categories',
         name: 'categories.index',
-        component: CategoryIndexView,
+        component: import('@/views/auth/categories/CategoryIndexView/CategoryIndexView.vue'),
         exact: true,
         meta: {
             title: 'Categories',
@@ -35,7 +23,7 @@ const routes = [
     {
         path: '/shopping-cart',
         name: 'shopping-cart',
-        component: ShoppingCartView,
+        component: import('@/views/auth/ShoppingCartView'),
         meta: {
             title: 'Shopping Cart',
             customPageContentClass: 'pt-60 bottom-sp60',
@@ -44,7 +32,7 @@ const routes = [
     {
         path: '/wishlist',
         name: 'wishlist',
-        component: WishListView,
+        component: import('@/views/auth/WishListView'),
         meta: {
             title: 'Wishlist',
             customPageContentClass: 'pt-90 bottom-sp70',
@@ -53,7 +41,7 @@ const routes = [
     {
         path: '/user-menu',
         name: 'user-menu',
-        component: UserMenuView,
+        component: import('@/views/auth/UserMenuView'),
         meta: {
             title: 'User',
             customPageContentClass: 'pt-80 bottom-sp90',
@@ -62,7 +50,7 @@ const routes = [
     {
         path: '/profile',
         name: 'profile',
-        component: ProfileView,
+        component: import('@/views/auth/ProfileView'),
         meta: {
             title: 'Profile',
             customPageContentClass: 'pt-80 bottom-sp80',
@@ -71,32 +59,32 @@ const routes = [
     {
         path: '/notifications',
         name: 'notifications',
-        component: NotificationsView,
+        component: import('@/views/auth/NotificationsView/NotificationsView.vue'),
         meta: {
             title: 'Notifications',
             customPageContentClass: 'pt-80',
             viewFullScreen: true,
         },
     },
-    // {
-    //     path: '/products/:id',
-    //     name: 'products.detail',
-    //     component: NotificationsView,
-    //     meta: {
-    //         title: 'Products',
-    //         customPageContentClass: 'pt-80',
-    //         viewFullScreen: true,
-    //     },
-    // },
+    {
+        path: '/products/:id',
+        name: 'products.detail',
+        component: import('@/views/auth/NotificationsView/NotificationsView.vue'),
+        meta: {
+            title: 'Products',
+            customPageContentClass: 'pt-80',
+            viewFullScreen: true,
+        },
+    },
     {
         path: '/',
         name: 'home',
-        component: HomeView,
         exact: true,
         meta: {
             title: 'Homepage',
             customPageContentClass: 'pt-30 bottom-sp80',
         },
+        component: import('@/views/auth/HomeView/HomeView.vue'),
     },
 ];
 

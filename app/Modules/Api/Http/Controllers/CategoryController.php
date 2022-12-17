@@ -30,7 +30,7 @@ class CategoryController extends BaseController
     }
 
     /**
-     * Response a catego
+     * Response a category
      *
      * @param $id
      * @param  CategoryDetailFormRequest  $request

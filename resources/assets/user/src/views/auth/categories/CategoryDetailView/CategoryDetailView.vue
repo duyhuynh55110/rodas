@@ -12,12 +12,13 @@
         <!-- Category Banner -->
         <BannerHeading :category="category" />
 
-        <!--  Category's Products -->
-        <!-- <div class="dz-content">
+        <div class="dz-content">
+            <!-- Search -->
             <SearchBar />
 
-            <SearchProductsList />
-        </div> -->
+            <!-- Products list -->
+            <SearchProductsList :products="products" />
+        </div>
     </div>
 </template>
 

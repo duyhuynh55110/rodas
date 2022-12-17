@@ -13,6 +13,9 @@
         <!-- Trending items area -->
         <TitleBar :title="$t('trending deals')" linkTo="/categories" />
         <TrendingProductsList :products="products" />
+
+        <!-- toolbar -->
+        <toolbar />
     </div>
 </template>
 
