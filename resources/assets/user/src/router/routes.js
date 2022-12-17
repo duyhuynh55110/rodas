@@ -32,7 +32,7 @@ const routes = [
     {
         path: '/wishlist',
         name: 'wishlist',
-        component: import('@/views/auth/WishListView'),
+        component: import('@/views/auth/WishListView/WishListView.vue'),
         meta: {
             title: 'Wishlist',
             customPageContentClass: 'pt-90 bottom-sp70',
