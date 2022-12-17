@@ -1,6 +1,5 @@
 <template>
-    <screen-loading v-if="isPageLoading" />
-    <div class="container" v-else>
+    <div class="container">
         <navbar title="Profile" :navbarStyle="navbarStyle">
             <template v-slot:left>
                 <link-icon linkIcon="link-back" />
@@ -8,6 +7,7 @@
         </navbar>
 
         <ProfileInfo />
+
         <ProfileList />
     </div>
 </template>

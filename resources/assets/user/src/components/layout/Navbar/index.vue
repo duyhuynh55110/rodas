@@ -1,7 +1,7 @@
 <template>
     <div :class="this.navbarClass">
         <div class="navbar-inner">
-            <div class="left" v-if="this.hasLeftSlot">
+            <div class="left" v-if="this.hasLeftSlot" @click="$router.go(-1)">
                 <slot name="left"></slot>
             </div>
             <div class="title">{{ title }}</div>

@@ -41,7 +41,7 @@ const routes = [
     {
         path: '/user-menu',
         name: 'user-menu',
-        component: import('@/views/auth/UserMenuView'),
+        component: import('@/views/auth/UserMenuView/UserMenuView.vue'),
         meta: {
             title: 'User',
             customPageContentClass: 'pt-80 bottom-sp90',
@@ -50,7 +50,7 @@ const routes = [
     {
         path: '/profile',
         name: 'profile',
-        component: import('@/views/auth/ProfileView'),
+        component: import('@/views/auth/ProfileView/ProfileView.vue'),
         meta: {
             title: 'Profile',
             customPageContentClass: 'pt-80 bottom-sp80',
