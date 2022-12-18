@@ -46,14 +46,18 @@ import i18n from "./i18n";
 // vue-skeletor
 import { Skeletor } from 'vue-skeletor';
 
-// global components
+// global components, objects
 import { Navbar, LinkIcon, Toolbar } from "@/components";
+import * as helper from "@/utils/helper";
 
 // initial app
 const app = createApp(App);
 
 // https://vuejs.org/guide/components/provide-inject.html#working-with-reactivity
 app.config.unwrapInjectedRef = true;
+
+// global properties (object, functions...)
+app.config.globalProperties.$helper = helper;
 
 // add global components & global object to App
 app.component("font-awesome-icon", FontAwesomeIcon)
@@ -64,4 +68,5 @@ app.component("font-awesome-icon", FontAwesomeIcon)
     .use(store)
     .use(router)
     .use(i18n)
+    .use(helper)
     .mount("#app");

@@ -1,5 +1,4 @@
 import router from "@/router";
-import store from "@/store";
 import { PAGE_DEFAULT } from "./constants";
 
 // set query, redirect with page reload
@@ -17,7 +16,7 @@ export const nextPage = (pagination) => {
     : PAGE_DEFAULT
 }
 
-// reset state when leave page (use in 'unmounted' hook)
-export const resetState = (moduleName) => {
-    store.commit(moduleName + '/resetState');
+// Make a first letter in string upper
+export const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }

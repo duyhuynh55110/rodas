@@ -12,7 +12,7 @@
             <ButtonPrimary
                 v-if="showLoadMoreBtn"
                 :content="$t('load more')"
-                customClass="text-capitalize"
+                class="text-capitalize"
                 @clickButton="onClickLoadMoreBtn"
             />
             <div v-if="isLoadingProducts" class="loading-products">

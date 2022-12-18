@@ -5,7 +5,7 @@ export default {
             type: String,
             required: true,
         },
-        customClass: {
+        class: { // user's custom class
             type: String,
             required: false,
             default: '',
@@ -13,7 +13,12 @@ export default {
     },
     computed: {
         getClass: function () {
-            return "button button-fill button-large " + this.customClass;
+            return [
+                "button",
+                "button-fill",
+                "button-large",
+                this.class
+            ];
         }
     },
     methods: {
