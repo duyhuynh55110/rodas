@@ -1,4 +1,3 @@
-import { redirectWithQuery } from "@/utils/helper";
 import { PRODUCT_KEYWORDS } from "@/utils/keywords";
 
 export default {
@@ -12,7 +11,7 @@ export default {
     methods: {
         // event when submit search form
         onSubmitSearch: async function () {
-            redirectWithQuery({
+            this.$helper.redirectWithQuery({
                 search: this.inputSearch ?? null,
             });
         },
