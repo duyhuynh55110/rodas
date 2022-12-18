@@ -1,7 +1,6 @@
 import { categoryService, favoriteService, productService } from "@/services";
 import { NAVBAR_STYLE_2 } from "@/utils/constants";
-import { nextPage } from "@/utils/helper";
-import { setPaginate } from "@/utils/paginator";
+import { nextPage, setPaginate } from "@/utils/paginator";
 import { useRoute } from "vue-router";
 
 // components
