@@ -53,3 +53,13 @@ button {
     user-select: none;
     font-family: inherit; // inherit font-family from body
 }
+
+input {
+    &:focus {
+        outline: none !important;
+    }
+}
+input[type=email], input[type=password], input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+}

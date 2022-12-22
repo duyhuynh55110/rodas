@@ -1,10 +1,9 @@
 import { favoriteService } from "@/services";
 import { NAVBAR_STYLE_2 } from "@/utils/constants";
-import { nextPage } from "@/utils/helper";
 
 // components
 import { ProductBoxesList } from "@/components";
-import { setPaginate } from "@/utils/paginator";
+import { nextPage, setPaginate } from "@/utils/paginator";
 
 // load user's favorite products
 const fetchFavoriteProducts = async (page) => {

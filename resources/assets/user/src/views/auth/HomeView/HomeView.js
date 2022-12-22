@@ -7,8 +7,7 @@ import NotificationBar from "./components/NotificationBar/NotificationBar.vue";
 
 // store
 import { compositionService, favoriteService, productService } from "@/services";
-import { nextPage } from "@/utils/helper";
-import { setPaginate } from "@/utils/paginator";
+import { nextPage, setPaginate } from "@/utils/paginator";
 
 // load master data
 const fetchCompositionData = async function () {

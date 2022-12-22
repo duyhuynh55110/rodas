@@ -10,8 +10,7 @@
     }
 }
 
-.page,
-.page-content {
+.page, .page-content {
     background-color: $themeColorLight;
 }
 
@@ -19,15 +18,10 @@
     margin: 0 auto; // center
 
     .page-content {
-        // &.content-full-screen {
-        //     position: relative;
-        //     top: 0;
-        //     z-index: $zIndexMax;
-
-        //     .container {
-        //         min-height: 100vh;
-        //     }
-        // }
+        box-sizing: border-box;
+        height: 100%;
+        position: relative;
+        z-index: 1;
 
         .container {
             max-width: 1024px;
@@ -92,4 +86,12 @@
 
 .text-capitalize {
     text-transform: capitalize;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-upper-first-letter::first-letter {
+    text-transform:capitalize;
 }
