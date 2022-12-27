@@ -38,6 +38,10 @@ defined('HTTP_CODE_INTERNAL_SERVER_ERROR') or define('HTTP_CODE_INTERNAL_SERVER_
 defined('HTTP_CODE_UNAUTHORIZED') or define('HTTP_CODE_UNAUTHORIZED', 401);
 defined('HTTP_CODE_NOT_FOUND') or define('HTTP_CODE_NOT_FOUND', 404);
 
+// Status code
+defined('STATUS_CODE_LOGIN_FAILED') or define('STATUS_CODE_LOGIN_FAILED', 104);
+defined('STATUS_CODE_NOT_LOGGED_IN') or define('STATUS_CODE_NOT_LOGGED_IN', 103); // still not login
+
 // Status code (status is custom define, handle exception from RESTFUL API)
 defined('STATUS_CODE_INVALID_REQUEST') or define('STATUS_CODE_INVALID_REQUEST', 100);
 

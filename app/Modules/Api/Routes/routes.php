@@ -84,13 +84,7 @@ Route::group(
                         Route::get('/', [NotificationController::class, 'index']);
                     }
                 );
-            }
-        );
 
-        // === Without Authentication
-        Route::group(
-            [],
-            function () {
                 // composition
                 Route::group(
                     [

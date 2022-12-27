@@ -68,9 +68,14 @@ class Handler extends ExceptionHandler
      */
     private function customApiResponse($request, Throwable $e)
     {
-        $e = $this->prepareApiException($request, $e);
+        $e = $this->prepareException($e);
 
-        if (method_exists($e, 'getStatusCode')) {
+        if($e instanceof \Illuminate\Validation\ValidationException) {
+            $httpCode = HTTP_CODE_UNPROCESSABLE_ENTITY;
+            $e = $this->convertValidationExceptionToResponse($e, $request);
+        } else if ($e instanceof \App\Exceptions\AuthenticateException) {
+            $httpCode = HTTP_CODE_UNAUTHORIZED;
+        } else if (method_exists($e, 'getStatusCode')) {
             $httpCode = $e->getStatusCode();
         } else {
             $httpCode = HTTP_CODE_INTERNAL_SERVER_ERROR;
@@ -79,9 +84,6 @@ class Handler extends ExceptionHandler
         $response = [];
 
         switch ($httpCode) {
-            case HTTP_CODE_UNAUTHORIZED:
-                $response['message'] = 'Unauthorized';
-                break;
             case HTTP_CODE_UNPROCESSABLE_ENTITY:
                 // Only return first error message
                 $errors = $e->original['errors'];
@@ -92,30 +94,14 @@ class Handler extends ExceptionHandler
                 $response['status'] = STATUS_CODE_INVALID_REQUEST;
                 $response['message'] = $firstErrorMessage;
                 break;
+            case HTTP_CODE_UNAUTHORIZED:
+                $response['status'] = $e->getStatusCode();
+                $response['message'] = $e->getMessage();
+                break;
             default:
                 $response['message'] = $httpCode == HTTP_CODE_INTERNAL_SERVER_ERROR ? 'Whoops, looks like something went wrong' : $e->getMessage();
         }
 
         return response()->json($response, $httpCode);
-    }
-
-    /**
-     * Custom handle api exception
-     *
-     * @param $request
-     * @param  Throwable  $e
-     * @return Throwable $e
-     */
-    private function prepareApiException($request, Throwable $e)
-    {
-        $e = $this->prepareException($e);
-
-        if ($e instanceof \Illuminate\Validation\ValidationException) {
-            $e = $this->convertValidationExceptionToResponse($e, $request);
-        } elseif ($e instanceof \Illuminate\Auth\AuthenticationException) {
-            $e = $this->unauthenticated($request, $e);
-        }
-
-        return $e;
     }
 }

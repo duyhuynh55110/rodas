@@ -12,33 +12,10 @@ import store from "./store";
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-    faBell,
-    faArrowRight,
-    faHeart,
-    faCartShopping,
-    faArrowRightArrowLeft,
-    faHouse,
-    faArrowLeft,
-    faCircle,
-    faBars,
-    faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBell, faArrowRight, faHeart, faCartShopping, faArrowRightArrowLeft, faHouse, faArrowLeft, faCircle, faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 
-library.add([
-    faBell,
-    faArrowRight,
-    faHeart,
-    faCartShopping,
-    faArrowRightArrowLeft,
-    faHouse,
-    faArrowLeft,
-    faCircle,
-    faClock,
-    faBars,
-    faMagnifyingGlass,
-]);
+library.add([ faBell, faArrowRight, faHeart, faCartShopping, faArrowRightArrowLeft, faHouse, faArrowLeft, faCircle, faClock, faBars, faMagnifyingGlass]);
 
 // vue-i18n (translate package)
 import i18n from "./i18n";
@@ -49,6 +26,7 @@ import { Skeletor } from 'vue-skeletor';
 // global components, objects
 import { Navbar, LinkIcon, Toolbar } from "@/components";
 import * as helper from "@/utils/helper";
+import * as auth from "@/utils/auth";
 
 // initial app
 const app = createApp(App);
@@ -58,6 +36,7 @@ app.config.unwrapInjectedRef = true;
 
 // global properties (object, functions...)
 app.config.globalProperties.$helper = helper;
+app.config.globalProperties.$auth = auth;
 
 // add global components & global object to App
 app.component("font-awesome-icon", FontAwesomeIcon)

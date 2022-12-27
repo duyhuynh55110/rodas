@@ -16,11 +16,13 @@
     "caniuse-lite": "^1.0.30001397",
     "core-js": "^3.8.3",
     "swiper": "^8.3.2",
+    "vee-validate": "^4.7.3",
     "vue": "^3.2.13",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.0.13",
     "vue-skeletor": "^1.0.6",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

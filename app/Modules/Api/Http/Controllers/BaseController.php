@@ -39,21 +39,19 @@ class BaseController extends Controller
         } else {
             $dataResponse = collect($data)->transform(function ($item) {
                 // Convert fractal instance -> array
-                if ($item instanceof \League\Fractal\Resource\ResourceInterface) {
+                if ($item instanceof \League\Fractal\Resource\Collection) {
                     return current($this->fractal->createData($item)->toArray());
+                } else if ($item instanceof \League\Fractal\Resource\ResourceInterface) {
+                    return $this->fractal->createData($item)->toArray();
                 }
 
                 return $item;
             });
         }
 
-        $baseData = [
+        $response = [
             'status' => HTTP_CODE_OK,
             'message' => 'Ok',
-        ];
-
-        $response = [
-            ...$baseData,
             ...(! $groupInData) ? $dataResponse : ['data' => $dataResponse], // true: data: {...}, false: without data object
         ];
 

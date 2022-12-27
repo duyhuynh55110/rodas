@@ -60,18 +60,45 @@ $fontSizeTransition: font-size ease-out 0.2s;
                     font-size: 14px;
                     color: $inputColor;
                     transition: $fontSizeTransition;
+                    box-sizing: border-box;
+
+                    &.is-invalid {
+                        border-color: $inputInValidColor;
+                        background: rgba($inputInValidColor, 0.01);
+
+                        + label {
+                            color: $inputInValidColor;
+                        }
+                    }
 
                     &:focus {
-                        border: 1px solid $themeColor;
+                        // not change color if input was invalid
+                        &:not(.is-invalid) {
+                            border: 1px solid $themeColor;
+
+                            + label {
+                                color: $themeTextColor;
+                            }
+                        }
+
                         font-size: 16px;
 
                         + label {
                             font-size: 14px;
-                            color: $themeTextColor;
                         }
                     }
 
                     ::-webkit-input-placeholder {
+                        text-transform:capitalize;
+                    }
+                }
+
+                span.invalid-feedback {
+                    font-size: 13px;
+                    line-height: 30px;
+                    color: $inputInValidColor;
+
+                    &::first-letter {
                         text-transform:capitalize;
                     }
                 }
