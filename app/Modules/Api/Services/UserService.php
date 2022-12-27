@@ -2,9 +2,9 @@
 
 namespace App\Modules\Api\Services;
 
+use App\Exceptions\AuthenticateException;
 use App\Modules\Api\Repositories\UserRepository;
 use App\Modules\Api\Transformers\UserTransformer;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
@@ -80,7 +80,7 @@ class UserService
             ];
 
             if (! auth()->attempt($credentials)) {
-                throw new AuthenticationException();
+                throw new AuthenticateException(STATUS_CODE_LOGIN_FAILED);
             }
 
             $user = auth()->user();

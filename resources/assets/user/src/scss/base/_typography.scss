@@ -75,6 +75,10 @@
     color: $textColorWhite;
     border: none;
 
+    &:disabled {
+        background: rgba($themeColor, 0.6);
+    }
+
 	&.button-large{
 		font-size: 16px;
         font-weight: 500;
