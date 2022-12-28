@@ -29,7 +29,8 @@
             </li>
             <li>
                 <router-link
-                    to="/logout"
+                    to=""
+                    @click="onClickLogoutOption"
                     class="button-large button button-fill"
                 >
                     <img
