@@ -41,4 +41,9 @@ export const setAuth = (accessToken, user) => {
     sessionStorage.setItem(USER_LOGGED_IN_KEY, values);
 }
 
+// unset a user's data
+export const unsetAuth = () => {
+    // remove user's data from session storage
+    sessionStorage.removeItem(USER_LOGGED_IN_KEY);
+}
 

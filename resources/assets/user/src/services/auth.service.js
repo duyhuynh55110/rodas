@@ -1,4 +1,4 @@
-import { setAuth } from "@/utils/auth";
+import { setAuth, unsetAuth } from "@/utils/auth";
 import { STATUS_CODE_OK } from "@/utils/constants";
 import BaseService from "./base.service";
 
@@ -25,6 +25,16 @@ class AuthService extends BaseService {
         return {
             status: data.status,
         };
+    }
+
+    // logout a user
+    async logout() {
+        const { data } = await this.post('/logout');
+
+        // unset current user's data from sessionStorage
+        unsetAuth();
+
+        return data;
     }
 }
 
