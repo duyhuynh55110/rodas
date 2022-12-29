@@ -2,7 +2,7 @@ const routes = [
     {
         path: '/register',
         name: 'register',
-        component: () => import('@/views/unAuth/SignUpView/SignUpView.vue'),
+        component: () => import('@/views/unAuth/RegisterView/RegisterView.vue'),
         meta: {
             title: 'Register',
         },
