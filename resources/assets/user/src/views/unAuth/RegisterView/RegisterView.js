@@ -1,13 +1,13 @@
 import { authService } from "@/services";
-import { STATUS_CODE_OK } from "@/utils/constants";
 import * as yup from 'yup';
+import { STATUS_CODE_OK } from "@/utils/constants";
 
 // components
 import { AuthLayout } from "@/layouts";
 import { Form, Field, ErrorMessage } from 'vee-validate';
 
 export default {
-    name: "LoginView",
+    name: "RegisterView",
     components: {
         Form,
         Field,
@@ -17,11 +17,15 @@ export default {
     data() {
         return {
             disabledBtn: false,
+            name: '',
             email: '',
             password: '',
+            passwordConfirmation: '',
             schema: yup.object({
+                name: yup.string().required(),
                 email: yup.string().required().email(),
                 password: yup.string().required().min(6),
+                password_confirmation: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
             })
         }
     },
@@ -33,12 +37,12 @@ export default {
                 'is-invalid': error,
             }
         },
-        // event on submit login form
+        // event on submit register form
         onSubmitForm: async function (values, actions) {
             // start confirm
             this.disabledBtn = true;
 
-            const { status, message } = await authService.login(this.email, this.password);
+            const { status, message } = await authService.register(this.name, this.email, this.password, this.passwordConfirmation);
 
             // show error if login failed
             if (status != STATUS_CODE_OK) {

@@ -32,6 +32,7 @@ defined('MAX_INTEGER_VALUE') or define('MAX_INTEGER_VALUE', 2147483647);
 defined('UPLOAD_MAX_SIZE') or define('UPLOAD_MAX_SIZE', 5242880); // BYTES (maximum is 5MB)
 
 // Http Code
+// https://developers.rebrandly.com/docs/403-already-exists-errors
 defined('HTTP_CODE_OK') or define('HTTP_CODE_OK', 200);
 defined('HTTP_CODE_UNPROCESSABLE_ENTITY') or define('HTTP_CODE_UNPROCESSABLE_ENTITY', 422);
 defined('HTTP_CODE_INTERNAL_SERVER_ERROR') or define('HTTP_CODE_INTERNAL_SERVER_ERROR', 500);

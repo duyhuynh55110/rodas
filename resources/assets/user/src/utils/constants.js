@@ -6,6 +6,7 @@ export const HTTP_CODE_OK = 200;
 export const HTTP_CODE_INTERNAL_SERVER_ERROR = 500;
 export const HTTP_CODE_UNAUTHORIZED = 401;
 export const HTTP_CODE_NOT_FOUND = 404;
+export const HTTP_CODE_UNPROCESSABLE_ENTITY = 422;
 
 // status code
 export const STATUS_CODE_OK = 200;

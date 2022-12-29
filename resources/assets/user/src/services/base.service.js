@@ -83,8 +83,8 @@ export default class BaseService {
                     router.push({ path: "/login " });
                 }
 
-                // login failed
-                return response;
+                // continue throw error -> 104 login fail
+                break;
         }
 
         throw e;
