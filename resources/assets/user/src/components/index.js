@@ -9,6 +9,7 @@ import ButtonPrimary from "./ui/ButtonPrimary";
 
 // products
 import ProductBoxesList from "./products/ProductBoxesList";
+import Stepper from "./products/Stepper/Stepper.vue";
 
 // shopping cart
 import CartItemList from "./items/CartItemList";
@@ -26,5 +27,6 @@ export {
     LinkIcon,
     ScreenLoading,
     LoadingData,
-    ProductBoxesList
+    ProductBoxesList,
+    Stepper
 }

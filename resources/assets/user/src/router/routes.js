@@ -85,10 +85,10 @@ const routes = [
     {
         path: '/products/:id',
         name: 'products.detail',
-        component: () => import('@/views/auth/NotificationsView/NotificationsView.vue'),
+        component: () => import('@/views/auth/products/ProductDetailView/ProductDetailView.vue'),
         meta: {
             title: 'Products',
-            customPageContentClass: 'pt-80',
+            customPageContentClass: 'bottom-sp90',
             viewFullScreen: true,
         },
     },

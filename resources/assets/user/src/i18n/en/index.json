@@ -24,5 +24,8 @@
     "password confirmation": "password confirmation",
     "create an account": "create an account",
     "sign in": "sign in",
-    "email": "email"
+    "email": "email",
+    "description": "description",
+    "review": "review",
+    "discussion": "discussion"
 }
