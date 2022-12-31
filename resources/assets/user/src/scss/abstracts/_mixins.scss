@@ -65,12 +65,14 @@
 /// @param {String} $alignItems
 /// @param {String} $alignContent
 /// @param {String} $wrap
+/// @param {Number} $flex
 @mixin flexbox(
     $flexDirection: row,
     $justifyContent: null,
     $alignItems: null,
     $alignContent: null,
-    $wrap: null
+    $wrap: null,
+    $flex: null,
 ) {
     display: flex;
     flex-direction: $flexDirection;
@@ -78,6 +80,7 @@
     align-items: $alignItems;
     align-content: $alignContent;
     flex-wrap: $wrap;
+    flex: $flex;
 }
 
 /// responsive, set max page width

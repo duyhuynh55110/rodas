@@ -1,0 +1,38 @@
+.stepper {
+    @include flexbox();
+    @include circleBox(35px, 28px);
+    background-color: #efefef;
+    width: 115px;
+
+    .stepper-button-minus,
+    .stepper-button-plus,
+    .stepper-input-wrap {
+        box-sizing: border-box;
+        flex: 1;
+        text-align: center;
+        margin: auto;
+        width: 50%;
+        color: #0a3c48;
+    }
+
+    .stepper-input-wrap {
+        border: 0;
+        height: 100%;
+
+        input {
+            box-sizing: border-box;
+            font-size: 18px;
+            font-weight: 500;
+            height: 100%;
+            width: 45px;
+            border: none;
+            background: inherit;
+            text-align: center;
+            color: #0a3c48;
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
+    }
+}

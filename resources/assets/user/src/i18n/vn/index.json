@@ -24,5 +24,8 @@
     "password confirmation": "xác nhận mật khẩu",
     "create an account": "đăng ký",
     "sign in": "đăng nhập",
-    "email": "email"
+    "email": "email",
+    "description": "mô tả",
+    "review": "đánh giá",
+    "discussion": "thảo luận"
 }
