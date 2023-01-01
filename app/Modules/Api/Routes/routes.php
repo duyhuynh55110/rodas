@@ -14,7 +14,7 @@ Route::group(
     [
         // 'domain' => env('APP_API_DOMAIN'),
         'as' => API_MODULE_AS,
-        'middleware' => ['api', 'response.json'],
+        'middleware' => ['api'],
     ],
     function () {
         Route::post('/register', [AuthController::class, 'register']);
@@ -24,7 +24,7 @@ Route::group(
         // === Authentication
         Route::group(
             [
-                'middleware' => ['auth:sanctum'],
+               'middleware' => ['auth:sanctum'],
             ],
             function () {
                 Route::get('/profile', [UserController::class, 'profile']);
