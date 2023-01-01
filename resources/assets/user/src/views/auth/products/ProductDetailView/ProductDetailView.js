@@ -21,6 +21,7 @@ export default {
         const route = useRoute();
         const id = route.params.id; // product id
 
+        // fetch data
         const { data:product } = await fetchProductById(id);
 
         return {
@@ -30,6 +31,11 @@ export default {
     computed: {
         brand: function () {
             return this.product.brand;
+        },
+        itemThumbnailStyle: function () {
+            return {
+                'background-image': 'url(' + this.product.image_url + ')',
+            }
         }
     }
 }

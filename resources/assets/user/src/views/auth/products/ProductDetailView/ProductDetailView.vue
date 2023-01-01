@@ -10,7 +10,7 @@
         </navbar>
 
         <!-- Thumbnail -->
-        <div class="item-thumbnail" style="background: url(https://kede.dexignzone.com/xhtml/img/slider/slide1.jpg);"></div>
+        <div class="item-thumbnail" :style="itemThumbnailStyle"></div>
         <div class="dz-banner-height"></div>
 
         <!-- Information -->
