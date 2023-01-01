@@ -12,7 +12,7 @@
 
         <!-- Tab Swiper -->
         <swiper @swiper="onSwiper" @init="onSlideChange" @slideChange="onSlideChange">
-            <swiper-slide> {{ product.description }} </swiper-slide>
+            <swiper-slide v-html="product.description"></swiper-slide>
             <swiper-slide>Slide 2</swiper-slide>
             <swiper-slide>Slide 3</swiper-slide>
         </swiper>
