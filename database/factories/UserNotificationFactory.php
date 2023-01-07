@@ -19,7 +19,7 @@ class UserNotificationFactory extends Factory
 
         $user = User::where('role', ACCOUNT_ROLE_USER)->first();
 
-        if(!$user) {
+        if (! $user) {
             return;
         }
 

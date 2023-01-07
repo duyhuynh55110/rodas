@@ -32,7 +32,7 @@ class ProductSlide extends Model
      */
     protected $fillable = [
         'product_id', 'image_file_name',
-        'created_by', 'created_at', 'updated_by', 'updated_at', 'deleted_at'
+        'created_by', 'created_at', 'updated_by', 'updated_at', 'deleted_at',
     ];
 
     // ---- Mutators & Casting

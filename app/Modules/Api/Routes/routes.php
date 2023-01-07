@@ -23,7 +23,7 @@ Route::group(
         // === Authentication
         Route::group(
             [
-               'middleware' => ['auth:sanctum'],
+                'middleware' => ['auth:sanctum'],
             ],
             function () {
                 Route::get('/profile', [UserController::class, 'profile']);

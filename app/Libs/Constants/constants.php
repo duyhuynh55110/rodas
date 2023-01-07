@@ -67,4 +67,3 @@ defined('NOTIFICATION_TYPE_SUCCESS') or define('NOTIFICATION_TYPE_SUCCESS', 2);
 //  user notification read status
 defined('NOTIFICATION_IS_READ_OFF') or define('NOTIFICATION_IS_READ_OFF', 0);
 defined('NOTIFICATION_IS_READ_ON') or define('NOTIFICATION_IS_READ_ON', 1);
-

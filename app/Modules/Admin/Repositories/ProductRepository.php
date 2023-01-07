@@ -89,8 +89,8 @@ class ProductRepository extends Repository
      * @param  array  $attributes
      * @param  array  $values
      * @param  array  $categoriesData
-     * @param array $productSlides
-     * @param array $keepProductSlideIds
+     * @param  array  $productSlides
+     * @param  array  $keepProductSlideIds
      * @return App\Models\Product
      */
     public function updateOrCreateWithRelations(array $attributes, array $values, array $categoriesData, array $productSlides, array $keepProductSlideIds)

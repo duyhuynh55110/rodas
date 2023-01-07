@@ -41,7 +41,7 @@ class BaseController extends Controller
                 // Convert fractal instance -> array
                 if ($item instanceof \League\Fractal\Resource\Collection) {
                     return current($this->fractal->createData($item)->toArray());
-                } else if ($item instanceof \League\Fractal\Resource\ResourceInterface) {
+                } elseif ($item instanceof \League\Fractal\Resource\ResourceInterface) {
                     return $this->fractal->createData($item)->toArray();
                 }
 

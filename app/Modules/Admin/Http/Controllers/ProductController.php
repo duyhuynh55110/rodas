@@ -110,7 +110,7 @@ class ProductController extends BaseController
 
             // load relation
             $product->load([
-                'productSlides:id,product_id,image_file_name'
+                'productSlides:id,product_id,image_file_name',
             ]);
 
             // data

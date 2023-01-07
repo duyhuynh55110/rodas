@@ -13,13 +13,14 @@ class StorageService
      * @param $request
      * @return array
      */
-    public function uploadMultipleImagesToStorage($request) {
+    public function uploadMultipleImagesToStorage($request)
+    {
         $path = $request->path;
         $files = $request->file;
 
         // upload files and return array names
         return collect($files)->map(function ($file) use ($path) {
-            $hashName = $path . $file->hashName();
+            $hashName = $path.$file->hashName();
 
             switch ($path) {
                 case STORAGE_PATH_TO_PRODUCT_SLIDES:

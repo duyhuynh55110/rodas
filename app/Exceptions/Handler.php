@@ -70,12 +70,12 @@ class Handler extends ExceptionHandler
     {
         $e = $this->prepareException($e);
 
-        if($e instanceof \Illuminate\Validation\ValidationException) {
+        if ($e instanceof \Illuminate\Validation\ValidationException) {
             $httpCode = HTTP_CODE_UNPROCESSABLE_ENTITY;
             $e = $this->convertValidationExceptionToResponse($e, $request);
-        } else if ($e instanceof \App\Exceptions\AuthenticateException) {
+        } elseif ($e instanceof \App\Exceptions\AuthenticateException) {
             $httpCode = HTTP_CODE_UNAUTHORIZED;
-        } else if (method_exists($e, 'getStatusCode')) {
+        } elseif (method_exists($e, 'getStatusCode')) {
             $httpCode = $e->getStatusCode();
         } else {
             $httpCode = HTTP_CODE_INTERNAL_SERVER_ERROR;

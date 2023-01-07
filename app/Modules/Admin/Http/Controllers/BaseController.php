@@ -12,7 +12,8 @@ class BaseController extends Controller
      * @param $data
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function outputJson($data) {
+    protected function outputJson($data)
+    {
         $response = [
             'status' => HTTP_CODE_OK,
             'message' => 'Ok',

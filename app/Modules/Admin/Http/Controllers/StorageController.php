@@ -28,7 +28,7 @@ class StorageController extends BaseController
     /**
      * Upload image to storage
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function uploadMultipleImagesToStorage(Request $request)
