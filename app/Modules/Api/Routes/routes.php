@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(
     [
         // 'domain' => env('APP_API_DOMAIN'),
-        'as' => API_MODULE_AS,
         'middleware' => ['api'],
     ],
     function () {
@@ -24,7 +23,7 @@ Route::group(
         // === Authentication
         Route::group(
             [
-               'middleware' => ['auth:sanctum'],
+                'middleware' => ['auth:sanctum'],
             ],
             function () {
                 Route::get('/profile', [UserController::class, 'profile']);

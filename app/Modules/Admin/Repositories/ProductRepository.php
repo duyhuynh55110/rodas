@@ -89,15 +89,39 @@ class ProductRepository extends Repository
      * @param  array  $attributes
      * @param  array  $values
      * @param  array  $categoriesData
+     * @param  array  $productSlides
+     * @param  array  $keepProductSlideIds
      * @return App\Models\Product
      */
-    public function updateOrCreateWithRelations(array $attributes, array $values, array $categoriesData)
+    public function updateOrCreateWithRelations(array $attributes, array $values, array $categoriesData, array $productSlides, array $keepProductSlideIds)
     {
         // create/update a product
         $product = $this->updateOrCreate($attributes, $values);
 
         // Laravel pivot sync function - compare change to create/update/delete relation data
         $product->categories()->sync($categoriesData);
+
+        // remove product slides not include in array
+        $removeProductSlides = $product->productSlides()->whereNotIn('id', $keepProductSlideIds);
+
+        // delete image slides from storage
+        $removeProductSlides->get()->map(
+            function ($productSlide) {
+                deleteImageFromStorage($productSlide->image_file_name);
+            }
+        );
+        $removeProductSlides->delete();
+
+        // create product slides
+        $productSlideValues = collect($productSlides)->map(
+            function ($productSlide) {
+                return [
+                    'image_file_name' => $productSlide['file_name'],
+                ];
+            }
+        );
+
+        $product->productSlides()->createMany($productSlideValues->toArray());
 
         return $product;
     }

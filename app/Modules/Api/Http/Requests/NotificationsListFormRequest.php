@@ -20,11 +20,11 @@ class NotificationsListFormRequest extends FormRequest
         return [
             'is_read' => [
                 'integer',
-                Rule::in([NOTIFICATION_IS_READ_OFF, NOTIFICATION_IS_READ_ON])
+                Rule::in([NOTIFICATION_IS_READ_OFF, NOTIFICATION_IS_READ_ON]),
             ],
             'type' => [
                 'integer',
-                Rule::in([NOTIFICATION_TYPE_NORMAL, NOTIFICATION_TYPE_SUCCESS])
+                Rule::in([NOTIFICATION_TYPE_NORMAL, NOTIFICATION_TYPE_SUCCESS]),
             ],
 
             // paginate

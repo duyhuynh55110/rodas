@@ -27,7 +27,8 @@ class AuthenticateException extends HttpException
      *
      * @return string
      */
-    public function getStatusCode() {
+    public function getStatusCode()
+    {
         return $this->statusCode;
     }
 }
