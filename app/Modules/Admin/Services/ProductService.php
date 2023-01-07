@@ -110,6 +110,8 @@ class ProductService
                 ],
                 $values,
                 $request->category_ids,
+                $request->image_slides_uploaded,
+                $request->keep_product_slide_ids
             );
 
             // db - end transaction and save data

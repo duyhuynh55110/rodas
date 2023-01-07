@@ -5,6 +5,7 @@ use App\Modules\Admin\Http\Controllers\Auth\LogoutController;
 use App\Modules\Admin\Http\Controllers\BrandController;
 use App\Modules\Admin\Http\Controllers\GiftBoxController;
 use App\Modules\Admin\Http\Controllers\ProductController;
+use App\Modules\Admin\Http\Controllers\StorageController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -15,14 +16,9 @@ Route::group(
     ],
     function () {
         // Authentication
-        Route::group(
-            [],
-            function () {
-                Route::name('login')->get('/login', [LoginController::class, 'login']);
-                Route::name('authenticate')->post('/authenticate', [LoginController::class, 'authenticate']);
-                Route::name('logout')->get('/logout', [LogoutController::class, 'logout']);
-            }
-        );
+        Route::name('login')->get('/login', [LoginController::class, 'login']);
+        Route::name('authenticate')->post('/authenticate', [LoginController::class, 'authenticate']);
+        Route::name('logout')->get('/logout', [LogoutController::class, 'logout']);
 
         // Admin group
         Route::group(
@@ -72,7 +68,10 @@ Route::group(
                     }
                 );
 
-                // Homepage
+                // upload image to store
+                Route::name('upload-to-storage')->post('/upload-to-storage', [StorageController::class, 'uploadMultipleImagesToStorage']);
+
+                // homepage
                 Route::name('home')->get(
                     '/',
                     function () {

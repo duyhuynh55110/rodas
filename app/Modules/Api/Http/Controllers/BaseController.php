@@ -26,7 +26,7 @@ class BaseController extends Controller
      * API output manage by fractal
      *
      * @param  \League\Fractal\Resource\ResourceInterface|array  $data
-     * @return array
+     * @return \Illuminate\Http\JsonResponse
      */
     protected function outputJson($data, $groupInData = true)
     {

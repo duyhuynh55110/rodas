@@ -108,6 +108,11 @@ class ProductController extends BaseController
         try {
             $product = $this->productService->getProductById($id);
 
+            // load relation
+            $product->load([
+                'productSlides:id,product_id,image_file_name'
+            ]);
+
             // data
             $brands = $this->brandService->getAllBrands();
             $categories = $this->categoryService->getAllCategories();
@@ -148,6 +153,12 @@ class ProductController extends BaseController
         Assets::js(
             [
                 assetAdmin('pages/products.js'),
+            ]
+        );
+
+        Assets::css(
+            [
+                assetAdmin('css/products/form.css'),
             ]
         );
     }
