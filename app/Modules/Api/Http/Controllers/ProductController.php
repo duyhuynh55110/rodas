@@ -42,6 +42,8 @@ class ProductController extends BaseController
     {
         $product = $this->productService->getProductById($id);
 
+        $this->fractal->parseIncludes(['product_slides']);
+
         return $this->outputJson($product);
     }
 }

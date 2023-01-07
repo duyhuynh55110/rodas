@@ -26,8 +26,8 @@ class CompositionService
      */
     public function homePage()
     {
-        $categoriesCollection = createFractalCollection($this->categoryRepo->getAllCategories(), new CategoryTransformer);
-        $giftBoxes = createFractalCollection($this->giftBoxRepo->getAllGiftBoxes(), new GiftBoxTransformer);
+        $categoriesCollection = createFractalCollection($this->categoryRepo->getAllCategories(), new CategoryTransformer, null);
+        $giftBoxes = createFractalCollection($this->giftBoxRepo->getAllGiftBoxes(), new GiftBoxTransformer, null);
 
         return [
             'categories' => $categoriesCollection,

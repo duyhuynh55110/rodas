@@ -23,6 +23,9 @@ import i18n from "./i18n";
 // vue-skeletor
 import { Skeletor } from 'vue-skeletor';
 
+// swiper.js
+import { Swiper, SwiperSlide } from "swiper/vue";
+
 // global components, objects
 import { Navbar, LinkIcon, Toolbar } from "@/components";
 import * as helper from "@/utils/helper";
@@ -44,6 +47,8 @@ app.component("font-awesome-icon", FontAwesomeIcon)
     .component("Toolbar", Toolbar)
     .component("link-icon", LinkIcon)
     .component("skeletor", Skeletor)
+    .component("swiper", Swiper)
+    .component("swiper-slide", SwiperSlide)
     .use(store)
     .use(router)
     .use(i18n)

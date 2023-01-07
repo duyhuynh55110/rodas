@@ -3,15 +3,15 @@
 namespace App\Modules\Api\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Libs\CustomFractalSerializer;
 use League\Fractal\Manager as FractalManager;
-use League\Fractal\Serializer\ArraySerializer;
 
 class BaseController extends Controller
 {
     /**
      * @var FractalManager
      */
-    private $fractal;
+    protected $fractal;
 
     /**
      * Constructor
@@ -19,7 +19,7 @@ class BaseController extends Controller
     public function __construct()
     {
         $this->fractal = new FractalManager();
-        $this->fractal->setSerializer(new ArraySerializer);
+        $this->fractal->setSerializer(new CustomFractalSerializer);
     }
 
     /**
@@ -33,15 +33,14 @@ class BaseController extends Controller
         if ($data instanceof \League\Fractal\Resource\ResourceInterface) {
             $dataResponse = $this->fractal->createData($data)->toArray();
 
+            // not group in data because collection can have two fields 'data' & 'meta.pagination'
             if ($data instanceof \League\Fractal\Resource\Collection) {
                 $groupInData = false;
             }
         } else {
             $dataResponse = collect($data)->transform(function ($item) {
                 // Convert fractal instance -> array
-                if ($item instanceof \League\Fractal\Resource\Collection) {
-                    return current($this->fractal->createData($item)->toArray());
-                } elseif ($item instanceof \League\Fractal\Resource\ResourceInterface) {
+                if ($item instanceof \League\Fractal\Resource\ResourceInterface) {
                     return $this->fractal->createData($item)->toArray();
                 }
 

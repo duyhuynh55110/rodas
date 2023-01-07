@@ -1,7 +1,9 @@
-// components
 import { Stepper } from "@/components"
 import { productService } from "@/services"
 import { useRoute } from "vue-router";
+
+// components
+import { Pagination } from "swiper";
 import TabSwiper from "./components/TabSwiper/TabSwiper.vue"
 
 // fetch product by id
@@ -26,9 +28,13 @@ export default {
 
         return {
             product,
+            modules: [Pagination],
         }
     },
     computed: {
+        productSlides: function () {
+            return this.product.product_slides ?? [];
+        },
         brand: function () {
             return this.product.brand;
         },

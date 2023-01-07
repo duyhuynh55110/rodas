@@ -9,8 +9,12 @@
             </template>
         </navbar>
 
-        <!-- Thumbnail -->
-        <div class="item-thumbnail" :style="itemThumbnailStyle"></div>
+        <!-- Product Slides -->
+        <swiper :pagination="true" :modules="modules" class="product-slides-content">
+            <swiper-slide v-for="(productSlide, index) in productSlides" :key="index">
+                <img :src="productSlide.image_url" />
+            </swiper-slide>
+        </swiper>
         <div class="dz-banner-height"></div>
 
         <!-- Information -->

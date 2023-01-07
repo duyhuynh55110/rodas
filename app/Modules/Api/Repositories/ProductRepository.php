@@ -141,7 +141,10 @@ class ProductRepository extends Repository
             ...($userId) ? [DB::raw('fp.id as is_favorite')] : [],
         ];
 
-        $query = $this->model->select($select)->with(['brand:id,name,logo_file_name']);
+        $query = $this->model->select($select)->with([
+            'brand:id,name,logo_file_name',
+            'productSlides:product_id,image_file_name'
+        ]);
 
         $query->when(
             $userId,
