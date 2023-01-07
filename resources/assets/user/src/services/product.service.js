@@ -16,7 +16,6 @@ class ProductService extends BaseService {
     async getProductById(id) {
         const { data } = await this.get(baseUri + `/${id}`);
 
-
         return data;
     }
 }
