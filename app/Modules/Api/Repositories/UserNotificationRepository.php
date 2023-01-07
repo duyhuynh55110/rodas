@@ -45,7 +45,6 @@ class UserNotificationRepository extends Repository
         return $query->orderBy('id', 'DESC')->paginate(getPerPage());
     }
 
-
     /**
      * Filter user's notifications by condition
      *
@@ -53,7 +52,8 @@ class UserNotificationRepository extends Repository
      * @param $filter
      * @return void
      */
-    private function filterUserNotifications($query, $filter) {
+    private function filterUserNotifications($query, $filter)
+    {
         // filter by is_read
         $query->when(
             isset($filter['is_read']),

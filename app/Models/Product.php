@@ -59,6 +59,16 @@ class Product extends Model
         return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
 
+    /**
+     * Product has many slides
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productSlides()
+    {
+        return $this->hasMany(ProductSlide::class, 'product_id', 'id');
+    }
+
     // ---- Mutators & Casting
     /**
      * Get full image path

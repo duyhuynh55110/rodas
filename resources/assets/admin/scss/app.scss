@@ -10,21 +10,25 @@
 @import "~admin-lte/plugins/toastr/toastr.css";
 @import "~admin-lte/plugins/select2/css/select2.min.css";
 @import "~admin-lte/dist/css/adminlte.min.css";
+@import "~dropzone/dist/basic.css";
+@import "~dropzone/dist/dropzone.css";
 
 // === jQuery Validation library
+$jQueryColorError: #dc3545;
+
 input.error, select.error {
-    border-color: #dc3545;
+    border-color: $jQueryColorError;
 }
 
 label.error {
     padding-top: 4px;
-    color: #dc3545;
+    color: $jQueryColorError;
     font-weight: 500 !important;
 }
 
 // jQuery validation + Select2 custom error field
 .select2-selection.error {
-    border: 1px solid #dc3545;
+    border: 1px solid $jQueryColorError;
 }
 
 // === 'Select2' library
@@ -62,6 +66,32 @@ label.error {
 
         table {
             table-layout: fixed; // scroll header & scroll body not same width because scrollbar
+        }
+    }
+}
+
+// === Custom Dropzone
+.dropzone {
+    width: 100%;
+    border: 2px dashed #3498db !important;
+    border-radius: 5px;
+
+    .remove-button {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        z-index: 99;
+        background: rgba(43, 43, 43, 0.8);
+        color: #fff;
+        border: none;
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        border-radius: 26px;
+        cursor: pointer;
+
+        &:hover {
+            background: rgba(0,0,0,0.8);
         }
     }
 }

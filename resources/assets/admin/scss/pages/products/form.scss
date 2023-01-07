@@ -1,0 +1,28 @@
+#reviewImageSlides {
+    .review-image {
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        display: inline-block;
+
+        img {
+            width: 180px;
+        }
+
+        .remove-button {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            border: none;
+            background: #dc3545;
+            color: #fff;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 20px;
+
+            &:hover {
+                background-color: #bd2130;
+            }
+        }
+    }
+}
