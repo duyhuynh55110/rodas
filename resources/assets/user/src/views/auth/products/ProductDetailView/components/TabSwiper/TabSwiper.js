@@ -27,6 +27,12 @@ export default {
             ]
         }
     },
+    props: {
+        product: {
+            type: Object,
+            required: true,
+        }
+    },
     methods: {
         // event when initial swiper
         onSwiper: function (swiper) {

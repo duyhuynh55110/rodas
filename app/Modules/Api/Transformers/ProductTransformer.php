@@ -7,6 +7,15 @@ use League\Fractal\TransformerAbstract;
 class ProductTransformer extends TransformerAbstract
 {
     /**
+     * List of resources possible to include
+     *
+     * @var array
+     */
+    protected array $availableIncludes = [
+        'product_slides'
+    ];
+
+    /**
      * List of resources to automatically include
      *
      * @var array
@@ -42,5 +51,20 @@ class ProductTransformer extends TransformerAbstract
     public function includeBrand($data)
     {
         return $this->item($data->brand, new BrandTransformer);
+    }
+
+    /**
+     * Include product slides
+     *
+     * @param $data
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeProductSlides($data)
+    {
+        if(!$data->productSlides) {
+            return null;
+        }
+
+        return $this->collection($data->productSlides, new ProductSlideTransformer);
     }
 }

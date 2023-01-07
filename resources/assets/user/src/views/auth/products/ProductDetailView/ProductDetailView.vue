@@ -9,8 +9,12 @@
             </template>
         </navbar>
 
-        <!-- Thumbnail -->
-        <div class="item-thumbnail" style="background: url(https://kede.dexignzone.com/xhtml/img/slider/slide1.jpg);"></div>
+        <!-- Product Slides -->
+        <swiper :pagination="true" :modules="modules" class="product-slides-content">
+            <swiper-slide v-for="(productSlide, index) in productSlides" :key="index">
+                <img :src="productSlide.image_url" />
+            </swiper-slide>
+        </swiper>
         <div class="dz-banner-height"></div>
 
         <!-- Information -->
@@ -19,20 +23,20 @@
                 <!-- Brand name, Item name -->
                 <div class="item-info">
                     <div class="clearfix">
-                        <h3 class="brand-name"> FRUITS </h3>
-                        <h2 class="item-name"> Item Name </h2>
+                        <h3 class="brand-name"> {{ brand.name }} </h3>
+                        <h2 class="item-name"> {{ product.name }}</h2>
                     </div>
                 </div>
 
                 <!-- Currency, Quantity -->
                 <div class="item-info">
-                    <h2 class="text-primary item-price">$4.9</h2>
+                    <h2 class="text-primary item-price"> {{ $helper.formatMoney(product.item_price) }} </h2>
 
                     <Stepper />
                 </div>
 
                 <!-- Tab swiper -->
-                <TabSwiper />
+                <TabSwiper :product="product" />
             </div>
         </div>
     </div>

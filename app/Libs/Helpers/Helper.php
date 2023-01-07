@@ -249,6 +249,13 @@ if (! function_exists('writeLogHandleException')) {
 }
 
 if (! function_exists('createFractalItem')) {
+    /**
+     * Create a fractal item format
+     *
+     * @param $data
+     * @param $transformer
+     * @return \League\Fractal\Resource\Item
+     */
     function createFractalItem($data, $transformer)
     {
         $item = new FractalItem($data, $transformer);
@@ -258,14 +265,22 @@ if (! function_exists('createFractalItem')) {
 }
 
 if (! function_exists('createFractalCollection')) {
-    function createFractalCollection($data, $transformer)
+    /**
+     * Create a fractal collection format
+     *
+     * @param $data
+     * @param $transformer
+     * @param $resourceKey
+     * @return \League\Fractal\Resource\Collection
+     */
+    function createFractalCollection($data, $transformer, $resourceKey = 'data')
     {
         if ($data instanceof \Illuminate\Pagination\LengthAwarePaginator) {
             $collection = $data->getCollection();
-            $collection = new FractalCollection($collection, $transformer);
+            $collection = new FractalCollection($collection, $transformer, $resourceKey);
             $collection->setPaginator(new IlluminatePaginatorAdapter($data));
         } else {
-            $collection = new FractalCollection($data, $transformer);
+            $collection = new FractalCollection($data, $transformer, $resourceKey);
         }
 
         return $collection;

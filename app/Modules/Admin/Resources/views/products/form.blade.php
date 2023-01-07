@@ -14,6 +14,14 @@
     $requiredInputImage = !$isUpdateForm ? 'required' : ''; // required if create
 @endphp
 
+@section('style')
+    <style>
+        .ck-editor__editable {
+            min-height: 200px !important;
+        }
+    </style>
+@endsection
+
 @extends('Admin::layouts.admin.master')
 
 @section('title')

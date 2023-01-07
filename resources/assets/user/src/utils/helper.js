@@ -12,3 +12,12 @@ export const redirectWithQuery = (query, path = null) => {
 export const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+// format money
+export const formatMoney = (price) => {
+    if (!price) {
+        return '';
+    }
+
+    return `$` + price;
+}
