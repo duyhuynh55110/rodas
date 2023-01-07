@@ -6,9 +6,9 @@
             </template>
         </navbar>
 
-        <ProfileInfo />
+        <ProfileInfo :auth="auth" />
 
-        <ProfileList />
+        <ProfileList :auth="auth" />
     </div>
 </template>
 <script src="./ProfileView.js"></script>
