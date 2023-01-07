@@ -1,9 +1,18 @@
+import { authService } from "@/services";
 import { NAVBAR_STYLE_2 } from "@/utils/constants";
-import { mapState, useStore } from "vuex";
 
 // components
 import ProfileInfo from "./components/ProfileInfo/ProfileInfo.vue";
 import ProfileList from "./components/ProfileList/ProfileList.vue";
+
+
+// fetch user's profile
+const fetchUserProfile = async function () {
+    // call api
+    const response = await authService.getUserProfile();
+
+    return response;
+};
 
 export default {
     name: "ProfileView",
@@ -16,15 +25,11 @@ export default {
             navbarStyle: NAVBAR_STYLE_2,
         };
     },
-    computed: {
-        ...mapState('app', ['auth']),
-    },
     setup: async function () {
-        const store = useStore();
+        const { data } = await fetchUserProfile();
 
-        // call api
-        await store.dispatch('app/loadAuth');
-
-        return {};
+        return {
+            auth: data,
+        };
     }
 }
