@@ -12,10 +12,10 @@ import store from "./store";
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faBell, faArrowRight, faHeart, faCartShopping, faArrowRightArrowLeft, faHouse, faArrowLeft, faCircle, faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faBell, faArrowRight, faHeart, faCartShopping, faArrowRightArrowLeft, faHouse, faArrowLeft, faCircle, faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 
-library.add([ faBell, faArrowRight, faHeart, faCartShopping, faArrowRightArrowLeft, faHouse, faArrowLeft, faCircle, faClock, faBars, faMagnifyingGlass]);
+library.add([ faXmark, faBell, faArrowRight, faHeart, faCartShopping, faArrowRightArrowLeft, faHouse, faArrowLeft, faCircle, faClock, faBars, faMagnifyingGlass]);
 
 // vue-i18n (translate package)
 import i18n from "./i18n";
@@ -25,6 +25,11 @@ import { Skeletor } from 'vue-skeletor';
 
 // swiper.js
 import { Swiper, SwiperSlide } from "swiper/vue";
+
+// vue final modal
+// https://v3.vue-final-modal.org/
+import { vfmPlugin, $vfm } from 'vue-final-modal'
+
 
 // global components, objects
 import { Navbar, LinkIcon, Toolbar } from "@/components";
@@ -53,4 +58,6 @@ app.component("font-awesome-icon", FontAwesomeIcon)
     .use(router)
     .use(i18n)
     .use(helper)
+    .use($vfm)
+    .use(vfmPlugin)
     .mount("#app");

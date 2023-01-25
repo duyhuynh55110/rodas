@@ -15,7 +15,7 @@ export const capitalizeFirstLetter = (str) => {
 
 // format money
 export const formatMoney = (price) => {
-    if (!price) {
+    if (!Number.isInteger(price)) {
         return '';
     }
 

@@ -4,6 +4,7 @@ $minScreenWidth: 426px;
 // Theme color
 $themeColor: #4CB32B;
 $themeColorLight: #fafefc;
+$themeColorFavorite: #FF2E6C;
 
 // Text color
 $themeTextColor: #4CB32B;
@@ -11,12 +12,13 @@ $textColorHeading:#384144;
 $textColorWhite: #fff;
 $textColorGray: #898a8d;
 
+
 // Font family
 $themeFontFamily: 'Poppins', sans-serif, sans-serif;
 
 // z-index system
-$zIndexMax: 9999;
-$zIndexNavbar: 9998;
+$zIndexMax: 999;
+$zIndexNavbar: 998;
 
 // navbar
 $navbarHeight: 60px;

@@ -40,6 +40,19 @@
     }
 }
 
+/* Padding Left, Right space */
+.px- {
+    &15 {
+        padding-left: 15px;
+        padding-right: 150px;
+    }
+
+    &30 {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
 /* Content Bottom space */
 .bottom- {
     &sp30:after {

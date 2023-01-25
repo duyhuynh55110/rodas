@@ -13,7 +13,7 @@
         }
     }
 
-    .dz-banner-height  {
+    .dz-banner-height {
         height: 320px;
     }
 
@@ -25,11 +25,15 @@
         z-index: 2;
 
         .item-info {
-            @include flexbox($justifyContent: space-between, $alignItems: center);
+            @include flexbox(
+                $justifyContent: space-between,
+                $alignItems: center
+            );
             margin-bottom: 20px;
 
-            .brand-name, .item-name, .item-price {
-                margin: 0;
+            .brand-name,
+            .item-name,
+            .item-price {
                 font-weight: 600;
                 color: $textColorHeading;
             }
@@ -38,6 +42,81 @@
                 font-size: 14px;
                 color: $textColorGray;
             }
+        }
+    }
+
+    .product-detail-btn {
+        padding: 16px;
+        background-color: #fff;
+        height: 60px;
+        border-top: 1px solid #f4f4f4;
+        @include toolbar();
+
+        .button.button-large {
+            padding: 11px 30px;
+        }
+
+        .add-wishlist-btn {
+            font-size: 22px;
+            line-height: 37px;
+
+            &.active {
+                background-color: $themeColorFavorite;
+            }
+        }
+
+        .add-cart-btn {
+            span {
+                display: block;
+                opacity: 0.7;
+                margin-top: 1px;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .item-price {
+        font-weight: 600;
+        color: $textColorHeading;
+    }
+
+    // popup success
+    .popup-container {
+        .message-success {
+            color: $themeColor;
+            font-size: 13px;
+            line-height: 24px;
+            margin: 7px 0;
+        }
+
+        .item-banner {
+            width: -webkit-fill-available;
+            border-radius: 12px;
+        }
+
+        .item-info {
+            .item-name {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+
+            .brand-name {
+                color: $textColorGray;
+                font-weight: 600;
+                font-size: 13px;
+            }
+        }
+
+        .goto-cart-btn {
+            background: $themeColor;
+            color: $textColorWhite;
+            display: block;
+            text-align: center;
+            font-size: 18px;
+            line-height: 36px;
+            border-radius: 14px;
+            margin-top: 12px;
+            padding: 5px 0;
         }
     }
 }

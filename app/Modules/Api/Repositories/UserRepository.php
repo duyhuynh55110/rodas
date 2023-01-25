@@ -62,14 +62,21 @@ class UserRepository extends Repository
      * @param  User  $user
      * @param $productId
      * @param $cartProductValues
+     * @param $type
      * @return void
      */
-    public function updateOrCreateCartProduct(User $user, $productId, $cartProductValues)
+    public function updateOrCreateCartProduct(User $user, $productId, $cartProductValues, $type)
     {
         $cartProducts = $user->cartProducts();
-        $productExists = $cartProducts->where('product_id', $productId)->exists();
+        $cartProduct = $cartProducts->where('product_id', $productId)->first();
 
-        if ($productExists) {
+        if ($cartProduct) {
+            // if type was update
+            if($type == ADD_TO_CART_TYPE_UPDATE) {
+                $currentQuantity = $cartProduct->pivot->quantity;
+                $cartProductValues['quantity'] += $currentQuantity;
+            }
+
             $cartProducts->updateExistingPivot($productId, $cartProductValues);
         } else {
             // create/update products in cart

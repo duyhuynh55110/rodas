@@ -24,3 +24,7 @@ export const NOTIFICATION_IS_READ_ON = 1;
 
 // key name for access_token save in sessionStorage
 export const USER_LOGGED_IN_KEY = 'user';
+
+// add product to cart types
+export const ADD_TO_CART_TYPE_INSERT = 1;
+export const ADD_TO_CART_TYPE_UPDATE = 2;

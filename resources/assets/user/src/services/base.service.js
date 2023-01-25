@@ -56,7 +56,7 @@ export default class BaseService {
 
     async delete(uri) {
         try {
-            return await axios.delete(uri);
+            return await axios.delete(uri, { headers: this.authHeader() });
         } catch (e) {
             return this.handleError(e);
         }
