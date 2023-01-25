@@ -41,6 +41,8 @@ class FavoriteController extends BaseController
     {
         $product = $this->productService->createFavoriteProduct($id);
 
+        $this->fractal->parseIncludes(['product_slides']);
+
         return $this->outputJson($product);
     }
 
@@ -54,6 +56,8 @@ class FavoriteController extends BaseController
     public function delete($id, RemoveFavoriteProductFormRequest $request)
     {
         $product = $this->productService->removeFavoriteProduct($id);
+
+        $this->fractal->parseIncludes(['product_slides']);
 
         return $this->outputJson($product);
     }

@@ -1,16 +1,15 @@
 <template>
      <div class="stepper">
-        <div class="stepper-button-minus">-</div>
+        <button class="stepper-button-minus" @click="onClickChangeQuantityBtn('-')">-</button>
         <div class="stepper-input-wrap">
             <input
-                type="text"
-                value="4"
-                min="0"
-                max="100"
+                type="number"
                 step="1"
+                v-model="quantity"
+                @focusout="onFocusoutInputQuantity"
             />
         </div>
-        <div class="stepper-button-plus">+</div>
+        <button class="stepper-button-plus" @click="onClickChangeQuantityBtn('+')">+</button>
     </div>
 </template>
 

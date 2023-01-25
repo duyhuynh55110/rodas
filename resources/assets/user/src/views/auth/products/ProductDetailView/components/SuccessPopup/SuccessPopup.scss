@@ -1,0 +1,27 @@
+::v-deep .modal-container {
+    @include flexbox($justifyContent: center, $alignItems: center);
+    @include maxPageWidth();
+    margin: 0 auto;
+    min-width: 200px;
+}
+::v-deep .modal-content {
+    @include flexbox($flexDirection: column);
+    position: relative;
+    margin: 0 1rem;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+    background: #fff;
+}
+.modal__title {
+    margin: 0 2rem 0 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.modal__close {
+    @include position(absolute, $top: 0.5rem, $right: 0.5rem);
+    font-size: 18px;
+
+    border: none;
+    background: none;
+}

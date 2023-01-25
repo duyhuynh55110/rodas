@@ -97,3 +97,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/// fixed bar and maxWidth
+@mixin toolbar() {
+    @include position(fixed, $left: 0, $right: 0, $bottom: 0, $zIndex: $zIndexNavbar);
+    @include maxPageWidth();
+    margin: 0 auto;
+}

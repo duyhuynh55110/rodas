@@ -146,8 +146,9 @@ class ProductRepository extends Repository
             'productSlides:product_id,image_file_name'
         ]);
 
+        // if have user logged in check favorite
         $query->when(
-            $userId,
+            isset($userId) && !empty($userId),
             function ($q) use ($userId) {
                 $q->leftJoin('favorite_products as fp', function ($q) use ($userId) {
                     $q->on('fp.product_id', '=', 'products.id')

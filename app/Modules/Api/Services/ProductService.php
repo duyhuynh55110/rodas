@@ -215,8 +215,9 @@ class ProductService
      * @param $userId
      * @return League\Fractal\Resource\Item
      */
-    public function getProductById($productId, $userId = null)
+    public function getProductById($productId)
     {
+        $userId = auth()->user()->id;
         $product = $this->productRepo->getProductById($productId, $userId);
 
         // fractal item

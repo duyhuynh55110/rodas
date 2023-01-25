@@ -2,17 +2,25 @@
     @include flexbox();
     @include circleBox(35px, 28px);
     background-color: #efefef;
-    width: 115px;
+    width: 120px;
+    overflow: hidden;
 
-    .stepper-button-minus,
-    .stepper-button-plus,
+    [class*="stepper-button-"],
     .stepper-input-wrap {
         box-sizing: border-box;
         flex: 1;
         text-align: center;
-        margin: auto;
         width: 50%;
         color: #0a3c48;
+    }
+
+    // minus/plus button
+    [class*="stepper-button-"] {
+        border: none;
+
+        &:active{
+            background-color: rgba(10, 60, 72, .1);
+        }
     }
 
     .stepper-input-wrap {
@@ -24,7 +32,7 @@
             font-size: 18px;
             font-weight: 500;
             height: 100%;
-            width: 45px;
+            width: 50px;
             border: none;
             background: inherit;
             text-align: center;
