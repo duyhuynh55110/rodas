@@ -67,3 +67,7 @@ defined('NOTIFICATION_TYPE_SUCCESS') or define('NOTIFICATION_TYPE_SUCCESS', 2);
 //  user notification read status
 defined('NOTIFICATION_IS_READ_OFF') or define('NOTIFICATION_IS_READ_OFF', 0);
 defined('NOTIFICATION_IS_READ_ON') or define('NOTIFICATION_IS_READ_ON', 1);
+
+// add product to cart types
+defined('ADD_TO_CART_TYPE_INSERT') or define('ADD_TO_CART_TYPE_INSERT', 1);
+defined('ADD_TO_CART_TYPE_UPDATE') or define('ADD_TO_CART_TYPE_UPDATE', 2);

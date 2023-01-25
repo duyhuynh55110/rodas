@@ -65,6 +65,7 @@
                             <div class="col-70">
                                 <button
                                     @click="onClickAddToCartBtn"
+                                    :disabled="isProcessAddToCart"
                                     class="button-large button add-cart-btn button-fill text-uppercase"
                                 >
                                     add to cart

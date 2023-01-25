@@ -68,6 +68,7 @@ class ProductService
         try {
             $user = auth()->user();
             $productId = $request->product_id;
+            $type = $request->type;
 
             // cart_products value
             $cartProductValues = [
@@ -78,7 +79,7 @@ class ProductService
             DB::beginTransaction();
 
             // create/update cart_product
-            $this->userRepo->updateOrCreateCartProduct($user, $productId, $cartProductValues);
+            $this->userRepo->updateOrCreateCartProduct($user, $productId, $cartProductValues, $type);
 
             // commit transaction
             DB::commit();

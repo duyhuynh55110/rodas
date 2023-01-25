@@ -7,6 +7,8 @@ import * as yup from 'yup';
 import { Pagination } from "swiper";
 import TabSwiper from "./components/TabSwiper/TabSwiper.vue"
 import SuccessPopup from "./components/SuccessPopup/SuccessPopup.vue";
+import cartService from "@/services/cart.service";
+import { ADD_TO_CART_TYPE_INSERT } from "@/utils/constants";
 
 // fetch product by id
 const fetchProductById = async function (id) {
@@ -38,6 +40,7 @@ export default {
         return {
             product: null,
             isProcessFavorite: false,
+            isProcessAddToCart: false,
             quantity: 0,
         }
     },
@@ -95,6 +98,9 @@ export default {
         },
         // event on click 'add to cart' button
         onClickAddToCartBtn: async function () {
+            // block click button multiple
+            this.isProcessAddToCart = true;
+
             const yupObject = yup.object().shape({
                 quantity: yup.number().required().min(1),
             });
@@ -105,8 +111,13 @@ export default {
                 alert(e.message);
             });
 
-            // console.log(this.$vfm.show('successPopup'));
-            await this.$vfm.show('successPopup');
+            // call api add to cart
+            await cartService.addProductToCart(this.product.id, this.quantity, ADD_TO_CART_TYPE_INSERT);
+
+            this.$vfm.show('successPopup');
+
+            // enable click
+            this.isProcessAddToCart = false;
         },
     },
     created() {
