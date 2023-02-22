@@ -1,0 +1,49 @@
+.modal__title {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+::v-deep .modal-container {
+    @include flexbox($justifyContent: center, $alignItems: center);
+    @include maxPageWidth();
+    margin: 0 auto;
+    min-width: 200px;
+}
+
+::v-deep .modal-content {
+    @include flexbox($flexDirection: column);
+    position: relative;
+    margin: 0 1rem;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+    background: #fff;
+    font-size: 14px;
+
+    .modal-control {
+        @include flexbox($justifyContent: flex-end);
+        margin-top: 32px;
+
+        .btn {
+            padding: 8px 16px;
+            font-size: 13px;
+            line-height: 24px;
+            border-radius: 8px;
+            border: 1px solid $themeColor;
+            text-transform: capitalize;
+
+            &.btn-secondary {
+                margin-right: 8px;
+                background: #fff;
+                color: $themeColor;
+            }
+
+            &.btn-primary {
+                background: $themeColor;
+                color: #fff;
+            }
+        }
+    }
+}

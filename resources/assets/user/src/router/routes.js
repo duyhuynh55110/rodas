@@ -39,7 +39,7 @@ const routes = [
     {
         path: '/shopping-cart',
         name: 'shopping-cart',
-        component: () => import('@/views/auth/ShoppingCartView'),
+        component: () => import('@/views/auth/ShoppingCartView/ShoppingCartView.vue'),
         meta: {
             title: 'Shopping Cart',
             customPageContentClass: 'pt-60 bottom-sp60',

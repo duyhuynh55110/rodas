@@ -19,13 +19,13 @@ class CartController extends BaseController
     }
 
     /**
-     * Response user's products cart with paginate
+     * Response user's cart products with paginate
      *
      * @return Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $responseData = $this->productService->getProductsCart();
+        $responseData = $this->productService->getCartProducts();
 
         return $this->outputJson($responseData);
     }
@@ -46,12 +46,13 @@ class CartController extends BaseController
     /**
      * Remove a product from cart
      *
+     * @param $id
      * @param $request
      * @return Illuminate\Http\JsonResponse
      */
-    public function delete(RemoveProductFromCartFormRequest $request)
+    public function delete($id, RemoveProductFromCartFormRequest $request)
     {
-        $this->productService->removeProductFromCart($request);
+        $this->productService->removeProductFromCart($id);
 
         return $this->outputJson([]);
     }

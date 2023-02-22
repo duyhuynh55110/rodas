@@ -53,7 +53,7 @@ Route::group(
                             function () {
                                 Route::get('/', [CartController::class, 'index']);
                                 Route::post('/', [CartController::class, 'updateOrCreate']);
-                                Route::delete('/', [CartController::class, 'delete']);
+                                Route::delete('/{id}', [CartController::class, 'delete']);
                             }
                         );
 

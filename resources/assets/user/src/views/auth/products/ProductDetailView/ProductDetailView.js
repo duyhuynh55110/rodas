@@ -1,5 +1,5 @@
 import { Stepper } from "@/components"
-import { favoriteService, productService } from "@/services"
+import { favoriteService, productService, cartService } from "@/services"
 import { useRoute } from "vue-router";
 import * as yup from 'yup';
 
@@ -7,7 +7,6 @@ import * as yup from 'yup';
 import { Pagination } from "swiper";
 import TabSwiper from "./components/TabSwiper/TabSwiper.vue"
 import SuccessPopup from "./components/SuccessPopup/SuccessPopup.vue";
-import cartService from "@/services/cart.service";
 import { ADD_TO_CART_TYPE_INSERT } from "@/utils/constants";
 
 // fetch product by id
@@ -67,14 +66,7 @@ export default {
         },
         // total price to buy this item
         amount: function () {
-            let amount = this.quantity * this.product.item_price;
-
-            // if amount is invalid
-            if(!amount) {
-                return 0;
-            }
-
-            return amount;
+            return this.$helper.amount(this.quantity, this.product.item_price);
         },
     },
     methods: {
@@ -112,7 +104,7 @@ export default {
             });
 
             // call api add to cart
-            await cartService.addProductToCart(this.product.id, this.quantity, ADD_TO_CART_TYPE_INSERT);
+            await cartService.updateProductQuantity(this.product.id, this.quantity, ADD_TO_CART_TYPE_INSERT);
 
             this.$vfm.show('successPopup');
 

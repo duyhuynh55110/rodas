@@ -44,14 +44,14 @@ class ProductService
     }
 
     /**
-     * Get user's products cart
+     * Get user's cart products
      *
      * @return League\Fractal\Resource\Collection
      */
-    public function getProductsCart()
+    public function getCartProducts()
     {
         $userId = auth()->user()->id;
-        $data = $this->productRepo->getProductsCart($userId);
+        $data = $this->productRepo->getCartProducts($userId);
         $collection = createFractalCollection($data, new CartProductTransformer);
 
         return $collection;
@@ -96,14 +96,13 @@ class ProductService
     /**
      * Remove a product from user's cart
      *
-     * @param $request
+     * @param $productId
      * @return void
      */
-    public function removeProductFromCart($request)
+    public function removeProductFromCart($productId)
     {
         try {
             $user = auth()->user();
-            $productId = $request->product_id;
 
             // start transaction
             DB::beginTransaction();

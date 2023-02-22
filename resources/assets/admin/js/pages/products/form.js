@@ -47,7 +47,6 @@ export default class FormData {
                 },
             },
             submitHandler: function (form) {
-                console.log('from form');
                 _this._onSubmitForm(form);
 
                 return false;

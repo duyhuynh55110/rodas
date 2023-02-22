@@ -30,6 +30,8 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 // https://v3.vue-final-modal.org/
 import { vfmPlugin, $vfm } from 'vue-final-modal'
 
+// lodash
+import _ from 'lodash';
 
 // global components, objects
 import { Navbar, LinkIcon, Toolbar } from "@/components";
@@ -45,6 +47,7 @@ app.config.unwrapInjectedRef = true;
 // global properties (object, functions...)
 app.config.globalProperties.$helper = helper;
 app.config.globalProperties.$auth = auth;
+app.config.globalProperties.$_ = _;
 
 // add global components & global object to App
 app.component("font-awesome-icon", FontAwesomeIcon)
