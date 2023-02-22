@@ -92,12 +92,12 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Get user's products cart
+     * Get user's cart products
      *
      * @param $userId
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getProductsCart($userId)
+    public function getCartProducts($userId)
     {
         $query = $this->model->select([
             'products.id',

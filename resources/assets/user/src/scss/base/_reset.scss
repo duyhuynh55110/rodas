@@ -66,3 +66,22 @@ input[type=email], input[type=password], input[type=text] {
     width: 100%;
     box-sizing: border-box;
 }
+
+// remove spin button from input number
+// https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+button {
+    &:active {
+        background-image: linear-gradient(rgb(0 0 0/40%) 0 0) !important;
+    }
+}

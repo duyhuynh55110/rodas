@@ -21,3 +21,15 @@ export const formatMoney = (price) => {
 
     return `$` + price;
 }
+
+// calculate total price (amount)
+export const amount = (quantity, price) => {
+    let amount = quantity * price;
+
+    // if amount is invalid
+    if(!amount) {
+        return 0;
+    }
+
+    return amount;
+}

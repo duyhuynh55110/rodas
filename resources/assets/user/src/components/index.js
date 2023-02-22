@@ -11,22 +11,22 @@ import ButtonPrimary from "./ui/ButtonPrimary";
 import ProductBoxesList from "./products/ProductBoxesList";
 import Stepper from "./products/Stepper/Stepper.vue";
 
-// shopping cart
-import CartItemList from "./items/CartItemList";
-
 // loader
 import ScreenLoading from "./loader/ScreenLoading";
 import LoadingData from "./loader/LoadingData";
+
+// popup
+import ConfirmPopup from "./popup/ConfirmPopup/ConfirmPopup.vue";
 
 export {
     Toolbar,
     Navbar,
     ButtonPrimary,
     TitleBar,
-    CartItemList,
     LinkIcon,
     ScreenLoading,
     LoadingData,
     ProductBoxesList,
-    Stepper
+    Stepper,
+    ConfirmPopup
 }
