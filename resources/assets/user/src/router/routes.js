@@ -93,6 +93,15 @@ const routes = [
         },
     },
     {
+        path: '/checkout',
+        name: 'checkout',
+        meta: {
+            title: 'Checkout',
+            customPageContentClass: 'pt-60 bottom-sp80',
+        },
+        component: () => import('@/views/auth/CheckoutView/CheckoutView.vue'),
+    },
+    {
         path: '/',
         name: 'home',
         exact: true,
@@ -102,7 +111,6 @@ const routes = [
         },
         component: () => import('@/views/auth/HomeView/HomeView.vue'),
     },
-
 ];
 
 export default routes;

@@ -31,5 +31,12 @@
     "confirm": "confirm",
     "do you want to delete the selected product?": "do you want to delete the selected product?",
     "cancel": "cancel",
-    "ok": "ok"
+    "ok": "ok",
+    "next": "next",
+    "payment method": "payment method",
+    "full name": "full name",
+    "zip code": "zip code",
+    "city": "city",
+    "country": "country",
+    "address": "address"
 }

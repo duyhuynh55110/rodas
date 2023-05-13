@@ -1,7 +1,7 @@
 // layout
 import Toolbar from "./layout/Toolbar";
-import Navbar from "./layout/Navbar";
-import LinkIcon from "./layout/LinkIcon";
+import Navbar from "./layout/Navbar/Navbar.vue";
+import LinkIcon from "./layout/LinkIcon/LinkIcon.vue";
 
 // ui
 import TitleBar from "./ui/TitleBar";

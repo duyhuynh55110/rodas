@@ -57,18 +57,8 @@
     background-color: $themeColor;
 }
 
-.button {
-    border-radius: 16px;
-
-    &.button-large {
-        font-size: 16px;
-        padding: 20px 30px;
-        height: auto;
-        line-height: 1.2;
-    }
-}
-
 .button{
+    text-align: center;
     width: 100%;
 	border-radius:16px;
     background: $themeColor;
@@ -98,4 +88,8 @@
 
 .text-upper-first-letter::first-letter {
     text-transform:capitalize;
+}
+
+.d-none {
+    display: none;
 }

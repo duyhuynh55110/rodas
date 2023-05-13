@@ -2,7 +2,7 @@
     <div>
         <navbar :title="$t('shopping cart')">
             <template v-slot:right>
-                <a href="/shipping-address/"> {{ $t("checkout") }} </a>
+                <router-link to="/checkout"> {{ $t("checkout") }} </router-link>
             </template>
         </navbar>
 

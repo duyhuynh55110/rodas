@@ -31,5 +31,12 @@
     "confirm": "xác nhận",
     "do you want to delete the selected product?": "bạn có muốn xoá sản phẩm đang chọn?",
     "cancel": "huỷ",
-    "ok": "xác nhận"
+    "ok": "xác nhận",
+    "next": "tiếp",
+    "payment method": "phương thức thanh toán",
+    "full name": "họ và tên",
+    "zip code": "mã zip",
+    "city": "thành phố",
+    "country": "quốc gia",
+    "address": "địa chỉ"
 }

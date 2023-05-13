@@ -32,7 +32,6 @@ export default {
         // handle quantity change
         quantity: {
             handler: async function (newValue) {
-                console.log(newValue);
                 // call api update value
                 if (!this.isInitial) {
                     await cartService.updateProductQuantity(this.product.id, newValue, ADD_TO_CART_TYPE_UPDATE);
