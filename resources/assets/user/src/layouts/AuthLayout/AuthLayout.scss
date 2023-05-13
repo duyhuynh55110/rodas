@@ -89,17 +89,7 @@ $fontSizeTransition: font-size ease-out 0.2s;
                     }
 
                     ::-webkit-input-placeholder {
-                        text-transform:capitalize;
-                    }
-                }
-
-                span.invalid-feedback {
-                    font-size: 13px;
-                    line-height: 30px;
-                    color: $inputInValidColor;
-
-                    &::first-letter {
-                        text-transform:capitalize;
+                        text-transform: capitalize;
                     }
                 }
             }

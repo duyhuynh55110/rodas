@@ -1,5 +1,5 @@
 // Plugins
-@import "plugins/plugins.scss";
+@import "plugins/plugins";
 
 @import "base/reset";
 @import "base/typography";
@@ -10,3 +10,18 @@
 
 @import "custom/fonts";
 @import "custom/styles";
+
+// validation styles
+form {
+    .form-group {
+        span.invalid-feedback {
+            font-size: 13px;
+            line-height: 30px;
+            color: $inputInValidColor;
+
+            &::first-letter {
+                text-transform: capitalize;
+            }
+        }
+    }
+}

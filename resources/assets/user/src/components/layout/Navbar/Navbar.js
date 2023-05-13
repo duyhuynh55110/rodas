@@ -18,9 +18,11 @@ export default {
         }
     },
     computed: {
+        // check user has use left slot
         hasLeftSlot: function () {
             return !!this.$slots.left;
         },
+        // navbar's class
         navbarClass: function () {
             return {
                 'navbar': true,
