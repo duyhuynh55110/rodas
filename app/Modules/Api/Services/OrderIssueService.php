@@ -25,7 +25,7 @@ class OrderIssueService
      * Create a order issue
      *
      * @param $request
-     * @return
+     * @return \League\Fractal\Resource\Item
      */
     public function createOrderIssue($request) {
         try {
