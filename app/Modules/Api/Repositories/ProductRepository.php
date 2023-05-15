@@ -159,4 +159,15 @@ class ProductRepository extends Repository
 
         return $query->find($productId);
     }
+
+    /**
+     * Find products by array ids
+     *
+     * @param array $productIds
+     * @param array $fields
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function getProductByIds(array $productIds, array $fields = ['*']) {
+        return $this->model->select($fields)->whereIn('id', $productIds)->get();
+    }
 }

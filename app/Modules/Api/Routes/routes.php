@@ -6,6 +6,7 @@ use App\Modules\Api\Http\Controllers\CategoryController;
 use App\Modules\Api\Http\Controllers\CompositionController;
 use App\Modules\Api\Http\Controllers\FavoriteController;
 use App\Modules\Api\Http\Controllers\NotificationController;
+use App\Modules\Api\Http\Controllers\OrderIssueController;
 use App\Modules\Api\Http\Controllers\ProductController;
 use App\Modules\Api\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -91,6 +92,16 @@ Route::group(
                     ],
                     function () {
                         Route::get('/home-page', [CompositionController::class, 'homePage']);
+                    }
+                );
+
+                // orders
+                Route::group(
+                    [
+                        'prefix' => 'order-issues',
+                    ],
+                    function () {
+                        Route::post('/', [OrderIssueController::class, 'create']);
                     }
                 );
             }
