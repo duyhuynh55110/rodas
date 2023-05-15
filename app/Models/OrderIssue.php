@@ -46,7 +46,8 @@ class OrderIssue extends Model
      *
      * @return Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function orderIssueInform() {
+    public function orderIssueInform()
+    {
         return $this->hasOne(OrderIssueInform::class);
     }
 }

@@ -22,8 +22,8 @@ class CreateProductToCartFormRequest extends FormRequest
             'quantity' => ['required', 'integer', 'min:0'],
             'type' => [
                 'required',
-                Rule::in([ADD_TO_CART_TYPE_INSERT, ADD_TO_CART_TYPE_UPDATE])
-            ]
+                Rule::in([ADD_TO_CART_TYPE_INSERT, ADD_TO_CART_TYPE_UPDATE]),
+            ],
         ];
     }
 }

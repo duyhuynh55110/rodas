@@ -10,7 +10,7 @@ class OrderIssueController extends BaseController
     /**
      * Constructor
      *
-     * @param OrderIssueService $orderIssueServices
+     * @param  OrderIssueService  $orderIssueServices
      */
     public function __construct(private OrderIssueService $orderIssueService)
     {
@@ -20,10 +20,11 @@ class OrderIssueController extends BaseController
     /**
      * Create a order issue
      *
-     * @param CreateOrderIssueFormRequest $request
+     * @param  CreateOrderIssueFormRequest  $request
      * @return Illuminate\Http\JsonResponse
      */
-    public function create(CreateOrderIssueFormRequest $request) {
+    public function create(CreateOrderIssueFormRequest $request)
+    {
         $orderIssue = $this->orderIssueService->createOrderIssue($request);
 
         return $this->outputJson($orderIssue);

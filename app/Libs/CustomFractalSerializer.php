@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Libs;
+
 use League\Fractal\Serializer\ArraySerializer;
 
 /**
  * Custom class for fratal
- *
  */
 class CustomFractalSerializer extends ArraySerializer
 {
@@ -22,6 +23,7 @@ class CustomFractalSerializer extends ArraySerializer
         if ($resourceKey) {
             return [$resourceKey => $data];
         }
+
         return $data;
     }
 }

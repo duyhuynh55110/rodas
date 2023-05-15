@@ -29,7 +29,7 @@ class ProductFactory extends Factory
         $productData = [
             'brand_id' => Arr::random($brandIds),
             'name' => $this->faker->text(50),
-            'description' => '<p>' . $this->faker->realText(300) . '</p>',
+            'description' => '<p>'.$this->faker->realText(300).'</p>',
             'image_file_name' => $imageFiles[rand(0, count($imageFiles) - 1)],
             'item_price' => rand(1, 100), // random between 1 - 100
             'created_by' => 1,

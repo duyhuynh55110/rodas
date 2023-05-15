@@ -72,7 +72,7 @@ class UserRepository extends Repository
 
         if ($cartProduct) {
             // if type was update
-            if($type == ADD_TO_CART_TYPE_INSERT) {
+            if ($type == ADD_TO_CART_TYPE_INSERT) {
                 $currentQuantity = $cartProduct->pivot->quantity;
                 $cartProductValues['quantity'] += $currentQuantity;
             }

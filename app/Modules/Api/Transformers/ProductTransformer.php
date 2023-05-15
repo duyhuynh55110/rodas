@@ -12,7 +12,7 @@ class ProductTransformer extends TransformerAbstract
      * @var array
      */
     protected array $availableIncludes = [
-        'product_slides'
+        'product_slides',
     ];
 
     /**
@@ -61,7 +61,7 @@ class ProductTransformer extends TransformerAbstract
      */
     public function includeProductSlides($data)
     {
-        if(!$data->productSlides) {
+        if (! $data->productSlides) {
             return null;
         }
 

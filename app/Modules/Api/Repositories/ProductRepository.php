@@ -143,12 +143,12 @@ class ProductRepository extends Repository
 
         $query = $this->model->select($select)->with([
             'brand:id,name,logo_file_name',
-            'productSlides:product_id,image_file_name'
+            'productSlides:product_id,image_file_name',
         ]);
 
         // if have user logged in check favorite
         $query->when(
-            isset($userId) && !empty($userId),
+            isset($userId) && ! empty($userId),
             function ($q) use ($userId) {
                 $q->leftJoin('favorite_products as fp', function ($q) use ($userId) {
                     $q->on('fp.product_id', '=', 'products.id')
@@ -163,11 +163,12 @@ class ProductRepository extends Repository
     /**
      * Find products by array ids
      *
-     * @param array $productIds
-     * @param array $fields
+     * @param  array  $productIds
+     * @param  array  $fields
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getProductByIds(array $productIds, array $fields = ['*']) {
+    public function getProductByIds(array $productIds, array $fields = ['*'])
+    {
         return $this->model->select($fields)->whereIn('id', $productIds)->get();
     }
 }

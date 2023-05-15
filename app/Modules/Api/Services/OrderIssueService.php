@@ -15,7 +15,7 @@ class OrderIssueService
      * Constructor
      *
      * @param  OrderIssueRepository  $orderIssueRepo
-     * @param  ProductRepository $productRepo
+     * @param  ProductRepository  $productRepo
      */
     public function __construct(private OrderIssueRepository $orderIssueRepo, private ProductRepository $productRepo)
     {
@@ -27,7 +27,8 @@ class OrderIssueService
      * @param $request
      * @return \League\Fractal\Resource\Item
      */
-    public function createOrderIssue($request) {
+    public function createOrderIssue($request)
+    {
         try {
             // db - start transaction
             DB::beginTransaction();
@@ -40,7 +41,7 @@ class OrderIssueService
             $products = $this->productRepo->getProductByIds($orderProductIds, ['id', 'item_price']);
 
             // order_issue_products values
-            $orderIssueProducts = $orderProductsRequest->map(function($orderProduct) use ($products) {
+            $orderIssueProducts = $orderProductsRequest->map(function ($orderProduct) use ($products) {
                 $productId = $orderProduct['id'];
                 $quantity = $orderProduct['quantity'];
                 $itemPrice = $products->where('id', $productId)->first()->item_price;
@@ -68,7 +69,7 @@ class OrderIssueService
                 'email' => $request->email,
                 'zip_code' => $request->zip_code,
                 'city' => $request->city,
-                'phone' =>  $request->phone,
+                'phone' => $request->phone,
                 'address' => $request->address,
             ];
 

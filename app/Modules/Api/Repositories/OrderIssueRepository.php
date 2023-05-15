@@ -23,8 +23,8 @@ class OrderIssueRepository extends Repository
     /**
      * Create a order issue
      *
-     * @param array $orderIssueValues
-     * @param array $orderIssueInformValues
+     * @param  array  $orderIssueValues
+     * @param  array  $orderIssueInformValues
      * @param $orderIssueProductsValues
      * @return \App\Models\OrderIssue
      */
@@ -38,7 +38,6 @@ class OrderIssueRepository extends Repository
 
         // create order issue inform
         $orderIssue->orderIssueInform()->create($orderIssueInformValues);
-
 
         $orderIssueProductsValues = [];
         $orderIssueProducts->map(
