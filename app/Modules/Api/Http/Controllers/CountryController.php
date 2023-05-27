@@ -21,7 +21,8 @@ class CountryController extends BaseController
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function index() {
+    public function index()
+    {
         $collection = $this->countryService->getCountries();
 
         return $this->outputJson($collection);

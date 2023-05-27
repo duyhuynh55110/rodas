@@ -39,7 +39,7 @@ class OrderIssueService
             // get products
             $cartProducts = $this->productRepo->getAllCartProducts($user->id);
 
-            if(!$cartProducts->count()) {
+            if (! $cartProducts->count()) {
                 throw new EmptyCartProductsHttpException;
             }
 

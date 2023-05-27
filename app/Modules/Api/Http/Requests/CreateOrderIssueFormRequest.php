@@ -2,7 +2,6 @@
 
 namespace App\Modules\Api\Http\Requests;
 
-use App\Modules\Api\Http\Rules\CartProductsEmptyRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

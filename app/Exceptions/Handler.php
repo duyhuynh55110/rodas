@@ -3,13 +3,12 @@
 namespace App\Exceptions;
 
 use App\Traits\HandleErrorException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -93,7 +92,6 @@ class Handler extends ExceptionHandler
                 return $this->renderForbiddenException($e);
             default:
                 return $this->renderServerErrorException($e);
-
-    }
+        }
     }
 }

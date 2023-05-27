@@ -166,7 +166,8 @@ class ProductRepository extends Repository
      * @param $userId
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getAllCartProducts($userId) {
+    public function getAllCartProducts($userId)
+    {
         $query = $this->model->select([
             'products.id',
             'products.item_price',

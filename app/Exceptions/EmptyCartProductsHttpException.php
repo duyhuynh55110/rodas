@@ -4,7 +4,8 @@ namespace App\Exceptions;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class EmptyCartProductsHttpException extends HttpException {
+class EmptyCartProductsHttpException extends HttpException
+{
     /**
      * __constructor
      *

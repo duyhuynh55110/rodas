@@ -221,7 +221,7 @@ class ProductService
         $userId = auth()->user()->id;
         $product = $this->productRepo->getProductById($productId, $userId);
 
-        if(!$product) {
+        if (! $product) {
             throw new NotFoundHttpException();
         }
 
