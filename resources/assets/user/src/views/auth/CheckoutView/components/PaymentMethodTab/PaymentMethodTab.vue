@@ -18,14 +18,13 @@
                     name="address"
                     :placeholder="$helper.capitalizeFirstLetter($t('address'))"
                     autocomplete="off"
-                    :value="address"
-                    @input="$emit('update:address', $event.target.value)"
+                    v-model="formData.address"
                 />
                 <ErrorMessage name="address" class="invalid-feedback" />
             </div>
 
             <!-- Submit button -->
-            <button class="button-large button button-fill text-upper-first-letter"> {{ $t('confirm') }} </button>
+            <button class="button-large button button-fill text-upper-first-letter" :disabled="isProcessing"> {{ $t('confirm') }} </button>
         </Form>
     </div>
 </template>

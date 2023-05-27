@@ -24,10 +24,6 @@ class CreateOrderIssueFormRequest extends FormRequest
             'country_id' => ['required', 'exists:countries,id'],
             'phone' => ['required', 'integer', 'digits_between:9,10'],
             'address' => ['required', 'max:255'],
-
-            'order_products' => ['required', 'array'],
-            'order_products.*.id' => ['required', 'integer', 'exists:products,id'],
-            'order_products.*.quantity' => ['required', 'integer', 'min:1'],
         ];
     }
 }

@@ -2,11 +2,18 @@
 
 namespace App\Exceptions;
 
+use App\Traits\HandleErrorException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use HandleErrorException;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -70,38 +77,21 @@ class Handler extends ExceptionHandler
     {
         $e = $this->prepareException($e);
 
-        if ($e instanceof \Illuminate\Validation\ValidationException) {
-            $httpCode = HTTP_CODE_UNPROCESSABLE_ENTITY;
-            $e = $this->convertValidationExceptionToResponse($e, $request);
-        } elseif ($e instanceof \App\Exceptions\AuthenticateException) {
-            $httpCode = HTTP_CODE_UNAUTHORIZED;
-        } elseif (method_exists($e, 'getStatusCode')) {
-            $httpCode = $e->getStatusCode();
-        } else {
-            $httpCode = HTTP_CODE_INTERNAL_SERVER_ERROR;
-        }
-
-        $response = [];
-
-        switch ($httpCode) {
-            case HTTP_CODE_UNPROCESSABLE_ENTITY:
-                // Only return first error message
-                $errors = $e->original['errors'];
-                $firstErrorKey = array_keys($errors)[0];
-                $firstErrorMessage = array_values($errors[$firstErrorKey])[0];
-
-                // status code
-                $response['status'] = STATUS_CODE_INVALID_REQUEST;
-                $response['message'] = $firstErrorMessage;
-                break;
-            case HTTP_CODE_UNAUTHORIZED:
-                $response['status'] = $e->getStatusCode();
-                $response['message'] = $e->getMessage();
-                break;
+        switch (get_class($e)) {
+            case ValidationException::class:
+                return $this->renderValidateException($e, $request);
+            case NotFoundHttpException::class:
+                return $this->renderApiNotFoundResponse($e);
+            case BadRequestHttpException::class:
+                return $this->renderApiBadRequestResponse($e);
+            case AuthenticateHttpException::class:
+                return $this->renderUnauthenticatedException($e);
+            case ModelNotFoundException::class:
+                return $this->renderApiModelNotFoundResponse($e);
+            case EmptyCartProductsHttpException::class:
+                return $this->renderForbiddenException($e);
             default:
-                $response['message'] = $httpCode == HTTP_CODE_INTERNAL_SERVER_ERROR ? 'Whoops, looks like something went wrong' : $e->getMessage();
+                return $this->renderServerErrorException($e);
         }
-
-        return response()->json($response, $httpCode);
     }
 }

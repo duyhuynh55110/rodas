@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Admin\Repositories;
+namespace App\Modules\Api\Repositories;
 
 use App\Models\Country;
 use Base\Repositories\Eloquent\Repository;

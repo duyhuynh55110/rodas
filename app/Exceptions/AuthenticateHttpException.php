@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class AuthenticateException extends HttpException
+class AuthenticateHttpException extends HttpException
 {
     private $statusCode;
 
@@ -17,8 +17,6 @@ class AuthenticateException extends HttpException
             $this->message = 'The username or password was not correct';
         }
 
-        // set http code
-        $this->code = HTTP_CODE_UNAUTHORIZED;
         $this->statusCode = $statusCode;
     }
 

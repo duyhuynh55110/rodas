@@ -161,14 +161,23 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Find products by array ids
+     * Get all cart products
      *
-     * @param  array  $productIds
-     * @param  array  $fields
+     * @param $userId
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getProductByIds(array $productIds, array $fields = ['*'])
+    public function getAllCartProducts($userId)
     {
-        return $this->model->select($fields)->whereIn('id', $productIds)->get();
+        $query = $this->model->select([
+            'products.id',
+            'products.item_price',
+            'cp.quantity',
+        ])
+        ->join('cart_products as cp', function ($q) use ($userId) {
+            $q->on('cp.product_id', '=', 'products.id')
+            ->where('cp.user_id', '=', DB::raw($userId));
+        });
+
+        return $query->get();
     }
 }

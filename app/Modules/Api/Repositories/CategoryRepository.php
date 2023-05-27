@@ -48,6 +48,6 @@ class CategoryRepository extends Repository
             'name',
         ])
         ->withCount(['products'])
-        ->find($categoryId);
+        ->findOrFail($categoryId);
     }
 }

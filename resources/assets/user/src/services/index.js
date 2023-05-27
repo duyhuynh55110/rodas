@@ -5,6 +5,8 @@ import categoryService from "./category.service";
 import authService from "./auth.service";
 import notificationService from "./notification.service";
 import cartService from "./cart.service";
+import countryService from "./country.service";
+import orderIssueService from "./orderIssue.service";
 
 export {
     productService,
@@ -14,4 +16,6 @@ export {
     authService,
     notificationService,
     cartService,
+    countryService,
+    orderIssueService
 }

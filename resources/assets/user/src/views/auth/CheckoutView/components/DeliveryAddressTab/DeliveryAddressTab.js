@@ -1,4 +1,5 @@
 // components
+import { DEFAULT_COUNTRY_ID_SELECTED } from '@/utils/constants';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 
@@ -9,14 +10,7 @@ export default {
         Field,
         ErrorMessage,
     },
-    props: {
-        name: String,
-        email: String,
-        zipCode: String,
-        city: String,
-        countryId: Number,
-        phoneNumber: String,
-    },
+    props: ['formData', 'countries'],
     data: function () {
         return {
             schema: yup.object({
@@ -25,19 +19,11 @@ export default {
                 'zip-code': yup.number().typeError(this.$t('you must specify a number')),
                 'city': yup.string().required(),
                 'country': yup.number().required(),
-                'phone': yup.number().typeError(this.$t('you must specify a number')),
-            })
+                'phone': yup.string().matches(/\b\d{9,10}\b/, {message: 'phone must have length from 9 to 10', excludeEmptyString: true}).required(),
+            }),
+            selected: DEFAULT_COUNTRY_ID_SELECTED,
         }
     },
-    emits: [
-        'update:name',
-        'update:email',
-        'update:zipCode',
-        'update:city',
-        'update:countryId',
-        'update:phoneNumber',
-        'nextStep'
-    ],
     methods: {
         onSubmitForm: function () {
             this.$emit('nextStep');

@@ -38,5 +38,6 @@
     "zip code": "zip code",
     "city": "city",
     "country": "country",
-    "address": "address"
+    "address": "address",
+    "you must specify a number": "you must specify a number"
 }

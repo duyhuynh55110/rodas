@@ -40,7 +40,7 @@ class AuthService extends BaseService {
     async logout() {
         const { data } = await this.post('/logout');
 
-        // unset current user's data from sessionStorage
+        // unset current user's data from localStorage
         unsetAuth();
 
         return data;

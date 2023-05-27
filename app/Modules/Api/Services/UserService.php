@@ -2,7 +2,7 @@
 
 namespace App\Modules\Api\Services;
 
-use App\Exceptions\AuthenticateException;
+use App\Exceptions\AuthenticateHttpException;
 use App\Modules\Api\Repositories\UserRepository;
 use App\Modules\Api\Transformers\UserTransformer;
 use Illuminate\Support\Facades\DB;
@@ -80,7 +80,7 @@ class UserService
             ];
 
             if (! auth()->attempt($credentials)) {
-                throw new AuthenticateException(STATUS_CODE_LOGIN_FAILED);
+                throw new AuthenticateHttpException(STATUS_CODE_LOGIN_FAILED);
             }
 
             $user = auth()->user();
@@ -118,7 +118,7 @@ class UserService
         $user = auth('sanctum')->user();
 
         if (! $user) {
-            throw new AuthenticationException();
+            throw new AuthenticateHttpException();
         }
 
         // Revoke the user's current token...

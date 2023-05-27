@@ -34,7 +34,7 @@ class Authenticate extends Middleware
     {
         // throw custom exception error if was API
         if ($request->expectsJson()) {
-            throw new \App\Exceptions\AuthenticateException();
+            throw new \App\Exceptions\AuthenticateHttpException();
         }
 
         throw new AuthenticationException(
