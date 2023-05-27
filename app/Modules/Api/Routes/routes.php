@@ -4,6 +4,7 @@ use App\Modules\Api\Http\Controllers\AuthController;
 use App\Modules\Api\Http\Controllers\CartController;
 use App\Modules\Api\Http\Controllers\CategoryController;
 use App\Modules\Api\Http\Controllers\CompositionController;
+use App\Modules\Api\Http\Controllers\CountryController;
 use App\Modules\Api\Http\Controllers\FavoriteController;
 use App\Modules\Api\Http\Controllers\NotificationController;
 use App\Modules\Api\Http\Controllers\OrderIssueController;
@@ -95,13 +96,23 @@ Route::group(
                     }
                 );
 
-                // orders
+                // order issues
                 Route::group(
                     [
                         'prefix' => 'order-issues',
                     ],
                     function () {
                         Route::post('/', [OrderIssueController::class, 'create']);
+                    }
+                );
+
+                // countries
+                Route::group(
+                    [
+                        'prefix' => 'countries',
+                    ],
+                    function () {
+                        Route::get('/', [CountryController::class, 'index']);
                     }
                 );
             }

@@ -9,14 +9,13 @@ export default {
         Field,
         ErrorMessage,
     },
-    props: {
-        address: String,
-    },
+    props: ['formData'],
     data: function () {
         return {
             schema: yup.object({
                 'address': yup.string().required(),
-            })
+            }),
+            isProcessing: false,
         }
     },
      emits: [
@@ -26,7 +25,14 @@ export default {
     methods: {
         // event when submit form
         onSubmitForm: function () {
-            this.$emit('complete');
+            // block click multiple
+            this.isProcessing = true;
+
+            this.$emit('complete', {
+                fail: () => {
+                    this.isProcessing = false;
+                }
+            });
             return false;
         },
     }

@@ -12,8 +12,7 @@
                     name="full-name"
                     :placeholder="$helper.capitalizeFirstLetter($t('full name'))"
                     autocomplete="off"
-                    :value="name"
-                    @input="$emit('update:name', $event.target.value)"
+                    v-model="formData.name"
                 />
                 <ErrorMessage name="full-name" class="invalid-feedback" />
             </div>
@@ -26,8 +25,7 @@
                     name="email"
                     :placeholder="$helper.capitalizeFirstLetter($t('email'))"
                     autocomplete="off"
-                    :value="email"
-                    @input="$emit('update:email', $event.target.value)"
+                    v-model="formData.email"
                 />
                 <ErrorMessage name="email" class="invalid-feedback" />
             </div>
@@ -42,8 +40,7 @@
                             name="zip-code"
                             :placeholder="$helper.capitalizeFirstLetter($t('zip code'))"
                             autocomplete="off"
-                            :value="zipCode"
-                            @input="$emit('update:zipCode', $event.target.value)"
+                            v-model="formData.zip_code"
                         />
                         <ErrorMessage name="zip-code" class="invalid-feedback" />
                     </div>
@@ -58,8 +55,7 @@
                             name="city"
                             :placeholder="$helper.capitalizeFirstLetter($t('city'))"
                             autocomplete="off"
-                            :value="city"
-                            @input="$emit('update:city', $event.target.value)"
+                            v-model="formData.city"
                         />
                         <ErrorMessage name="city" class="invalid-feedback" />
                     </div>
@@ -75,18 +71,9 @@
                             id="inputCountry"
                             name="country"
                             as="select"
-                            :value="countryId"
-                            @change="$emit('update:countryId', $event.target.value)"
+                            v-model="formData.country_id"
                         >
-                            <option value="0">Month</option>
-                            <option value="1" selected>January</option>
-                            <option value="2">February</option>
-                            <option value="3">March</option>
-                            <option value="4">April</option>
-                            <option value="5">May</option>
-                            <option value="6">June</option>
-                            <option value="7">July</option>
-                            <option value="8">August</option>
+                            <option v-for="(country, index) in countries" :key="index" :value="country.id"> {{ country.name }} </option>
                         </Field>
                         <ErrorMessage name="country" class="invalid-feedback" />
                     </div>
@@ -102,8 +89,7 @@
                             type="number"
                             :placeholder="$helper.capitalizeFirstLetter($t('phone'))"
                             autocomplete="off"
-                            :value="phoneNumber"
-                            @input="$emit('update:phoneNumber', $event.target.value)"
+                            v-model="formData.phone"
                         />
                         <ErrorMessage name="phone" class="invalid-feedback" />
                     </div>

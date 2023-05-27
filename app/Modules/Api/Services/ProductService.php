@@ -7,6 +7,7 @@ use App\Modules\Api\Repositories\UserRepository;
 use App\Modules\Api\Transformers\CartProductTransformer;
 use App\Modules\Api\Transformers\ProductTransformer;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class ProductService
@@ -219,6 +220,10 @@ class ProductService
     {
         $userId = auth()->user()->id;
         $product = $this->productRepo->getProductById($productId, $userId);
+
+        if(!$product) {
+            throw new NotFoundHttpException();
+        }
 
         // fractal item
         $item = createFractalItem($product, new ProductTransformer);

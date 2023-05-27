@@ -38,5 +38,6 @@
     "zip code": "mã zip",
     "city": "thành phố",
     "country": "quốc gia",
-    "address": "địa chỉ"
+    "address": "địa chỉ",
+    "you must specify a number": "bạn cần nhập số"
 }

@@ -33,16 +33,14 @@ defined('MAX_INTEGER_VALUE') or define('MAX_INTEGER_VALUE', 2147483647);
 defined('UPLOAD_MAX_SIZE') or define('UPLOAD_MAX_SIZE', 5242880); // BYTES (maximum is 5MB)
 
 // Http Code
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/100
 // https://developers.rebrandly.com/docs/http-responses
 defined('HTTP_CODE_OK') or define('HTTP_CODE_OK', 200);
-defined('HTTP_CODE_UNPROCESSABLE_ENTITY') or define('HTTP_CODE_UNPROCESSABLE_ENTITY', 422);
-defined('HTTP_CODE_INTERNAL_SERVER_ERROR') or define('HTTP_CODE_INTERNAL_SERVER_ERROR', 500);
-defined('HTTP_CODE_UNAUTHORIZED') or define('HTTP_CODE_UNAUTHORIZED', 401);
-defined('HTTP_CODE_NOT_FOUND') or define('HTTP_CODE_NOT_FOUND', 404);
 
 // Status code
 defined('STATUS_CODE_LOGIN_FAILED') or define('STATUS_CODE_LOGIN_FAILED', 104);
 defined('STATUS_CODE_NOT_LOGGED_IN') or define('STATUS_CODE_NOT_LOGGED_IN', 103); // still not login
+defined('STATUS_CODE_EMPTY_CART_PRODUCTS') or define('STATUS_CODE_EMPTY_CART_PRODUCTS', 105);
 
 // Status code (status is custom define, handle exception from RESTFUL API)
 defined('STATUS_CODE_INVALID_REQUEST') or define('STATUS_CODE_INVALID_REQUEST', 100);

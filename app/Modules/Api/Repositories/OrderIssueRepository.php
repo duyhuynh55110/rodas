@@ -26,12 +26,14 @@ class OrderIssueRepository extends Repository
      * @param  array  $orderIssueValues
      * @param  array  $orderIssueInformValues
      * @param $orderIssueProductsValues
+     * @param $user
      * @return \App\Models\OrderIssue
      */
     public function createOrderIssue(
         array $orderIssueValues,
         array $orderIssueInformValues,
-        $orderIssueProducts
+        $orderIssueProducts,
+        $user
     ) {
         // create order issue
         $orderIssue = $this->model->create($orderIssueValues);
@@ -49,6 +51,9 @@ class OrderIssueRepository extends Repository
 
         // create order issue products
         $orderIssue->orderIssueProducts()->sync($orderIssueProductsValues);
+
+        // clear user's cart
+        $user->cartProducts()->detach();
 
         return $orderIssue;
     }

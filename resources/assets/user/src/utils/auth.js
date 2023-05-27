@@ -3,7 +3,7 @@ import { USER_LOGGED_IN_KEY } from "./constants"
 // get user's data
 const getAuth = () => {
     // get data from session storage
-    const auth = JSON.parse(sessionStorage.getItem(USER_LOGGED_IN_KEY));
+    const auth = JSON.parse(localStorage.getItem(USER_LOGGED_IN_KEY));
 
     return auth ?? null;
 }
@@ -38,12 +38,12 @@ export const setAuth = (accessToken, user) => {
     });
 
     // save to session storage to keep login
-    sessionStorage.setItem(USER_LOGGED_IN_KEY, values);
+    localStorage.setItem(USER_LOGGED_IN_KEY, values);
 }
 
 // unset a user's data
 export const unsetAuth = () => {
     // remove user's data from session storage
-    sessionStorage.removeItem(USER_LOGGED_IN_KEY);
+    localStorage.removeItem(USER_LOGGED_IN_KEY);
 }
 

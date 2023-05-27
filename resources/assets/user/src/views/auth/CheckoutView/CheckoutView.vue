@@ -18,17 +18,13 @@
 
         <DeliveryAddressTab
             v-show="activeTab(0)"
-            v-model:name="form.name"
-            v-model:email="form.email"
-            v-model:zipCode="form.zipCode"
-            v-model:city="form.city"
-            v-model:countryId="form.countryId"
-            v-model:phoneNumber="form.phoneNumber"
+            :formData="formData"
+            :countries="countries"
             @nextStep="nextStep"
         />
         <PaymentMethodTab
             v-show="activeTab(1)"
-            v-model:address="form.address"
+            :formData="formData"
             @complete="onClickCompleteBtn"
         />
     </div>

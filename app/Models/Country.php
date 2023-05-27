@@ -22,7 +22,7 @@ class Country extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 'calling_code',
         'created_by', 'created_at', 'updated_by', 'updated_at',
     ];
 }

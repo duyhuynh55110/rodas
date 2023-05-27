@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\Services;
 
+use App\Exceptions\EmptyCartProductsHttpException;
 use App\Modules\Api\Repositories\OrderIssueRepository;
 use App\Modules\Api\Repositories\ProductRepository;
 use App\Modules\Api\Transformers\OrderIssueTransformer;
@@ -33,21 +34,22 @@ class OrderIssueService
             // db - start transaction
             DB::beginTransaction();
 
-            // request
-            $orderProductsRequest = collect($request->order_products);
-            $orderProductIds = $orderProductsRequest->pluck('id')->all();
+            $user = auth()->user();
 
             // get products
-            $products = $this->productRepo->getProductByIds($orderProductIds, ['id', 'item_price']);
+            $cartProducts = $this->productRepo->getAllCartProducts($user->id);
+
+            if(!$cartProducts->count()) {
+                throw new EmptyCartProductsHttpException;
+            }
 
             // order_issue_products values
-            $orderIssueProducts = $orderProductsRequest->map(function ($orderProduct) use ($products) {
-                $productId = $orderProduct['id'];
-                $quantity = $orderProduct['quantity'];
-                $itemPrice = $products->where('id', $productId)->first()->item_price;
+            $orderIssueProducts = $cartProducts->map(function ($product) {
+                $quantity = $product->quantity;
+                $itemPrice = $product->item_price;
 
                 return [
-                    'product_id' => $productId,
+                    'product_id' => $product->id,
                     'item_price' => $itemPrice,
                     'quantity' => $quantity,
                     'amount' => $quantity * $itemPrice,
@@ -56,7 +58,7 @@ class OrderIssueService
 
             // order_issues values
             $orderIssueValues = [
-                'user_id' => auth()->user()->id,
+                'user_id' => $user->id,
                 'status' => ORDER_ISSUE_STATUS_UNCONFIRMED,
                 'total_price' => $orderIssueProducts->sum('amount'),
                 'note' => null,
@@ -76,7 +78,8 @@ class OrderIssueService
             $orderIssue = $this->orderIssueRepo->createOrderIssue(
                 $orderIssueValues,
                 $orderIssueInformValues,
-                $orderIssueProducts
+                $orderIssueProducts,
+                $user
             );
 
             // db - end transaction and save data
