@@ -14,7 +14,7 @@ services:
         networks:
             - rodas
         ports:
-            - '8000:80'
+            - '9000:80'
         expose:
             - '80'
         links:
@@ -30,18 +30,18 @@ services:
         container_name: 'rodas_web'
         environment:
             TZ: '${APP_TIMEZONE:-UTC}'
-            NODE_ENV: 'development'
         volumes:
             - './resources/assets/user:/var/www/rodas-user'
-            - 'dependencies:/var/www/rodas-user/node_modules' # this enables a much faster start/reload
-        tty: true
+            - './docker/web/entrypoint.sh:/entrypoint.sh'
+            # - 'dependencies:/var/www/rodas-user/node_modules' # this enables a much faster start/reload
         working_dir: '/var/www/rodas-user'
         networks:
             - rodas
         ports:
-            - '8080:8080' # when run 'npm run serve' default port was 8080 that why must set '8080:8080' here
+            - '8080:8080' # when run 'npm run serve'
         expose:
             - '8080'
+        command: ['/entrypoint.sh']
 
     # (Laravel) Admin application
     app:
