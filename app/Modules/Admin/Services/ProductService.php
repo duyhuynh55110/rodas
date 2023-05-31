@@ -120,7 +120,7 @@ class ProductService
             // upload file to storage
             if ($request->hasFile('image_file_upload')) {
                 // delete old image if was update form
-                if ($id) {
+                if ($id && $deleteLogoFileName) {
                     deleteImageFromStorage($deleteLogoFileName);
                 }
 
