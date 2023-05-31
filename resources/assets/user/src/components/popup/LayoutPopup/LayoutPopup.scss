@@ -5,14 +5,14 @@
     text-transform: capitalize;
 }
 
-::v-deep .modal-container {
+::v-deep(.modal-container) {
     @include flexbox($justifyContent: center, $alignItems: center);
     @include maxPageWidth();
     margin: 0 auto;
     min-width: 200px;
 }
 
-::v-deep .modal-content {
+::v-deep(.modal-content) {
     @include flexbox($flexDirection: column);
     position: relative;
     margin: 0 1rem;
