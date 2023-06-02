@@ -1,0 +1,72 @@
+.navbar {
+    @include maxPageWidth();
+    @include position(
+        fixed,
+        $top: 0,
+        $left: 0,
+        $right: 0,
+        $zIndex: $zIndexNavbar
+    );
+    background: $themeColorLight;
+    border-bottom: 1px solid #f4f4f4;
+    height: $navbarHeight;
+    margin: 0 auto;
+
+    .navbar-inner {
+        @include flexbox($justifyContent: space-between, $alignItems: center);
+        height: inherit;
+
+        // ::v-deep effect this style to slot element
+        .left::v-deep() {
+            a.back {
+                font-size: 1.3rem;
+                color: $textColorHeading;
+            }
+        }
+
+        .title {
+            margin: 0 16px;
+            color: $textColorHeading;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .right {
+            margin-right: 20px;
+            font-size: 16px;
+        }
+    }
+
+    &.navbar-style-1 {
+        .navbar-inner {
+            padding: 0 20px;
+        }
+    }
+
+    &.navbar-style-2 {
+        .navbar-inner {
+            padding: 0 30px;
+        }
+    }
+
+    &.navbar-transparent {
+        border-bottom: unset;
+        background-color: transparent;
+
+        .navbar-inner {
+            .left::v-deep() {
+                a {
+                    color: $textColorWhite !important;
+                }
+            }
+
+            .right::v-deep() {
+                margin-right: 0;
+
+                a {
+                    color: $textColorWhite !important;
+                }
+            }
+        }
+    }
+}

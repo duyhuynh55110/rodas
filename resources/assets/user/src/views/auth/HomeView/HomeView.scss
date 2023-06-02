@@ -1,0 +1,4 @@
+.loading-products {
+    @include flexbox($alignItems: center, $justifyContent: center);
+    margin-top: 5px;
+}

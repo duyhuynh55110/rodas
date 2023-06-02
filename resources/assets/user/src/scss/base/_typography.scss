@@ -1,0 +1,95 @@
+/**
+    Typography Rules
+    -----------------------
+    basic style sheet with the website’s
+**/
+@media only screen and (min-width: $minScreenWidth) {
+    // Limit page size for mobile only
+    .page {
+       @include maxPageWidth();
+    }
+}
+
+.page, .page-content {
+    background-color: $themeColorLight;
+}
+
+.page {
+    margin: 0 auto; // center
+
+    .page-content {
+        box-sizing: border-box;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+
+        .container {
+            max-width: 1024px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 30px;
+            padding-right: 30px;
+            box-sizing: border-box;
+
+            &.px-15 {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    }
+
+    /* route transitions */
+    .route-enter-active,
+    .route-leave-active {
+        transition: opacity 0.2s ease;
+    }
+    .route-enter-from,
+    .route-leave-to {
+        opacity: 0;
+    }
+}
+
+.text-primary {
+    color: $themeColor !important;
+}
+
+.bg-primary {
+    background-color: $themeColor;
+}
+
+.button{
+    text-align: center;
+    width: 100%;
+	border-radius:16px;
+    background: $themeColor;
+    color: $textColorWhite;
+    border: none;
+
+    &:disabled {
+        background: rgba($themeColor, 0.6);
+    }
+
+	&.button-large{
+		font-size: 16px;
+        font-weight: 500;
+		padding: 20px 30px;
+		height: auto;
+		line-height: 1.2;
+	}
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-upper-first-letter::first-letter {
+    text-transform:capitalize;
+}
+
+.d-none {
+    display: none;
+}

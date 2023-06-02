@@ -1,0 +1,39 @@
+# brands
+- for: 'brands.create'
+  items:
+    - title: 'Brand List'
+      route: 'brands.index'
+    - title: 'New Brand'
+      route: null
+- for: 'brands.create'
+  items:
+    - title: 'Brand List'
+      route: 'brands.index'
+    - title: 'Brand Detail'
+      route: null
+# products
+- for: 'products.create'
+  items:
+    - title: 'Product List'
+      route: 'products.index'
+    - title: 'New Product'
+      route: null
+- for: 'products.create'
+  items:
+    - title: 'Product List'
+      route: 'products.index'
+    - title: 'Product Detail'
+      route: null
+# gift-boxes
+- for: 'gift-boxes.create'
+  items:
+    - title: 'Gift Box List'
+      route: 'gift-boxes.index'
+    - title: 'New Gift Box'
+      route: null
+- for: 'gift-boxes.create'
+  items:
+    - title: 'Gift Box List'
+      route: 'gift-boxes.index'
+    - title: 'Gift Box Detail'
+      route: null

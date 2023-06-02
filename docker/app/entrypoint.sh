@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 WORKSPACE="/var/www/rodas-admin"
 
 chmod -R 777 $WORKSPACE/storage
@@ -15,6 +15,12 @@ composer install
 
 # migration
 php artisan migrate
+
+# create storage link
+php artisan storage:link
+
+# generate app key
+php artisan key:generate
 
 # start supervisord
 # supervisord -c /etc/supervisor/supervisord.conf

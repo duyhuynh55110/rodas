@@ -1,0 +1,27 @@
+.toolbar {
+    background-color: transparent;
+    border-bottom: 1px solid #DDDDDD;
+
+    .toolbar-inner {
+        display: flex;
+    }
+    .tab-link {
+        @include flexbox($justifyContent: space-between, $alignItems: center, $flexDirection: column, $flex: 1);
+        background: #fafefc;
+        padding: 0;
+        line-height: 2.5;
+        font-size: 16px;
+        text-transform: capitalize;
+        color: #959A9B;
+        box-sizing: border-box;
+
+        &.tab-link-active {
+            color: #384144;
+            border-bottom: 2px solid $themeColor;
+        }
+    }
+}
+
+::v-deep(p) {
+    font-size: 14px;
+}

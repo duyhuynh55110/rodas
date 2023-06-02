@@ -1,0 +1,32 @@
+/*
+    Custom library css
+    ----------------
+    this File is imported last, and will override other styles in the cascade
+    Add styles here to make changes without digging in too much
+*/
+
+// Swiper
+.swiper {
+    .swiper-pagination {
+        .swiper-pagination-bullet {
+            width: 7%;
+            height: 4px;
+            border-radius: 12px;
+
+            &.swiper-pagination-bullet-active {
+                background-color: $textColorWhite !important;
+            }
+        }
+    }
+}
+
+// vue-skeletor
+/*
+Text skeleton
+By default skeletor uses fully rounded style for text
+type skeletons, you can change that as you like
+*/
+.vue-skeletor--text {
+    /* Completely square style skeletons */
+    border-radius: .5rem;
+}

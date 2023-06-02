@@ -1,0 +1,30 @@
+{
+    "name": "base/assets",
+    "description": "register js/css & render to view",
+    "type": "library",
+    "license": "MIT",
+    "authors": [{
+        "name": "duyhuynh",
+        "email": "duyhuynh55110@gmail.com"
+    }],
+    "version": "dev-develop",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Base\\Assets\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Base\\Assets\\ServiceProvider"
+            ],
+            "aliases": {
+                "Assets": "Base\\Assets\\Assets"
+            }
+        }
+    }
+}

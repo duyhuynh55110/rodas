@@ -1,0 +1,87 @@
+/**
+    Reset CSS
+    -------------------------
+    resets all of the styles that come with the browser’s user agent.
+**/
+
+// Custom - the text is being highlighted by the user.
+::selection {
+    color: $textColorWhite;
+    background: $themeColor;
+}
+
+body {
+    color: #212121;
+    margin: 0;
+    overflow-x: hidden;
+    height: 100%;
+    position: relative;
+    max-width: 100%;
+    font-size: 1rem;
+    font-family: $themeFontFamily;
+    background: $themeColorLight;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $textColorHeading;
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: $themeColor;
+    -webkit-tap-highlight-color: transparent; // prevent the Blue highlighting of elements in Chrome when clicking
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    font-family: inherit; // inherit font-family from body
+}
+
+input {
+    &:focus {
+        outline: none !important;
+    }
+}
+input[type=email], input[type=password], input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+// remove spin button from input number
+// https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+button {
+    &:active {
+        background-image: linear-gradient(rgb(0 0 0/40%) 0 0) !important;
+    }
+}

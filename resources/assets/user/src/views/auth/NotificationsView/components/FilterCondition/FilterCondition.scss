@@ -1,0 +1,21 @@
+.filter-condition {
+    margin-bottom: 5px;
+    padding: 5px 10px;
+
+    .filter-button {
+        padding: 5px 20px;
+        margin-right: 10px;
+        background: inherit;
+        border: none;
+        border-radius: 10px;
+        font-size: 13px;
+        line-height: 24px;
+        color: $textColorGray;
+        font-weight: 600;
+
+        &.active {
+            color: $themeTextColor;
+            background: rgba($color: #6dc94e, $alpha: 0.2);
+        }
+    }
+}

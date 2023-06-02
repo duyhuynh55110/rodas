@@ -1,0 +1,30 @@
+# using fas font icon
+
+# master data (brand, products, categories)
+- group_label: 'Master'
+  icon: 'fas fa-columns'
+  items:
+  # brands
+  - label: 'Brand'
+    icon: 'far fa-circle'
+    items:
+    - label: 'List'
+      route: 'brands.index'
+    - label: 'New Brand'
+      route: 'brands.create'
+  # products
+  - label: 'Product'
+    icon: 'far fa-circle'
+    items:
+    - label: 'List'
+      route: 'products.index'
+    - label: 'New Product'
+      route: 'products.create'
+  # gift-boxes
+  - label: 'Gift Box'
+    icon: 'far fa-circle'
+    items:
+    - label: 'List'
+      route: 'gift-boxes.index'
+    - label: 'New Gift Box'
+      route: 'gift-boxes.create'

@@ -1,5 +1,16 @@
 const mix = require('laravel-mix');
 
+// Alias path for css, js
+mix.webpackConfig({
+    resolve: {
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+            '@admin_js': __dirname + '/resources/assets/admin/js',
+            '@utils': __dirname + '/resources/assets/admin/js/utils/index.js',
+        },
+    }
+});
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -10,8 +21,20 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+const assetAdminPath = 'public/admin-lte/';
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+// Build admin-lte resource (CSS, JS, Image)
+mix.sass('resources/assets/admin/scss/app.scss', assetAdminPath + 'css')
+.js('resources/assets/admin/js/app.js', assetAdminPath + 'js')
+.copyDirectory('node_modules/admin-lte/dist/img', assetAdminPath + 'img')
+// Publish css
+// products
+mix.sass('resources/assets/admin/scss/pages/products/form.scss', assetAdminPath + 'css/products')
+// Publish page script
+// brands
+mix.js('resources/assets/admin/js/pages/brands.js', assetAdminPath + 'pages')
+// products
+mix.js('resources/assets/admin/js/pages/products.js', assetAdminPath + 'pages')
+// giftBoxes
+mix.js('resources/assets/admin/js/pages/gift-boxes.js', assetAdminPath + 'pages')
+.version();

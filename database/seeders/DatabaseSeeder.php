@@ -13,6 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // You should install this only one time after install source
+        $this->call([
+            UserSeeder::class,
+            UserNotificationSeeder::class,
+            CountrySeeder::class,
+            BrandSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
+            GiftBoxSeeder::class,
+        ]);
     }
 }

@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-    # # Nginx service
+    # Nginx service
     nginx:
         build:
             context: .
@@ -9,11 +9,12 @@ services:
         container_name: 'rodas_nginx'
         volumes:
             - './public:/var/www/rodas-admin/public'
+            - ./storage/app:/var/www/rodas-admin/storage/app # need setting this to use laravel storage with nginx
             - ./docker/nginx/${APP_ENV:-local}.conf:/etc/nginx/nginx.conf
         networks:
             - rodas
         ports:
-            - '8000:80'
+            - '9000:80'
         expose:
             - '80'
         links:
@@ -21,14 +22,35 @@ services:
         depends_on:
             - 'app'
 
-    # # (Laravel) Admin application
+    # (VueJS) End User application
+    web:
+        build:
+            context: .
+            dockerfile: './docker/web/Dockerfile'
+        container_name: 'rodas_web'
+        environment:
+            TZ: '${APP_TIMEZONE:-UTC}'
+        volumes:
+            - './resources/assets/user:/var/www/rodas-user'
+            - './docker/web/entrypoint.sh:/entrypoint.sh'
+            # - 'dependencies:/var/www/rodas-user/node_modules' # this enables a much faster start/reload
+        working_dir: '/var/www/rodas-user'
+        networks:
+            - rodas
+        ports:
+            - '8080:8080' # when run 'npm run serve'
+        expose:
+            - '8080'
+        command: ['/entrypoint.sh']
+
+    # (Laravel) Admin application
     app:
         build:
             context: .
             dockerfile: './docker/app/Dockerfile'
         container_name: 'rodas_app'
         environment:
-            - TZ="${APP_TIMEZONE:-UTC}"
+            TZ: '${APP_TIMEZONE:-UTC}'
         volumes:
             - '.:/var/www/rodas-admin'
             - './docker/app/config/php/php.ini:/usr/local/etc/php/php.ini'
@@ -56,7 +78,7 @@ services:
         networks:
             - rodas
         environment:
-            TZ: "${APP_TIMEZONE:-UTC}"
+            TZ: '${APP_TIMEZONE:-UTC}'
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_DATABASE: '${DB_DATABASE}'
             MYSQL_USER: '${DB_USERNAME}'
@@ -78,7 +100,7 @@ services:
         networks:
             - rodas
         healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
+            test: ['CMD', 'redis-cli', 'ping']
             retries: 3
             timeout: 5s
 networks:

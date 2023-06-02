@@ -1,0 +1,36 @@
+.notification-bar {
+    @include flexbox($justifyContent: space-between, $alignItems: flex-end);
+    margin-bottom: 20px;
+
+    .info {
+        span {
+            color: #5F5F5F;
+            font-size: 14px;
+            text-transform: capitalize;
+        }
+
+        h5 {
+            font-size: 20px;
+            margin: 5px 0 0;
+            font-weight: 600;
+        }
+    }
+
+    .media {
+        .notibell {
+            font-size: 25px;
+            color: $textColorHeading;
+            position: relative;
+
+            .badge {
+                @include position(absolute, $top: 2px, $right: -2px);
+                @include circleBox(8px, 18px);
+                width: 8px;
+                min-width: 8px;
+                background: $themeColor;
+                border: 2px solid $textColorWhite;
+                min-height: 6px;
+            }
+        }
+    }
+}

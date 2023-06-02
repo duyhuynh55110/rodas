@@ -1,0 +1,13 @@
+/*
+    Add plugin stylesheets to this directory and they will be automatically
+    Imported. Load order is alphabetical and styles can be overridden in
+    custom/_style.scss which is loaded after all plugin stylesheets.
+*/
+
+// Swiper styles
+@import 'swiper/css';
+@import 'swiper/css/pagination';
+@import 'swiper/css/autoplay';
+
+// vue-skeletor styles
+@import 'vue-skeletor/dist/vue-skeletor';

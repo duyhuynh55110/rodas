@@ -1,0 +1,61 @@
+.product-box {
+    @include circleBox(220px, 18px);
+    @include position(relative);
+    margin-bottom: 15px;
+    overflow: hidden;
+
+    &:after {
+        @include bgGradient();
+        @include position(absolute, $left: 0, $bottom: 0);
+        width: 100%;
+        height: 50%;
+    }
+
+    .product-media {
+        height: 100%;
+
+        img {
+            @include imgObjectFitCover();
+        }
+    }
+
+    .product-content {
+        @include position(absolute, $left: 0, $bottom: 0, $zIndex: 1);
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+
+        .title {
+            margin: 0 0 5px;
+            font-weight: 400;
+            font-size: 18px;
+            a {
+                color: $textColorWhite;
+
+                // replace long text by dots
+                @include replaceLongText(3)
+            }
+        }
+
+        .price {
+            margin: 0;
+            font-weight: 600;
+            font-size: 14px;
+            color: $textColorWhite;
+        }
+    }
+
+    .product-bookmark {
+        @include position(absolute, $top: 15px, $left: 15px);
+        font-size: 22px;
+        color: #fff;
+
+        &.active {
+            color: $themeColorFavorite;
+        }
+
+        input {
+            display: none;
+        }
+    }
+}
