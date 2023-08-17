@@ -10,8 +10,6 @@ class ProductController extends BaseController
 {
     /**
      * Constructor
-     *
-     * @param  ProductService  $productService
      */
     public function __construct(private ProductService $productService)
     {
@@ -21,7 +19,6 @@ class ProductController extends BaseController
     /**
      * Response products with paginate
      *
-     * @param $request
      * @return Illuminate\Http\JsonResponse
      */
     public function index(ProductsListFormRequest $request)
@@ -34,8 +31,6 @@ class ProductController extends BaseController
     /**
      * Response a product detail by id
      *
-     * @param $id
-     * @param $request
      * @return Illuminate\Http\JsonResponse
      */
     public function show($id, ProductDetailFormRequest $request)

@@ -9,8 +9,6 @@ class UserNotificationService
 {
     /**
      * Constructor
-     *
-     * @param  UserNotificationRepository  $userNotificationRepo
      */
     public function __construct(private UserNotificationRepository $userNotificationRepo)
     {
@@ -19,7 +17,6 @@ class UserNotificationService
     /**
      * Get all user's notifications, fractal collection format
      *
-     * @param $request
      * @return League\Fractal\Resource\Collection
      */
     public function getUserNotifications($request)

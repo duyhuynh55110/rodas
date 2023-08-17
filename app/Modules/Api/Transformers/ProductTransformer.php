@@ -8,8 +8,6 @@ class ProductTransformer extends TransformerAbstract
 {
     /**
      * List of resources possible to include
-     *
-     * @var array
      */
     protected array $availableIncludes = [
         'product_slides',
@@ -17,8 +15,6 @@ class ProductTransformer extends TransformerAbstract
 
     /**
      * List of resources to automatically include
-     *
-     * @var array
      */
     protected array $defaultIncludes = [
         'brand',
@@ -27,7 +23,6 @@ class ProductTransformer extends TransformerAbstract
     /**
      * Transform data
      *
-     * @param $data
      * @return array
      */
     public function transform($data)
@@ -45,7 +40,6 @@ class ProductTransformer extends TransformerAbstract
     /**
      * Include Brand
      *
-     * @param $data
      * @return \League\Fractal\Resource\Item
      */
     public function includeBrand($data)
@@ -56,7 +50,6 @@ class ProductTransformer extends TransformerAbstract
     /**
      * Include product slides
      *
-     * @param $data
      * @return \League\Fractal\Resource\Collection
      */
     public function includeProductSlides($data)

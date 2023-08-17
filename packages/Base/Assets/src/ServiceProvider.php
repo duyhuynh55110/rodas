@@ -12,8 +12,6 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
 {
     /**
      * Get the services provided for deferred loading.
-     *
-     * @return array
      */
     public function provides(): array
     {
@@ -24,8 +22,6 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -38,8 +34,6 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
 
     /**
      * Bootstrap the application events.
-     *
-     * @return void
      */
     public function boot(): void
     {

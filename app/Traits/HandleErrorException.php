@@ -10,11 +10,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 trait HandleErrorException
 {
-    /**
-     * @param  \Illuminate\Validation\ValidationException  $e
-     * @param $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     private function renderValidateException(ValidationException $e, $request): JsonResponse
     {
         $e = $this->convertValidationExceptionToResponse($e, $request);
@@ -31,7 +26,6 @@ trait HandleErrorException
     }
 
     /**
-     * @param $errors
      * @return array
      */
     private function convertApiErrors($errors)
@@ -49,7 +43,6 @@ trait HandleErrorException
 
     /**
      * @param  Symfony\Component\HttpKernel\Exception\NotFoundHttpException  $e
-     * @return \Illuminate\Http\JsonResponse
      */
     private function renderApiNotFoundResponse(NotFoundHttpException $e): JsonResponse
     {
@@ -61,7 +54,6 @@ trait HandleErrorException
 
     /**
      * @param  \Symfony\Component\HttpKernel\Exception\BadRequestHttpException  $e
-     * @return \Illuminate\Http\JsonResponse
      */
     private function renderApiBadRequestResponse($e, $code = null): JsonResponse
     {
@@ -73,9 +65,6 @@ trait HandleErrorException
 
     /**
      * Response server error exception
-     *
-     * @param $e
-     * @return \Illuminate\Http\JsonResponse
      */
     private function renderServerErrorException($e): JsonResponse
     {
@@ -94,9 +83,6 @@ trait HandleErrorException
 
     /**
      * Response unauthenticated
-     *
-     * @param  \App\Exceptions\AuthenticateHttpException  $e
-     * @return \Illuminate\Http\JsonResponse
      */
     private function renderUnauthenticatedException(AuthenticateHttpException $e): JsonResponse
     {
@@ -106,10 +92,6 @@ trait HandleErrorException
         ], JsonResponse::HTTP_UNAUTHORIZED);
     }
 
-    /**
-     * @param  \Illuminate\Database\Eloquent\ModelNotFoundException  $e
-     * @return \Illuminate\Http\JsonResponse
-     */
     private function renderApiModelNotFoundResponse(ModelNotFoundException $e): JsonResponse
     {
         return response()->json([
@@ -117,10 +99,6 @@ trait HandleErrorException
         ], JsonResponse::HTTP_NOT_FOUND);
     }
 
-    /**
-     * @param $e
-     * @return JsonResponse
-     */
     private function renderForbiddenException($e): JsonResponse
     {
         return response()->json([

@@ -36,9 +36,9 @@ class OrderIssue extends Model
     public function orderIssueProducts()
     {
         return $this->belongsToMany(Product::class, 'order_issue_products', 'order_issue_id', 'product_id')
-                ->withTimestamps()
-                ->withPivot(['item_price', 'quantity', 'amount', 'deleted_at'])
-                ->using(OrderIssueProduct::class);
+            ->withTimestamps()
+            ->withPivot(['item_price', 'quantity', 'amount', 'deleted_at'])
+            ->using(OrderIssueProduct::class);
     }
 
     /**

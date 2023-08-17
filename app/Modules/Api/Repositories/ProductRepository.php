@@ -24,7 +24,6 @@ class ProductRepository extends Repository
     /**
      * Get products with paginate
      *
-     * @param  array  $filter
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function getProducts($userId, array $filter)
@@ -38,11 +37,11 @@ class ProductRepository extends Repository
             'products.item_price',
             DB::raw('fp.id as is_favorite'),
         ])
-        ->with(['brand:id,name,logo_file_name'])
-        ->leftJoin('favorite_products as fp', function ($q) use ($userId) {
-            $q->on('fp.product_id', '=', 'products.id')
-            ->where('fp.user_id', '=', DB::raw($userId));
-        });
+            ->with(['brand:id,name,logo_file_name'])
+            ->leftJoin('favorite_products as fp', function ($q) use ($userId) {
+                $q->on('fp.product_id', '=', 'products.id')
+                    ->where('fp.user_id', '=', DB::raw($userId));
+            });
 
         // filters
         $this->filterProducts($query, $filter);
@@ -57,8 +56,6 @@ class ProductRepository extends Repository
     /**
      * Filter products by condition
      *
-     * @param $query
-     * @param $filter
      * @return void
      */
     private function filterProducts($query, $filter)
@@ -94,7 +91,6 @@ class ProductRepository extends Repository
     /**
      * Get user's cart products
      *
-     * @param $userId
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function getCartProducts($userId)
@@ -108,15 +104,15 @@ class ProductRepository extends Repository
             DB::raw('fp.id as is_favorite'),
             'cp.quantity',
         ])
-        ->with(['brand:id,name,logo_file_name'])
-        ->join('cart_products as cp', function ($q) use ($userId) {
-            $q->on('cp.product_id', '=', 'products.id')
-            ->where('cp.user_id', '=', DB::raw($userId));
-        })
-        ->leftJoin('favorite_products as fp', function ($q) use ($userId) {
-            $q->on('fp.product_id', '=', 'products.id')
-            ->where('fp.user_id', '=', DB::raw($userId));
-        });
+            ->with(['brand:id,name,logo_file_name'])
+            ->join('cart_products as cp', function ($q) use ($userId) {
+                $q->on('cp.product_id', '=', 'products.id')
+                    ->where('cp.user_id', '=', DB::raw($userId));
+            })
+            ->leftJoin('favorite_products as fp', function ($q) use ($userId) {
+                $q->on('fp.product_id', '=', 'products.id')
+                    ->where('fp.user_id', '=', DB::raw($userId));
+            });
 
         // paginate
         return $query->paginate(getPerPage());
@@ -125,8 +121,6 @@ class ProductRepository extends Repository
     /**
      * Get a product by id
      *
-     * @param $productId
-     * @param $userId
      * @return \App\Models\Product
      */
     public function getProductById($productId, $userId = null)
@@ -152,7 +146,7 @@ class ProductRepository extends Repository
             function ($q) use ($userId) {
                 $q->leftJoin('favorite_products as fp', function ($q) use ($userId) {
                     $q->on('fp.product_id', '=', 'products.id')
-                    ->where('fp.user_id', '=', DB::raw($userId));
+                        ->where('fp.user_id', '=', DB::raw($userId));
                 });
             }
         );
@@ -163,7 +157,6 @@ class ProductRepository extends Repository
     /**
      * Get all cart products
      *
-     * @param $userId
      * @return Illuminate\Database\Eloquent\Collection
      */
     public function getAllCartProducts($userId)
@@ -173,10 +166,10 @@ class ProductRepository extends Repository
             'products.item_price',
             'cp.quantity',
         ])
-        ->join('cart_products as cp', function ($q) use ($userId) {
-            $q->on('cp.product_id', '=', 'products.id')
-            ->where('cp.user_id', '=', DB::raw($userId));
-        });
+            ->join('cart_products as cp', function ($q) use ($userId) {
+                $q->on('cp.product_id', '=', 'products.id')
+                    ->where('cp.user_id', '=', DB::raw($userId));
+            });
 
         return $query->get();
     }

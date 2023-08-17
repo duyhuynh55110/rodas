@@ -50,7 +50,6 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $e
      * @return mixed
      *
      * @throws \Throwable
@@ -69,8 +68,6 @@ class Handler extends ExceptionHandler
     /**
      * Return JSON format if request have content type is 'application/json'
      *
-     * @param $request
-     * @param  Throwable  $e
      * @return \Illuminate\Http\JsonResponse
      */
     private function customApiResponse($request, Throwable $e)

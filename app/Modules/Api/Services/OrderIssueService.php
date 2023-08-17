@@ -14,9 +14,6 @@ class OrderIssueService
 {
     /**
      * Constructor
-     *
-     * @param  OrderIssueRepository  $orderIssueRepo
-     * @param  ProductRepository  $productRepo
      */
     public function __construct(private OrderIssueRepository $orderIssueRepo, private ProductRepository $productRepo)
     {
@@ -25,7 +22,6 @@ class OrderIssueService
     /**
      * Create a order issue
      *
-     * @param $request
      * @return \League\Fractal\Resource\Item
      */
     public function createOrderIssue($request)

@@ -8,8 +8,6 @@ class CartProductTransformer extends TransformerAbstract
 {
     /**
      * List of resources to automatically include
-     *
-     * @var array
      */
     protected array $defaultIncludes = [
         'brand',
@@ -18,7 +16,6 @@ class CartProductTransformer extends TransformerAbstract
     /**
      * Transform data
      *
-     * @param $data
      * @return array
      */
     public function transform($data)
@@ -36,7 +33,6 @@ class CartProductTransformer extends TransformerAbstract
     /**
      * Include Brand
      *
-     * @param $data
      * @return \League\Fractal\Resource\Item
      */
     public function includeBrand($data)

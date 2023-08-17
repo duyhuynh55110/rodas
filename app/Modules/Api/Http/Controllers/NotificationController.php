@@ -9,8 +9,6 @@ class NotificationController extends BaseController
 {
     /**
      * Constructor
-     *
-     * @param  UserNotificationService  $userNotificationService
      */
     public function __construct(private UserNotificationService $userNotificationService)
     {
@@ -20,7 +18,6 @@ class NotificationController extends BaseController
     /**
      * Response all categories
      *
-     * @param $request
      * @return Illuminate\Http\JsonResponse
      */
     public function index(NotificationsListFormRequest $request)

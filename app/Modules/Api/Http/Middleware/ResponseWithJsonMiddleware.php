@@ -12,9 +12,6 @@ class ResponseWithJsonMiddleware
 {
     /**
      * Handle an incoming request
-     *
-     * @param  Request  $request
-     * @param  Closure  $next
      */
     public function handle(Request $request, Closure $next)
     {

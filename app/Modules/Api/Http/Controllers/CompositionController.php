@@ -8,8 +8,6 @@ class CompositionController extends BaseController
 {
     /**
      * Constructor
-     *
-     * @param  CompositionService  $compositionService
      */
     public function __construct(private CompositionService $compositionService)
     {

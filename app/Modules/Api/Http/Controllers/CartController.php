@@ -10,8 +10,6 @@ class CartController extends BaseController
 {
     /**
      * Constructor
-     *
-     * @param  ProductService  $productService
      */
     public function __construct(private ProductService $productService)
     {
@@ -33,7 +31,6 @@ class CartController extends BaseController
     /**
      * Add/Update a product to cart
      *
-     * @param $request
      * @return Illuminate\Http\JsonResponse
      */
     public function updateOrCreate(CreateProductToCartFormRequest $request)
@@ -46,8 +43,6 @@ class CartController extends BaseController
     /**
      * Remove a product from cart
      *
-     * @param $id
-     * @param $request
      * @return Illuminate\Http\JsonResponse
      */
     public function delete($id, RemoveProductFromCartFormRequest $request)

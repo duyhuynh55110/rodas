@@ -18,8 +18,6 @@ class LoginController extends BaseController
 
     /**
      * __construct
-     *
-     * @param  UserService  $userService
      */
     public function __construct(UserService $userService)
     {
@@ -29,7 +27,6 @@ class LoginController extends BaseController
     /**
      * Display login form.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return View
      */
     public function login(Request $request)
@@ -48,7 +45,6 @@ class LoginController extends BaseController
     /**
      * Handle an authentication attempt.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return void
      */
     public function authenticate(Request $request)

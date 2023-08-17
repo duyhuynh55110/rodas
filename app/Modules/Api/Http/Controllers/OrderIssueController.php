@@ -20,7 +20,6 @@ class OrderIssueController extends BaseController
     /**
      * Create a order issue
      *
-     * @param  CreateOrderIssueFormRequest  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function create(CreateOrderIssueFormRequest $request)
