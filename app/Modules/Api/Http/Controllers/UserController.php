@@ -8,8 +8,6 @@ class UserController extends BaseController
 {
     /**
      * Constructor
-     *
-     * @param  UserService  $userService
      */
     public function __construct(private UserService $userService)
     {

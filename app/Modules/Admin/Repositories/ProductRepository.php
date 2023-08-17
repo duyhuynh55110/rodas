@@ -23,7 +23,6 @@ class ProductRepository extends Repository
     /**
      * Get products and format dataTable response
      *
-     * @param  array  $filter
      * @return Illuminate\Http\JsonResponse
      */
     public function productsDataTable(array $filter)
@@ -40,7 +39,7 @@ class ProductRepository extends Repository
             [
                 'brand' => function ($q) {
                     $q->select('id', 'name', 'country_id')
-                    ->with(['country:id,name']);
+                        ->with(['country:id,name']);
                 },
             ]
         );
@@ -86,11 +85,6 @@ class ProductRepository extends Repository
      * Relations
      * - categories
      *
-     * @param  array  $attributes
-     * @param  array  $values
-     * @param  array  $categoriesData
-     * @param  array  $productSlides
-     * @param  array  $keepProductSlideIds
      * @return App\Models\Product
      */
     public function updateOrCreateWithRelations(array $attributes, array $values, array $categoriesData, array $productSlides, array $keepProductSlideIds)

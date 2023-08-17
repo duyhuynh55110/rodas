@@ -23,7 +23,6 @@ class GiftBoxRepository extends Repository
     /**
      * Get gift boxes and format dataTable response
      *
-     * @param  array  $filter
      * @return Illuminate\Http\JsonResponse
      */
     public function giftBoxesDataTable(array $filter)
@@ -48,13 +47,13 @@ class GiftBoxRepository extends Repository
         );
 
         return datatables($query)
-        ->addColumn(
-            'price',
-            function ($giftBox) {
-                return floatval($giftBox->price);
-            }
-        )
-        ->escapeColumns([])->make(true);
+            ->addColumn(
+                'price',
+                function ($giftBox) {
+                    return floatval($giftBox->price);
+                }
+            )
+            ->escapeColumns([])->make(true);
     }
 
     /**
@@ -63,9 +62,6 @@ class GiftBoxRepository extends Repository
      * Relations
      * - products (gift_box_products)
      *
-     * @param  array  $attributes
-     * @param  array  $values
-     * @param  array  $giftBoxProducts
      * @return App\Models\GiftBox
      */
     public function updateOrCreateWithRelations(array $attributes, array $values, array $giftBoxProducts)

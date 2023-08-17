@@ -16,8 +16,6 @@ class UserService
 
     /**
      * __construct
-     *
-     * @param  UserRepository  $userRepository
      */
     public function __construct(UserRepository $userRepository)
     {
@@ -28,7 +26,6 @@ class UserService
      * Authenticate attempt
      *
      * @param  array  $credentials credentials.
-     * @return bool
      */
     public function authenticate(array $credentials): bool
     {

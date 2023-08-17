@@ -10,7 +10,6 @@ class StorageService
     /**
      * Upload multiples images to storage
      *
-     * @param $request
      * @return array
      */
     public function uploadMultipleImagesToStorage($request)

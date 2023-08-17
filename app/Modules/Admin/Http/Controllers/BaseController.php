@@ -9,7 +9,6 @@ class BaseController extends Controller
     /**
      * API output
      *
-     * @param $data
      * @return \Illuminate\Http\JsonResponse
      */
     protected function outputJson($data)

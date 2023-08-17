@@ -32,10 +32,6 @@ class GiftBoxController extends BaseController
 
     /**
      * __construct
-     *
-     * @param  GiftBoxService  $giftBoxService
-     * @param  BrandService  $brandService
-     * @param  CountryService  $countryService
      */
     public function __construct(GiftBoxService $giftBoxService, BrandService $brandService, CountryService $countryService)
     {
@@ -47,7 +43,6 @@ class GiftBoxController extends BaseController
     /**
      * View page giftBox list
      *
-     * @param  Request  $request
      * @return view
      */
     public function index(Request $request)
@@ -102,7 +97,6 @@ class GiftBoxController extends BaseController
     /**
      * View edit giftBox form
      *
-     * @param $id
      * @return view
      */
     public function edit($id)
@@ -139,7 +133,6 @@ class GiftBoxController extends BaseController
     /**
      * Save a gift box data
      *
-     * @param  GiftBoxFormRequest  $request
      * @return mixed
      */
     public function save(GiftBoxFormRequest $request)
@@ -155,8 +148,6 @@ class GiftBoxController extends BaseController
 
     /**
      * Register assets
-     *
-     * @return void
      */
     private function registerAssets(): void
     {
@@ -170,7 +161,6 @@ class GiftBoxController extends BaseController
     /**
      * Return gift box products data for giftBoxProducts table
      *
-     * @param $giftBox
      * @return array
      */
     private function getGiftBoxProductsData($giftBox)

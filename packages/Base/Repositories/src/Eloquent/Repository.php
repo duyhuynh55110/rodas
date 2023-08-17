@@ -17,14 +17,9 @@ abstract class Repository implements RepositoryInterface
      */
     private $app;
 
-    /**
-     * @var
-     */
     protected $model;
 
     /**
-     * @param  App  $app
-     *
      * @throws RepositoryException
      */
     public function __construct(App $app)
@@ -60,7 +55,6 @@ abstract class Repository implements RepositoryInterface
      * Eager loaded
      * Refer: https://laravel.com/docs/8.x/eloquent-relationships#eager-loading-multiple-relationships
      *
-     * @param  array  $relations
      * @return mixed
      */
     public function with(array $relations)
@@ -73,7 +67,6 @@ abstract class Repository implements RepositoryInterface
     /**
      * Bulk Insertion data
      *
-     * @param  array  $data
      * @return bool
      */
     public function insert(array $data)
@@ -84,7 +77,6 @@ abstract class Repository implements RepositoryInterface
     /**
      * Create data
      *
-     * @param  array  $data
      * @return mixed
      */
     public function create(array $data)
@@ -95,8 +87,6 @@ abstract class Repository implements RepositoryInterface
     /**
      * Update data
      *
-     * @param  array  $data
-     * @param $id
      * @return mixed
      */
     public function update(array $data, $id, $attribute = 'id')
@@ -112,8 +102,6 @@ abstract class Repository implements RepositoryInterface
     /**
      * Create or update a record matching the attributes, and fill it with values.
      *
-     * @param  array  $attributes
-     * @param  array  $values
      * @return mixed
      */
     public function updateOrCreate(array $attributes, array $values = [])
@@ -129,7 +117,6 @@ abstract class Repository implements RepositoryInterface
     /**
      * Insert new records or update the existing ones.
      *
-     * @param  array  $values
      * @param  array|string  $uniqueBy
      * @param  array|null  $update
      * @return int
@@ -147,7 +134,6 @@ abstract class Repository implements RepositoryInterface
     /**
      * Delete data
      *
-     * @param $id
      * @return mixed
      */
     public function delete($id)
@@ -173,7 +159,6 @@ abstract class Repository implements RepositoryInterface
     /**
      * Find by id
      *
-     * @param $id
      * @param  array  $columns
      * @return mixed
      */
@@ -190,7 +175,6 @@ abstract class Repository implements RepositoryInterface
     /**
      * Find by id
      *
-     * @param $id
      * @param  array  $columns
      * @return mixed
      */
@@ -207,8 +191,6 @@ abstract class Repository implements RepositoryInterface
     /**
      * Find all by field
      *
-     * @param $field
-     * @param $value
      * @param  array  $columns
      * @return mixed
      */

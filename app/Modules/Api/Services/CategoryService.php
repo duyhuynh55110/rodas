@@ -9,8 +9,6 @@ class CategoryService
 {
     /**
      * Constructor
-     *
-     * @param  CategoryRepository  $categoryRepo
      */
     public function __construct(private CategoryRepository $categoryRepo)
     {
@@ -32,7 +30,6 @@ class CategoryService
     /**
      * Get a category by id, fractal item format
      *
-     * @param $categoryId
      * @return League\Fractal\Resource\Item
      */
     public function getCategoryById($categoryId)

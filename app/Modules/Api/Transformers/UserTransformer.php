@@ -9,7 +9,6 @@ class UserTransformer extends TransformerAbstract
     /**
      * Transform data
      *
-     * @param $data
      * @return array
      */
     public function transform($data)

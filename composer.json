@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.5",
         "league/fractal": "^0.20.1",
         "pragmarx/yaml": "^1.3",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.3",
         "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {

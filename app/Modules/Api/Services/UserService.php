@@ -13,8 +13,6 @@ class UserService
 {
     /**
      * Constructor
-     *
-     * @param  UserRepository  $userRepo
      */
     public function __construct(private UserRepository $userRepo)
     {
@@ -23,7 +21,6 @@ class UserService
     /**
      * Create a user with token
      *
-     * @param $request
      * @return array
      */
     public function register($request)
@@ -64,7 +61,6 @@ class UserService
     /**
      * User login using email & password
      *
-     * @param $request
      * @return mixed
      */
     public function login($request)

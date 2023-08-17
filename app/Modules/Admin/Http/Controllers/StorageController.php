@@ -17,8 +17,6 @@ class StorageController extends BaseController
 
     /**
      * __construct
-     *
-     * @param  StorageService  $storageService
      */
     public function __construct(StorageService $storageService)
     {
@@ -28,7 +26,6 @@ class StorageController extends BaseController
     /**
      * Upload image to storage
      *
-     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function uploadMultipleImagesToStorage(Request $request)

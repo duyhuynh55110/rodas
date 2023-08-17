@@ -16,8 +16,6 @@ class CategoryService
 
     /**
      * __construct
-     *
-     * @param  CategoryRepository  $categoryRepo
      */
     public function __construct(CategoryRepository $categoryRepo)
     {

@@ -10,8 +10,6 @@ class FavoriteController extends BaseController
 {
     /**
      * Constructor
-     *
-     * @param  ProductService  $productService
      */
     public function __construct(private ProductService $productService)
     {
@@ -34,7 +32,6 @@ class FavoriteController extends BaseController
      * Add a user's favorite product
      *
      * @param $id products.id
-     * @param $request
      * @return Illuminate\Http\JsonResponse
      */
     public function create($id, CreateFavoriteProductFormRequest $request)
@@ -50,7 +47,6 @@ class FavoriteController extends BaseController
      * Remove a user's favorite product
      *
      * @param $id products.id
-     * @param $request
      * @return Illuminate\Http\JsonResponse
      */
     public function delete($id, RemoveFavoriteProductFormRequest $request)

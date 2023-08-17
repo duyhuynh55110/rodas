@@ -82,3 +82,8 @@ Route::group(
         );
     }
 );
+
+// PHP info
+Route::get('/phpinfo', function () {
+    return phpinfo();
+});

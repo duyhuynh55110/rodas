@@ -21,8 +21,6 @@ class ProductService
 
     /**
      * __construct
-     *
-     * @param  ProductRepository  $productRepo
      */
     public function __construct(ProductRepository $productRepo)
     {
@@ -32,7 +30,6 @@ class ProductService
     /**
      * Data for products table
      *
-     * @param  Request  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function productsDataTable(Request $request)
@@ -49,7 +46,6 @@ class ProductService
     /**
      * Get product by id
      *
-     * @param $id
      * @return App\Models\Product
      */
     public function getProductById($id)
@@ -67,7 +63,6 @@ class ProductService
     /**
      * Create/Update a product
      *
-     * @param $request
      * @return App\Models\Product
      */
     public function updateOrCreate($request)

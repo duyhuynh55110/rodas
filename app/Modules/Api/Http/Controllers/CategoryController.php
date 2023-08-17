@@ -8,8 +8,6 @@ class CategoryController extends BaseController
 {
     /**
      * Constructor
-     *
-     * @param  CategoryService  $categoryService
      */
     public function __construct(private CategoryService $categoryService)
     {
@@ -31,7 +29,6 @@ class CategoryController extends BaseController
     /**
      * Response a category
      *
-     * @param $id
      * @return Illuminate\Http\JsonResponse
      */
     public function show($id)

@@ -35,8 +35,8 @@ class Category extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'category_products', 'category_id', 'product_id')
-                ->withTimestamps()
-                ->withPivot(['deleted_at'])
-                ->using(CategoryProduct::class);
+            ->withTimestamps()
+            ->withPivot(['deleted_at'])
+            ->using(CategoryProduct::class);
     }
 }

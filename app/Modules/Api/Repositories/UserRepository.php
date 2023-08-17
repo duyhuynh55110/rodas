@@ -23,7 +23,6 @@ class UserRepository extends Repository
     /**
      * Register a user and their token
      *
-     * @param  array  $values
      * @return array
      */
     public function registerUser(array $values)
@@ -39,7 +38,6 @@ class UserRepository extends Repository
     /**
      * Create token when user login by API
      *
-     * @param  User  $user
      * @return array
      */
     public function createUserLoginToken(User $user)
@@ -59,10 +57,6 @@ class UserRepository extends Repository
     /**
      * Create/Update product to user's cart
      *
-     * @param  User  $user
-     * @param $productId
-     * @param $cartProductValues
-     * @param $type
      * @return void
      */
     public function updateOrCreateCartProduct(User $user, $productId, $cartProductValues, $type)
@@ -89,8 +83,6 @@ class UserRepository extends Repository
     /**
      * Remove product from user's cart
      *
-     * @param  User  $user
-     * @param $productId
      * @return void
      */
     public function removeCartProduct(User $user, $productId)
@@ -106,8 +98,6 @@ class UserRepository extends Repository
     /**
      * Create a favorite product
      *
-     * @param  User  $user
-     * @param $productId
      * @return void
      */
     public function createFavoriteProduct(User $user, $productId)
@@ -124,8 +114,6 @@ class UserRepository extends Repository
     /**
      * Remove a favorite product
      *
-     * @param  User  $user
-     * @param $productId
      * @return void
      */
     public function removeFavoriteProduct(User $user, $productId)

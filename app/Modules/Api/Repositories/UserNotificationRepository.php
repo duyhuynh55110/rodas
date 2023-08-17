@@ -23,8 +23,6 @@ class UserNotificationRepository extends Repository
     /**
      * Get notifications with paginate
      *
-     * @param $userId
-     * @param $filter
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
     public function getUserNotifications($userId, $filter)
@@ -37,7 +35,7 @@ class UserNotificationRepository extends Repository
             'is_read',
             'created_at',
         ])
-        ->where('user_id', $userId);
+            ->where('user_id', $userId);
 
         // filter
         $this->filterUserNotifications($query, $filter);
@@ -48,8 +46,6 @@ class UserNotificationRepository extends Repository
     /**
      * Filter user's notifications by condition
      *
-     * @param $query
-     * @param $filter
      * @return void
      */
     private function filterUserNotifications($query, $filter)

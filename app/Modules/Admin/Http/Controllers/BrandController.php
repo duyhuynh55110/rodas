@@ -26,9 +26,6 @@ class BrandController extends BaseController
 
     /**
      * __construct
-     *
-     * @param  BrandService  $brandService
-     * @param  CountryService  $countryService
      */
     public function __construct(BrandService $brandService, CountryService $countryService)
     {
@@ -39,7 +36,6 @@ class BrandController extends BaseController
     /**
      * View page brand list
      *
-     * @param  Request  $request
      * @return view
      */
     public function index(Request $request)
@@ -85,7 +81,6 @@ class BrandController extends BaseController
     /**
      * View edit brand form
      *
-     * @param $id
      * @return view
      */
     public function edit($id)
@@ -108,7 +103,6 @@ class BrandController extends BaseController
     /**
      * Save a brand data
      *
-     * @param  BrandFormRequest  $request
      * @return mixed
      */
     public function save(BrandFormRequest $request)
@@ -124,8 +118,6 @@ class BrandController extends BaseController
 
     /**
      * Register assets
-     *
-     * @return void
      */
     private function registerAssets(): void
     {

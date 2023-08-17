@@ -19,7 +19,6 @@ interface RepositoryInterface
      * Eager loaded
      * Refer: https://laravel.com/docs/8.x/eloquent-relationships#eager-loading-multiple-relationships
      *
-     * @param  array  $relations
      * @return void
      */
     public function with(array $relations);
@@ -27,7 +26,6 @@ interface RepositoryInterface
     /**
      * Bulk Insertion data
      *
-     * @param  array  $data
      * @return bool
      */
     public function insert(array $data);
@@ -35,7 +33,6 @@ interface RepositoryInterface
     /**
      * Create data
      *
-     * @param  array  $data
      * @return mixed
      */
     public function create(array $data);
@@ -43,8 +40,6 @@ interface RepositoryInterface
     /**
      * Update data
      *
-     * @param  array  $data
-     * @param $id
      * @return mixed
      */
     public function update(array $data, $id);
@@ -52,8 +47,6 @@ interface RepositoryInterface
     /**
      * Create or update a record matching the attributes, and fill it with values.
      *
-     * @param  array  $attributes
-     * @param  array  $values
      * @return mixed
      */
     public function updateOrCreate(array $attributes, array $values = []);
@@ -61,7 +54,6 @@ interface RepositoryInterface
     /**
      * Delete data
      *
-     * @param $id
      * @return mixed
      */
     public function delete($id);
@@ -76,7 +68,6 @@ interface RepositoryInterface
     /**
      * Find by id
      *
-     * @param $id
      * @param  array  $columns
      * @return mixed
      */
@@ -85,8 +76,6 @@ interface RepositoryInterface
     /**
      * Find all by field
      *
-     * @param $field
-     * @param $value
      * @param  array  $columns
      * @return mixed
      */

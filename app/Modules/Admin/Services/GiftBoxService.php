@@ -21,8 +21,6 @@ class GiftBoxService
 
     /**
      * __construct
-     *
-     * @param  GiftBoxRepository  $giftBoxRepo
      */
     public function __construct(GiftBoxRepository $giftBoxRepo)
     {
@@ -32,7 +30,6 @@ class GiftBoxService
     /**
      * Data for gift boxes table
      *
-     * @param  Request  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function giftBoxesDataTable(Request $request)
@@ -47,7 +44,6 @@ class GiftBoxService
     /**
      * Get gift box by id
      *
-     * @param $id
      * @return App\Models\GiftBox
      */
     public function getGiftBoxById($id)
@@ -65,7 +61,6 @@ class GiftBoxService
     /**
      * Create/Update a gift box
      *
-     * @param $request
      * @return App\Models\GiftBox
      */
     public function updateOrCreate($request)

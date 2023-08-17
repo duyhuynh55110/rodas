@@ -23,10 +23,7 @@ class OrderIssueRepository extends Repository
     /**
      * Create a order issue
      *
-     * @param  array  $orderIssueValues
-     * @param  array  $orderIssueInformValues
      * @param $orderIssueProductsValues
-     * @param $user
      * @return \App\Models\OrderIssue
      */
     public function createOrderIssue(
