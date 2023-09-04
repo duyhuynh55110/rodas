@@ -330,3 +330,16 @@ if (! function_exists('getPerPage')) {
         return request()->per_page ?? 6;
     }
 }
+
+if (! function_exists('getClass')) {
+    /**
+     * Get a class constructor
+     *
+     * @param $name
+     * @return mixed
+     */
+    function getClass($name)
+    {
+        return app()->make($name);
+    }
+}
