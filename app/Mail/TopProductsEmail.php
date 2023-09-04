@@ -14,8 +14,8 @@ class TopProductsEmail extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param Brand $brand
-     * @param Product[] $products
+     * @param  Brand  $brand
+     * @param  Product[]  $products
      * @return void
      */
     public function __construct(private $brand, private $products)

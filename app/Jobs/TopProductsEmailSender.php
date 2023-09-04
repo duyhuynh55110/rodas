@@ -11,7 +11,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
-use Throwable;
 
 class TopProductsEmailSender implements ShouldQueue
 {
@@ -20,8 +19,6 @@ class TopProductsEmailSender implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param string $email
-     * @param string $brandId
      * @return void
      */
     public function __construct(private string $email, private string $brandId)

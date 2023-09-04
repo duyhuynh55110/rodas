@@ -335,7 +335,6 @@ if (! function_exists('getClass')) {
     /**
      * Get a class constructor
      *
-     * @param $name
      * @return mixed
      */
     function getClass($name)

@@ -35,7 +35,7 @@ class EmailTopProductsData extends Command
     /**
      * Create a new command instance.
      *
-     * @param ProductService $productService
+     * @param  ProductService  $productService
      * @return void
      */
     public function __construct()
@@ -45,16 +45,12 @@ class EmailTopProductsData extends Command
 
     /**
      * User's input email from option
-     *
-     * @var string
      */
     private string $email;
 
     /**
-    * User's brand_id email from option
-    *
-    * @var string
-    */
+     * User's brand_id email from option
+     */
     private string $brandId;
 
     /**
@@ -70,14 +66,15 @@ class EmailTopProductsData extends Command
         $this->brandId = $this->option('brand_id');
 
         // log inputs
-        $this->logging("---Options---");
+        $this->logging('---Options---');
         $this->logging("email: {$this->email}; brand_id: {$this->brandId};");
 
         $validator = $this->validate();
 
         // validate input is valid
-        if($validator->fails()) {
+        if ($validator->fails()) {
             $this->logging(json_encode($validator->errors()), 'error');
+
             return 0;
         }
 
@@ -90,11 +87,11 @@ class EmailTopProductsData extends Command
     /**
      * Write log
      *
-     * @param string $context
      * @return void
      */
-    private function logging(string $context, $type = 'info') {
-        Log::{$type}('[command ' . $this->batchName . '] ' . $context);
+    private function logging(string $context, $type = 'info')
+    {
+        Log::{$type}('[command '.$this->batchName.'] '.$context);
 
         // write error message to console
         if ($type == 'error') {
@@ -107,8 +104,9 @@ class EmailTopProductsData extends Command
      *
      * @return \Illuminate\Validation\Validator
      */
-    private function validate() {
-        $this->logging("---Validate---");
+    private function validate()
+    {
+        $this->logging('---Validate---');
 
         return Validator::make(
             [

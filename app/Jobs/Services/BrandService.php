@@ -4,11 +4,10 @@ namespace App\Jobs\Services;
 
 use App\Jobs\Repositories\BrandRepository;
 
-class BrandService {
+class BrandService
+{
     /**
      * __construct
-     *
-     * @param  BrandRepository $brandRepo
      */
     public function __construct(private BrandRepository $brandRepo)
     {
@@ -17,10 +16,10 @@ class BrandService {
     /**
      * Get brand by id
      *
-     * @param $id
      * @return \App\Models\Brand
      */
-    public function findBrandById($id) {
+    public function findBrandById($id)
+    {
         return $this->brandRepo->findOrFail($id);
     }
 }
