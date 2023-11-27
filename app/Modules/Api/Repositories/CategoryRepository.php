@@ -31,14 +31,13 @@ class CategoryRepository extends Repository
             'id',
             'name',
         ])
-        ->withCount(['products'])
-        ->get();
+            ->withCount(['products'])
+            ->get();
     }
 
     /**
      * Get category by id
      *
-     * @param $categoryId
      * @return \App\Models\Category
      */
     public function getCategoryById($categoryId)
@@ -47,7 +46,7 @@ class CategoryRepository extends Repository
             'id',
             'name',
         ])
-        ->withCount(['products'])
-        ->findOrFail($categoryId);
+            ->withCount(['products'])
+            ->findOrFail($categoryId);
     }
 }

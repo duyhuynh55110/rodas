@@ -23,7 +23,6 @@ class BrandRepository extends Repository
     /**
      * Get brands and format dataTable response
      *
-     * @param  array  $filter
      * @return Illuminate\Http\JsonResponse
      */
     public function brandsDataTable(array $filter)

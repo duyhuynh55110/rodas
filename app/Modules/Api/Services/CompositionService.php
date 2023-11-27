@@ -11,9 +11,6 @@ class CompositionService
 {
     /**
      * Constructor
-     *
-     * @param  CategoryRepository  $categoryRepo
-     * @param  GiftBoxRepository  $giftBoxRepo
      */
     public function __construct(private CategoryRepository $categoryRepo, private GiftBoxRepository $giftBoxRepo)
     {

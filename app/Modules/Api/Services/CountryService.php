@@ -9,8 +9,6 @@ class CountryService
 {
     /**
      * Constructor
-     *
-     * @param  CountryRepository  $countryRepo
      */
     public function __construct(private CountryRepository $countryRepo)
     {

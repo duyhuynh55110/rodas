@@ -44,9 +44,9 @@ class GiftBox extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'gift_box_products', 'gift_box_id', 'product_id')
-                ->withTimestamps()
-                ->withPivot(['quantity', 'deleted_at'])
-                ->using(GiftBoxProduct::class);
+            ->withTimestamps()
+            ->withPivot(['quantity', 'deleted_at'])
+            ->using(GiftBoxProduct::class);
     }
 
     // ---- Mutators & Casting

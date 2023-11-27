@@ -8,8 +8,6 @@ class CountryController extends BaseController
 {
     /**
      * Constructor
-     *
-     * @param  CountryService  $countryService
      */
     public function __construct(private CountryService $countryService)
     {

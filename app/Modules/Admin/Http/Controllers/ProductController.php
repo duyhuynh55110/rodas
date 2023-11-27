@@ -38,11 +38,6 @@ class ProductController extends BaseController
 
     /**
      * __construct
-     *
-     * @param  ProductService  $productService
-     * @param  CountryService  $countryService
-     * @param  BrandService  $brandService
-     * @param  CategoryService  $categoryService
      */
     public function __construct(ProductService $productService, CountryService $countryService, BrandService $brandService, CategoryService $categoryService)
     {
@@ -55,7 +50,6 @@ class ProductController extends BaseController
     /**
      * View page product list
      *
-     * @param  Request  $request
      * @return view
      */
     public function index(Request $request)
@@ -100,7 +94,6 @@ class ProductController extends BaseController
     /**
      * View edit product form
      *
-     * @param $id
      * @return view
      */
     public function edit($id)
@@ -129,7 +122,6 @@ class ProductController extends BaseController
     /**
      * Save a product data
      *
-     * @param  ProductFormRequest  $request
      * @return mixed
      */
     public function save(ProductFormRequest $request)
@@ -145,8 +137,6 @@ class ProductController extends BaseController
 
     /**
      * Register assets
-     *
-     * @return void
      */
     private function registerAssets(): void
     {

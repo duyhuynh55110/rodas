@@ -21,7 +21,6 @@ class AuthController extends BaseController
     /**
      * Register a user
      *
-     * @param  RegisterUserFormRequest  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function register(RegisterUserFormRequest $request)
@@ -34,7 +33,6 @@ class AuthController extends BaseController
     /**
      * Register a user
      *
-     * @param  LoginFormRequest  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function login(LoginFormRequest $request)

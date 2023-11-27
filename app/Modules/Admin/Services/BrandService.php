@@ -21,8 +21,6 @@ class BrandService
 
     /**
      * __construct
-     *
-     * @param  BrandRepository  $brandRepo
      */
     public function __construct(BrandRepository $brandRepo)
     {
@@ -32,7 +30,6 @@ class BrandService
     /**
      * Data for brands table
      *
-     * @param  Request  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function brandsDataTable(Request $request)
@@ -48,7 +45,6 @@ class BrandService
     /**
      * Create/Update a brand
      *
-     * @param $request
      * @return App\Models\Brand
      */
     public function updateOrCreate($request)
@@ -120,7 +116,6 @@ class BrandService
     /**
      * Get brand by id
      *
-     * @param $id
      * @return App\Models\Brand
      */
     public function getBrandById($id)

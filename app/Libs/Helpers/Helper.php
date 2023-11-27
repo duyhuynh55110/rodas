@@ -46,7 +46,6 @@ if (! function_exists('assetAdmin')) {
      *
      * @param  string  $url url path.
      * @param  bool  $http flag for return http(s) or none http(s)
-     * @return string
      */
     function assetAdmin($url, $http = true): string
     {
@@ -66,7 +65,6 @@ if (! function_exists('uploadImageToStorage')) {
      * Resize and upload image to storage
      *
      * @param Illuminate\Http\UploadedFile || Illuminate\Http\File $file
-     * @param  string  $fileName
      * @param  int  $pWidth width you want to resize
      * @param  int  $pHeight height you want to resize
      * @param  string|null  $fileExtension
@@ -138,7 +136,6 @@ if (! function_exists('deleteImageFromStorage')) {
     /**
      * Delete image from storage
      *
-     * @param  string  $fileName
      * @return void
      */
     function deleteImageFromStorage(string $fileName)
@@ -175,7 +172,6 @@ if (! function_exists('checkActiveSidebarItem')) {
      * Get Active of side
      *
      * @param  array  $side @app/Modules/Management/Config/sidebar.yml
-     * @return array
      */
     function checkActiveSidebarItem(array $side): array
     {
@@ -252,8 +248,6 @@ if (! function_exists('createFractalItem')) {
     /**
      * Create a fractal item format
      *
-     * @param $data
-     * @param $transformer
      * @return \League\Fractal\Resource\Item
      */
     function createFractalItem($data, $transformer)
@@ -268,9 +262,6 @@ if (! function_exists('createFractalCollection')) {
     /**
      * Create a fractal collection format
      *
-     * @param $data
-     * @param $transformer
-     * @param $resourceKey
      * @return \League\Fractal\Resource\Collection
      */
     function createFractalCollection($data, $transformer, $resourceKey = 'data')
@@ -291,7 +282,6 @@ if (! function_exists('getRequestListByName')) {
     /**
      * [API] Get list ids from request param
      *
-     * @param $requestName
      * @return array
      */
     function getListByRequestName($requestName)
@@ -338,5 +328,17 @@ if (! function_exists('getPerPage')) {
     function getPerPage()
     {
         return request()->per_page ?? 6;
+    }
+}
+
+if (! function_exists('getClass')) {
+    /**
+     * Get a class constructor
+     *
+     * @return mixed
+     */
+    function getClass($name)
+    {
+        return app()->make($name);
     }
 }

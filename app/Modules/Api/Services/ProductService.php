@@ -14,9 +14,6 @@ class ProductService
 {
     /**
      * Constructor
-     *
-     * @param  ProductRepository  $productRepo
-     * @param  UserRepository  $userRepo
      */
     public function __construct(
         private ProductRepository $productRepo,
@@ -27,7 +24,6 @@ class ProductService
     /**
      * Get products with paginate
      *
-     * @param $request
      * @return League\Fractal\Resource\Collection
      */
     public function getProducts($request)
@@ -61,7 +57,6 @@ class ProductService
     /**
      * Add/Update a product to user's cart
      *
-     * @param $request
      * @return void
      */
     public function updateOrCreateProductToCart($request)
@@ -97,7 +92,6 @@ class ProductService
     /**
      * Remove a product from user's cart
      *
-     * @param $productId
      * @return void
      */
     public function removeProductFromCart($productId)
@@ -178,7 +172,6 @@ class ProductService
     /**
      * Remove a favorite product
      *
-     * @param $productId
      * @return void
      */
     public function removeFavoriteProduct($productId)
@@ -212,7 +205,6 @@ class ProductService
     /**
      * Get a product detail by id
      *
-     * @param $productId
      * @param $userId
      * @return League\Fractal\Resource\Item
      */
