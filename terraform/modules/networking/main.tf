@@ -119,13 +119,45 @@ resource "aws_route" "main" {
   destination_cidr_block = "0.0.0.0/0"
 }
 
+# ------- NACL -------
+resource "aws_network_acl" "main" {
+  vpc_id = aws_vpc.main.id
+
+  # Allow all inbound from HTTP
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 80
+    to_port    = 80
+  }
+
+  # Allow all outbound
+  egress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  tags = merge(
+    {
+      Name = "main-nacl"
+    },
+    var.common_tags
+  )
+}
+
 # ------- EIP -------
 resource "aws_eip" "eip" {
   domain = "vpc"
 
   tags = merge(
     {
-      Name = "eip"
+      Name = "main-eip"
     },
     var.common_tags
   )
