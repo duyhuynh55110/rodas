@@ -1,5 +1,10 @@
-variable "environment" {
-  description = "The environment name (e.g., dev, prod)"
+variable "app_name" {
+  description = "The name of the application"
+  type        = string
+}
+
+variable "app_env" {
+  description = "The environment of the application"
   type        = string
 }
 

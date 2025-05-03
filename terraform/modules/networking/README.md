@@ -1,7 +1,7 @@
 ## Introduction
 This VPC is built using a simplified version of the **"one-to-many" VPC design**, using **one NAT Gateway** to provide outbound internet access to private subnets. It’s intended for development/staging environments where cost efficiency is prioritized over full fault tolerance.
-
-![Single NAT Gateway Architecture](./assets/networking_architecture.drawio.png)
+<!-- 
+![Single NAT Gateway Architecture](./assets/networking_architecture.drawio.png) -->
 
 ## Purpose
 - Provide secure network segmentation across public, private, and isolated workloads.

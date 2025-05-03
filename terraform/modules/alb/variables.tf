@@ -1,20 +1,31 @@
-variable "environment" {
-  description = "Environment name (e.g., dev, test)"
+variable "name" {
+  description = "Name of the Load Balancer."
+  type        = string
+}
+
+variable "load_balancer_type" {
+  description = "Type of load balancer to create. Possible values are application, gateway, or network. The default value is application."
   type        = string
 }
 
 variable "security_group_id" {
-  description = "Security group ID"
+  description = "Security group IDs"
   type        = string
 }
 
-variable "vpc_id" {
-  description = "VPC ID"
-  type        = string
-}
-
-variable "public_subnet_ids" {
+variable "subnet_ids" {
   description = "Public subnet IDs"
   type        = list(string)
 }
 
+variable "common_tags" {
+  description = "Common tags to apply to all resources"
+  type        = map(any)
+  default     = {}
+}
+
+# ------- Target Group setting -------
+variable "vpc_id" {
+  description = "VPC ID"
+  type        = string
+}
