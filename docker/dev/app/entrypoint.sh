@@ -1,17 +1,7 @@
 #!/bin/sh
-WORKSPACE="/var/www/rodas-admin"
-
-chmod -R 777 $WORKSPACE/storage
-chmod -R 777 $WORKSPACE/bootstrap
+WORKSPACE="/var/www/admin"
 
 cd $WORKSPACE
-
-# mix assets
-npm install
-npm run prod
-
-# install package
-composer install
 
 # migration
 php artisan migrate
