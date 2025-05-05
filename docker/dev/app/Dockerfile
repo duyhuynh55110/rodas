@@ -8,17 +8,15 @@ WORKDIR /var/www/admin
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     zlib1g-dev \
-    libpq-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
     libxml2-dev \
     supervisor \
+    zip \
     unzip \
     git \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install \
-    zip \
     sockets \
     pdo_mysql \
     soap \

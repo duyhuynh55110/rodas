@@ -32,9 +32,9 @@ services:
         environment:
             TZ: '${APP_TIMEZONE:-UTC}'
         volumes:
-            - './resources/assets/user:/var/www/user'
-            - 'dependencies:/var/www/user/node_modules' # this enables a much faster start/reload
-        working_dir: '/var/www/user'
+            - './resources/assets/user:/var/www/html'
+            - 'dependencies:/var/www/html/node_modules' # this enables a much faster start/reload
+        working_dir: '/var/www/html'
         networks:
             - rodas-network
         ports:
