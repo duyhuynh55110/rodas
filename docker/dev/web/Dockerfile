@@ -1,10 +1,10 @@
 FROM node:18-alpine
 
 # Set working directory
-WORKDIR /var/www/user
+WORKDIR /var/www/html
 
 # Copy all source files
-COPY ./resources/assets/user /var/www/user
+COPY ./resources/assets/user /var/www/html
 
 # Install dependencies
 RUN npm install

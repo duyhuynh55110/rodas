@@ -23,7 +23,7 @@ mix.webpackConfig({
  */
 const assetAdminPath = 'public/admin-lte/';
 
-// Build admin-lte resource (CSS, JS, Image)
+// Compile admin-lte resource (CSS, JS, Image) & pages resource
 mix.sass('resources/assets/admin/scss/app.scss', assetAdminPath + 'css')
 .js('resources/assets/admin/js/app.js', assetAdminPath + 'js')
 .copyDirectory('node_modules/admin-lte/dist/img', assetAdminPath + 'img')
@@ -36,5 +36,7 @@ mix.js('resources/assets/admin/js/pages/brands.js', assetAdminPath + 'pages')
 // products
 mix.js('resources/assets/admin/js/pages/products.js', assetAdminPath + 'pages')
 // giftBoxes
-mix.js('resources/assets/admin/js/pages/gift-boxes.js', assetAdminPath + 'pages')
-.version();
+mix.js('resources/assets/admin/js/pages/gift-boxes.js', assetAdminPath + 'pages');
+
+// Versioning them
+mix.version();
