@@ -4,17 +4,25 @@
         {
             "Effect": "Allow",
             "Action": [
-                "ecr:GetAuthorizationToken",
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage"
+                "ecr:GetAuthorizationToken"
             ],
             "Resource": "*"
         },
         {
             "Effect": "Allow",
+            "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage"
+            ],
+            "Resource": ${jsonencode(ecr_resource)}
+        },
+        {
+            "Effect": "Allow",
             "Action": ["logs:CreateLogStream", "logs:PutLogEvents"],
-            "Resource": "*"
+            "Resource": [
+                "arn:aws:logs:*:*:log-group:/ecs/task-definition-*:*"
+            ]
         }
     ]
 }

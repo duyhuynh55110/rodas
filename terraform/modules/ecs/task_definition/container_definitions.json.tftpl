@@ -6,14 +6,13 @@
         "memory": 128,
         "cpu": 128,
         "essential": true,
-        "readonlyRootFilesystem": true,
+        "readonlyRootFilesystem": ${!allow_ecs_exec},
+        "enableExecuteCommand": ${allow_ecs_exec},
         "links": [],
-        "command": [],
-        "entryPoint": [],
         "logConfiguration": {
             "logDriver": "awslogs",
             "options": {
-                "awslogs-group": "/ecs/task-definition-${family}",
+                "awslogs-group": "${log_group_name}",
                 "awslogs-region": "${region}",
                 "awslogs-stream-prefix": "ecs"
             }
@@ -24,6 +23,19 @@
                 "hostPort": 80,
                 "protocol": "tcp"
             }
+            %{ if allow_ecs_exec }
+            ,{
+                "containerPort": 22,
+                "hostPort": 22,
+                "protocol": "tcp"
+            }
+            %{ endif }
+        ],
+        "dependsOn": [
+            {
+                "containerName": "${admin_container_name}",
+                "condition": "START"
+            }
         ]
     },
     {
@@ -33,14 +45,13 @@
         "memory": 256,
         "cpu": 128,
         "essential": true,
-        "readonlyRootFilesystem": true,
+        "readonlyRootFilesystem": ${!allow_ecs_exec},
+        "enableExecuteCommand": ${allow_ecs_exec},
         "links": [],
-        "command": [],
-        "entryPoint": [],
         "logConfiguration": {
             "logDriver": "awslogs",
             "options": {
-                "awslogs-group": "/ecs/task-definition-${family}",
+                "awslogs-group": "${log_group_name}",
                 "awslogs-region": "${region}",
                 "awslogs-stream-prefix": "ecs"
             }

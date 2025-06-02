@@ -18,6 +18,11 @@ variable "desired_count" {
   type        = string
 }
 
+variable "enable_execute_command" {
+  description = "Whether to enable Amazon ECS Exec for the tasks within the service."
+  type = bool
+}
+
 # ------- Network configuration -------
 variable "security_group_arn" {
   description = "Network configuration for the service"

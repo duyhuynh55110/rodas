@@ -55,3 +55,10 @@ variable "admin_container_name" {
   description = "Name for Admin app container"
   type        = string
 }
+
+# ------- Environment settings -------
+variable "allow_ecs_exec" {
+  description = "Whether to allow ECS execute command functionality"
+  type        = bool
+  default     = false
+}

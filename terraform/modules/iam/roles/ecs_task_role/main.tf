@@ -32,7 +32,7 @@ EOF
 resource "aws_iam_policy" "policy_for_ecs_task_role" {
   name        = "Policy-${var.name}"
   description = "IAM Policy for Role ${var.name}"
-  policy      = file("modules/iam/policies/ecs-task-role-policy.json")
+  policy      = file("${path.module}/policy.json.tftpl")
 
   lifecycle {
     create_before_destroy = true

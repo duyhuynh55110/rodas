@@ -42,6 +42,17 @@ variable "cidr_blocks_ingress" {
   default     = null
 }
 
+variable "additional_ingress_rules" {
+  description = "List of additional ingress rules"
+  type = list(object({
+    protocol        = string
+    from_port       = number
+    to_port         = number
+    cidr_blocks     = list(string)
+  }))
+  default = null
+}
+
 # ------- Egress setting -------
 variable "egress_port" {
   description = "Number of the port to open in the egress rules"

@@ -32,7 +32,7 @@ EOF
 resource "aws_iam_policy" "policy_for_ecs_execution_role" {
   name        = "Policy-${var.name}"
   description = "IAM Policy for ${var.name} Role"
-  policy = templatefile("modules/iam/policies/ecs-execution-role-policy.json", {
+  policy = templatefile("${path.module}/policy.json.tftpl", {
     ecr_resource = var.ecr_resource
   })
 

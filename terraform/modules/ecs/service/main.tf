@@ -9,6 +9,7 @@ resource "aws_ecs_service" "ecs_service" {
   desired_count                     = var.desired_count
   health_check_grace_period_seconds = 10
   launch_type                       = "FARGATE"
+  enable_execute_command = var.enable_execute_command
 
   network_configuration {
     security_groups = [var.security_group_arn]

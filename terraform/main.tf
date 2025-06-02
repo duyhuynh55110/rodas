@@ -38,6 +38,20 @@ module "security_group_alb_server" {
   cidr_blocks_ingress = ["0.0.0.0/0"]
 }
 
+# ------- Creating Security Group for SSH access -------
+module "security_group_ssh" {
+  count       = var.allow_ecs_exec ? 1 : 0
+  source      = "./modules/security_group"
+  name        = "ssh-access-sg"
+  description = "Controls SSH access to ECS containers"
+  vpc_id      = module.networking.vpc_id
+  common_tags = local.common_tags
+
+  # Inbound rules
+  ingress_port        = 22
+  cidr_blocks_ingress = ["0.0.0.0/0"]
+}
+
 # ------- ALB (Application Load Balancer) -------
 module "alb_server" {
   source             = "./modules/alb"
@@ -82,6 +96,7 @@ module "ecs_task_definition_server" {
   task_role_arn      = module.ecs_task_role.arn_role
   cpu                = 1024
   memory             = 2048
+  allow_ecs_exec     = var.allow_ecs_exec
 
   server_container_name = "rodas-server"
   server_image_uri      = module.ecr_server.repository_url
@@ -99,8 +114,12 @@ module "security_group_ecs_task_server" {
   vpc_id = module.networking.vpc_id
 
   # Inbound rules
-  ingress_port    = 80
-  security_groups = [module.security_group_alb_server.security_group_id]
+  ingress_port = 80
+  cidr_blocks_ingress = ["0.0.0.0/0"]
+  # security_groups = concat(
+  #   [module.security_group_alb_server.security_group_id],
+  #   var.allow_ecs_exec ? [module.security_group_ssh[0].security_group_id] : []
+  # )
 }
 
 # ------- Creating ECS Cluster -------
@@ -111,12 +130,13 @@ module "ecs_cluster" {
 
 # ------- Creating ECS Service server -------
 module "ecs_service_server" {
-  depends_on          = [module.alb_server]
-  source              = "./modules/ecs/service"
-  name                = "service-server"
-  ecs_cluster_id      = module.ecs_cluster.ecs_cluster_id
-  task_definition_arn = module.ecs_task_definition_server.task_definition_arn
-  desired_count       = 1
+  depends_on             = [module.alb_server]
+  source                 = "./modules/ecs/service"
+  name                   = "service-server"
+  ecs_cluster_id         = module.ecs_cluster.ecs_cluster_id
+  task_definition_arn    = module.ecs_task_definition_server.task_definition_arn
+  desired_count          = 1
+  enable_execute_command = var.allow_ecs_exec
 
   # ------- Network configuration -------
   security_group_arn = module.security_group_ecs_task_server.security_group_id

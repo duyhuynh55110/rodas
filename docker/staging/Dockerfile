@@ -99,6 +99,18 @@ RUN rm -rf resources/assets/user
 # Permissions
 RUN chmod -R 777 storage && chmod -R 777 bootstrap/cache
 
+COPY ./docker/staging/php.ini /usr/local/etc/php/php.ini
+ADD ./docker/staging/workers/laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
+ADD ./docker/staging/workers/php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
+ADD ./docker/staging/workers/supervisord.conf /etc/supervisor/supervisord.conf
+
+# Copy entrypoint and make it executable
+COPY ./docker/staging/entrypoint.sh /entrypoint.sh
+RUN chmod u+x /entrypoint.sh
+
+# Run entrypoint
+ENTRYPOINT [ "sh", "/entrypoint.sh" ]
+
 EXPOSE 9000
 
 # === Stage 4: Build static files for user site ===
@@ -118,7 +130,7 @@ COPY ./resources/assets/user /app
 RUN npm run build
 
 # === Stage 5: Final runtime nginx container ===
-FROM nginx:1.23.0 as nginx-server
+FROM nginx:1.24-alpine as nginx-server
 
 VOLUME ["/var/cache/nginx", "/var/run", "/etc/nginx/conf.d"]
 
@@ -130,11 +142,6 @@ COPY --from=static-build ./app/public /var/www/admin/public
 
 # Copy user source to run static
 COPY --from=user-build ./app/dist /var/www/html
-
-COPY ./docker/staging/php.ini /usr/local/etc/php/php.ini
-ADD ./docker/staging/workers/laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
-ADD ./docker/staging/workers/php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
-ADD ./docker/staging/workers/supervisord.conf /etc/supervisor/supervisord.conf
 
 # 80 -> admin application
 # 8080 -> user application
