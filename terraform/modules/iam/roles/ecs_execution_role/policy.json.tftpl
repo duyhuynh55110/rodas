@@ -20,9 +20,7 @@
         {
             "Effect": "Allow",
             "Action": ["logs:CreateLogStream", "logs:PutLogEvents"],
-            "Resource": [
-                "arn:aws:logs:*:*:log-group:/ecs/task-definition-*:*"
-            ]
+            "Resource": ${jsonencode(log_group_resource)}
         }
     ]
 }

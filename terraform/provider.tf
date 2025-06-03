@@ -3,6 +3,6 @@
 ============================*/
 
 provider "aws" {
-  region = var.aws_region # Change this to your desired region
-  #   profile = var.aws_profile
+  region = var.aws_region
+  profile = var.aws_profile
 }

@@ -34,6 +34,9 @@ resource "aws_iam_policy" "policy_for_ecs_execution_role" {
   description = "IAM Policy for ${var.name} Role"
   policy = templatefile("${path.module}/policy.json.tftpl", {
     ecr_resource = var.ecr_resource
+    log_group_resource = [
+      for log_group in var.log_group_resource : "${log_group}:log-stream:ecs/*/*"
+    ]
   })
 
   lifecycle {

@@ -27,9 +27,3 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
     allow_ecs_exec = var.allow_ecs_exec
   })
 }
-
-# ------- CloudWatch Logs groups to store ecs-containers logs -------
-resource "aws_cloudwatch_log_group" "log_group" {
-  name              = local.log_group_name
-  retention_in_days = 30
-}

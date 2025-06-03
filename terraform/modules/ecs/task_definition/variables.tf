@@ -3,6 +3,11 @@ variable "family" {
   type        = string
 }
 
+variable "log_group_name" {
+  description = "name for log group which handle logging for this task definition"
+  type        = string
+}
+
 variable "cpu" {
   description = "The CPU value to assign to the container, read AWS documentation for available values"
   type        = number

@@ -9,6 +9,10 @@ data "aws_availability_zones" "available" {
 
 locals {
   availability_zones = slice(data.aws_availability_zones.available.names, 0, 2)
+  
+  // ECS settings
+  task_definition_name = "task-definition-server"
+  log_group_name = "/ecs/${local.task_definition_name}"
 
   common_tags = {
     Environment = var.app_env
@@ -74,6 +78,12 @@ module "ecr_admin" {
   name   = "rodas/admin"
 }
 
+# ------- Create a CloudWatch log group to handle logging for ECS container -------
+module "ecs_containers_log_group" {
+  source = "./modules/log_group"
+  name = local.log_group_name
+}
+
 # ------- ECS task role -------
 module "ecs_task_role" {
   source = "./modules/iam/roles/ecs_task_role"
@@ -86,12 +96,14 @@ module "ecs_execution_role" {
   name   = "ecs-execution-role"
 
   ecr_resource = [module.ecr_server.repository_arn, module.ecr_admin.repository_arn]
+  log_group_resource = [module.ecs_containers_log_group.log_group_arn]
 }
 
 # ------- Creating ECS Task Definition for the server -------
 module "ecs_task_definition_server" {
   source             = "./modules/ecs/task_definition"
-  family             = "task-definition-server"
+  family             = local.task_definition_name
+  log_group_name     = module.ecs_containers_log_group.log_group_name
   execution_role_arn = module.ecs_execution_role.arn_role
   task_role_arn      = module.ecs_task_role.arn_role
   cpu                = 1024
