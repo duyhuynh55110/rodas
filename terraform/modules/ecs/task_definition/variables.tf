@@ -8,6 +8,17 @@ variable "log_group_name" {
   type        = string
 }
 
+variable "execution_role_arn" {
+  description = "ARN of the task execution role that the Amazon ECS container agent and the Docker daemon can assume."
+  type        = string
+}
+
+variable "task_role_arn" {
+  description = "ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services."
+  type        = string
+  default     = null
+}
+
 variable "cpu" {
   description = "The CPU value to assign to the container, read AWS documentation for available values"
   type        = number
@@ -28,17 +39,6 @@ variable "memory" {
   }
 }
 
-variable "execution_role_arn" {
-  description = "ARN of the task execution role that the Amazon ECS container agent and the Docker daemon can assume."
-  type        = string
-}
-
-variable "task_role_arn" {
-  description = "ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services."
-  type        = string
-  default     = null
-}
-
 # ------- Server container setting -------
 variable "server_image_uri" {
   description = "Image Uri for Server container"
@@ -48,6 +48,34 @@ variable "server_image_uri" {
 variable "server_container_name" {
   description = "Name for Server container"
   type        = string
+}
+
+variable "server_container_cpu" {
+  description = "The CPU value to assign to the server container"
+  type        = number
+  default     = 128
+}
+
+variable "server_container_memory" {
+  description = "The memory value to assign to the server container"
+  type        = number
+  default     = 128
+}
+
+variable "server_container_memory_reservation" {
+  description = "The memory reservation value to assign to the server container"
+  type        = number
+  default     = 128
+}
+
+variable "server_container_port" {
+  description = "The container port for the server"
+  type        = number
+}
+
+variable "server_host_port" {
+  description = "The host port for the server"
+  type        = number
 }
 
 # ------- Admin application container setting -------
@@ -61,9 +89,44 @@ variable "admin_container_name" {
   type        = string
 }
 
+variable "admin_container_cpu" {
+  description = "The CPU value to assign to the admin container"
+  type        = number
+  default     = 128
+}
+
+variable "admin_container_memory" {
+  description = "The memory value to assign to the admin container"
+  type        = number
+  default     = 256
+}
+
+variable "admin_container_memory_reservation" {
+  description = "The memory reservation value to assign to the admin container"
+  type        = number
+  default     = 256
+}
+
+variable "admin_container_port" {
+  description = "The container port for the admin application"
+  type        = number
+  default     = 9000
+}
+
 # ------- Environment settings -------
+variable "region" {
+  description = "AWS region for the resources"
+  type        = string
+}
+
 variable "allow_ecs_exec" {
   description = "Whether to allow ECS execute command functionality"
   type        = bool
   default     = false
+}
+
+variable "ssh_port" {
+  description = "SSH port for ECS exec functionality"
+  type        = number
+  default     = 22
 }

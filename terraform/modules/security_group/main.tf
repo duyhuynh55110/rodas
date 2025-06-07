@@ -13,17 +13,21 @@ resource "aws_security_group" "sg" {
       protocol        = ingress.value.protocol
       from_port       = ingress.value.from_port
       to_port         = ingress.value.to_port
-      cidr_blocks     = ingress.value.cidr_blocks
-      # security_groups = ingress.value.security_groups
+      cidr_blocks     = ingress.value.cidr_blocks != null ? ingress.value.cidr_blocks : null
+      security_groups = ingress.value.security_groups != null ? ingress.value.security_groups : null
     }
   }
 
-  ingress {
-    protocol        = "tcp"
-    from_port       = var.ingress_port
-    to_port         = var.ingress_port
-    cidr_blocks     = var.cidr_blocks_ingress
-    # security_groups = var.security_groups
+  # Only create this ingress rule if ingress_port is provided and either cidr_blocks_ingress or security_groups is not null
+  dynamic "ingress" {
+    for_each = var.ingress_port != null && (var.cidr_blocks_ingress != null || var.security_groups != null) ? [1] : []
+    content {
+      protocol        = "tcp"
+      from_port       = var.ingress_port
+      to_port         = var.ingress_port
+      cidr_blocks     = var.cidr_blocks_ingress
+      security_groups = var.security_groups
+    }
   }
 
   egress {
@@ -34,6 +38,6 @@ resource "aws_security_group" "sg" {
   }
 
   tags = merge({
-    Name        = var.name
+    Name = var.name
   }, var.common_tags)
 }

@@ -2,9 +2,9 @@
     {
         "name": "${server_container_name}",
         "image": "${server_image_uri}",
-        "memoryReservation": 128,
-        "memory": 128,
-        "cpu": 128,
+        "memoryReservation": ${server_container_memory_reservation},
+        "memory": ${server_container_memory},
+        "cpu": ${server_container_cpu},
         "essential": true,
         "readonlyRootFilesystem": ${!allow_ecs_exec},
         "enableExecuteCommand": ${allow_ecs_exec},
@@ -19,14 +19,14 @@
         },
         "portMappings": [
             {
-                "containerPort": 80,
-                "hostPort": 80,
+                "containerPort": ${server_container_port},
+                "hostPort": ${server_host_port},
                 "protocol": "tcp"
             }
             %{ if allow_ecs_exec }
             ,{
-                "containerPort": 22,
-                "hostPort": 22,
+                "containerPort": ${ssh_port},
+                "hostPort": ${ssh_port},
                 "protocol": "tcp"
             }
             %{ endif }
@@ -41,9 +41,9 @@
     {
         "name": "${admin_container_name}",
         "image": "${admin_image_uri}",
-        "memoryReservation": 256,
-        "memory": 256,
-        "cpu": 128,
+        "memoryReservation": ${admin_container_memory_reservation},
+        "memory": ${admin_container_memory},
+        "cpu": ${admin_container_cpu},
         "essential": true,
         "readonlyRootFilesystem": ${!allow_ecs_exec},
         "enableExecuteCommand": ${allow_ecs_exec},
@@ -58,8 +58,7 @@
         },
         "portMappings": [
             {
-                "containerPort": 9000,
-                "hostPort": 9000,
+                "containerPort": ${admin_container_port},
                 "protocol": "tcp"
             }
         ]

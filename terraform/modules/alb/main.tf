@@ -3,8 +3,8 @@
 ===============================================================*/
 
 locals {
-  http_protocol = "HTTP"
-  http_port     = 80
+  http_port     = var.ingress_port
+  http_protocol = var.ingress_port == 80 ? "HTTP" : "HTTPS"
 }
 
 # ------- Create Load Balancer -------

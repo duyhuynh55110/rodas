@@ -36,16 +36,16 @@ variable "subnet_ids" {
 
 # ------- Load Balancer setting -------
 variable "target_group_arn" {
-  description = "The full ARN of the target group or groups associated with the VPC Lattice configuration"
+  description = "ARN of the Load Balancer target group to associate with the service"
   type        = string
 }
 
 variable "container_name" {
-  description = "The name of the container"
+  description = "Name of the container to associate with the load balancer (as it appears in a container definition)"
   type        = string
 }
 
 variable "container_port" {
-  description = "value of the container port"
+  description = "Port on the container to associate with the load balancer"
   type        = string
 }
