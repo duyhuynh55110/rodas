@@ -21,29 +21,29 @@ variable "aws_profile" {
 # ------- Networking -------
 variable "vpc_cidr" {
   description = "CIDR block for the VPC (e.g., 10.0.0.0/16)"
-  type = string
+  type        = string
 }
 
 # ------- Security Group -------
 variable "public_access_cidr" {
   description = "List of CIDR blocks allowed to access the public ALB (typically 0.0.0.0/0 for public access)"
-  type = list(string)
+  type        = list(string)
 }
 
 variable "admin_restricted_cidr" {
   description = "List of CIDR blocks with restricted access to admin resources (typically your own IP address)"
-  type = list(string)
+  type        = list(string)
 }
 
 variable "ssh_ingress_port" {
   description = "Port on which the SSH ingress rule will be applied"
-  type = number
-  default = 22
+  type        = number
+  default     = 22
 }
 # ------- ALB configuration -------
 variable "alb_ingress_port" {
   description = "Port on which the ALB will accept incoming (80: HTTP, 443: HTTPS)"
-  type = number
+  type        = number
 }
 
 # ------- ECS configuration -------
@@ -82,4 +82,29 @@ variable "admin_container_name" {
 variable "allow_ecs_exec" {
   description = "Whether to allow ECS execute command functionality"
   type        = bool
+}
+
+# ------- Database configuration -------
+variable "db_port" {
+  description = "Port on which the database accepts connections"
+  type        = number
+  default     = 3306
+}
+
+variable "db_name" {
+  description = "The name of the database"
+  type        = string
+  default     = "rodas"
+}
+
+variable "db_username" {
+  description = "Username for the database"
+  type        = string
+  sensitive   = true
+}
+
+variable "db_password" {
+  description = "Password for the database"
+  type        = string
+  sensitive   = true
 }

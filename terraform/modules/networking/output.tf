@@ -13,3 +13,8 @@ output "private_subnet_ids" {
   value       = aws_subnet.private[*].id
 }
 
+output "isolated_subnet_ids" {
+  description = "List of isolated subnet IDs"
+  value       = aws_subnet.isolated[*].id
+}
+

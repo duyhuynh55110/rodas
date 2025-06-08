@@ -182,3 +182,76 @@ module "ecs_autoscaling_group_server" {
   min_capacity = var.server_min_capacity
   max_capacity = var.server_max_capacity
 }
+
+# ------- Creating RDS Security Group -------
+module "security_group_rds" {
+  source      = "./modules/security_group"
+  name        = "rds-sg"
+  description = "Controls access to the RDS instances"
+  vpc_id      = module.networking.vpc_id
+
+  ingress_port               = var.db_port
+  security_groups = [module.security_group_ecs_task_server.security_group_id]
+
+  common_tags = local.common_tags
+}
+
+# ------- Creating RDS Database with Replica -------
+module "rds" {
+  source = "./modules/rds"
+  name   = "rodas-db"
+
+  database_name = var.db_name
+  username      = var.db_username
+  password      = var.db_password
+
+  # Place RDS instances in isolated subnets
+  subnet_ids        = module.networking.isolated_subnet_ids
+  security_group_id = module.security_group_rds.security_group_id
+
+  # Place instances in different AZs
+  primary_availability_zone = local.availability_zones[0]
+  replica_availability_zone = local.availability_zones[1]
+
+  skip_final_snapshot     = true
+  backup_retention_period = 7
+
+  common_tags = local.common_tags
+}
+
+# ------- Storing Database Connection Info in Parameter Store -------
+module "db_parameters" {
+  source = "./modules/parameter_store"
+  prefix = "${var.app_name}/${var.app_env}/database"
+
+  parameters = {
+    host = {
+      value       = module.rds.primary_address
+      description = "RDS primary instance hostname"
+    },
+    port = {
+      value       = tostring(var.db_port)
+      description = "RDS port"
+    },
+    name = {
+      value       = var.db_name
+      description = "Database name"
+    },
+    username = {
+      value       = var.db_username
+      description = "Database username"
+      type        = "SecureString"
+    },
+    password = {
+      value       = var.db_password
+      description = "Database password"
+      type        = "SecureString"
+    },
+    replica_host = {
+      value       = module.rds.replica_address
+      description = "RDS replica instance hostname"
+    }
+  }
+
+  common_tags = local.common_tags
+}
