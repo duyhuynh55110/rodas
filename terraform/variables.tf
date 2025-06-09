@@ -108,3 +108,10 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+# ------- Bastion configuration -------
+variable "bastion_key_name" {
+  description = "SSH key name to use for the bastion host"
+  type        = string
+  sensitive   = true
+}

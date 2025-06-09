@@ -42,20 +42,6 @@ module "security_group_alb_server" {
   cidr_blocks_ingress = var.public_access_cidr
 }
 
-# ------- Creating Security Group for SSH access -------
-module "security_group_ssh" {
-  count       = var.allow_ecs_exec ? 1 : 0
-  source      = "./modules/security_group"
-  name        = "ssh-access-sg"
-  description = "Controls SSH access to ECS containers"
-  vpc_id      = module.networking.vpc_id
-  common_tags = local.common_tags
-
-  # Inbound rules
-  ingress_port        = var.ssh_ingress_port
-  cidr_blocks_ingress = var.admin_restricted_cidr
-}
-
 # ------- ALB (Application Load Balancer) -------
 module "alb_server" {
   source             = "./modules/alb"
@@ -135,16 +121,6 @@ module "security_group_ecs_task_server" {
   # Inbound rules - only allow port 80 from ALB
   ingress_port    = var.alb_ingress_port
   security_groups = [module.security_group_alb_server.security_group_id]
-
-  # Use additional_ingress_rules for SSH access if needed
-  additional_ingress_rules = var.allow_ecs_exec ? [
-    {
-      protocol    = "tcp"
-      from_port   = var.ssh_ingress_port
-      to_port     = var.ssh_ingress_port
-      cidr_blocks = var.admin_restricted_cidr
-    }
-  ] : null
 }
 
 # ------- Creating ECS Cluster -------
@@ -183,6 +159,29 @@ module "ecs_autoscaling_group_server" {
   max_capacity = var.server_max_capacity
 }
 
+# ------- Creating Security Group for Bastion Host -------
+module "security_group_bastion" {
+  source      = "./modules/security_group"
+  name        = "bastion-sg"
+  description = "Controls access to the bastion host"
+  vpc_id      = module.networking.vpc_id
+  common_tags = local.common_tags
+
+  # Inbound rules - SSH access from your IP
+  ingress_port        = var.ssh_ingress_port
+  cidr_blocks_ingress = var.admin_restricted_cidr
+}
+
+# ------- Creating Bastion Host which use for Devs can access resource placed in private, isolated subnet in VPC -------
+module "bastion" {
+  source             = "./modules/bastion"
+  subnet_id          = module.networking.public_subnet_ids[0]
+  security_group_ids = [module.security_group_bastion.security_group_id]
+  key_name           = var.bastion_key_name
+  common_tags        = local.common_tags
+}
+
+
 # ------- Creating RDS Security Group -------
 module "security_group_rds" {
   source      = "./modules/security_group"
@@ -190,8 +189,8 @@ module "security_group_rds" {
   description = "Controls access to the RDS instances"
   vpc_id      = module.networking.vpc_id
 
-  ingress_port               = var.db_port
-  security_groups = [module.security_group_ecs_task_server.security_group_id]
+  ingress_port    = var.db_port
+  security_groups = [module.security_group_ecs_task_server.security_group_id, module.security_group_bastion.security_group_id]
 
   common_tags = local.common_tags
 }
