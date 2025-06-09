@@ -1,9 +1,10 @@
 app_name    = "rodas"
 app_env     = "staging"
-aws_profile = "default" # "rodas-dev"
+aws_profile = "staging-rodas" # Replace with your profile name
 aws_region  = "ap-southeast-1"
-admin_restricted_cidr = ["0.0.0.0/0"]  # Limit IP for some services only can access by admin IP
 public_access_cidr = ["0.0.0.0/0"] # Allow access from anywhere for public ALB
+admin_restricted_cidr = ["YOUR_IP/32"]  # Limit IP for some services only can access by admin IP
+bastion_key_name = "staging-rodas-bastion" # Key pair use to access bastion host. Replace with your key pair name
 
 # ------- Networking configuration -------
 vpc_cidr = "10.0.0.0/16" # CIDR block for the VPC

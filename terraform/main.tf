@@ -181,7 +181,6 @@ module "bastion" {
   common_tags        = local.common_tags
 }
 
-
 # ------- Creating RDS Security Group -------
 module "security_group_rds" {
   source      = "./modules/security_group"
