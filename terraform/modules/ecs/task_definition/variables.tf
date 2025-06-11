@@ -125,8 +125,34 @@ variable "allow_ecs_exec" {
   default     = false
 }
 
-variable "ssh_port" {
-  description = "SSH port for ECS exec functionality"
-  type        = number
-  default     = 22
+# ------- Parameter Store settings -------
+variable "app_name" {
+  description = "Application name used for parameter store paths"
+  type        = string
+}
+
+variable "app_env" {
+  description = "Environment name used for parameter store paths"
+  type        = string
+}
+
+variable "account_id" {
+  description = "AWS account ID for constructing ARNs"
+  type        = string
+}
+
+# ------- Database settings -------
+variable "db_host" {
+  description = "Database host"
+  type        = string
+}
+
+variable "db_port" {
+  description = "Database port"
+  type        = string
+}
+
+variable "db_name" {
+  description = "Database name"
+  type        = string
 }

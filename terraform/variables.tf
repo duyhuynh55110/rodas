@@ -18,6 +18,11 @@ variable "aws_profile" {
   type        = string
 }
 
+variable "app_key" {
+  description = "It serves as a cryptographic key used by Laravel for secure data encryption and decryption"
+  type = string
+}
+
 # ------- Networking -------
 variable "vpc_cidr" {
   description = "CIDR block for the VPC (e.g., 10.0.0.0/16)"
@@ -109,7 +114,6 @@ variable "db_password" {
   sensitive   = true
 }
 
-# ------- Bastion configuration -------
 variable "bastion_key_name" {
   description = "SSH key name to use for the bastion host"
   type        = string

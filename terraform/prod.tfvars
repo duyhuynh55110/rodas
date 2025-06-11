@@ -19,4 +19,4 @@ server_max_capacity = 4
 # ------- ECS configuration -------
 ecs_task_cpu = 1024
 ecs_task_memory = 2048
-allow_ecs_exec = true  # Allow access ECS container to execute command
+allow_ecs_exec = false  # Allow access ECS container to execute command

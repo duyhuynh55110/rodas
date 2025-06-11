@@ -15,12 +15,23 @@
                 "ecr:GetDownloadUrlForLayer",
                 "ecr:BatchGetImage"
             ],
-            "Resource": ${jsonencode(ecr_resource)}
+            "Resource": ${jsonencode(ecr_resources)}
         },
         {
             "Effect": "Allow",
             "Action": ["logs:CreateLogStream", "logs:PutLogEvents"],
-            "Resource": ${jsonencode(log_group_resource)}
+            "Resource": ${jsonencode(log_group_resources)}
         }
+        %{ if length(parameter_store_resources) > 0 }
+        ,
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameters",
+                "ssm:GetParameter"
+            ],
+            "Resource": ${jsonencode(parameter_store_resources)}
+        }
+        %{ endif }
     ]
 }
