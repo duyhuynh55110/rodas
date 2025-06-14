@@ -13,11 +13,6 @@ variable "aws_region" {
   type        = string
 }
 
-variable "aws_profile" {
-  description = "The AWS profile to use"
-  type        = string
-}
-
 variable "app_key" {
   description = "It serves as a cryptographic key used by Laravel for secure data encryption and decryption"
   type = string

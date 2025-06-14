@@ -13,7 +13,7 @@ services:
             target: 'nginx-server'
         container_name: 'rodas-server'
         networks:
-            - staging-rodas-network
+            - rodas-staging-network
         ports:
             - '9000:80'
             - '8080:8080'
@@ -35,7 +35,7 @@ services:
         env_file:
           - ./.env.staging
         networks:
-            - staging-rodas-network
+            - rodas-staging-network
         links:
             - 'db'
         depends_on:
@@ -49,7 +49,7 @@ services:
         volumes:
             - 'rodas-mysql:/var/lib/mysql'
         networks:
-            - staging-rodas-network
+            - rodas-staging-network
         environment:
             TZ: '${APP_TIMEZONE:-UTC}'
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
@@ -63,7 +63,7 @@ services:
             test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
 
 networks:
-    staging-rodas-network:
+    rodas-staging-network:
         driver: bridge
 volumes:
     rodas-mysql: # Use mysql local (must install mysql local to use)

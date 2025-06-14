@@ -2,7 +2,6 @@ app_name    = "rodas"
 app_env     = "staging"
 public_access_cidr = ["0.0.0.0/0"] # Allow access from anywhere for public ALB
 admin_restricted_cidr = ["0.0.0.0/0"]  # Limit IP for some services only can access by admin IP
-bastion_key_name = "staging-rodas-bastion" # Key pair use to access bastion host. Replace with your key pair name
 
 # ------- Networking configuration -------
 vpc_cidr = "10.0.0.0/16" # CIDR block for the VPC
