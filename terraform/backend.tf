@@ -1,5 +1,5 @@
 /*===========================
-    Backend configuration for production environment
+    Backend configuration for staging environment
 ============================*/
 
 terraform {
@@ -8,7 +8,7 @@ terraform {
 
     workspaces {
       project = "rodas"
-      name = "prod-rodas"
+      tags = ["rodas"]
     }
   }
 }
