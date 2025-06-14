@@ -1,0 +1,91 @@
+[
+    {
+        "name": "${server_container_name}",
+        "image": "${server_image_uri}",
+        "memoryReservation": ${server_container_memory_reservation},
+        "memory": ${server_container_memory},
+        "cpu": ${server_container_cpu},
+        "essential": true,
+        "readonlyRootFilesystem": ${!allow_ecs_exec},
+        "enableExecuteCommand": ${allow_ecs_exec},
+        "links": [],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "${log_group_name}",
+                "awslogs-region": "${region}",
+                "awslogs-stream-prefix": "ecs"
+            }
+        },
+        "portMappings": [
+            {
+                "containerPort": ${server_container_port},
+                "hostPort": ${server_host_port},
+                "protocol": "tcp"
+            }
+        ],
+        "dependsOn": [
+            {
+                "containerName": "${admin_container_name}",
+                "condition": "START"
+            }
+        ]
+    },
+    {
+        "name": "${admin_container_name}",
+        "image": "${admin_image_uri}",
+        "memoryReservation": ${admin_container_memory_reservation},
+        "memory": ${admin_container_memory},
+        "cpu": ${admin_container_cpu},
+        "essential": true,
+        "readonlyRootFilesystem": ${!allow_ecs_exec},
+        "enableExecuteCommand": ${allow_ecs_exec},
+        "links": [],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "${log_group_name}",
+                "awslogs-region": "${region}",
+                "awslogs-stream-prefix": "ecs"
+            }
+        },
+        "portMappings": [
+            {
+                "containerPort": ${admin_container_port},
+                "protocol": "tcp"
+            }
+        ],
+        "secrets": [
+            {
+                "name": "APP_KEY",
+                "valueFrom": "arn:aws:ssm:${region}:${account_id}:parameter/${app_name}/${app_env}/app_key"
+            },
+            {
+                "name": "DB_USERNAME",
+                "valueFrom": "arn:aws:ssm:${region}:${account_id}:parameter/${app_name}/${app_env}/database/username"
+            },
+            {
+                "name": "DB_PASSWORD",
+                "valueFrom": "arn:aws:ssm:${region}:${account_id}:parameter/${app_name}/${app_env}/database/password"
+            }
+        ],
+        "environment": [
+            {
+                "name": "APP_ENV",
+                "value": "${app_env}"
+            },
+            {
+                "name": "DB_HOST",
+                "value": "${db_host}"
+            },
+            {
+                "name": "DB_PORT",
+                "value": "${db_port}"
+            },
+            {
+                "name": "DB_NAME",
+                "value": "${db_name}"
+            }
+        ]
+    }
+]

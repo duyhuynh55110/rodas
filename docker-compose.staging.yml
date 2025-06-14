@@ -11,7 +11,7 @@ services:
             context: .
             dockerfile: './docker/staging/Dockerfile'
             target: 'nginx-server'
-        container_name: 'rodas_nginx'
+        container_name: 'rodas-server'
         networks:
             - staging-rodas-network
         ports:
@@ -28,7 +28,7 @@ services:
             context: .
             dockerfile: './docker/staging/Dockerfile'
             target: 'admin-app'
-        container_name: 'rodas_app'
+        container_name: 'rodas-admin'
         environment:
             TZ: '${APP_TIMEZONE:-UTC}'
         working_dir: '/var/www/admin'
