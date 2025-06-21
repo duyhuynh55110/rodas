@@ -1,0 +1,73 @@
+# ==============================================================
+#                     Demo for staging development
+# ==============================================================
+
+version: '3'
+
+services:
+    # Nginx service
+    nginx:
+        build:
+            context: .
+            dockerfile: './docker/staging/Dockerfile'
+            target: 'nginx-server'
+        container_name: 'rodas-server'
+        networks:
+            - rodas-staging-network
+        ports:
+            - '9000:80'
+            - '8080:8080'
+        links:
+            - 'app'
+        depends_on:
+            - 'app'
+
+    # (Laravel) Admin application
+    app:
+        build:
+            context: .
+            dockerfile: './docker/staging/Dockerfile'
+            target: 'admin-app'
+        container_name: 'rodas-admin'
+        environment:
+            TZ: '${APP_TIMEZONE:-UTC}'
+        working_dir: '/var/www/admin'
+        env_file:
+          - ./.env.staging
+        networks:
+            - rodas-staging-network
+        links:
+            - 'db'
+        depends_on:
+            - 'db'
+
+    db:
+        build:
+            context: .
+            dockerfile: './docker/dev/db/Dockerfile'
+        container_name: 'rodas_db'
+        volumes:
+            - 'rodas-mysql:/var/lib/mysql'
+        networks:
+            - rodas-staging-network
+        environment:
+            TZ: '${APP_TIMEZONE:-UTC}'
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        ports:
+            - "${FORWARD_DB_PORT:-13306}:3306"
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
+
+networks:
+    rodas-staging-network:
+        driver: bridge
+volumes:
+    rodas-mysql: # Use mysql local (must install mysql local to use)
+        driver: local
+    rodas-redis:
+        driver: local
+    dependencies:

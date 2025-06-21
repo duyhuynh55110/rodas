@@ -1,0 +1,60 @@
+name: Rodas_Docker_Image_Build
+on:
+  push:
+    branches:
+      - "develop"
+      - "master"
+jobs:
+  build:
+    name: Build, tag, and push image to Amazon ECR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # role-to-assume: arn:aws:iam::832707999579:policy/rodas_deploy
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Set image tag name
+        id: imageTagName
+        run: |
+          if [ ${{ github.ref }} == 'refs/heads/master' ]; then
+            echo "tagname=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_OUTPUT
+          elif [ ${{ github.ref }} == 'refs/heads/develop' ]; then
+            echo "tagname=latest" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Set up AWS CLI
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+          aws --version  # To verify installation
+
+      - name: Build, tag, and push image to Amazon ECR
+        # if: ${{ (github.ref == 'refs/heads/develop') || (github.ref == 'refs/heads/master') }}
+        id: docker
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_IMAGE_PHP_FPM: rodas/php-fpm
+          IMAGE_TAG: ${{ steps.imageTagName.outputs.tagname }}
+        run: |
+          # Retrieve an authentication token and authenticate your Docker client to your registry.
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin $ECR_REGISTRY
+
+          # Build image and tag
+          docker build . -f docker/app/Dockerfile -t $ECR_REGISTRY/$ECR_IMAGE_PHP_FPM:$IMAGE_TAG --target php-fpm
+
+          # Push image to Amazon ECR
+          docker push $ECR_REGISTRY/$ECR_IMAGE_PHP_FPM:$IMAGE_TAG

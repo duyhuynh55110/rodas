@@ -1,3 +1,7 @@
+# ==============================================================
+#                     Use for dev development
+# ==============================================================
+
 version: '3'
 
 services:
@@ -5,18 +9,15 @@ services:
     nginx:
         build:
             context: .
-            dockerfile: './docker/nginx/Dockerfile'
+            dockerfile: './docker/dev/nginx/Dockerfile'
         container_name: 'rodas_nginx'
         volumes:
-            - './public:/var/www/rodas-admin/public'
-            - ./storage/app:/var/www/rodas-admin/storage/app # need setting this to use laravel storage with nginx
-            - ./docker/nginx/${APP_ENV:-local}.conf:/etc/nginx/nginx.conf
+            - './public:/var/www/admin/public'
+            - ./storage/app:/var/www/admin/storage/app # need setting this to use laravel storage with nginx
         networks:
-            - rodas
+            - rodas-network
         ports:
             - '9000:80'
-        expose:
-            - '80'
         links:
             - 'app'
         depends_on:
@@ -26,57 +27,50 @@ services:
     web:
         build:
             context: .
-            dockerfile: './docker/web/Dockerfile'
+            dockerfile: './docker/dev/web/Dockerfile'
         container_name: 'rodas_web'
         environment:
             TZ: '${APP_TIMEZONE:-UTC}'
         volumes:
-            - './resources/assets/user:/var/www/rodas-user'
-            - './docker/web/entrypoint.sh:/entrypoint.sh'
-            # - 'dependencies:/var/www/rodas-user/node_modules' # this enables a much faster start/reload
-        working_dir: '/var/www/rodas-user'
+            - './resources/assets/user:/var/www/html'
+            - 'dependencies:/var/www/html/node_modules' # this enables a much faster start/reload
+        working_dir: '/var/www/html'
         networks:
-            - rodas
+            - rodas-network
         ports:
-            - '8080:8080' # when run 'npm run serve'
-        expose:
-            - '8080'
-        command: ['/entrypoint.sh']
+            - '8080:8080' # mapping to port when run 'npm run serve'
+        command: ['tail', '-f', '/etc/issue'] # keep container don't exit code
 
     # (Laravel) Admin application
     app:
         build:
             context: .
-            dockerfile: './docker/app/Dockerfile'
+            dockerfile: './docker/dev/app/Dockerfile'
         container_name: 'rodas_app'
         environment:
             TZ: '${APP_TIMEZONE:-UTC}'
         volumes:
-            - '.:/var/www/rodas-admin'
-            - './docker/app/config/php/php.ini:/usr/local/etc/php/php.ini'
-            - './docker/app/entrypoint.sh:/entrypoint.sh'
-        working_dir: '/var/www/rodas-admin'
+            - '.:/var/www/admin'
+        working_dir: '/var/www/admin'
         networks:
-            - rodas
-        expose:
-            - '9000'
-        command: ['/entrypoint.sh']
+            - rodas-network
         links:
             - 'db'
         depends_on:
             - 'db'
             - 'redis'
+        command: ['./docker/dev/app/entrypoint.sh']
 
     # MySQL database
     db:
         build:
             context: .
-            dockerfile: './docker/db/Dockerfile'
+            dockerfile: './docker/dev/db/Dockerfile'
         container_name: 'rodas_db'
         volumes:
             - 'rodas-mysql:/var/lib/mysql'
         networks:
-            - rodas
+            - rodas-network
         environment:
             TZ: '${APP_TIMEZONE:-UTC}'
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
@@ -98,7 +92,7 @@ services:
         volumes:
             - 'rodas-redis:/data'
         networks:
-            - rodas
+            - rodas-network
         healthcheck:
             test: ['CMD', 'redis-cli', 'ping']
             retries: 3
@@ -115,10 +109,10 @@ services:
             - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
             - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
         networks:
-            - rodas
+            - rodas-network
 
 networks:
-    rodas:
+    rodas-network:
         driver: bridge
 volumes:
     rodas-mysql: # Use mysql local (must install mysql local to use)
