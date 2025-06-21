@@ -1,3 +1,7 @@
+/*===========================
+     Terraform variables
+============================*/
+
 variable "app_name" {
   description = "The name of the application"
   type        = string
@@ -11,11 +15,6 @@ variable "app_env" {
 variable "aws_region" {
   description = "The AWS region"
   type        = string
-}
-
-variable "app_key" {
-  description = "It serves as a cryptographic key used by Laravel for secure data encryption and decryption"
-  type = string
 }
 
 # ------- Networking -------
@@ -84,33 +83,40 @@ variable "allow_ecs_exec" {
   type        = bool
 }
 
+variable "bastion_key_name" {
+  description = "SSH key name to use for the bastion host"
+  type        = string
+}
+
+/*===========================
+     Environment variables. Use for Terraform runtime environment.
+============================*/
+variable "APP_KEY" {
+  description = "It serves as a cryptographic key used by Laravel for secure data encryption and decryption"
+  type        = string
+}
+
 # ------- Database configuration -------
-variable "db_port" {
+variable "DB_PORT" {
   description = "Port on which the database accepts connections"
   type        = number
   default     = 3306
 }
 
-variable "db_name" {
+variable "DB_NAME" {
   description = "The name of the database"
   type        = string
   default     = "rodas"
 }
 
-variable "db_username" {
+variable "DB_USERNAME" {
   description = "Username for the database"
   type        = string
   sensitive   = true
 }
 
-variable "db_password" {
+variable "DB_PASSWORD" {
   description = "Password for the database"
-  type        = string
-  sensitive   = true
-}
-
-variable "bastion_key_name" {
-  description = "SSH key name to use for the bastion host"
   type        = string
   sensitive   = true
 }
