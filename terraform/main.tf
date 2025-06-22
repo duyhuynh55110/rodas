@@ -77,7 +77,7 @@ module "security_group_rds" {
   description = "Controls access to the RDS instances"
   vpc_id      = module.networking.vpc_id
 
-  ingress_port    = var.db_port
+  ingress_port    = var.DB_PORT
   security_groups = [module.security_group_ecs_task_server.security_group_id, module.security_group_bastion.security_group_id]
 
   common_tags = local.common_tags
@@ -120,9 +120,9 @@ module "rds" {
   source = "./modules/rds"
   name   = "rodas-db"
 
-  database_name = var.db_name
-  username      = var.db_username
-  password      = var.db_password
+  database_name = var.DB_NAME
+  username      = var.DB_USERNAME
+  password      = var.DB_PASSWORD
 
   # Place RDS instances in isolated subnets
   subnet_ids        = module.networking.isolated_subnet_ids
@@ -149,20 +149,20 @@ module "db_parameters" {
       description = "RDS primary instance hostname"
     },
     port = {
-      value       = tostring(var.db_port)
+      value       = tostring(var.DB_PORT)
       description = "RDS port"
     },
     name = {
-      value       = var.db_name
+      value       = var.DB_NAME
       description = "Database name"
     },
     username = {
-      value       = var.db_username
+      value       = var.DB_USERNAME
       description = "Database username"
       type        = "SecureString"
     },
     password = {
-      value       = var.db_password
+      value       = var.DB_PASSWORD
       description = "Database password"
       type        = "SecureString"
     },
@@ -186,7 +186,7 @@ module "app_parameters" {
     }
 
     app_key = {
-      value       = var.app_key
+      value       = var.APP_KEY
       description = "It serves as a cryptographic key used by Laravel for secure data encryption and decryption"
       type        = "SecureString"
     }

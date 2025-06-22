@@ -7,6 +7,10 @@ tests
 **/.env
 .git
 terraform
+.docker-compose.yml
+.docker-compose.*.yml
+README.md
+phpunit.xml
 
 # Laravel cache files
 bootstrap/cache/*.php
