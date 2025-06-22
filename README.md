@@ -21,6 +21,3 @@ https://github.com/duyhuynh55110/rodas/wiki/03.-Support-command
 
 ### 6. How to build insfrastructure for this application
 https://duyhuynh55110-1733544290042.atlassian.net/wiki/x/TgEzAw
-
-### 7. How to manage S3 Bucket on Dev environments (Use Minio to Fake S3)
-https://github.com/duyhuynh55110/rodas/wiki/07.-How-to-manage-S3-Bucket-on-Dev-environments-(Use-Minio-to-Fake-S3)
