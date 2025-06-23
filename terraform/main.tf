@@ -16,6 +16,9 @@ locals {
   task_definition_name = "task-definition-server"
   log_group_name       = "/ecs/${local.task_definition_name}"
 
+  // S3 setting
+  bucket_prefix = "${var.app_name}-${var.app_env}"
+
   common_tags = {
     Environment = var.app_env
     Application = var.app_name
@@ -106,6 +109,20 @@ module "ecr_admin" {
   name   = "rodas/admin"
 }
 
+# ------- Creating S3 Bucket for Application Storage -------
+module "s3_app_bucket" {
+  source = "./modules/s3"
+
+  bucket_name     = "${local.bucket_prefix}-storage-${random_id.bucket_suffix.hex}"
+  allowed_origins = var.s3_allowed_origins
+  common_tags     = local.common_tags
+}
+
+# Random ID for unique bucket naming
+resource "random_id" "bucket_suffix" {
+  byte_length = 4
+}
+
 # ------- Creating Bastion Host which use for Devs can access resource placed in private, isolated subnet in VPC -------
 module "bastion" {
   source             = "./modules/bastion"
@@ -190,6 +207,16 @@ module "app_parameters" {
       description = "It serves as a cryptographic key used by Laravel for secure data encryption and decryption"
       type        = "SecureString"
     }
+
+    s3_bucket = {
+      value       = module.s3_app_bucket.bucket_name
+      description = "S3 bucket name for application storage"
+    }
+
+    s3_region = {
+      value       = var.aws_region
+      description = "AWS region for S3 bucket"
+    }
   }
 
   common_tags = local.common_tags
@@ -207,6 +234,7 @@ module "ecs_task_role" {
   name   = "ecs-task-role"
 
   allow_ecs_exec = var.allow_ecs_exec
+  bucket_arn     = module.s3_app_bucket.bucket_arn
 }
 
 # ------- ECS execution role -------
@@ -265,6 +293,9 @@ module "ecs_task_definition_server" {
   db_host = module.rds.primary_endpoint
   db_port = module.rds.primary_port
   db_name = module.rds.primary_db_name
+
+  # S3 settings
+  s3_bucket_name = module.s3_app_bucket.bucket_name
 
   # Add dependency on parameter store modules
   depends_on = [module.db_parameters, module.app_parameters]
