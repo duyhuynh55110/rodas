@@ -3,8 +3,9 @@
 ============================*/
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = var.bucket_name
-  tags   = var.common_tags
+  bucket        = var.bucket_name
+  force_destroy = true
+  tags          = var.common_tags
 }
 
 # Enable when you want storage versioning for bucket
@@ -25,14 +26,14 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_encryption
   }
 }
 
-# resource "aws_s3_bucket_public_access_block" "bucket_pab" {
-#   bucket = aws_s3_bucket.bucket.id
+resource "aws_s3_bucket_public_access_block" "bucket_pab" {
+  bucket = aws_s3_bucket.bucket.id
 
-#   block_public_acls       = true
-#   block_public_policy     = true
-#   ignore_public_acls      = true
-#   restrict_public_buckets = true
-# }
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
 
 # CORS configuration for web application access
 resource "aws_s3_bucket_cors_configuration" "bucket_cors" {
