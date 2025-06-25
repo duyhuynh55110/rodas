@@ -44,5 +44,8 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
     db_host = var.db_host
     db_port = var.db_port
     db_name = var.db_name
+
+    # S3 settings
+    s3_bucket_name = var.s3_bucket_name
   })
 }

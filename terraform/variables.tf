@@ -120,3 +120,10 @@ variable "DB_PASSWORD" {
   type        = string
   sensitive   = true
 }
+
+# ------- S3 configuration -------
+variable "s3_allowed_origins" {
+  description = "List of allowed origins for S3 CORS configuration"
+  type        = list(string)
+  default     = ["*"]
+}

@@ -12,7 +12,20 @@
                 "ssmmessages:OpenDataChannel"
             ],
             "Resource": "*"
-        }
+        },
         %{ endif }
+        {
+            "Sid": "AllowS3Access",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "${bucket_arn}",
+                "${bucket_arn}/*"
+            ]
+        }
     ]
 }

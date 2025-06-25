@@ -156,3 +156,9 @@ variable "db_name" {
   description = "Database name"
   type        = string
 }
+
+# ------- S3 settings -------
+variable "s3_bucket_name" {
+  description = "S3 bucket name for application storage"
+  type        = string
+}

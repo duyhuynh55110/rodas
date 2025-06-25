@@ -34,6 +34,7 @@ resource "aws_iam_policy" "policy_for_ecs_task_role" {
   description = "IAM Policy for Role ${var.name}"
   policy      = templatefile("${path.module}/policy.json.tftpl", {
     allow_ecs_exec = var.allow_ecs_exec
+    bucket_arn     = var.bucket_arn
   })
 
   lifecycle {
