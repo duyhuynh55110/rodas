@@ -46,3 +46,30 @@ resource "aws_s3_bucket_cors_configuration" "bucket_cors" {
     max_age_seconds = 3000
   }
 }
+
+# Bucket policy to allow ECS task role access
+resource "aws_s3_bucket_policy" "bucket_policy" {
+  bucket = aws_s3_bucket.bucket.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid    = "AllowECSTaskRoleAccess"
+        Effect = "Allow"
+        Principal = {
+          AWS = var.ecs_task_role_arn
+        }
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject",
+        ]
+        Resource = [
+          aws_s3_bucket.bucket.arn,
+          "${aws_s3_bucket.bucket.arn}/*"
+        ]
+      }
+    ]
+  })
+}
