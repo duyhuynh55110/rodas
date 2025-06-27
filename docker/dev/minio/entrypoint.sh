@@ -40,6 +40,32 @@ if ! mc mb local/rodas --ignore-existing; then
     exit 1
 fi
 
+# Create and apply bucket policy
+log "Setting bucket policy for 'rodas'"
+cat > /tmp/policy.json << EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": "arn:aws:s3:::rodas/*"
+    }
+  ]
+}
+EOF
+
+# Apply Json to Bucket Policy and display error when failed
+if ! mc anonymous set-json /tmp/policy.json local/rodas; then
+    log "ERROR: Failed to set bucket policy"
+    exit 1
+fi
+
 # Verify buckets
 log "Listing buckets to verify"
 if ! mc ls local; then
