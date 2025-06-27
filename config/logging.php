@@ -1,5 +1,6 @@
 <?php
 
+use App\Libs\Loggers\LogFormatter;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -52,6 +53,9 @@ return [
             'driver' => 'stack',
             'channels' => ['single'],
             'ignore_exceptions' => false,
+            'tap' => [
+                LogFormatter::class,
+            ],
         ],
 
         'single' => [
