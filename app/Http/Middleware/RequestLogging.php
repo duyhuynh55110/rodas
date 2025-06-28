@@ -63,17 +63,15 @@ class RequestLogging
      */
     private function requestLogging(Request $request)
     {
+        // Only log full headers for local and limit on other environment
+        $keys = env('APP_ENV') === 'local' ? '*' : ['referer', 'accept', 'user-agent', 'cache-control', 'host', 'content-type'];
+        $header = collect($request->header())->only($keys)->toArray();
         $context = [
             'url' => $request->fullUrl(),
             'method' => $request->method(),
             'parameters' => $this->hideSensitiveData($request->all()),
+            'headers' => $this->hideSensitiveData($header),
         ];
-
-        // Only log headers for production and local environment to save cost
-        if (in_array(env('APP_ENV'), ['prod', 'local'])) {
-            $header = collect($request->header())->only('referer', 'accept', 'user-agent', 'cache-control', 'host', 'content-type');
-            $context['headers'] = $this->hideSensitiveData($header);
-        }
 
         Log::info('[request]', $context);
     }
