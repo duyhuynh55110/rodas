@@ -19,5 +19,8 @@ https://github.com/duyhuynh55110/rodas/wiki/02.-How-to-use-API-by-Postman
 ### 5. Command usually use in this application
 https://github.com/duyhuynh55110/rodas/wiki/03.-Support-command
 
-### 6. How to build insfrastructure for this application
+### 6. How to set up Logging (Log level)
+https://github.com/duyhuynh55110/rodas/wiki/07.-How-to-set-up-Logging-(Log-level) 
+
+### 7. How to build insfrastructure for this application
 https://duyhuynh55110-1733544290042.atlassian.net/wiki/x/TgEzAw
