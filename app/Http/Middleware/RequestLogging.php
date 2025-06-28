@@ -16,7 +16,7 @@ class RequestLogging
      *
      * @var array
      */
-    const SENSITIVE_FIELDS = ['password', '_token', 'authorization', 'api_key', 'secret'];
+    const SENSITIVE_FIELDS = ['email', 'password', '_token', 'authorization', 'api_key', 'secret', 'XSRF-TOKEN'];
 
     /**
      * Hide sensitive data by replacing values with asterisks
@@ -71,7 +71,8 @@ class RequestLogging
 
         // Only log headers for production and local environment to save cost
         if (in_array(env('APP_ENV'), ['prod', 'local'])) {
-            $context['headers'] = $this->hideSensitiveData($request->header());
+            $header = collect($request->header())->only('referer', 'accept', 'user-agent', 'cache-control', 'host', 'content-type');
+            $context['headers'] = $this->hideSensitiveData($header);
         }
 
         Log::info('[request]', $context);

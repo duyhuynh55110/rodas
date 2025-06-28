@@ -21,7 +21,7 @@ class LogFormatter
      *
      * @var string
      */
-    const LOGGING_LINE_FORMAT = "[%datetime%][%uuid%] %channel%.%level_name%: %message% %context% %extra%\n";
+    const LOG_FORMAT = "[%datetime%][%uuid%] %channel%.%level_name%: %message% %context% %extra%\n";
 
     /**
      * Uid
@@ -60,7 +60,7 @@ class LogFormatter
      */
     protected function getLogFormatter()
     {
-        $format = str_replace('%uuid%', $this->uid, self::LOGGING_LINE_FORMAT);
+        $format = str_replace('%uuid%', $this->uid, self::LOG_FORMAT);
 
         return new LineFormatter($format, null, true, true);
     }
