@@ -162,7 +162,7 @@ module "db_parameters" {
   source = "./modules/parameter_store"
   prefix = "${var.app_name}/${var.app_env}/database"
 
-  parameters = {
+  parameters = merge({
     host = {
       value       = module.rds.primary_address
       description = "RDS primary instance hostname"
@@ -184,13 +184,13 @@ module "db_parameters" {
       value       = var.DB_PASSWORD
       description = "Database password"
       type        = "SecureString"
-    },
+    }
+  }, var.app_env == "prod" ? {
     replica_host = {
-      count       = var.app_env == "prod" ? 1 : 0
       value       = module.rds.replica_address
       description = "RDS replica instance hostname"
     }
-  }
+  } : {})
 
   common_tags = local.common_tags
 }
