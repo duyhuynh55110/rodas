@@ -54,6 +54,7 @@ resource "aws_db_instance" "primary" {
 }
 
 resource "aws_db_instance" "replica" {
+  count                  = var.app_env == "prod" ? 1 : 0
   identifier             = "${var.name}-replica"
   instance_class         = var.replica_instance_class
   replicate_source_db    = aws_db_instance.primary.identifier

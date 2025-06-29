@@ -113,10 +113,10 @@ module "ecr_admin" {
 module "s3_app_bucket" {
   source = "./modules/s3"
 
-  bucket_name        = "${local.bucket_prefix}-storage-${random_id.bucket_suffix.hex}"
-  allowed_origins    = var.s3_allowed_origins
-  ecs_task_role_arn  = module.ecs_task_role.arn_role
-  common_tags        = local.common_tags
+  bucket_name       = "${local.bucket_prefix}-storage-${random_id.bucket_suffix.hex}"
+  allowed_origins   = var.s3_allowed_origins
+  ecs_task_role_arn = module.ecs_task_role.arn_role
+  common_tags       = local.common_tags
 }
 
 # Random ID for unique bucket naming
@@ -152,6 +152,7 @@ module "rds" {
 
   skip_final_snapshot     = true
   backup_retention_period = 7
+  app_env                 = var.app_env
 
   common_tags = local.common_tags
 }
@@ -185,6 +186,7 @@ module "db_parameters" {
       type        = "SecureString"
     },
     replica_host = {
+      count       = var.app_env == "prod" ? 1 : 0
       value       = module.rds.replica_address
       description = "RDS replica instance hostname"
     }

@@ -6,7 +6,7 @@
         "memory": ${server_container_memory},
         "cpu": ${server_container_cpu},
         "essential": true,
-        "readonlyRootFilesystem": ${!allow_ecs_exec},
+        "readonlyRootFilesystem": false,
         "enableExecuteCommand": ${allow_ecs_exec},
         "links": [],
         "logConfiguration": {
@@ -38,7 +38,7 @@
         "memory": ${admin_container_memory},
         "cpu": ${admin_container_cpu},
         "essential": true,
-        "readonlyRootFilesystem": ${!allow_ecs_exec},
+        "readonlyRootFilesystem": false,
         "enableExecuteCommand": ${allow_ecs_exec},
         "links": [],
         "logConfiguration": {

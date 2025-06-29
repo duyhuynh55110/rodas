@@ -106,3 +106,8 @@ variable "common_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "app_env" {
+  description = "Application environment (prod, dev, staging, etc.)"
+  type        = string
+}
