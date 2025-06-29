@@ -128,9 +128,7 @@ if (! function_exists('uploadImageToStorage')) {
         $resizeImage = $image->resize($width, $height)->stream($fileExtension, STORAGE_IMAGE_QUANTITY)->detach();
 
         // upload resize image to storage
-        Storage::disk()->put($fileName, $resizeImage, [
-            'visibility' => 'public'
-        ]);
+        Storage::disk()->put($fileName, $resizeImage);
     }
 }
 
@@ -153,6 +151,27 @@ if (! function_exists('deleteImageFromStorage')) {
         if ($storage->exists($fileOriginalName)) {
             $storage->delete($fileOriginalName);
         }
+    }
+}
+
+if (! function_exists('getS3PresignedUrl')) {
+    /**
+     * Generate S3 pre-signed URL for secure file access
+     *
+     * @param string|null $fileName
+     * @param int $expirationMinutes
+     * @return string|null
+     */
+    function getS3PresignedUrl($fileName, $expirationMinutes = 60)
+    {
+        if (empty($fileName)) {
+            return null;
+        }
+
+        return Storage::disk()->temporaryUrl(
+            $fileName,
+            now()->addMinutes($expirationMinutes)
+        );
     }
 }
 
