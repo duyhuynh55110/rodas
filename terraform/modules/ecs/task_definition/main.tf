@@ -47,5 +47,9 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
 
     # S3 settings
     s3_bucket_name = var.s3_bucket_name
+
+    # Domain settings
+    app_admin_domain = var.app_admin_domain
+    app_api_domain    = var.app_api_domain
   })
 }

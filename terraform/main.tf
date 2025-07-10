@@ -42,9 +42,23 @@ module "security_group_alb_server" {
   vpc_id      = module.networking.vpc_id
   common_tags = local.common_tags
 
-  # Inbound rules
-  ingress_port        = var.alb_ingress_port
-  cidr_blocks_ingress = var.public_access_cidr
+  # Inbound rules for HTTP and HTTPS
+  additional_ingress_rules = [
+    {
+      protocol    = "tcp"
+      from_port   = 80
+      to_port     = 80
+      cidr_blocks = var.public_access_cidr
+      security_groups = null
+    },
+    {
+      protocol    = "tcp"
+      from_port   = 443
+      to_port     = 443
+      cidr_blocks = var.public_access_cidr
+      security_groups = null
+    }
+  ]
 }
 
 # ------- Creating a server Security Group for ECS tasks -------
@@ -86,6 +100,16 @@ module "security_group_rds" {
   common_tags = local.common_tags
 }
 
+# ------- Route53 Hosted Zone -------
+module "route53" {
+  source       = "./modules/route53"
+  domain_name  = var.domain_name
+  app_env      = var.app_env
+  alb_dns_name = module.alb_server.dns_name
+  alb_zone_id  = module.alb_server.zone_id
+  common_tags  = local.common_tags
+}
+
 # ------- ALB (Application Load Balancer) -------
 module "alb_server" {
   source             = "./modules/alb"
@@ -95,6 +119,7 @@ module "alb_server" {
   security_group_id  = module.security_group_alb_server.security_group_id
   subnet_ids         = module.networking.public_subnet_ids
   vpc_id             = module.networking.vpc_id
+  certificate_arn    = var.certificate_arn
   common_tags        = local.common_tags
 }
 
@@ -299,6 +324,10 @@ module "ecs_task_definition_server" {
 
   # S3 settings
   s3_bucket_name = module.s3_app_bucket.bucket_name
+
+  # Domain settings
+  app_admin_domain = "${var.app_env}-admin.${var.domain_name}"
+  app_api_domain    = "${var.app_env}-api.${var.domain_name}"
 
   # Add dependency on parameter store modules
   depends_on = [module.db_parameters, module.app_parameters]

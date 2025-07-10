@@ -162,3 +162,14 @@ variable "s3_bucket_name" {
   description = "S3 bucket name for application storage"
   type        = string
 }
+
+# ------- Domain settings -------
+variable "app_admin_domain" {
+  description = "Admin domain for the application"
+  type        = string
+}
+
+variable "app_api_domain" {
+  description = "API domain for the application"
+  type        = string
+}

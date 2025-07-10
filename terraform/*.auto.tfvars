@@ -6,7 +6,7 @@ admin_restricted_cidr = ["0.0.0.0/0"]  # Limit IP for some services only can acc
 vpc_cidr = "10.0.0.0/16" # CIDR block for the VPC
 
 # ------- ALB configuration -------
-alb_ingress_port = 80  # Default protocol (HTTP/HTTPS) for ALB
+alb_ingress_port = 80  # HTTP port for ALB (temporary until SSL cert is validated)
 
 # ------- ASG configuration -------
 server_min_capacity = 1
