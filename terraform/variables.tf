@@ -127,3 +127,14 @@ variable "s3_allowed_origins" {
   type        = list(string)
   default     = ["*"]
 }
+
+# ------- Domain configuration -------
+variable "domain_name" {
+  description = "The domain name for the application"
+  type        = string
+}
+
+variable "certificate_arn" {
+  description = "ARN of the SSL certificate for HTTPS"
+  type        = string
+}
