@@ -16,24 +16,13 @@ resource "aws_route53_record" "main" {
   }
 }
 
-# ------- Admin subdomain -------
-resource "aws_route53_record" "admin" {
-  zone_id = data.aws_route53_zone.main.zone_id
-  name    = "${var.app_env}-admin.${var.domain_name}"
-  type    = "A"
+# ------- Dynamic Route53 Records -------
+resource "aws_route53_record" "dynamic" {
+  for_each = var.subdomains
 
-  alias {
-    name                   = var.alb_dns_name
-    zone_id                = var.alb_zone_id
-    evaluate_target_health = true
-  }
-}
-
-# ------- API subdomain -------
-resource "aws_route53_record" "api" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "${var.app_env}-api.${var.domain_name}"
-  type    = "A"
+  name    = each.value.name
+  type    = each.value.type != null ? each.value.type : "A"
 
   alias {
     name                   = var.alb_dns_name

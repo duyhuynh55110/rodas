@@ -13,19 +13,17 @@ variable "alb_zone_id" {
   type        = string
 }
 
-variable "create_www_record" {
-  description = "Whether to create a www subdomain record"
-  type        = bool
-  default     = true
-}
-
-variable "app_env" {
-  description = "Application environment (staging, prod, etc.)"
-  type        = string
-}
-
 variable "common_tags" {
   description = "Common tags to apply to all resources"
   type        = map(any)
   default     = {}
+}
+
+# ------- Subdomains -------
+variable "subdomains" {
+  description = "Map of subdomains with their names"
+  type = map(object({
+    name = string
+    type = string
+  }))
 }

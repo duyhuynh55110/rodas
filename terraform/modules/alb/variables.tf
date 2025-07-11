@@ -8,11 +8,6 @@ variable "load_balancer_type" {
   type        = string
 }
 
-variable "ingress_port" {
-  description = "The port on which the load balancer is listening"
-  type        = number
-}
-
 variable "security_group_id" {
   description = "Security group IDs"
   type        = string
@@ -36,6 +31,6 @@ variable "vpc_id" {
 }
 
 variable "certificate_arn" {
-  description = "ARN of the SSL certificate for HTTPS listener"
+  description = "ARN of the default SSL server certificate. Exactly one certificate is required if the protocol is HTTPS"
   type        = string
 }

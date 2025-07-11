@@ -11,12 +11,15 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.cpu
   memory                   = var.memory
+
+  # Policies
   execution_role_arn       = var.execution_role_arn
   task_role_arn            = var.task_role_arn
 
+  # Container configuration
   container_definitions = templatefile("${path.module}/container_definitions.json.tftpl", {
-    log_group_name = local.log_group_name
     region         = var.region
+    log_group_name = local.log_group_name
 
     server_container_name               = var.server_container_name
     server_image_uri                    = var.server_image_uri
@@ -33,6 +36,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
     admin_container_memory_reservation = var.admin_container_memory_reservation
     admin_container_port               = var.admin_container_port
 
+    # Allow access to container to run command
     allow_ecs_exec = var.allow_ecs_exec
 
     # Parameter store
