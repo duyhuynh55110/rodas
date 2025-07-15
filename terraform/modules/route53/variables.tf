@@ -24,6 +24,6 @@ variable "subdomains" {
   description = "Map of subdomains with their names"
   type = map(object({
     name = string
-    type = string
+    type = optional(string, "A")
   }))
 }
