@@ -27,13 +27,13 @@ resource "aws_lb_target_group" "http" {
 
   # Must config rule for health check
   health_check {
-    port        = 80
-    protocol    = "HTTP"
+    port                = 80
+    protocol            = "HTTP"
     healthy_threshold   = "5"
     unhealthy_threshold = "2"
     interval            = "30"
     matcher             = "200"
-    path                = "/"
+    path                = "/health"
     timeout             = "5"
   }
 
