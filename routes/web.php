@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+use Illuminate\Http\Request;
+
+# Use to health check for ALB target group
+Route::get('/health', function (Request $request) {
+    return response()->json(['status' => 'healthy'], 200);
+});
