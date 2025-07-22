@@ -131,12 +131,16 @@ module "route53" {
   domain_name  = var.domain_name
   alb_dns_name = module.alb_server.dns_name
   alb_zone_id  = module.alb_server.zone_id
+  cf_distribution_domain_name = module.s3_web_hosting_bucket.cloudfront_domain_name
+  cf_distribution_hosted_zone_id = module.s3_web_hosting_bucket.cloudfront_hosted_zone_id
   common_tags  = local.common_tags
 
   subdomains = {
     admin: { name = local.app_admin_domain }
     api: { name = local.app_api_domain }
   }
+
+  depends_on = [ module.alb_server, module.s3_web_hosting_bucket ]
 }
 
 # ------- ALB (Application Load Balancer) -------
@@ -163,13 +167,19 @@ module "ecr_admin" {
 }
 
 # ------- Creating S3 Bucket for Application Storage -------
-module "s3_app_bucket" {
-  source = "./modules/s3"
+module "s3_storage_bucket" {
+  source = "./modules/s3/storage_bucket"
 
   bucket_name       = "${local.bucket_prefix}-storage-${random_id.bucket_suffix.hex}"
   allowed_origins   = var.s3_allowed_origins
   ecs_task_role_arn = module.ecs_task_role.arn_role
   common_tags       = local.common_tags
+}
+
+# ------- Creating S3 Bucket for Static website hosting -------
+module "s3_web_hosting_bucket" {
+  source = "./modules/s3/web_hosting"
+  bucket_name       = "${local.bucket_prefix}-web-${random_id.bucket_suffix.hex}"
 }
 
 # Random ID for unique bucket naming
@@ -265,7 +275,7 @@ module "app_parameters" {
     }
 
     s3_bucket = {
-      value       = module.s3_app_bucket.bucket_name
+      value       = module.s3_storage_bucket.bucket_name
       description = "S3 bucket name for application storage"
     }
 
@@ -290,7 +300,7 @@ module "ecs_task_role" {
   name   = "ecs-task-role"
 
   allow_ecs_exec = var.allow_ecs_exec
-  bucket_arn     = module.s3_app_bucket.bucket_arn
+  bucket_arn     = module.s3_storage_bucket.bucket_arn
 }
 
 # ------- ECS execution role -------
@@ -352,7 +362,7 @@ module "ecs_task_definition_server" {
   db_name = module.rds.primary_db_name
 
   # S3 settings
-  s3_bucket_name = module.s3_app_bucket.bucket_name
+  s3_bucket_name = module.s3_storage_bucket.bucket_name
 
   # Subdomain settings
   app_admin_domain = local.app_admin_domain
