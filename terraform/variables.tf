@@ -138,3 +138,10 @@ variable "certificate_arn" {
   description = "ARN of the SSL certificate for HTTPS"
   type        = string
 }
+
+# ------- Slack configuration -------
+variable "slack_webhook_url" {
+  description = "Slack webhook URL for notifications"
+  type        = string
+  sensitive   = true
+}

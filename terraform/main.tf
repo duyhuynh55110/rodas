@@ -76,15 +76,15 @@ module "security_group_ecs_task_server" {
   # Inbound rules - only allow port from ALB
   ingress_rules = [
     {
-      protocol  = "tcp"
-      from_port = 80
-      to_port   = 80
+      protocol        = "tcp"
+      from_port       = 80
+      to_port         = 80
       security_groups = [module.security_group_alb_server.security_group_id]
     },
     {
-      protocol  = "tcp"
-      from_port = 443
-      to_port   = 443
+      protocol        = "tcp"
+      from_port       = 443
+      to_port         = 443
       security_groups = [module.security_group_alb_server.security_group_id]
     },
   ]
@@ -398,4 +398,22 @@ module "ecs_autoscaling_group_server" {
   max_capacity = var.server_max_capacity
 
   depends_on = [module.ecs_service_server]
+}
+
+# ------- Send notifications to slack when have ERROR -------
+module "lambda_slack" {
+  source            = "./modules/lambda_slack"
+  function_name     = "${var.app_name}-${var.app_env}-slack-notification"
+  slack_webhook_url = var.slack_webhook_url
+  log_group_name    = module.ecs_containers_log_group.log_group_name
+}
+
+# ------- CloudWatch Alarm to monitor and alert when ECS container have errors -------
+module "ecs_errors_alarm" {
+  source              = "./modules/cloudwatch/ecs_subscription_error"
+  log_group_name      = module.ecs_containers_log_group.log_group_name
+  lambda_function_arn = module.lambda_slack.lambda_function_arn
+  filter_pattern      = "ERROR"
+  filter_name         = "${var.app_name}-${var.app_env}-error-logs-filter"
+  common_tags         = local.common_tags
 }
