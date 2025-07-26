@@ -10,12 +10,18 @@ variable "slack_webhook_url" {
 }
 
 variable "log_group_name" {
-  description = "name for log group which handle logging for this task definition"
+  description = "Name for log group which handle logging for this task definition"
   type        = string
 }
 
-variable "tags" {
-  description = "A map of tags to add to all resources"
-  type        = map(string)
+variable "queue_arn" {
+  description = "ARN of the SQS queue that triggers the Lambda function"
+  type = string
+}
+
+variable "common_tags" {
+  description = "Common tags to apply to all resources"
+  type        = map(any)
   default     = {}
 }
+

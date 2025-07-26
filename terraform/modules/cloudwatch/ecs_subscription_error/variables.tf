@@ -1,11 +1,7 @@
-variable "log_group_name" {
-  description = "The name of the CloudWatch log group to monitor"
+variable "filter_name" {
+  description = "Name of the subscription filter"
   type        = string
-}
-
-variable "lambda_function_arn" {
-  description = "ARN of the Lambda function to trigger when ERROR logs are detected"
-  type        = string
+  default     = "error-logs-filter"
 }
 
 variable "filter_pattern" {
@@ -14,14 +10,12 @@ variable "filter_pattern" {
   default     = "ERROR"
 }
 
-variable "filter_name" {
-  description = "Name of the subscription filter"
+variable "log_group_name" {
+  description = "The name of the CloudWatch log group to monitor"
   type        = string
-  default     = "error-logs-filter"
 }
 
-variable "common_tags" {
-  description = "A map of tags to add to all resources"
-  type        = map(string)
-  default     = {}
+variable "lambda_function_arn" {
+  description = "ARN of the Lambda function to trigger when ERROR logs are detected"
+  type        = string
 }

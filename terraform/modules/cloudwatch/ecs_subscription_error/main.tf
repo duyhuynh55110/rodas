@@ -8,7 +8,7 @@ resource "aws_lambda_permission" "allow_cloudwatch" {
   action        = "lambda:InvokeFunction"
   function_name = var.lambda_function_arn
   principal     = "logs.amazonaws.com"
-  source_arn    = "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:${var.log_group_name}:*"
+  source_arn    = "${data.aws_cloudwatch_log_group.log_group.arn}:*"
 }
 
 # Create a CloudWatch subscription filter to detect ERROR logs
@@ -22,8 +22,8 @@ resource "aws_cloudwatch_log_subscription_filter" "error_logs_filter" {
   depends_on = [aws_lambda_permission.allow_cloudwatch]
 }
 
-# Get the current AWS account ID
-data "aws_caller_identity" "current" {}
+data "aws_cloudwatch_log_group" "log_group" {
+  name = var.log_group_name
+}
 
-# Get the current AWS region
-data "aws_region" "current" {}
+

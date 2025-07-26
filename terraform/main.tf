@@ -401,19 +401,39 @@ module "ecs_autoscaling_group_server" {
 }
 
 # ------- Send notifications to slack when have ERROR -------
-module "lambda_slack" {
-  source            = "./modules/lambda_slack"
-  function_name     = "${var.app_name}-${var.app_env}-slack-notification"
-  slack_webhook_url = var.slack_webhook_url
-  log_group_name    = module.ecs_containers_log_group.log_group_name
+module "sqs_queue" {
+  source = "./modules/sqs"
+  queue_name  = "${var.app_name}-${var.app_env}-slack-queue"
+
+  common_tags = local.common_tags
 }
 
-# ------- CloudWatch Alarm to monitor and alert when ECS container have errors -------
-module "ecs_errors_alarm" {
+module "lambda_slack" {
+  source            = "./modules/lambda_slack"
+  function_name     = "${var.app_name}-${var.app_env}-notify-error-to-slack"
+  slack_webhook_url = var.slack_webhook_url
+  queue_arn         = module.sqs_queue.queue_arn
+  log_group_name    = module.ecs_containers_log_group.log_group_name
+  common_tags       = local.common_tags
+
+  depends_on = [module.ecs_containers_log_group, module.sqs_queue]
+}
+
+module "lambda_sqs" {
+  source        = "./modules/lambda_sqs"
+  function_name = "${var.app_name}-${var.app_env}-send-to-sqs"
+  queue_name    = module.sqs_queue.queue_name
+  common_tags   = local.common_tags
+
+  depends_on = [module.sqs_queue]
+}
+
+module "ecs_subscription_filter" {
   source              = "./modules/cloudwatch/ecs_subscription_error"
-  log_group_name      = module.ecs_containers_log_group.log_group_name
-  lambda_function_arn = module.lambda_slack.lambda_function_arn
+  filter_name         = "${var.app_name}-${var.app_env}-filter-error"
   filter_pattern      = "ERROR"
-  filter_name         = "${var.app_name}-${var.app_env}-error-logs-filter"
-  common_tags         = local.common_tags
+  log_group_name      = module.ecs_containers_log_group.log_group_name
+  lambda_function_arn = module.lambda_sqs.lambda_function_arn
+
+  depends_on = [module.ecs_containers_log_group, module.lambda_sqs]
 }

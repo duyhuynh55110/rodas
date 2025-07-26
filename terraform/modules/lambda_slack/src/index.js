@@ -17,15 +17,17 @@ const logsClient = new CloudWatchLogsClient({ region: 'ap-southeast-1' });
 const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 const LOG_GROUP_NAME = process.env.LOG_GROUP_NAME;
 
-// Parse and decode CloudWatch Logs subscription filter data
-async function getLogData(event) {
+// Parse and decode CloudWatch Logs subscription filter data from SQS message
+async function getLogData(sqsMessage) {
     try {
-        if (!event.awslogs || !event.awslogs.data) {
-            throw new Error("Invalid event structure: awslogs.data not found");
+        const subscriptionFilterData = JSON.parse(sqsMessage.body);
+
+        if (!subscriptionFilterData.awslogs || !subscriptionFilterData.awslogs.data) {
+            throw new Error("Invalid subscription filter structure: awslogs.data not found");
         }
 
         // Decode base64 and decompress gzip
-        const compressedData = Buffer.from(event.awslogs.data, "base64");
+        const compressedData = Buffer.from(subscriptionFilterData.awslogs.data, "base64");
         const decompressedData = await gunzip(compressedData);
         const logData = JSON.parse(decompressedData.toString("utf-8"));
 
@@ -61,17 +63,11 @@ async function queryLogsInsights(logData) {
     const startTime = new Date(logData.timestamp.getTime() - 5 * 60 * 1000); // 10 minutes before
     const endTime = new Date(logData.timestamp.getTime() + 5 * 60 * 1000); // 10 minutes after
     const queryParams = {
-        queryString: `fields @message | filter @message like /cf40abf9b3/ | sort @timestamp desc | limit 50`,
-        startTime: 1753329802081, // Convert to seconds
-        endTime: 1753330402081, // Convert to seconds
-        // queryString: `fields @message | filter @message like /${logData.requestId}/ | sort @timestamp desc | limit 50`,
-        // startTime: startTime.getTime(), // Convert to seconds
-        // endTime: endTime.getTime(), // Convert to seconds
+        queryString: `fields @message | filter @message like /${logData.requestId}/ | sort @timestamp desc | limit 50`,
+        startTime: startTime.getTime(), // Convert to seconds
+        endTime: endTime.getTime(), // Convert to seconds
         logGroupNames: [LOG_GROUP_NAME],
     };
-    console.log("Query Parameters:", JSON.stringify(queryParams, null, 2));
-    console.log("Start Time:", startTime.toUTCString());
-    console.log("End Time:", endTime.toUTCString());
 
     try {
         // Start the query
@@ -94,8 +90,6 @@ async function queryLogsInsights(logData) {
             const getQueryResultsCommand = new GetQueryResultsCommand({ queryId });
             results = await logsClient.send(getQueryResultsCommand);
             attempts++;
-            // console.log(`Attempt ${attempts}: Query Status = ${results.status}`);
-            console.info(`results: `, results);
 
             if (results.status === "Complete") {
                 break;
@@ -113,7 +107,6 @@ async function queryLogsInsights(logData) {
             return [];
         }
 
-        console.log("Query Results:", JSON.stringify(results.results, null, 2));
         return results.results.map((row) => ({
             message: row.find((field) => field.field === "@message")?.value || "",
         }));
@@ -187,25 +180,25 @@ async function sendToSlack(message) {
 // Main Lambda handler
 exports.handler = async (event) => {
     try {
-        console.log("event: ", event);
+        // Process each SQS message
+        for (const record of event.Records) {
+            // Parse and decode subscription filter data from SQS message
+            const logData = await getLogData(record);
 
-        // Parse and decode subscription filter data
-        const logData = await getLogData(event);
+            // Query logs using requestId
+            const logEntries = await queryLogsInsights(logData);
 
-        // Query logs using requestId
-        const logEntries = await queryLogsInsights(logData);
-        console.log("logEntries: ", logEntries);
+            // Format Slack message
+            const slackMessage = formatSlackMessage(logData, logEntries);
 
-        // Format Slack message
-        const slackMessage = formatSlackMessage(logData, logEntries);
-
-        // Send to Slack
-        await sendToSlack(slackMessage);
+            // Send to Slack
+            await sendToSlack(slackMessage);
+        }
 
         return {
             statusCode: 200,
             body: JSON.stringify({
-                message: "Successfully processed log event and sent to Slack",
+                message: "Successfully processed SQS messages and sent to Slack",
             }),
         };
     } catch (error) {
