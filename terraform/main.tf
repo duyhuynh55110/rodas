@@ -21,7 +21,7 @@ locals {
 
   // Application subdomains
   app_admin_domain = "${var.app_env}-admin.${var.domain_name}"
-  app_api_domain = "${var.app_env}-api.${var.domain_name}"
+  app_api_domain   = "${var.app_env}-api.${var.domain_name}"
 
   common_tags = {
     Environment = var.app_env
@@ -49,17 +49,17 @@ module "security_group_alb_server" {
   # Inbound rules for HTTP and HTTPS
   ingress_rules = [
     {
-      protocol    = "tcp"
-      from_port   = 80
-      to_port     = 80
-      cidr_blocks = var.public_access_cidr
+      protocol        = "tcp"
+      from_port       = 80
+      to_port         = 80
+      cidr_blocks     = var.public_access_cidr
       security_groups = null
     },
     {
-      protocol    = "tcp"
-      from_port   = 443
-      to_port     = 443
-      cidr_blocks = var.public_access_cidr
+      protocol        = "tcp"
+      from_port       = 443
+      to_port         = 443
+      cidr_blocks     = var.public_access_cidr
       security_groups = null
     }
   ]
@@ -70,16 +70,21 @@ module "security_group_ecs_task_server" {
   source      = "./modules/security_group"
   name        = "ecs-task-server-sg"
   description = "Controls access to the ECS task server"
-
-  vpc_id = module.networking.vpc_id
+  vpc_id      = module.networking.vpc_id
+  common_tags = local.common_tags
 
   # Inbound rules - only allow port from ALB
   ingress_rules = [
     {
-      protocol    = "tcp"
-      from_port   = 443
-      to_port     = 443
-      cidr_blocks = var.public_access_cidr
+      protocol        = "tcp"
+      from_port       = 80
+      to_port         = 80
+      security_groups = [module.security_group_alb_server.security_group_id]
+    },
+    {
+      protocol        = "tcp"
+      from_port       = 443
+      to_port         = 443
       security_groups = [module.security_group_alb_server.security_group_id]
     },
   ]
@@ -96,10 +101,10 @@ module "security_group_bastion" {
   # Inbound rules - SSH access from your IP
   ingress_rules = [
     {
-      protocol    = "tcp"
-      from_port   = var.ssh_ingress_port
-      to_port     = var.ssh_ingress_port
-      cidr_blocks = var.admin_restricted_cidr
+      protocol        = "tcp"
+      from_port       = var.ssh_ingress_port
+      to_port         = var.ssh_ingress_port
+      cidr_blocks     = var.admin_restricted_cidr
       security_groups = null
     },
   ]
@@ -115,9 +120,9 @@ module "security_group_rds" {
   # Inbound rules - Allow access from ECS and Bastion host
   ingress_rules = [
     {
-      protocol    = "tcp"
-      from_port   = var.DB_PORT
-      to_port     = var.DB_PORT
+      protocol        = "tcp"
+      from_port       = var.DB_PORT
+      to_port         = var.DB_PORT
       security_groups = [module.security_group_ecs_task_server.security_group_id, module.security_group_bastion.security_group_id]
     },
   ]
@@ -134,8 +139,8 @@ module "route53" {
   common_tags  = local.common_tags
 
   subdomains = {
-    admin: { name = local.app_admin_domain }
-    api: { name = local.app_api_domain }
+    admin : { name = local.app_admin_domain }
+    api : { name = local.app_api_domain }
   }
 }
 
@@ -238,7 +243,7 @@ module "db_parameters" {
       description = "Database password"
       type        = "SecureString"
     }
-  }, var.app_env == "prod" ? {
+    }, var.app_env == "prod" ? {
     replica_host = {
       value       = module.rds.replica_address
       description = "RDS replica instance hostname"
@@ -280,8 +285,9 @@ module "app_parameters" {
 
 # ------- Create a CloudWatch log group to handle logging for ECS container -------
 module "ecs_containers_log_group" {
-  source = "./modules/log_group"
-  name   = local.log_group_name
+  source = "./modules/cloudwatch/log_group"
+
+  name = local.log_group_name
 }
 
 # ------- ECS task role -------
@@ -322,12 +328,12 @@ module "ecs_cluster" {
 
 # ------- Creating ECS Task Definition for the server -------
 module "ecs_task_definition_server" {
-  source             = "./modules/ecs/task_definition"
-  family             = local.task_definition_name
-  region             = var.aws_region
-  log_group_name     = module.ecs_containers_log_group.log_group_name
-  cpu                = var.ecs_task_cpu
-  memory             = var.ecs_task_memory
+  source         = "./modules/ecs/task_definition"
+  family         = local.task_definition_name
+  region         = var.aws_region
+  log_group_name = module.ecs_containers_log_group.log_group_name
+  cpu            = var.ecs_task_cpu
+  memory         = var.ecs_task_memory
 
   execution_role_arn = module.ecs_execution_role.arn_role
   task_role_arn      = module.ecs_task_role.arn_role
@@ -356,7 +362,7 @@ module "ecs_task_definition_server" {
 
   # Subdomain settings
   app_admin_domain = local.app_admin_domain
-  app_api_domain    = local.app_api_domain
+  app_api_domain   = local.app_api_domain
 
   # Add dependency on parameter store modules
   depends_on = [module.db_parameters, module.app_parameters]
@@ -380,7 +386,7 @@ module "ecs_service_server" {
   container_name   = var.server_container_name
   container_port   = var.alb_ingress_port
 
-  depends_on       = [module.alb_server, module.ecs_task_definition_server]
+  depends_on = [module.alb_server, module.ecs_task_definition_server]
 }
 
 # ------- Creating ECS Autoscaling group policies for the server application -------
@@ -391,5 +397,43 @@ module "ecs_autoscaling_group_server" {
   min_capacity = var.server_min_capacity
   max_capacity = var.server_max_capacity
 
-  depends_on   = [module.ecs_service_server]
+  depends_on = [module.ecs_service_server]
+}
+
+# ------- Send notifications to slack when have ERROR -------
+module "sqs_queue" {
+  source = "./modules/sqs"
+  queue_name  = "${var.app_name}-${var.app_env}-slack-queue"
+
+  common_tags = local.common_tags
+}
+
+module "lambda_slack" {
+  source            = "./modules/lambda_slack"
+  function_name     = "${var.app_name}-${var.app_env}-notify-error-to-slack"
+  slack_webhook_url = var.slack_webhook_url
+  queue_arn         = module.sqs_queue.queue_arn
+  log_group_name    = module.ecs_containers_log_group.log_group_name
+  common_tags       = local.common_tags
+
+  depends_on = [module.ecs_containers_log_group, module.sqs_queue]
+}
+
+module "lambda_sqs" {
+  source        = "./modules/lambda_sqs"
+  function_name = "${var.app_name}-${var.app_env}-send-to-sqs"
+  queue_name    = module.sqs_queue.queue_name
+  common_tags   = local.common_tags
+
+  depends_on = [module.sqs_queue]
+}
+
+module "ecs_subscription_filter" {
+  source              = "./modules/cloudwatch/ecs_subscription_error"
+  filter_name         = "${var.app_name}-${var.app_env}-filter-error"
+  filter_pattern      = "ERROR"
+  log_group_name      = module.ecs_containers_log_group.log_group_name
+  lambda_function_arn = module.lambda_sqs.lambda_function_arn
+
+  depends_on = [module.ecs_containers_log_group, module.lambda_sqs]
 }
