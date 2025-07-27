@@ -1,10 +1,6 @@
 /*====================================
       AWS ECS Task definition
 =====================================*/
-locals {
-  log_group_name = "/ecs/${var.family}"
-}
-
 resource "aws_ecs_task_definition" "ecs_task_definition" {
   family                   = var.family
   network_mode             = "awsvpc"
@@ -19,7 +15,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   # Container configuration
   container_definitions = templatefile("${path.module}/container_definitions.json.tftpl", {
     region         = var.region
-    log_group_name = local.log_group_name
+    log_group_name = var.log_group_name
 
     server_container_name               = var.server_container_name
     server_image_uri                    = var.server_image_uri

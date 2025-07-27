@@ -23,7 +23,7 @@ Route::group(
         // Admin group
         Route::group(
             [
-                'middleware' => 'auth',
+                'middleware' => ['auth', 'request.logging'],
             ],
             function () {
                 // brands
@@ -82,8 +82,3 @@ Route::group(
         );
     }
 );
-
-// PHP info
-Route::get('/phpinfo', function () {
-    return phpinfo();
-});
