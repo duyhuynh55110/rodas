@@ -140,7 +140,7 @@ variable "certificate_arn" {
 }
 
 # ------- Slack configuration -------
-variable "slack_webhook_url" {
+variable "SLACK_WEBHOOK_URL" {
   description = "Slack webhook URL for notifications"
   type        = string
   sensitive   = true

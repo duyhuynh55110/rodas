@@ -411,7 +411,7 @@ module "sqs_queue" {
 module "lambda_slack" {
   source            = "./modules/lambda_slack"
   function_name     = "${var.app_name}-${var.app_env}-notify-error-to-slack"
-  slack_webhook_url = var.slack_webhook_url
+  slack_webhook_url = var.SLACK_WEBHOOK_URL
   queue_arn         = module.sqs_queue.queue_arn
   log_group_name    = module.ecs_containers_log_group.log_group_name
   common_tags       = local.common_tags
