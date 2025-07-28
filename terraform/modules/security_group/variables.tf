@@ -25,26 +25,8 @@ variable "common_tags" {
 }
 
 # ------- Ingress setting -------
-variable "ingress_port" {
-  description = "Number of the port to open in the ingress rules"
-  type        = number
-  default     = null
-}
-
-variable "cidr_blocks_ingress" {
-  description = "An ingress block of CIDR to grant access to"
-  type        = list(any)
-  default     = null
-}
-
-variable "security_groups" {
-  description = "List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC"
-  type        = list(any)
-  default     = null
-}
-
-variable "additional_ingress_rules" {
-  description = "List of additional ingress rules"
+variable "ingress_rules" {
+  description = "List of ingress rules"
   type = list(object({
     protocol        = string
     from_port       = number

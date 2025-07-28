@@ -158,6 +158,27 @@ if (! function_exists('deleteImageFromStorage')) {
     }
 }
 
+if (! function_exists('getS3PresignedUrl')) {
+    /**
+     * Generate S3 pre-signed URL for secure file access
+     *
+     * @param string|null $fileName
+     * @param int $expirationMinutes
+     * @return string|null
+     */
+    function getS3PresignedUrl($fileName, $expirationMinutes = 60)
+    {
+        if (empty($fileName)) {
+            return null;
+        }
+
+        return Storage::disk()->temporaryUrl(
+            $fileName,
+            now()->addMinutes($expirationMinutes)
+        );
+    }
+}
+
 if (! function_exists('getFilenameSuffixOriginal')) {
     /**
      * Get file name with suffix original

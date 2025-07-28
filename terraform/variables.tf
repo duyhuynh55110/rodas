@@ -120,3 +120,33 @@ variable "DB_PASSWORD" {
   type        = string
   sensitive   = true
 }
+
+# ------- S3 configuration -------
+variable "s3_allowed_origins" {
+  description = "List of allowed origins for S3 CORS configuration"
+  type        = list(string)
+  default     = ["*"]
+}
+
+# ------- Domain configuration -------
+variable "domain_name" {
+  description = "The domain name for the application"
+  type        = string
+}
+
+variable "alb_certificate_arn" {
+  description = "ARN of the SSL certificate for HTTPS (ALB)"
+  type        = string
+}
+
+variable "cf_certificate_arn" {
+  description = "ARN of the SSL certificate for HTTPS (Cloudfront)"
+  type        = string
+}
+
+# ------- Slack configuration -------
+variable "SLACK_WEBHOOK_URL" {
+  description = "Slack webhook URL for notifications"
+  type        = string
+  sensitive   = true
+}

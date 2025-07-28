@@ -1,12 +1,6 @@
 /*==============================================================
       AWS Application Load Balancer + Target groups
 ===============================================================*/
-
-locals {
-  http_port     = var.ingress_port
-  http_protocol = var.ingress_port == 80 ? "HTTP" : "HTTPS"
-}
-
 # ------- Create Load Balancer -------
 resource "aws_lb" "lb" {
   name               = var.name
@@ -26,20 +20,20 @@ resource "aws_lb" "lb" {
 # ------- Target Groups -------
 resource "aws_lb_target_group" "http" {
   name        = "${var.name}-http-tg"
-  port        = local.http_port
-  protocol    = local.http_protocol
+  port        = 80
+  protocol    = "HTTP"
   vpc_id      = var.vpc_id
   target_type = "ip"
 
   # Must config rule for health check
   health_check {
-    port                = local.http_port
-    protocol            = local.http_protocol
+    port                = 80
+    protocol            = "HTTP"
     healthy_threshold   = "5"
     unhealthy_threshold = "2"
     interval            = "30"
     matcher             = "200"
-    path                = "/"
+    path                = "/health"
     timeout             = "5"
   }
 
@@ -55,11 +49,30 @@ resource "aws_lb_target_group" "http" {
   )
 }
 
-# ------- Load Balancer listener for HTTP -------
+# ------- Load Balancer listener for HTTP (redirect to HTTPS) -------
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.lb.arn
-  port              = local.http_port
-  protocol          = local.http_protocol
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+# ------- Load Balancer listener for HTTPS -------
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.lb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
+  certificate_arn   = var.certificate_arn
 
   default_action {
     type             = "forward"

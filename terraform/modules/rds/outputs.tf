@@ -26,12 +26,12 @@ output "primary_username" {
 
 output "replica_endpoint" {
   description = "The endpoint of the replica database"
-  value       = aws_db_instance.replica.endpoint
+  value       = var.app_env == "prod" ? aws_db_instance.replica[0].endpoint : null
 }
 
 output "replica_address" {
   description = "The hostname of the replica database instance"
-  value       = aws_db_instance.replica.address
+  value       = var.app_env == "prod" ? aws_db_instance.replica[0].address : null
 }
 
 output "db_subnet_group_name" {

@@ -49,16 +49,12 @@ class Brand extends Model
 
     // ---- Mutators & Casting
     /**
-     * Get full image logo path
+     * Get full image logo path with pre-signed URL
      *
      * @return string
      */
     public function getFullPathLogoAttribute()
     {
-        if (empty($this->logo_file_name)) {
-            return null;
-        }
-
-        return Storage::disk()->url($this->logo_file_name);
+        return getS3PresignedUrl($this->logo_file_name);
     }
 }

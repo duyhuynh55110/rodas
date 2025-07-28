@@ -71,16 +71,12 @@ class Product extends Model
 
     // ---- Mutators & Casting
     /**
-     * Get full image path
+     * Get full image path with pre-signed URL
      *
      * @return string
      */
     public function getFullPathImageAttribute()
     {
-        if (empty($this->image_file_name)) {
-            return null;
-        }
-
-        return Storage::disk()->url($this->image_file_name);
+        return getS3PresignedUrl($this->image_file_name);
     }
 }

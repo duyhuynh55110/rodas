@@ -1,5 +1,6 @@
 <?php
 
+use App\Libs\Loggers\LogFormatter;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -52,6 +53,9 @@ return [
             'driver' => 'stack',
             'channels' => ['single'],
             'ignore_exceptions' => false,
+            'tap' => [
+                LogFormatter::class,
+            ],
         ],
 
         'single' => [
@@ -89,7 +93,10 @@ return [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
             'handler' => StreamHandler::class,
-            'formatter' => env('LOG_STDERR_FORMATTER'),
+            // 'formatter' => env('LOG_STDERR_FORMATTER'),
+            'tap' => [
+                LogFormatter::class,
+            ],
             'with' => [
                 'stream' => 'php://stderr',
             ],
