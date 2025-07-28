@@ -134,8 +134,13 @@ variable "domain_name" {
   type        = string
 }
 
-variable "certificate_arn" {
-  description = "ARN of the SSL certificate for HTTPS"
+variable "alb_certificate_arn" {
+  description = "ARN of the SSL certificate for HTTPS (ALB)"
+  type        = string
+}
+
+variable "cf_certificate_arn" {
+  description = "ARN of the SSL certificate for HTTPS (Cloudfront)"
   type        = string
 }
 
