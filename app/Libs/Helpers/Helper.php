@@ -105,7 +105,9 @@ if (! function_exists('uploadImageToStorage')) {
             $originalImage = $image->stream($fileExtension, STORAGE_IMAGE_QUANTITY)->detach();
 
             // upload original image to storage
-            Storage::disk()->put($originalName, $originalImage);
+            Storage::disk()->put($originalName, $originalImage, [
+                'visibility' => 'public'
+            ]);
         }
 
         // calculate width & height
@@ -128,7 +130,9 @@ if (! function_exists('uploadImageToStorage')) {
         $resizeImage = $image->resize($width, $height)->stream($fileExtension, STORAGE_IMAGE_QUANTITY)->detach();
 
         // upload resize image to storage
-        Storage::disk()->put($fileName, $resizeImage);
+        Storage::disk()->put($fileName, $resizeImage, [
+            'visibility' => 'public'
+        ]);
     }
 }
 
