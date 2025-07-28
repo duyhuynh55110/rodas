@@ -1,6 +1,8 @@
 # S3 Bucket for static files
 resource "aws_s3_bucket" "app_bucket" {
-  bucket = var.bucket_name
+  bucket        = var.bucket_name
+  force_destroy = true
+  tags          = var.common_tags
 }
 
 # Enable static website hosting
@@ -24,16 +26,16 @@ resource "aws_s3_bucket_policy" "app_bucket_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid       = "AllowCloudFrontAccess"
-        Effect    = "Allow"
+        Sid    = "AllowCloudFrontAccess"
+        Effect = "Allow"
         Principal = {
           Service = "cloudfront.amazonaws.com"
         }
-        Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.app_bucket.arn}/*"
+        Action   = "s3:GetObject"
+        Resource = "${aws_s3_bucket.app_bucket.arn}/*"
         Condition = {
           StringEquals = {
-            "AWS:SourceArn" = aws_cloudfront_distribution.vue_app_distribution.arn
+            "AWS:SourceArn" = aws_cloudfront_distribution.app_distribution.arn
           }
         }
       }
@@ -62,6 +64,9 @@ resource "aws_cloudfront_distribution" "app_distribution" {
   is_ipv6_enabled     = true
   default_root_object = "index.html"
 
+  # Required when you want define CNAME for cloudfront
+  aliases = [var.app_domain]
+
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
@@ -82,17 +87,17 @@ resource "aws_cloudfront_distribution" "app_distribution" {
   }
 
   # Custom error responses for Vue Router
-#   custom_error_response {
-#     error_code         = 403
-#     response_code      = 200
-#     response_page_path = "/index.html"
-#   }
+  custom_error_response {
+    error_code         = 403
+    response_code      = 200
+    response_page_path = "/index.html"
+  }
 
-#   custom_error_response {
-#     error_code         = 404
-#     response_code      = 200
-#     response_page_path = "/index.html"
-#   }
+  custom_error_response {
+    error_code         = 404
+    response_code      = 200
+    response_page_path = "/index.html"
+  }
 
   restrictions {
     geo_restriction {
@@ -101,7 +106,7 @@ resource "aws_cloudfront_distribution" "app_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = aws_acm_certificate.app_cert.arn
+    acm_certificate_arn      = var.certificate_arn
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2021"
   }
