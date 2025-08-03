@@ -84,47 +84,46 @@ jobs:
             echo "nginx_changed=false" >> $GITHUB_OUTPUT
           fi
 
-      # - name: Notify deployment start
-      #   run: |
-      #     curl -X POST -H 'Content-type: application/json' \
-      #   --data '{
-      #     "attachments": [
-      #       {
-      #         "color": "#2b6cb0",
-      #         "blocks": [
-      #           {
-      #             "type": "header",
-      #             "text": {
-      #               "type": "plain_text",
-      #               "text": "🚀 Deployment In Progress",
-      #               "emoji": true
-      #             }
-      #           },
-      #           {
-      #             "type": "section",
-      #             "fields": [
-      #               { "type": "mrkdwn", "text": "*Application: Rodas" },
-      #               { "type": "mrkdwn", "text": "*Environment: `${{ APP_ENV }}`" },
-      #               { "type": "mrkdwn", "text": "*Branch: `${{ github.ref_name }}`" },
-      #               { "type": "mrkdwn", "text": "*Commit: `${{ github.sha }}`" },
-      #               { "type": "mrkdwn", "text": "*Status: Building and pushing image..." }
-      #             ]
-      #           },
-      #           {
-      #             "type": "context",
-      #             "elements": [
-      #               {
-      #                 "type": "mrkdwn",
-      #                 "text": ":hourglass_flowing_sand: *View details:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Run #${{ github.run_id }}>"
-      #               }
-      #             ]
-      #           }
-      #         ]
-      #       }
-      #     ]
-      #   }' \
-      #   ${{ secrets.SLACK_WEBHOOK_URL }}
-
+      - name: Notify deployment start
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+            "attachments": [
+              {
+                "color": "#2b6cb0",
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🚀 Deployment In Progress",
+                      "emoji": true
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      { "type": "mrkdwn", "text": "*Application:* Rodas" },
+                      { "type": "mrkdwn", "text": "*Environment:* `${{ env.APP_ENV }}`" },
+                      { "type": "mrkdwn", "text": "*Branch:* `${{ github.ref_name }}`" },
+                      { "type": "mrkdwn", "text": "*Commit:* `${{ github.sha }}`" },
+                      { "type": "mrkdwn", "text": "*Status:* Building and pushing image..." }
+                    ]
+                  },
+                  {
+                    "type": "context",
+                    "elements": [
+                      {
+                        "type": "mrkdwn",
+                        "text": ":hourglass_flowing_sand: *View details:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Run #${{ github.run_id }}>"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }' \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
       # - name: Build and push admin image
       #   if: steps.admin-changes.outputs.admin_changed == 'true'
       #   env:
