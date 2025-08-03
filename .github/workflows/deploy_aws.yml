@@ -46,9 +46,13 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Load slack_notify.sh into environment
-        run: echo source .github/workflows/scripts/slack_notify.sh >> $BASH_ENV
-        shell: bash
+      - name: Make slack script executable
+        run: chmod +x .github/workflows/scripts/slack_notify.sh
+
+      - name: Source slack_notify.sh globally
+        run: |
+          echo "source $GITHUB_WORKSPACE/.github/workflows/scripts/slack_notify.sh" >> bash_env_file
+          echo "BASH_ENV=$GITHUB_WORKSPACE/bash_env_file" >> $GITHUB_ENV
 
       - name: Notify deployment start
         run: |
