@@ -42,15 +42,63 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Debug GitHub context
+      - name: Create notification function
         run: |
-          echo "Repo: ${{ github.repository }}"
-          echo "Ref: ${{ github.ref }}"
+          function send_slack_notification() {
+            local status=$1
+            local emoji=$2
+            local status_text=$3
+            local additional_text=${4:-}
+
+            curl -X POST -H 'Content-type: application/json' \
+            --data '{
+              "attachments": [
+                {
+                  "color": "'${status}'",
+                  "blocks": [
+                    {
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "'${emoji}' Deployment '${status_text}'",
+                        "emoji": true
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "fields": [
+                        { "type": "mrkdwn", "text": "*Application:*\nRodas" },
+                        { "type": "mrkdwn", "text": "*Environment:*\n`'"${{ env.APP_ENV }}"'`" },
+                        { "type": "mrkdwn", "text": "*Branch:*\n`'"${{ github.ref_name }}"'`" },
+                        { "type": "mrkdwn", "text": "*Commit:*\n`'"${{ github.sha }}"'`" },
+                        { "type": "mrkdwn", "text": "*Status:*\n'"${additional_text}"'" }
+                      ]
+                    },
+                    {
+                      "type": "context",
+                      "elements": [
+                        {
+                          "type": "mrkdwn",
+                          "text": ":hourglass_flowing_sand: *View details:* <'"${{ github.server_url }}"'/'"${{ github.repository }}"'/actions/runs/'"${{ github.run_id }}"'|Run #'"${{ github.run_id }}"'>"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
+          }
+
+      - name: Notify deployment start
+        run: |
+          send_slack_notification "#2b6cb0" "🚀" "In Progress" "Building and pushing image..."
 
       - name: Configure AWS via OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          # role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-to-assume: 123213
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
@@ -84,47 +132,12 @@ jobs:
             echo "nginx_changed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Notify deployment start
+      - name: Notify deployment failure
+        if: failure()
         run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{
-            "attachments": [
-              {
-                "color": "#2b6cb0",
-                "blocks": [
-                  {
-                    "type": "header",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🚀 Deployment In Progress",
-                      "emoji": true
-                    }
-                  },
-                  {
-                    "type": "section",
-                    "fields": [
-                      { "type": "mrkdwn", "text": "*Application:*\nRodas" },
-                      { "type": "mrkdwn", "text": "*Environment:*\n`${{ env.APP_ENV }}`" },
-                      { "type": "mrkdwn", "text": "*Branch:*\n`${{ github.ref_name }}`" },
-                      { "type": "mrkdwn", "text": "*Commit:*\n`${{ github.sha }}`" },
-                      { "type": "mrkdwn", "text": "*Status:*\nBuilding and pushing image..." }
-                    ]
-                  },
-                  {
-                    "type": "context",
-                    "elements": [
-                      {
-                        "type": "mrkdwn",
-                        "text": ":hourglass_flowing_sand: *View details:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Run #${{ github.run_id }}>"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
-      # - name: Build and push admin image
+          send_slack_notification "#dc2626" "❌" "Failed" "Build or push failed"
+# Example usage for success:
+# send_slack_notification "#16a34a" "✅" "Successful" "All containers are healthy and running"      # - name: Build and push admin image
       #   if: steps.admin-changes.outputs.admin_changed == 'true'
       #   env:
       #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
