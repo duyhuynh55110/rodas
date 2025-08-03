@@ -1,0 +1,117 @@
+name: PR Deployment Impact Comment
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        run: |
+          # Get all changed files
+          ALL_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+
+          # Admin files (exclude user assets, .github, docker)
+          ADMIN_FILES=$(echo "$ALL_FILES" | grep -v '^resources/assets/user' | grep -v '^\.github/' | grep -v '^docker/' || true)
+
+          # User files
+          USER_FILES=$(echo "$ALL_FILES" | grep '^resources/assets/user' || true)
+
+          # Docker files
+          DOCKER_FILES=$(echo "$ALL_FILES" | grep '^docker/' || true)
+
+          # Set outputs
+          if [ -n "$ADMIN_FILES" ]; then
+            echo "admin_changed=true" >> $GITHUB_OUTPUT
+            echo "admin_files<<EOF" >> $GITHUB_OUTPUT
+            echo "$ADMIN_FILES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "admin_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+          if [ -n "$USER_FILES" ]; then
+            echo "user_changed=true" >> $GITHUB_OUTPUT
+            echo "user_files<<EOF" >> $GITHUB_OUTPUT
+            echo "$USER_FILES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "user_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+          if [ -n "$DOCKER_FILES" ]; then
+            echo "nginx_changed=true" >> $GITHUB_OUTPUT
+            echo "docker_files<<EOF" >> $GITHUB_OUTPUT
+            echo "$DOCKER_FILES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "nginx_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create deployment impact comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            let comment = "## 🚀 Deployment Impact\n\n";
+
+            const adminChanged = '${{ steps.changed-files.outputs.admin_changed }}' === 'true';
+            const userChanged = '${{ steps.changed-files.outputs.user_changed }}' === 'true';
+            const nginxChanged = '${{ steps.changed-files.outputs.nginx_changed }}' === 'true';
+
+            if (adminChanged) {
+              comment += "### 📦 Admin Container will be updated\n";
+              comment += "**Changed files:**\n";
+              const adminFiles = `${{ steps.changed-files.outputs.admin_files }}`.split('\n').filter(f => f.trim());
+              adminFiles.slice(0, 10).forEach(file => {
+                comment += `- \`${file}\`\n`;
+              });
+              if (adminFiles.length > 10) {
+                comment += `- ... and ${adminFiles.length - 10} more files\n`;
+              }
+              comment += "\n";
+            }
+
+            if (nginxChanged) {
+              comment += "### 📦 Server Container will be updated\n";
+              comment += "**Changed files:**\n";
+              const dockerFiles = `${{ steps.changed-files.outputs.docker_files }}`.split('\n').filter(f => f.trim());
+              dockerFiles.forEach(file => {
+                comment += `- \`${file}\`\n`;
+              });
+              comment += "\n";
+            }
+
+            if (userChanged) {
+              comment += "### ☁️ CloudFront Distribution will be invalidated\n";
+              comment += "**Changed files:**\n";
+              const userFiles = `${{ steps.changed-files.outputs.user_files }}`.split('\n').filter(f => f.trim());
+              userFiles.forEach(file => {
+                comment += `- \`${file}\`\n`;
+              });
+              comment += "\n";
+            }
+
+            if (!adminChanged && !nginxChanged && !userChanged) {
+              comment += "No deployment changes detected.\n";
+            }
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

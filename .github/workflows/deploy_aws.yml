@@ -1,0 +1,213 @@
+name: Deploy Image, Update container, Cloudfront distribution
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+  pull_request:
+    branches:
+      - develop
+      - master
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: ap-southeast-1
+
+  # ECS configuration
+  ECS_SERVICE: service-server
+  ECS_CLUSTER: cluster
+
+  # Admin
+  ADMIN_ECR: rodas/admin
+  ADMIN_CONTAINER: rodas-admin
+
+  # Server (Nginx)
+  SERVER_ECR: rodas/server
+  SERVER_CONTAINER: rodas-server
+
+  # CloudFront and S3
+  USER_ASSETS_BUCKET: your-user-assets-bucket
+  # CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Configure AWS via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Check for admin changes
+        id: admin-changes
+        run: |
+          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -v '^resources/assets/user' | grep -v '^\.github/' | grep -q .; then
+            echo "admin_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "admin_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check for user assets changes
+        id: user-changes
+        run: |
+          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^resources/assets/user' > /dev/null; then
+            echo "user_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "user_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check for nginx changes
+        id: nginx-changes
+        run: |
+          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^docker/' > /dev/null; then
+            echo "nginx_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "nginx_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Notify deployment start
+        if: steps.admin-changes.outputs.admin_changed == 'true'
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"text":"🚀 **Rodas Admin Container Deployment Started**\n• Branch: `${{ github.ref_name }}`\n• Commit: `${{ github.sha }}`\n• Status: Building and pushing image..."}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      # - name: Build and push admin image
+      #   if: steps.admin-changes.outputs.admin_changed == 'true'
+      #   env:
+      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #     IMAGE_TAG: ${{ github.sha }}
+      #   run: |
+      #     docker build -f docker/staging/Dockerfile --target admin-app -t $ECR_REGISTRY/${{ env.ADMIN_ECR }}:$IMAGE_TAG .
+      #     docker push $ECR_REGISTRY/${{ env.ADMIN_ECR }}:$IMAGE_TAG
+      #     docker tag $ECR_REGISTRY/${{ env.ADMIN_ECR }}:$IMAGE_TAG $ECR_REGISTRY/${{ env.ADMIN_ECR }}:latest
+      #     docker push $ECR_REGISTRY/${{ env.ADMIN_ECR }}:latest
+
+      # - name: Notify deployment success
+      #   if: steps.admin-changes.outputs.admin_changed == 'true' && success()
+      #   run: |
+      #     curl -X POST -H 'Content-type: application/json' \
+      #       --data '{"text":"✅ **Rodas Admin Container Deployed Successfully**\n• Branch: `${{ github.ref_name }}`\n• Commit: `${{ github.sha }}`\n• Image: `${{ steps.login-ecr.outputs.registry }}/${{ env.ADMIN_ECR }}:${{ github.sha }}`\n• Status: Ready for use"}' \
+      #       ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      # - name: Notify deployment failure
+      #   if: steps.admin-changes.outputs.admin_changed == 'true' && failure()
+      #   run: |
+      #     curl -X POST -H 'Content-type: application/json' \
+      #       --data '{"text":"❌ **Rodas Admin Container Deployment Failed**\n• Branch: `${{ github.ref_name }}`\n• Commit: `${{ github.sha }}`\n• Status: Build or push failed\n• Check: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|GitHub Actions>"}' \
+      #       ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      # - name: Update ECS task definition and service
+      #   if: steps.admin-changes.outputs.admin_changed == 'true'
+      #   env:
+      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #     IMAGE_TAG: ${{ github.sha }}
+      #   run: |
+      #     # Notify service update start
+      #     curl -X POST -H 'Content-type: application/json' \
+      #       --data '{"text":"🔄 **ECS Service Update Started**\n• Service: `${{ env.ECS_SERVICE }}`\n• Cluster: `${{ env.ECS_CLUSTER }}`\n• Status: Updating task definition..."}' \
+      #       ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      #     # Get current task definition
+      #     TASK_DEF=$(aws ecs describe-services \
+      #       --cluster ${{ env.ECS_CLUSTER }} \
+      #       --services ${{ env.ECS_SERVICE }} \
+      #       --query 'services[0].taskDefinition' --output text)
+
+      #     # Create new task definition with updated image
+      #     aws ecs describe-task-definition --task-definition $TASK_DEF \
+      #       --query 'taskDefinition' > task-def.json
+
+      #     # Update admin image in task definition
+      #     jq --arg ADMIN_IMAGE "$ECR_REGISTRY/${{ env.ADMIN_ECR }}:$IMAGE_TAG" \
+      #       'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .placementConstraints, .compatibilities, .registeredAt, .registeredBy) |
+      #        (.containerDefinitions[] | select(.name == "${{ env.ADMIN_CONTAINER }}") | .image) = $ADMIN_IMAGE' \
+      #       task-def.json > new-task-def.json
+
+      #     # Register new task definition
+      #     NEW_TASK_DEF=$(aws ecs register-task-definition \
+      #       --cli-input-json file://new-task-def.json \
+      #       --query 'taskDefinition.taskDefinitionArn' --output text)
+
+      #     # Update service
+      #     aws ecs update-service \
+      #       --cluster ${{ env.ECS_CLUSTER }} \
+      #       --service ${{ env.ECS_SERVICE }} \
+      #       --task-definition $NEW_TASK_DEF \
+      #       --force-new-deployment
+
+      # - name: Wait for deployment and check container status
+      #   if: steps.admin-changes.outputs.admin_changed == 'true'
+      #   run: |
+      #     # Notify deployment in progress
+      #     curl -X POST -H 'Content-type: application/json' \
+      #       --data '{"text":"⏳ **Container Deployment In Progress**\n• Service: `${{ env.ECS_SERVICE }}`\n• Status: Waiting for new containers to start..."}' \
+      #       ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      #     # Wait 2 minutes for ECS to start pulling and deploying new image
+      #     echo "Waiting 2 minutes for container deployment to begin..."
+      #     sleep 120
+
+      #     # Wait for deployment to complete (max 10 minutes)
+      #     aws ecs wait services-stable \
+      #       --cluster ${{ env.ECS_CLUSTER }} \
+      #       --services ${{ env.ECS_SERVICE }} \
+      #       --cli-read-timeout 600 \
+      #       --cli-connect-timeout 60
+
+      #     # Check final service status
+      #     SERVICE_STATUS=$(aws ecs describe-services \
+      #       --cluster ${{ env.ECS_CLUSTER }} \
+      #       --services ${{ env.ECS_SERVICE }} \
+      #       --query 'services[0].deployments[0].status' --output text)
+
+      #     RUNNING_COUNT=$(aws ecs describe-services \
+      #       --cluster ${{ env.ECS_CLUSTER }} \
+      #       --services ${{ env.ECS_SERVICE }} \
+      #       --query 'services[0].runningCount' --output text)
+
+      #     DESIRED_COUNT=$(aws ecs describe-services \
+      #       --cluster ${{ env.ECS_CLUSTER }} \
+      #       --services ${{ env.ECS_SERVICE }} \
+      #       --query 'services[0].desiredCount' --output text)
+
+      #     if [ "$SERVICE_STATUS" = "PRIMARY" ] && [ "$RUNNING_COUNT" = "$DESIRED_COUNT" ]; then
+      #       # Success notification
+      #       curl -X POST -H 'Content-type: application/json' \
+      #         --data '{"text":"✅ **Container Deployment Successful**\n• Service: `${{ env.ECS_SERVICE }}`\n• Running Tasks: '$RUNNING_COUNT'/'$DESIRED_COUNT'\n• Status: All containers are healthy and running\n• Image: `${{ steps.login-ecr.outputs.registry }}/${{ env.ADMIN_ECR }}:${{ github.sha }}`"}' \
+      #         ${{ secrets.SLACK_WEBHOOK_URL }}
+      #     else
+      #       # Failure notification
+      #       curl -X POST -H 'Content-type: application/json' \
+      #         --data '{"text":"❌ **Container Deployment Failed**\n• Service: `${{ env.ECS_SERVICE }}`\n• Running Tasks: '$RUNNING_COUNT'/'$DESIRED_COUNT'\n• Status: '$SERVICE_STATUS'\n• Check ECS console for details"}' \
+      #         ${{ secrets.SLACK_WEBHOOK_URL }}
+      #       exit 1
+      #     fi
+
+      # - name: Build user assets and sync to S3
+      #   if: steps.user-changes.outputs.user_changed == 'true'
+      #   run: |
+      #     cd resources/assets/user
+      #     npm ci
+      #     npm run build
+      #     aws s3 sync dist/ s3://${{ env.USER_ASSETS_BUCKET }}/ --delete
+
+      # - name: Invalidate CloudFront distribution
+      #   if: steps.user-changes.outputs.user_changed == 'true'
+      #   run: |
+      #     aws cloudfront create-invalidation \
+      #       --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+      #       --paths "/*"
