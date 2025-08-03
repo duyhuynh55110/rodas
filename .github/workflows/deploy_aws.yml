@@ -41,7 +41,7 @@ jobs:
 
       - name: Notify deployment start
         run: |
-          source scripts/slack_notify.sh
+          source .github/workflows/scripts/slack_notify.sh
           send_slack_notification "#2b6cb0" "🚀" "In Progress" "Building and pushing image..."
 
       - name: Configure AWS via OIDC
