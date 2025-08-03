@@ -5,10 +5,7 @@ on:
     branches:
       - develop
       - master
-  pull_request:
-    branches:
-      - develop
-      - master
+      - feature/cicd_deloy_aws
 
 permissions:
   id-token: write
@@ -134,9 +131,10 @@ jobs:
 
       - name: Notify deployment failure
         if: failure()
+        shell: bash
         run: |
+          source <(declare -f send_slack_notification)
           send_slack_notification "#dc2626" "❌" "Failed" "Build or push failed"
-# Example usage for success:
 # send_slack_notification "#16a34a" "✅" "Successful" "All containers are healthy and running"      # - name: Build and push admin image
       #   if: steps.admin-changes.outputs.admin_changed == 'true'
       #   env:
