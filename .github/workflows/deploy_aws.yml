@@ -13,6 +13,13 @@ permissions:
 
 env:
   APP_ENV: ${{ github.ref_name == 'master' && 'production' || 'staging' }}
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  GITHUB_REF_NAME: ${{ github.ref_name }}
+  GITHUB_SHA: ${{ github.sha }}
+  GITHUB_SERVER_URL: ${{ github.server_url }}
+  GITHUB_REPOSITORY: ${{ github.repository }}
+  GITHUB_RUN_ID: ${{ github.run_id }}
+
   AWS_REGION: ap-southeast-1
 
   # ECS configuration
@@ -39,18 +46,14 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - name: Load slack_notify.sh into environment
+        run: |
+          echo "source .github/workflows/scripts/slack_notify.sh" >> $BASH_ENV
+        shell: bash
+
       - name: Notify deployment start
         run: |
-          source .github/workflows/scripts/slack_notify.sh
           send_slack_notification "#2b6cb0" "🚀" "In Progress" "Building and pushing image..."
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          APP_ENV: "production"
-          GITHUB_REF_NAME: ${{ github.ref_name }}
-          GITHUB_SHA: ${{ github.sha }}
-          GITHUB_SERVER_URL: ${{ github.server_url }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
 
       - name: Configure AWS via OIDC
         uses: aws-actions/configure-aws-credentials@v4
@@ -92,9 +95,7 @@ jobs:
 
       - name: Notify deployment failure
         if: failure()
-        shell: bash
         run: |
-          source <(declare -f send_slack_notification)
           send_slack_notification "#dc2626" "❌" "Failed" "Build or push failed"
 # send_slack_notification "#16a34a" "✅" "Successful" "All containers are healthy and running"      # - name: Build and push admin image
       #   if: steps.admin-changes.outputs.admin_changed == 'true'
