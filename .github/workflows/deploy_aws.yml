@@ -39,56 +39,9 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Create notification function
-        run: |
-          function send_slack_notification() {
-            local status=$1
-            local emoji=$2
-            local status_text=$3
-            local additional_text=${4:-}
-
-            curl -X POST -H 'Content-type: application/json' \
-            --data '{
-              "attachments": [
-                {
-                  "color": "'${status}'",
-                  "blocks": [
-                    {
-                      "type": "header",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "'${emoji}' Deployment '${status_text}'",
-                        "emoji": true
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "fields": [
-                        { "type": "mrkdwn", "text": "*Application:*\nRodas" },
-                        { "type": "mrkdwn", "text": "*Environment:*\n`'"${{ env.APP_ENV }}"'`" },
-                        { "type": "mrkdwn", "text": "*Branch:*\n`'"${{ github.ref_name }}"'`" },
-                        { "type": "mrkdwn", "text": "*Commit:*\n`'"${{ github.sha }}"'`" },
-                        { "type": "mrkdwn", "text": "*Status:*\n'"${additional_text}"'" }
-                      ]
-                    },
-                    {
-                      "type": "context",
-                      "elements": [
-                        {
-                          "type": "mrkdwn",
-                          "text": ":hourglass_flowing_sand: *View details:* <'"${{ github.server_url }}"'/'"${{ github.repository }}"'/actions/runs/'"${{ github.run_id }}"'|Run #'"${{ github.run_id }}"'>"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }' \
-            ${{ secrets.SLACK_WEBHOOK_URL }}
-          }
-
       - name: Notify deployment start
         run: |
+          source scripts/slack_notify.sh
           send_slack_notification "#2b6cb0" "🚀" "In Progress" "Building and pushing image..."
 
       - name: Configure AWS via OIDC
