@@ -49,8 +49,7 @@ jobs:
       - name: Configure AWS via OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          # role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-          role-to-assume: arn:aws:iam::832707999579:role/RodasGithubOIDC
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
@@ -85,7 +84,6 @@ jobs:
           fi
 
       - name: Notify deployment start
-        if: steps.admin-changes.outputs.admin_changed == 'true'
         run: |
           curl -X POST -H 'Content-type: application/json' \
             --data '{"text":"🚀 **Rodas Admin Container Deployment Started**\n• Branch: `${{ github.ref_name }}`\n• Commit: `${{ github.sha }}`\n• Status: Building and pushing image..."}' \
