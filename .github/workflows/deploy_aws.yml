@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 env:
-  APP_ENV: github.ref_name == 'master' && 'production' || 'staging'
+  APP_ENV: ${{ github.ref_name == 'master' && 'production' || 'staging' }}
   AWS_REGION: ap-southeast-1
 
   # ECS configuration
@@ -115,7 +115,8 @@ jobs:
                     "elements": [
                       {
                         "type": "mrkdwn",
-                        "text": ":hourglass_flowing_sand: *View details:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.job }}|Run #${{ github.run_id }}>"                      }
+                        "text": ":hourglass_flowing_sand: *View details:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Run #${{ github.run_id }}>"
+                      }
                     ]
                   }
                 ]
