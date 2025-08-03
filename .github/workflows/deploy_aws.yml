@@ -86,7 +86,7 @@ jobs:
       - name: Notify deployment start
         run: |
           curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"🚀 **Rodas Admin Container Deployment Started**\n• Branch: `${{ github.ref_name }}`\n• Commit: `${{ github.sha }}`\n• Status: Building and pushing image..."}' \
+            --data '{"text":"🚀 **Rodas Admin Container Deployment Started**\n• Branch: `${{ github.ref_name }}`\n• Commit: `${{ github.sha }}`\n• Status: Building and pushing image...\n• Details: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Job>"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
 
       # - name: Build and push admin image
