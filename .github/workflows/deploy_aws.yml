@@ -43,6 +43,14 @@ jobs:
         run: |
           source .github/workflows/scripts/slack_notify.sh
           send_slack_notification "#2b6cb0" "🚀" "In Progress" "Building and pushing image..."
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          APP_ENV: "production"
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
 
       - name: Configure AWS via OIDC
         uses: aws-actions/configure-aws-credentials@v4
