@@ -41,12 +41,16 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - name: Debug GitHub context
+        run: |
+          echo "Repo: ${{ github.repository }}"
+          echo "Ref: ${{ github.ref }}"
+
       - name: Configure AWS via OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: ${{ env.AWS_REGION }}
-          debug-logging: true
 
       - name: Login to Amazon ECR
         id: login-ecr
